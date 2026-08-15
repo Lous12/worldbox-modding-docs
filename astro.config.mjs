@@ -78,6 +78,11 @@ export default defineConfig({
           translations: { ru: 'Кладбище плохих идей' },
           items: [{ autogenerate: { directory: 'graveyard' } }],
         },
+        {
+          label: 'Project',
+          translations: { ru: 'Проект' },
+          items: [{ slug: 'support' }],
+        },
       ],
     }),
   ],

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.7 — Project Support Links
+- Added a dedicated English/Russian Support page.
+- Added optional DonationAlerts and DALink support buttons to both home pages.
+- Added a Project → Support sidebar entry.
+- Added support links to the GitHub README.
+- Kept documentation explicitly free/open with no paid documentation tier.
+- Added responsive styling for the support block.
+
 ## 0.1.6 — Data Storage, Addon-Private State & Migrations
 - Added source-backed PoliticalWorldAPI addon-private kingdom data reference.
 - Documented int/string storage, bool→int representation and invariant round-trip float→string representation.

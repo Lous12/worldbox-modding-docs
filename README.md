@@ -13,6 +13,9 @@ The project is built with Astro + Starlight and is designed to become a multilin
 - Dark/light theme support
 - GitHub edit links
 - Dedicated sections for research, troubleshooting, case studies, AI documentation, and failed approaches
+- Evidence-status system for verified, observed, experimental, inferred, failed, and outdated findings
+- Real research extracted from Political World and TerraForge
+- AI-facing `llms.txt`
 
 ## Local development
 
@@ -37,6 +40,17 @@ public/                  Static files and AI-facing resources
 .github/workflows/       GitHub Pages deployment
 ```
 
+## Support
+
+WorldBox Modding Docs is free and open.
+
+If the documentation or research saves you time, optional support helps fund more experiments, compatibility checks and maintenance:
+
+- DonationAlerts: https://www.donationalerts.com/r/lous12
+- DALink: https://dalink.to/lous12
+
+There is no paid documentation tier.
+
 ## Project status
 
-Early foundation. The first documentation content will be extracted from existing WorldBox mod projects and verified research.
+Active research and documentation project. The knowledge base is being expanded through source archaeology, reproducible failures, runtime probes, compatibility testing, and the WorldBox Modding Lab.
