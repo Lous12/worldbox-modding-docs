@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.5 — Localization, Registration & API Versioning
+- Added source-backed PoliticalWorldAPI addon registration reference.
+- Documented addon ID validation, ownership rules and stable-ID compatibility concerns.
+- Added addon localization fallback guide with exact resolution order.
+- Added localization ownership/collision case study and `PWDIAG190`.
+- Added API versioning and capability-check guide.
+- Documented `IsCompatible` as a minimum-contract check rather than a current-version declaration.
+- Documented capability discovery and O(1) cached lookup design.
+- Added batch content registration guide with partial-success semantics.
+- Added Political World API evolution research notes.
+- Added AI rules for choosing minimum API versions and optional capabilities.
+- Added case study on readable addon content without complete localization.
+- Expanded `llms.txt` with registration, localization, versioning, capabilities and batch-registration facts.
+- Added Russian equivalents for every new page.
+
 ## 0.1.4 — Public API, Event Bus & Diagnostics
 - Added a source-backed PoliticalWorldAPI Event Bus reference.
 - Added Event Bus failure-containment case study.

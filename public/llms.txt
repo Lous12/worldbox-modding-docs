@@ -15,112 +15,149 @@
 - Outdated: previously verified but not re-tested for the current target.
 
 ## Mandatory AI rules
-1. Do not invent undocumented WorldBox or NeoModLoader APIs.
+1. Do not invent undocumented WorldBox, NeoModLoader or addon-framework APIs.
 2. Distinguish vanilla WorldBox API, NeoModLoader API, Political World internals and PoliticalWorldAPI.
-3. Bind technical claims to a source snapshot, installed package or runtime version.
+3. Bind claims to source snapshot, installed package or runtime version.
 4. Never merge planned features, source state and runtime state into one guessed version.
 5. Prefer runtime logs for what actually loaded in a test.
 6. Prefer source constants/package metadata for what exists in a source snapshot.
-7. Treat README, AI_START_HERE and llms.txt as documentation that can drift.
-8. When evidence conflicts, preserve both scoped facts and mark the drift.
-9. If an API is unknown, propose a minimal reflection/runtime probe.
+7. Treat README, AI_START_HERE, API_VERSIONING and llms.txt as documentation that can drift.
+8. Preserve conflicting evidence scopes instead of silently reconciling them.
+9. If an API is unknown, propose a minimal probe or source inspection.
 10. Never recommend a Failed approach.
-11. For third-party Political World addons, use PoliticalWorldAPI; do not bypass it through Main, ScenarioBridge or reflection.
-12. If a required public capability is missing, identify the gap instead of generating brittle internal access.
+11. Third-party Political World addons must use PoliticalWorldAPI rather than Main/ScenarioBridge/reflection.
+12. If a public capability is missing, identify the gap instead of bypassing the boundary.
+13. Current API version is not automatically the minimum API an addon should require.
+14. Optional functionality should prefer HasCapability when a verified capability exists.
+15. Never invent capability names.
 
-## Political World source snapshot currently documented
-Inspected GitHub tree:
+## Political World inspected source snapshot
+GitHub tree:
 ce0c91754722dd1e88e8eaf116c4c667ae020204
 
-Source/package facts in that snapshot:
-- Political World mod version: 1.7.0
+Source/package facts:
+- Political World core package: 1.7.0
 - PoliticalWorldAPI.cs ApiVersion: 1.9.0
-- Core mod ID: Lous12.PoliticalWorld
+- ApiMajor: 1
+- ApiMinor: 9
+- CoreModId: Lous12.PoliticalWorld
 - target WorldBox build: 719
 
-Known documentation drift inside that snapshot:
+Known repository documentation drift:
 - AI_START_HERE.md still describes API 1.6
-- root llms.txt still describes API 1.6.0
+- root Political World llms.txt still describes API 1.6.0
+- API_VERSIONING.md still labels the current candidate as API 1.6.0
 
 Separate newer local runtime evidence:
 - PoliticalWorldAPI runtime reported 1.14.0
 - Scenario Tools 0.3.0 reported loading with API 1.14.0
 
-Do NOT describe API 1.14.0 as the inspected GitHub source version.
-It belongs to a separate runtime evidence scope.
+Do not describe API 1.14.0 as the inspected GitHub source version.
 
-## Political World public-boundary facts
-- Supported third-party facade: Lous12.PoliticalWorld.PoliticalWorldAPI.
-- Internal Main / ScenarioBridge / private partial methods are not supported addon API.
-- Register addon identity before owned-content registration or Event Bus subscription.
-- Prefer IsCompatible + HasCapability instead of assuming every API 1.x build has the same features.
-- If the public API lacks a required operation, request/add a safe public capability instead of bypassing the boundary.
+## Addon registration facts
+- RegisterAddon validates addon identity before owned content use.
+- Addon ID: 3-96 characters; letters/numbers/dot/underscore/hyphen; starts/ends alphanumeric.
+- Lous12.PoliticalWorld is reserved.
+- Duplicate addon IDs are rejected.
+- Addon Name is required.
+- Missing namespace dot is a warning in inspected source.
+- Content ownership validation expects addon-owned IDs.
+- Validation examples indicate '.', ':' or '_' ownership separators.
+- Successful addon registration initializes diagnostics and records PWDIAG001.
 
-## Event Bus facts from inspected source
-- Discover supported IDs with GetEventIds().
-- Subscribe/Unsubscribe require a registered addon.
-- Unknown event IDs are rejected.
-- Exact duplicate subscriptions are rejected.
-- Wildcard event: Events.All.
-- Dispatch uses a subscriber-list snapshot.
-- Each callback gets a cloned PoliticalEventData object.
-- Each callback is isolated with try/catch.
-- Callback failures are attributed through diagnostics.
-- Nested event dispatch is capped at depth 16 in the inspected source.
-- Core event emission exits early when no exact/wildcard subscribers exist.
+## Localization facts
+- DefaultFallbackLanguage = "en".
+- Runtime localization registration is optional.
+- Literal DisplayName/Description and normal NML locale files can coexist with API localization.
+- Localization keys must be owned by the registered addon.
+- Cross-addon key collision is rejected and records PWDIAG190.
+- RegisterLocalizationPack registers a language dictionary.
+- RegisterEnglishLocalization targets the default fallback language.
+- Current-language registered API localization has priority.
+- ResolveLocalization then checks NML LM.
+- Registered English/default is the next fallback.
+- Literal fallback argument is next.
+- Final fallback is the localization key itself.
+- API translation registry remains available even if NML LM integration throws.
+- Language ID normalization in inspected source trims and requires length 2-24; no fixed ISO-list validation is proven.
+
+## API versioning facts
+Repository policy for API 1.x:
+- major = breaking public contract
+- minor = backward-compatible public additions
+- patch = fixes not intentionally breaking documented public contracts
+
+IsCompatible(requiredMajor, requiredMinor):
+- required major must equal ApiMajor
+- current ApiMinor must be >= required minor
+
+Therefore IsCompatible(1, 6) can be correct on API 1.9 when 1.6 is the minimum required contract.
+
+Use HasCapability for optional/newer features when possible.
+Use GetCapabilities for runtime discovery.
+
+## Capability lookup
+- Inspected creator source caches Capabilities in HashSet<string> with ordinal comparison.
+- Repeated HasCapability lookup is designed as O(1).
+- Verified capability examples include:
+  addon.registry
+  action.registry
+  ideology.read
+  ideology.register
+  government.read
+  government.register
+  kingdom.read
+  kingdom.write
+  kingdom.addon-data
+  kingdom.addon-data.typed
+  localization.safe
+  localization.fallback
+  localization.register
+  content.batch-register
+  party.read
+  party.write
+  event.publish
+  event.subscribe
+  event.core-hooks
+  political-event.rare
+  diagnostics
+  validation
+
+## Batch registration facts
+Public creator helpers exist for:
+- RegisterIdeologies
+- RegisterGovernments
+- RegisterActions
+- RegisterRarePoliticalEvents
+
+BatchRegistrationResult contains:
+- Requested
+- Registered
+- FailedIds
+- AllSucceeded
+
+Batch registration preserves partial success and does not roll back earlier successful registrations.
+
+## Event Bus facts
+- Discover IDs with GetEventIds().
+- Subscribe/Unsubscribe require registered addon.
+- Unknown IDs and duplicate exact subscriptions are rejected.
+- Wildcard = Events.All.
+- Dispatch snapshots subscriber list.
+- Each callback gets cloned PoliticalEventData.
+- Callback exception is isolated and diagnosed.
+- Nested dispatch cap is 16 in inspected source.
+- No-subscriber emission exits early.
 
 ## Diagnostics facts
-Per-addon diagnostics track:
-- registered ideologies
-- registered governments
-- registered actions
-- registered rare political events
-- event subscriptions
-- callback errors
-- warnings
-- errors
-- up to 32 recent entries
+Per-addon diagnostics track registrations, event subscriptions, callback errors, warnings/errors and up to 32 recent entries.
 
-Public helpers include:
-- GetAddonDiagnostics
-- GetDiagnosticsReport
-- GetAllDiagnosticsReports
-- LogDiagnosticsReport
-
-## Rare Political Event facts
-- Registry is evaluated from Political World's existing political pipeline.
-- Full registry evaluation refuses to repeat within the same world year.
-- Definitions support check interval, cooldown, chance-per-1000, optional condition and handler.
-- Condition and handler failures are isolated/diagnosed.
-- Last-fire is recorded before running addon handler so a broken callback still respects cooldown.
-- Manual execution bypasses random chance/check interval/existing cooldown but still respects Condition.
-
-## Documented source-derived guides
-- Political World source map
-- PoliticalWorldAPI as a public boundary
-- PoliticalWorldAPI Event Bus
-- Event-driven addons instead of permanent polling
-- Diagnostics for addon authors
-- Hardening a public Event Bus
-- Public API boundary rules for AI
-- Stagger heavy simulation work across frames
-- Version-resilient Harmony patch discovery
-- Kingdom.data custom value helpers
-- Source of truth and version drift for AI
-- Political World AI-documentation drift case study
-
-## Earlier verified/reproduced research
-
-### TerraForge
-- WorldTile.Height / WorldTile.data.height terrain-height storage
-- Safe New World UI cloning case study
-- Custom world all-ocean failure caused by a missing expected generation callback
-- Failed approach: WorldTile.health is not terrain height
-
-### Political World
-- Government getter/setter recursion causing StackOverflow
-- Quiet Feed / political notification spam control
-- Separate simulation events from player-facing notifications
+## Rare Event facts
+- Evaluated from existing Political World pipeline.
+- Full evaluation does not repeat in same world year.
+- Supports interval, cooldown, chance per 1000, Condition, Handler.
+- Callback failures are isolated.
+- Last-fire year is recorded before handler to prevent a broken handler from ignoring cooldown.
 
 ## Languages
 - English: root
