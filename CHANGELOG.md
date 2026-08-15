@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.4 — Public API, Event Bus & Diagnostics
+- Added a source-backed PoliticalWorldAPI Event Bus reference.
+- Added Event Bus failure-containment case study.
+- Added addon diagnostics/supportability guide.
+- Added event-driven addon vs permanent polling guide.
+- Added PoliticalWorldAPI public-boundary architecture research.
+- Added AI rules for respecting parent-mod public API boundaries.
+- Documented subscriber snapshots, payload cloning, callback isolation and recursive-dispatch protection.
+- Documented Rare Political Event shared scheduling and broken-handler cooldown behavior.
+- Expanded `llms.txt` with Event Bus, diagnostics, rare-event and boundary rules.
+- Added Russian equivalents for every new page.
+
 ## 0.1.3 — Political World Source Archaeology
 - Added a source-backed Political World module map.
 - Added a guide to staggering heavy simulation systems across frames.

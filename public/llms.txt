@@ -25,6 +25,8 @@
 8. When evidence conflicts, preserve both scoped facts and mark the drift.
 9. If an API is unknown, propose a minimal reflection/runtime probe.
 10. Never recommend a Failed approach.
+11. For third-party Political World addons, use PoliticalWorldAPI; do not bypass it through Main, ScenarioBridge or reflection.
+12. If a required public capability is missing, identify the gap instead of generating brittle internal access.
 
 ## Political World source snapshot currently documented
 Inspected GitHub tree:
@@ -47,18 +49,60 @@ Separate newer local runtime evidence:
 Do NOT describe API 1.14.0 as the inspected GitHub source version.
 It belongs to a separate runtime evidence scope.
 
-## Political World architecture facts
-- Third-party addons should use Lous12.PoliticalWorld.PoliticalWorldAPI.
-- Main / ScenarioBridge / private internals are not supported addon API.
-- Main.cs is intentionally tiny; implementation is split into focused partial modules.
-- WorldBox/Harmony integration lives under Core/Integration/WorldBox/.
-- Runtime scheduling/pipeline lives under Core/Runtime/.
-- Kingdom data helpers live under Core/Persistence/.
-- Heavy political simulation is staggered across pipeline stages.
-- Public addons should prefer Event Bus / Rare Event systems over their own permanent polling where possible.
+## Political World public-boundary facts
+- Supported third-party facade: Lous12.PoliticalWorld.PoliticalWorldAPI.
+- Internal Main / ScenarioBridge / private partial methods are not supported addon API.
+- Register addon identity before owned-content registration or Event Bus subscription.
+- Prefer IsCompatible + HasCapability instead of assuming every API 1.x build has the same features.
+- If the public API lacks a required operation, request/add a safe public capability instead of bypassing the boundary.
+
+## Event Bus facts from inspected source
+- Discover supported IDs with GetEventIds().
+- Subscribe/Unsubscribe require a registered addon.
+- Unknown event IDs are rejected.
+- Exact duplicate subscriptions are rejected.
+- Wildcard event: Events.All.
+- Dispatch uses a subscriber-list snapshot.
+- Each callback gets a cloned PoliticalEventData object.
+- Each callback is isolated with try/catch.
+- Callback failures are attributed through diagnostics.
+- Nested event dispatch is capped at depth 16 in the inspected source.
+- Core event emission exits early when no exact/wildcard subscribers exist.
+
+## Diagnostics facts
+Per-addon diagnostics track:
+- registered ideologies
+- registered governments
+- registered actions
+- registered rare political events
+- event subscriptions
+- callback errors
+- warnings
+- errors
+- up to 32 recent entries
+
+Public helpers include:
+- GetAddonDiagnostics
+- GetDiagnosticsReport
+- GetAllDiagnosticsReports
+- LogDiagnosticsReport
+
+## Rare Political Event facts
+- Registry is evaluated from Political World's existing political pipeline.
+- Full registry evaluation refuses to repeat within the same world year.
+- Definitions support check interval, cooldown, chance-per-1000, optional condition and handler.
+- Condition and handler failures are isolated/diagnosed.
+- Last-fire is recorded before running addon handler so a broken callback still respects cooldown.
+- Manual execution bypasses random chance/check interval/existing cooldown but still respects Condition.
 
 ## Documented source-derived guides
 - Political World source map
+- PoliticalWorldAPI as a public boundary
+- PoliticalWorldAPI Event Bus
+- Event-driven addons instead of permanent polling
+- Diagnostics for addon authors
+- Hardening a public Event Bus
+- Public API boundary rules for AI
 - Stagger heavy simulation work across frames
 - Version-resilient Harmony patch discovery
 - Kingdom.data custom value helpers
