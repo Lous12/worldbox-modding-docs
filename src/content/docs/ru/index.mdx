@@ -4,14 +4,14 @@ description: Документация, исследования, примеры 
 template: splash
 hero:
   title: WorldBox Modding Docs
-  tagline: Документация, исследования, примеры и решение проблем для моддинга WorldBox и NeoModLoader.
+  tagline: Реальные эксперименты. Воспроизводимые результаты. Меньше выдуманного API.
   actions:
     - text: Начать
       link: ./getting-started/
       icon: right-arrow
-    - text: GitHub
-      link: https://github.com/Lous12/worldbox-modding-docs
-      icon: external
+    - text: Методология
+      link: ./guides/documentation-statuses/
+      icon: open-book
       variant: minimal
 ---
 
@@ -21,8 +21,30 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 <p class="project-epigraph-note">Эпиграф намеренно сохраняется на русском языке во всех локализациях.</p>
 
 <p class="project-intro">
-Мы превращаем реальную разработку модов, эксперименты, баги, логи, неудачные попытки и подтверждённые открытия в документацию, которой смогут пользоваться другие.
+WorldBox Modding Docs превращает реальную разработку модов, runtime-probe,
+логи, краши, неудачные подходы и подтверждённые открытия в документацию
+для людей и ИИ-помощников.
 </p>
+
+<div class="home-facts">
+  <div class="home-fact">
+    <span class="home-fact-label">Базовая среда исследований</span>
+    <strong>WorldBox 0.51.2 build 719</strong>
+    <span>NeoModLoader 1.2.0.1</span>
+  </div>
+  <div class="home-fact">
+    <span class="home-fact-label">Сначала доказательство</span>
+    <strong>Probe → лог → результат</strong>
+    <span>Не выдаём выдуманный API за факт.</span>
+  </div>
+  <div class="home-fact">
+    <span class="home-fact-label">Языки</span>
+    <strong>English + Русский</strong>
+    <span>Позже добавим дополнительные переводы.</span>
+  </div>
+</div>
+
+## Выбери раздел
 
 <CardGrid stagger>
   <LinkCard title="Начало" href="./getting-started/" description="От пустого проекта до работающего мода NeoModLoader." />
@@ -30,7 +52,46 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
   <LinkCard title="Справочник API" href="./api/" description="Классы, методы, поля и подтверждённое поведение с привязкой к версиям." />
   <LinkCard title="Решение проблем" href="./troubleshooting/" description="Симптомы, сигнатуры логов, причины и исправления." />
   <LinkCard title="Исследования" href="./research/" description="Runtime-probe, гипотезы, эксперименты и доказательства." />
-  <LinkCard title="Разборы проектов" href="./case-studies/" description="Уроки из реальных проектов модов WorldBox." />
-  <LinkCard title="Для ИИ" href="./ai/" description="Структурированный контекст для ИИ с отметками надёжности." />
-  <LinkCard title="Кладбище плохих идей" href="./graveyard/" description="Что не сработало — и почему именно." />
+  <LinkCard title="Разборы проектов" href="./case-studies/" description="Уроки, полученные из реальных модов WorldBox." />
+  <LinkCard title="Для ИИ" href="./ai/" description="Строгие правила контекста для ИИ-помощников и агентов." />
+  <LinkCard title="Кладбище плохих идей" href="./graveyard/" description="Проверенные ошибки, которые больше никому не нужно открывать заново." />
 </CardGrid>
+
+## Насколько можно доверять странице?
+
+<div class="status-grid">
+  <div class="status-card status-verified"><strong>✅ Verified</strong><span>Воспроизведено и подтверждено.</span></div>
+  <div class="status-card status-observed"><strong>👁 Observed</strong><span>Наблюдали в runtime, но ещё не полностью объяснили.</span></div>
+  <div class="status-card status-experimental"><strong>🧪 Experimental</strong><span>Работает в тестах, но ещё исследуется.</span></div>
+  <div class="status-card status-inferred"><strong>⚠️ Inferred</strong><span>Вывод из доказательств без прямой проверки.</span></div>
+  <div class="status-card status-failed"><strong>❌ Failed</strong><span>Проверенный подход, который сломался или дал неверный результат.</span></div>
+  <div class="status-card status-outdated"><strong>🕒 Outdated</strong><span>Проверено на старой версии и ждёт повторного теста.</span></div>
+</div>
+
+[Полные правила проверки →](./guides/documentation-statuses/)
+
+## Первые реальные находки
+
+<div class="featured-findings">
+  <a class="finding" href="./api/worldtile-height/">
+    <span class="finding-kicker">✅ VERIFIED API</span>
+    <strong>WorldTile.Height</strong>
+    <span>Хранилище высоты рельефа, подтверждённое runtime-probe TerraForge.</span>
+  </a>
+  <a class="finding" href="./case-studies/terraforge-safe-ui-cloning/">
+    <span class="finding-kicker">🧪 CASE STUDY</span>
+    <strong>Безопасное клонирование UI New World</strong>
+    <span>Почему клонирование активного ванильного пресета падало и что в итоге сработало.</span>
+  </a>
+  <a class="finding" href="./troubleshooting/custom-world-all-ocean/">
+    <span class="finding-kicker">💥 TROUBLESHOOTING</span>
+    <strong>Собственный мир превращается в океан</strong>
+    <span>Реальная ошибка генерации из-за предположения, что Perlin callback всегда вызывается.</span>
+  </a>
+</div>
+
+## Основано на реальных проектах
+
+Первая база знаний извлекается из **Political World**, **TerraForge**,
+**Scenario Tools**, **Grand Strategy** и целевых экспериментов Modding Lab.
+Недоделанные и сломанные проекты тоже сохраняются, если из них можно извлечь знания о движке.

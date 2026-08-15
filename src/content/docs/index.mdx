@@ -4,25 +4,47 @@ description: Community-driven documentation, research, examples and troubleshoot
 template: splash
 hero:
   title: WorldBox Modding Docs
-  tagline: Documentation, research, examples and troubleshooting for WorldBox modding and NeoModLoader.
+  tagline: Real experiments. Reproducible results. Fewer invented APIs.
   actions:
     - text: Start modding
       link: ./getting-started/
       icon: right-arrow
-    - text: View on GitHub
-      link: https://github.com/Lous12/worldbox-modding-docs
-      icon: external
+    - text: Research methodology
+      link: ./guides/documentation-statuses/
+      icon: open-book
       variant: minimal
 ---
 
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 <div class="project-epigraph">Какова цена свободы?</div>
-<p class="project-epigraph-note">The epigraph is intentionally preserved in Russian.</p>
+<p class="project-epigraph-note">Intentionally preserved in Russian across all translations.</p>
 
 <p class="project-intro">
-This project turns real mod development, experiments, bugs, logs, failed attempts, and verified discoveries into reusable documentation.
+WorldBox Modding Docs turns real mod development, runtime probes, logs, crashes,
+failed approaches, and verified discoveries into reusable documentation for humans
+and AI coding assistants.
 </p>
+
+<div class="home-facts">
+  <div class="home-fact">
+    <span class="home-fact-label">Research baseline</span>
+    <strong>WorldBox 0.51.2 build 719</strong>
+    <span>NeoModLoader 1.2.0.1</span>
+  </div>
+  <div class="home-fact">
+    <span class="home-fact-label">Evidence first</span>
+    <strong>Probe → log → result</strong>
+    <span>No invented APIs presented as facts.</span>
+  </div>
+  <div class="home-fact">
+    <span class="home-fact-label">Languages</span>
+    <strong>English + Русский</strong>
+    <span>More translations will be added later.</span>
+  </div>
+</div>
+
+## Choose your path
 
 <CardGrid stagger>
   <LinkCard title="Getting Started" href="./getting-started/" description="From an empty project to a working NeoModLoader mod." />
@@ -31,6 +53,45 @@ This project turns real mod development, experiments, bugs, logs, failed attempt
   <LinkCard title="Troubleshooting" href="./troubleshooting/" description="Symptoms, log signatures, causes and fixes." />
   <LinkCard title="Research" href="./research/" description="Runtime probes, hypotheses, experiments and evidence." />
   <LinkCard title="Case Studies" href="./case-studies/" description="Lessons extracted from real WorldBox mod projects." />
-  <LinkCard title="For AI" href="./ai/" description="Structured, reliability-aware context for coding assistants." />
-  <LinkCard title="Graveyard of Bad Ideas" href="./graveyard/" description="Things that failed — and exactly why they failed." />
+  <LinkCard title="For AI" href="./ai/" description="Strict context rules for coding assistants and agents." />
+  <LinkCard title="Graveyard of Bad Ideas" href="./graveyard/" description="Tested mistakes preserved so they do not have to be rediscovered." />
 </CardGrid>
+
+## How reliable is a page?
+
+<div class="status-grid">
+  <div class="status-card status-verified"><strong>✅ Verified</strong><span>Reproduced and confirmed.</span></div>
+  <div class="status-card status-observed"><strong>👁 Observed</strong><span>Seen at runtime, not fully explained yet.</span></div>
+  <div class="status-card status-experimental"><strong>🧪 Experimental</strong><span>Works in tests, still under research.</span></div>
+  <div class="status-card status-inferred"><strong>⚠️ Inferred</strong><span>Evidence-backed conclusion, not directly verified.</span></div>
+  <div class="status-card status-failed"><strong>❌ Failed</strong><span>A tested approach that broke or produced the wrong result.</span></div>
+  <div class="status-card status-outdated"><strong>🕒 Outdated</strong><span>Verified on an older build and waiting for re-test.</span></div>
+</div>
+
+[Read the full verification policy →](./guides/documentation-statuses/)
+
+## First documented findings
+
+<div class="featured-findings">
+  <a class="finding" href="./api/worldtile-height/">
+    <span class="finding-kicker">✅ VERIFIED API</span>
+    <strong>WorldTile.Height</strong>
+    <span>The terrain-height storage confirmed by a TerraForge runtime probe.</span>
+  </a>
+  <a class="finding" href="./case-studies/terraforge-safe-ui-cloning/">
+    <span class="finding-kicker">🧪 CASE STUDY</span>
+    <strong>Safe cloning of the New World preset UI</strong>
+    <span>Why cloning an active vanilla preset crashed, and what finally worked.</span>
+  </a>
+  <a class="finding" href="./troubleshooting/custom-world-all-ocean/">
+    <span class="finding-kicker">💥 TROUBLESHOOTING</span>
+    <strong>Custom world becomes only ocean</strong>
+    <span>A real generation failure caused by assuming a Perlin callback would always run.</span>
+  </a>
+</div>
+
+## Built from real projects
+
+The first knowledge base is being extracted from **Political World**, **TerraForge**,
+**Scenario Tools**, **Grand Strategy**, and focused Modding Lab experiments.
+Unfinished and failed projects are kept as research material when they reveal useful engine behavior.

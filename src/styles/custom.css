@@ -2,34 +2,194 @@
   --sl-color-accent-low: #3b2009;
   --sl-color-accent: #f3a24b;
   --sl-color-accent-high: #ffd9ae;
-  --sl-content-width: 54rem;
+  --sl-content-width: 58rem;
+  --docs-panel: color-mix(in srgb, var(--sl-color-gray-6) 82%, transparent);
+  --docs-border: color-mix(in srgb, var(--sl-color-gray-4) 45%, transparent);
 }
 
 :root[data-theme='light'] {
   --sl-color-accent-low: #fff0df;
   --sl-color-accent: #b65f08;
   --sl-color-accent-high: #542500;
+  --docs-panel: color-mix(in srgb, var(--sl-color-gray-7) 80%, white);
+  --docs-border: color-mix(in srgb, var(--sl-color-gray-4) 32%, transparent);
 }
 
 .project-epigraph {
-  margin: 0 auto 0.4rem;
+  margin: 0 auto 0.35rem;
   max-width: 44rem;
   text-align: center;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.025em;
+}
+
+.project-epigraph::before,
+.project-epigraph::after {
+  content: '—';
+  opacity: 0.32;
+  margin: 0 0.65rem;
 }
 
 .project-epigraph-note {
-  margin: 0 auto 2.25rem;
+  margin: 0 auto 2.1rem;
   text-align: center;
-  opacity: 0.62;
-  font-size: 0.85rem;
+  opacity: 0.55;
+  font-size: 0.82rem;
 }
 
 .project-intro {
-  max-width: 48rem;
+  max-width: 50rem;
   margin: 0 auto 2rem;
   text-align: center;
-  opacity: 0.9;
+  opacity: 0.92;
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+
+.home-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 1.4rem 0 2.6rem;
+}
+
+.home-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 0.85rem;
+  background: var(--docs-panel);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.08);
+}
+
+.home-fact strong {
+  font-size: 1rem;
+}
+
+.home-fact span:last-child {
+  opacity: 0.68;
+  font-size: 0.83rem;
+}
+
+.home-fact-label {
+  color: var(--sl-color-accent-high);
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1.2rem 0 1.1rem;
+}
+
+.status-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 6.3rem;
+  gap: 0.45rem;
+  padding: 0.95rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 0.8rem;
+  background: var(--docs-panel);
+}
+
+.status-card strong {
+  font-size: 0.96rem;
+}
+
+.status-card span {
+  opacity: 0.72;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.status-verified { border-top: 3px solid #4aa36b; }
+.status-observed { border-top: 3px solid #4f8fc9; }
+.status-experimental { border-top: 3px solid #9c72d6; }
+.status-inferred { border-top: 3px solid #d2a84f; }
+.status-failed { border-top: 3px solid #cc5d5d; }
+.status-outdated { border-top: 3px solid #858585; }
+
+.featured-findings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0 2rem;
+}
+
+.finding {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.05rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 0.9rem;
+  background: var(--docs-panel);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.finding:hover {
+  transform: translateY(-2px);
+  border-color: var(--sl-color-accent);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.12);
+}
+
+.finding strong {
+  font-size: 1rem;
+}
+
+.finding > span:last-child {
+  opacity: 0.72;
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+
+.finding-kicker {
+  color: var(--sl-color-accent-high);
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.doc-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0.35rem 0.5rem 0;
+  padding: 0.26rem 0.55rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 999px;
+  background: var(--docs-panel);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.doc-meta {
+  margin: 1rem 0 1.5rem;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--sl-color-accent);
+  border-radius: 0.45rem;
+  background: var(--docs-panel);
+  font-size: 0.86rem;
+}
+
+@media (max-width: 50rem) {
+  .home-facts,
+  .status-grid,
+  .featured-findings {
+    grid-template-columns: 1fr;
+  }
+
+  .status-card {
+    min-height: auto;
+  }
 }

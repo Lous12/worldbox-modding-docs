@@ -1,6 +1,21 @@
 # WorldBox Modding Docs
 
-> Community-driven WorldBox and NeoModLoader documentation based on real projects, experiments, debugging sessions, and reproducible research.
+> Community-driven WorldBox and NeoModLoader documentation built from real mods, runtime probes, logs, reproducible failures, and verified research.
+
+## Research baseline
+- WorldBox 0.51.2 build 719
+- NeoModLoader 1.2.0.1
+
+## Reliability policy
+Technical claims use explicit reliability labels:
+- Verified: reproduced and confirmed.
+- Observed: seen at runtime, not fully explained.
+- Experimental: currently works but remains under research.
+- Inferred: evidence-backed conclusion without direct verification.
+- Failed: tested approach known to be wrong or broken.
+- Outdated: previously verified but not re-tested on the current version.
+
+Do not invent undocumented WorldBox APIs. If an API or behavior is missing, mark it unverified and prefer a reflection/runtime probe.
 
 ## Main sections
 - Getting Started
@@ -13,8 +28,18 @@
 - AI Documentation
 - Graveyard of Bad Ideas
 
-## Reliability policy
-Documentation should clearly distinguish verified behavior, observed runtime behavior, inference, experimental workarounds, failed approaches, and outdated information.
+## First verified / reproduced entries
+- API: WorldTile.Height
+- Case study: TerraForge safe New World UI cloning
+- Troubleshooting: custom world becomes only ocean
+- Failed approach: WorldTile.health is not terrain height
+- AI policy: verification rules for coding assistants
 
 ## Languages
-English is the root language. Russian is available under /ru/. Additional languages will be added progressively.
+English is the root language.
+Russian is available under /ru/.
+Additional languages will be added progressively.
+
+## Project
+Repository: https://github.com/Lous12/worldbox-modding-docs
+Site: https://lous12.github.io/worldbox-modding-docs/
