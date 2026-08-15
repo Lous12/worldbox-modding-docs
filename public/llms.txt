@@ -28,12 +28,27 @@ Do not invent undocumented WorldBox APIs. If an API or behavior is missing, mark
 - AI Documentation
 - Graveyard of Bad Ideas
 
-## First verified / reproduced entries
+## Verified / reproduced research entries
+
+### TerraForge
 - API: WorldTile.Height
-- Case study: TerraForge safe New World UI cloning
+- Case study: safe New World UI cloning
 - Troubleshooting: custom world becomes only ocean
 - Failed approach: WorldTile.health is not terrain height
-- AI policy: verification rules for coding assistants
+
+### Political World
+- Case study: government initialization getter/setter recursion
+- Troubleshooting: StackOverflow during recursive initialization
+- Case study: Quiet Feed / political notification spam control
+- Guide: separate simulation events from player-facing notifications
+- Research inventory: Political World topics waiting for source/probe extraction
+
+## AI rules
+- Never present planned Political World mechanics as implemented facts.
+- Distinguish project-internal methods from vanilla WorldBox APIs.
+- Do not invent missing APIs or signatures.
+- Prefer minimal probes when documentation is incomplete.
+- Respect the WorldBox/NML version attached to each verified result.
 
 ## Languages
 English is the root language.
