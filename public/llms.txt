@@ -1,59 +1,87 @@
 # WorldBox Modding Docs
 
-> Community-driven WorldBox and NeoModLoader documentation built from real mods, runtime probes, logs, reproducible failures, and verified research.
+> Evidence-first WorldBox and NeoModLoader documentation built from real mods, source inspection, runtime probes, logs, reproducible failures and verified research.
 
 ## Research baseline
 - WorldBox 0.51.2 build 719
 - NeoModLoader 1.2.0.1
 
-## Reliability policy
-Technical claims use explicit reliability labels:
-- Verified: reproduced and confirmed.
+## Reliability labels
+- Verified: reproduced/confirmed in the stated evidence scope.
 - Observed: seen at runtime, not fully explained.
-- Experimental: currently works but remains under research.
+- Experimental: works in current tests but remains under research.
 - Inferred: evidence-backed conclusion without direct verification.
 - Failed: tested approach known to be wrong or broken.
-- Outdated: previously verified but not re-tested on the current version.
+- Outdated: previously verified but not re-tested for the current target.
 
-Do not invent undocumented WorldBox APIs. If an API or behavior is missing, mark it unverified and prefer a reflection/runtime probe.
+## Mandatory AI rules
+1. Do not invent undocumented WorldBox or NeoModLoader APIs.
+2. Distinguish vanilla WorldBox API, NeoModLoader API, Political World internals and PoliticalWorldAPI.
+3. Bind technical claims to a source snapshot, installed package or runtime version.
+4. Never merge planned features, source state and runtime state into one guessed version.
+5. Prefer runtime logs for what actually loaded in a test.
+6. Prefer source constants/package metadata for what exists in a source snapshot.
+7. Treat README, AI_START_HERE and llms.txt as documentation that can drift.
+8. When evidence conflicts, preserve both scoped facts and mark the drift.
+9. If an API is unknown, propose a minimal reflection/runtime probe.
+10. Never recommend a Failed approach.
 
-## Main sections
-- Getting Started
-- Guides
-- API Reference
-- Troubleshooting
-- Research
-- Case Studies
-- FAQ
-- AI Documentation
-- Graveyard of Bad Ideas
+## Political World source snapshot currently documented
+Inspected GitHub tree:
+ce0c91754722dd1e88e8eaf116c4c667ae020204
 
-## Verified / reproduced research entries
+Source/package facts in that snapshot:
+- Political World mod version: 1.7.0
+- PoliticalWorldAPI.cs ApiVersion: 1.9.0
+- Core mod ID: Lous12.PoliticalWorld
+- target WorldBox build: 719
+
+Known documentation drift inside that snapshot:
+- AI_START_HERE.md still describes API 1.6
+- root llms.txt still describes API 1.6.0
+
+Separate newer local runtime evidence:
+- PoliticalWorldAPI runtime reported 1.14.0
+- Scenario Tools 0.3.0 reported loading with API 1.14.0
+
+Do NOT describe API 1.14.0 as the inspected GitHub source version.
+It belongs to a separate runtime evidence scope.
+
+## Political World architecture facts
+- Third-party addons should use Lous12.PoliticalWorld.PoliticalWorldAPI.
+- Main / ScenarioBridge / private internals are not supported addon API.
+- Main.cs is intentionally tiny; implementation is split into focused partial modules.
+- WorldBox/Harmony integration lives under Core/Integration/WorldBox/.
+- Runtime scheduling/pipeline lives under Core/Runtime/.
+- Kingdom data helpers live under Core/Persistence/.
+- Heavy political simulation is staggered across pipeline stages.
+- Public addons should prefer Event Bus / Rare Event systems over their own permanent polling where possible.
+
+## Documented source-derived guides
+- Political World source map
+- Stagger heavy simulation work across frames
+- Version-resilient Harmony patch discovery
+- Kingdom.data custom value helpers
+- Source of truth and version drift for AI
+- Political World AI-documentation drift case study
+
+## Earlier verified/reproduced research
 
 ### TerraForge
-- API: WorldTile.Height
-- Case study: safe New World UI cloning
-- Troubleshooting: custom world becomes only ocean
+- WorldTile.Height / WorldTile.data.height terrain-height storage
+- Safe New World UI cloning case study
+- Custom world all-ocean failure caused by a missing expected generation callback
 - Failed approach: WorldTile.health is not terrain height
 
 ### Political World
-- Case study: government initialization getter/setter recursion
-- Troubleshooting: StackOverflow during recursive initialization
-- Case study: Quiet Feed / political notification spam control
-- Guide: separate simulation events from player-facing notifications
-- Research inventory: Political World topics waiting for source/probe extraction
-
-## AI rules
-- Never present planned Political World mechanics as implemented facts.
-- Distinguish project-internal methods from vanilla WorldBox APIs.
-- Do not invent missing APIs or signatures.
-- Prefer minimal probes when documentation is incomplete.
-- Respect the WorldBox/NML version attached to each verified result.
+- Government getter/setter recursion causing StackOverflow
+- Quiet Feed / political notification spam control
+- Separate simulation events from player-facing notifications
 
 ## Languages
-English is the root language.
-Russian is available under /ru/.
-Additional languages will be added progressively.
+- English: root
+- Russian: /ru/
+- More languages planned
 
 ## Project
 Repository: https://github.com/Lous12/worldbox-modding-docs
