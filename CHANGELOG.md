@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.6 — Data Storage, Addon-Private State & Migrations
+- Added source-backed PoliticalWorldAPI addon-private kingdom data reference.
+- Documented int/string storage, bool→int representation and invariant round-trip float→string representation.
+- Documented collision-safe v2 UTF-8 hex addon-data keys.
+- Added case study for lazy API 1.1 → v2 copy-forward migration.
+- Documented that legacy values are kept after migration rather than deleted.
+- Added shared-vs-private kingdom tag guide.
+- Documented private tag storage model and shared legacy tag key.
+- Added typed addon-state architecture guide.
+- Added party-private int/string/bool/float API reference.
+- Added stable-ID and migration guide based on the real Political World identity transition.
+- Added a detailed Addon Data Save/Load Probe plan without falsely marking persistence as runtime-verified.
+- Added AI persistence/migration safety rules.
+- Expanded `llms.txt` with storage layout, migration and verification-status facts.
+- Added Russian equivalents for every new page.
+
 ## 0.1.5 — Localization, Registration & API Versioning
 - Added source-backed PoliticalWorldAPI addon registration reference.
 - Documented addon ID validation, ownership rules and stable-ID compatibility concerns.

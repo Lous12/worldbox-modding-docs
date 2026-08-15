@@ -9,7 +9,7 @@
 ## Reliability labels
 - Verified: reproduced/confirmed in the stated evidence scope.
 - Observed: seen at runtime, not fully explained.
-- Experimental: works in current tests but remains under research.
+- Experimental: works in current tests or is a defined experiment awaiting full verification.
 - Inferred: evidence-backed conclusion without direct verification.
 - Failed: tested approach known to be wrong or broken.
 - Outdated: previously verified but not re-tested for the current target.
@@ -19,17 +19,20 @@
 2. Distinguish vanilla WorldBox API, NeoModLoader API, Political World internals and PoliticalWorldAPI.
 3. Bind claims to source snapshot, installed package or runtime version.
 4. Never merge planned features, source state and runtime state into one guessed version.
-5. Prefer runtime logs for what actually loaded in a test.
+5. Prefer runtime logs for what actually loaded.
 6. Prefer source constants/package metadata for what exists in a source snapshot.
-7. Treat README, AI_START_HERE, API_VERSIONING and llms.txt as documentation that can drift.
-8. Preserve conflicting evidence scopes instead of silently reconciling them.
-9. If an API is unknown, propose a minimal probe or source inspection.
-10. Never recommend a Failed approach.
-11. Third-party Political World addons must use PoliticalWorldAPI rather than Main/ScenarioBridge/reflection.
-12. If a public capability is missing, identify the gap instead of bypassing the boundary.
-13. Current API version is not automatically the minimum API an addon should require.
-14. Optional functionality should prefer HasCapability when a verified capability exists.
-15. Never invent capability names.
+7. Documentation files can drift; preserve conflicting evidence scopes.
+8. Third-party Political World addons use PoliticalWorldAPI, not Main/ScenarioBridge/reflection.
+9. Current API version is not automatically the minimum API an addon should require.
+10. Optional functionality should prefer verified capability checks.
+11. Never invent capability names.
+12. For persistence, use public storage APIs; do not reconstruct internal raw save keys.
+13. Do not claim persistence is runtime-verified until a save/restart/load probe has passed.
+14. Stable persistent IDs are data compatibility, not branding.
+15. Private addon state should use addon-private storage/tags by default.
+16. Shared tags are cross-mod protocol and require intentional documented meaning.
+17. Do not remove legacy migration reads merely because newer storage exists.
+18. Prefer copy-forward migration before destructive cleanup.
 
 ## Political World inspected source snapshot
 GitHub tree:
@@ -38,131 +41,100 @@ ce0c91754722dd1e88e8eaf116c4c667ae020204
 Source/package facts:
 - Political World core package: 1.7.0
 - PoliticalWorldAPI.cs ApiVersion: 1.9.0
-- ApiMajor: 1
-- ApiMinor: 9
 - CoreModId: Lous12.PoliticalWorld
 - target WorldBox build: 719
 
-Known repository documentation drift:
-- AI_START_HERE.md still describes API 1.6
-- root Political World llms.txt still describes API 1.6.0
-- API_VERSIONING.md still labels the current candidate as API 1.6.0
+Separate newer local runtime evidence exists for API 1.14.0.
+Do not merge that runtime version into this source snapshot.
 
-Separate newer local runtime evidence:
-- PoliticalWorldAPI runtime reported 1.14.0
-- Scenario Tools 0.3.0 reported loading with API 1.14.0
+## Addon-private kingdom data
+Public typed APIs exist for:
+- int
+- string
+- bool
+- float
 
-Do not describe API 1.14.0 as the inspected GitHub source version.
+Source implementation facts:
+- int/string route through addon-private Kingdom.data-backed helpers.
+- bool uses integer representation: false=0, true=1.
+- float uses string storage with CultureInfo.InvariantCulture.
+- float write uses ToString("R", InvariantCulture).
+- public setters require registered addon identity.
+- private-tag public API requires a registered addon.
 
-## Addon registration facts
-- RegisterAddon validates addon identity before owned content use.
-- Addon ID: 3-96 characters; letters/numbers/dot/underscore/hyphen; starts/ends alphanumeric.
-- Lous12.PoliticalWorld is reserved.
-- Duplicate addon IDs are rejected.
-- Addon Name is required.
-- Missing namespace dot is a warning in inspected source.
-- Content ownership validation expects addon-owned IDs.
-- Validation examples indicate '.', ':' or '_' ownership separators.
-- Successful addon registration initializes diagnostics and records PWDIAG001.
+## Addon-data v2 namespace
+Internal source constants:
+- legacy prefix: ukiol_api_data_
+- v2 prefix: pw_api2_data_
 
-## Localization facts
-- DefaultFallbackLanguage = "en".
-- Runtime localization registration is optional.
-- Literal DisplayName/Description and normal NML locale files can coexist with API localization.
-- Localization keys must be owned by the registered addon.
-- Cross-addon key collision is rejected and records PWDIAG190.
-- RegisterLocalizationPack registers a language dictionary.
-- RegisterEnglishLocalization targets the default fallback language.
-- Current-language registered API localization has priority.
-- ResolveLocalization then checks NML LM.
-- Registered English/default is the next fallback.
-- Literal fallback argument is next.
-- Final fallback is the localization key itself.
-- API translation registry remains available even if NML LM integration throws.
-- Language ID normalization in inspected source trims and requires length 2-24; no fixed ISO-list validation is proven.
+v2 key concept:
+pw_api2_data_ + HEX(UTF8(addonId)) + "_" + HEX(UTF8(localKey))
 
-## API versioning facts
-Repository policy for API 1.x:
-- major = breaking public contract
-- minor = backward-compatible public additions
-- patch = fixes not intentionally breaking documented public contracts
+Reason:
+preserve exact identifier distinctions such as punctuation differences rather than normalizing different IDs into the same token.
 
-IsCompatible(requiredMajor, requiredMinor):
-- required major must equal ApiMajor
-- current ApiMinor must be >= required minor
+Do not construct these internal keys in normal addon code.
 
-Therefore IsCompatible(1, 6) can be correct on API 1.9 when 1.6 is the minimum required contract.
+## Legacy migration behavior
+For addon-private int/string reads:
+1. read v2;
+2. if missing, calculate/read API 1.1 legacy key;
+3. if legacy exists, copy value to v2;
+4. return value;
+5. keep legacy key untouched.
 
-Use HasCapability for optional/newer features when possible.
-Use GetCapabilities for runtime discovery.
+This is source-verified lazy copy-forward migration.
 
-## Capability lookup
-- Inspected creator source caches Capabilities in HashSet<string> with ordinal comparison.
-- Repeated HasCapability lookup is designed as O(1).
-- Verified capability examples include:
-  addon.registry
-  action.registry
-  ideology.read
-  ideology.register
-  government.read
-  government.register
-  kingdom.read
-  kingdom.write
-  kingdom.addon-data
-  kingdom.addon-data.typed
-  localization.safe
-  localization.fallback
-  localization.register
-  content.batch-register
-  party.read
-  party.write
-  event.publish
-  event.subscribe
-  event.core-hooks
-  political-event.rare
-  diagnostics
-  validation
+## Tags
+Shared kingdom tags:
+- public Get/Has/Add/RemoveKingdomTag APIs;
+- intentionally global/shared;
+- legacy storage key ukiol_api_kingdom_tags retained for compatibility.
 
-## Batch registration facts
-Public creator helpers exist for:
-- RegisterIdeologies
-- RegisterGovernments
-- RegisterActions
-- RegisterRarePoliticalEvents
+Addon-private kingdom tags:
+- public Get/Has/Add/RemoveAddonKingdomTag APIs;
+- stored inside addon-private namespace;
+- current internal local key __private_tags;
+- current internal list serialization uses '|';
+- a local private tag containing '|' is rejected.
 
-BatchRegistrationResult contains:
-- Requested
-- Registered
-- FailedIds
-- AllSucceeded
+Rule:
+if another mod does not need to understand a tag, use addon-private tags.
 
-Batch registration preserves partial success and does not roll back earlier successful registrations.
+## Party-private addon state
+API 1.9 exposes:
+- Get/SetPartyInt
+- Get/SetPartyString
+- Get/SetPartyBool
+- Get/SetPartyFloat
 
-## Event Bus facts
-- Discover IDs with GetEventIds().
-- Subscribe/Unsubscribe require registered addon.
-- Unknown IDs and duplicate exact subscriptions are rejected.
-- Wildcard = Events.All.
-- Dispatch snapshots subscriber list.
-- Each callback gets cloned PoliticalEventData.
-- Callback exception is isolated and diagnosed.
-- Nested dispatch cap is 16 in inspected source.
-- No-subscriber emission exits early.
+Implementation composes party identity/local key and reuses addon-private kingdom data.
+Setters verify the party exists before writing.
 
-## Diagnostics facts
-Per-addon diagnostics track registrations, event subscriptions, callback errors, warnings/errors and up to 32 recent entries.
+## Persistence verification status
+Source storage paths and migration logic are verified by inspection.
 
-## Rare Event facts
-- Evaluated from existing Political World pipeline.
-- Full evaluation does not repeat in same world year.
-- Supports interval, cooldown, chance per 1000, Condition, Handler.
-- Callback failures are isolated.
-- Last-fire year is recorded before handler to prevent a broken handler from ignoring cooldown.
+A full runtime persistence probe is still explicitly pending for:
+write → save → process restart → load → read
 
-## Languages
-- English: root
-- Russian: /ru/
-- More languages planned
+Do not upgrade persistence status to Verified until that probe runs and records exact WorldBox/NML/Political World versions.
+
+## Stable ID migration lesson
+Political World's public identity changed to:
+Lous12.PoliticalWorld
+
+Historical ukiol_* gameplay/save IDs were intentionally retained to protect existing saves.
+New addon IDs should use modern globally unique addon namespaces; legacy IDs should not be renamed merely for branding.
+
+## Current planned research
+Addon Data Save/Load Probe:
+- int/string/bool/float
+- private/shared tags
+- party-private typed data
+- full restart
+- language-switch float check
+- world isolation
+- controlled legacy-v1 → v2 migration fixture
 
 ## Project
 Repository: https://github.com/Lous12/worldbox-modding-docs
