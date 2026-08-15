@@ -1,0 +1,36 @@
+---
+title: WorldBox Modding Docs
+description: Community-driven documentation, research, examples and troubleshooting for WorldBox modding and NeoModLoader.
+template: splash
+hero:
+  title: WorldBox Modding Docs
+  tagline: Documentation, research, examples and troubleshooting for WorldBox modding and NeoModLoader.
+  actions:
+    - text: Start modding
+      link: ./getting-started/
+      icon: right-arrow
+    - text: View on GitHub
+      link: https://github.com/Lous12/worldbox-modding-docs
+      icon: external
+      variant: minimal
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+<div class="project-epigraph">Какова цена свободы?</div>
+<p class="project-epigraph-note">The epigraph is intentionally preserved in Russian.</p>
+
+<p class="project-intro">
+This project turns real mod development, experiments, bugs, logs, failed attempts, and verified discoveries into reusable documentation.
+</p>
+
+<CardGrid stagger>
+  <LinkCard title="Getting Started" href="./getting-started/" description="From an empty project to a working NeoModLoader mod." />
+  <LinkCard title="Guides" href="./guides/" description="UI, Harmony, world generation, saves, actors, kingdoms and more." />
+  <LinkCard title="API Reference" href="./api/" description="Version-aware classes, methods, fields and verified behavior." />
+  <LinkCard title="Troubleshooting" href="./troubleshooting/" description="Symptoms, log signatures, causes and fixes." />
+  <LinkCard title="Research" href="./research/" description="Runtime probes, hypotheses, experiments and evidence." />
+  <LinkCard title="Case Studies" href="./case-studies/" description="Lessons extracted from real WorldBox mod projects." />
+  <LinkCard title="For AI" href="./ai/" description="Structured, reliability-aware context for coding assistants." />
+  <LinkCard title="Graveyard of Bad Ideas" href="./graveyard/" description="Things that failed — and exactly why they failed." />
+</CardGrid>

@@ -1,0 +1,20 @@
+# WorldBox Modding Docs
+
+> Community-driven WorldBox and NeoModLoader documentation based on real projects, experiments, debugging sessions, and reproducible research.
+
+## Main sections
+- Getting Started
+- Guides
+- API Reference
+- Troubleshooting
+- Research
+- Case Studies
+- FAQ
+- AI Documentation
+- Graveyard of Bad Ideas
+
+## Reliability policy
+Documentation should clearly distinguish verified behavior, observed runtime behavior, inference, experimental workarounds, failed approaches, and outdated information.
+
+## Languages
+English is the root language. Russian is available under /ru/. Additional languages will be added progressively.

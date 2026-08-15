@@ -1,0 +1,35 @@
+:root {
+  --sl-color-accent-low: #3b2009;
+  --sl-color-accent: #f3a24b;
+  --sl-color-accent-high: #ffd9ae;
+  --sl-content-width: 54rem;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #fff0df;
+  --sl-color-accent: #b65f08;
+  --sl-color-accent-high: #542500;
+}
+
+.project-epigraph {
+  margin: 0 auto 0.4rem;
+  max-width: 44rem;
+  text-align: center;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.project-epigraph-note {
+  margin: 0 auto 2.25rem;
+  text-align: center;
+  opacity: 0.62;
+  font-size: 0.85rem;
+}
+
+.project-intro {
+  max-width: 48rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+  opacity: 0.9;
+}

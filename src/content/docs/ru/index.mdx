@@ -1,0 +1,36 @@
+---
+title: WorldBox Modding Docs
+description: Документация, исследования, примеры и решение проблем для моддинга WorldBox и NeoModLoader.
+template: splash
+hero:
+  title: WorldBox Modding Docs
+  tagline: Документация, исследования, примеры и решение проблем для моддинга WorldBox и NeoModLoader.
+  actions:
+    - text: Начать
+      link: ./getting-started/
+      icon: right-arrow
+    - text: GitHub
+      link: https://github.com/Lous12/worldbox-modding-docs
+      icon: external
+      variant: minimal
+---
+
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+<div class="project-epigraph">Какова цена свободы?</div>
+<p class="project-epigraph-note">Эпиграф намеренно сохраняется на русском языке во всех локализациях.</p>
+
+<p class="project-intro">
+Мы превращаем реальную разработку модов, эксперименты, баги, логи, неудачные попытки и подтверждённые открытия в документацию, которой смогут пользоваться другие.
+</p>
+
+<CardGrid stagger>
+  <LinkCard title="Начало" href="./getting-started/" description="От пустого проекта до работающего мода NeoModLoader." />
+  <LinkCard title="Руководства" href="./guides/" description="UI, Harmony, генерация мира, сохранения, юниты, королевства и многое другое." />
+  <LinkCard title="Справочник API" href="./api/" description="Классы, методы, поля и подтверждённое поведение с привязкой к версиям." />
+  <LinkCard title="Решение проблем" href="./troubleshooting/" description="Симптомы, сигнатуры логов, причины и исправления." />
+  <LinkCard title="Исследования" href="./research/" description="Runtime-probe, гипотезы, эксперименты и доказательства." />
+  <LinkCard title="Разборы проектов" href="./case-studies/" description="Уроки из реальных проектов модов WorldBox." />
+  <LinkCard title="Для ИИ" href="./ai/" description="Структурированный контекст для ИИ с отметками надёжности." />
+  <LinkCard title="Кладбище плохих идей" href="./graveyard/" description="Что не сработало — и почему именно." />
+</CardGrid>

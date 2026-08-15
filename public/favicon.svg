@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="WorldBox Modding Docs">
+  <rect width="64" height="64" rx="12" fill="#171a21"/>
+  <rect x="12" y="12" width="16" height="16" fill="#f3a24b"/>
+  <rect x="36" y="12" width="16" height="16" fill="#6f8fa8"/>
+  <rect x="12" y="36" width="16" height="16" fill="#6f8fa8"/>
+  <rect x="36" y="36" width="16" height="16" fill="#f3a24b"/>
+  <rect x="28" y="28" width="8" height="8" fill="#e9edf2"/>
+</svg>
