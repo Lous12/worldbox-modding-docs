@@ -1,167 +1,171 @@
 ---
 title: Addon Data Save/Load Probe
-description: План runtime experiment для проверки PoliticalWorldAPI kingdom/party state через реальные WorldBox saves.
+description: Runtime-результат WBML-0001 для PoliticalWorldAPI kingdom state после полного restart процесса WorldBox.
 ---
 
-<span class="doc-status">🧪 Experimental plan</span>
-<span class="doc-status">Research needed</span>
+<span class="doc-status">✅ Verified</span>
+<span class="doc-status">WBML-0001</span>
+<span class="doc-status">WorldBox 0.51.2 build 719</span>
 
-Source inspection подтверждает, **как** Political World пишет и читает addon-private values.
+Source inspection сначала показал, **как Political World намерен** хранить addon-private values.
 
-Остаётся проверить реальный runtime persistence через save lifecycle WorldBox.
-
-Probe не получает Verified до фактического запуска.
+WBML-0001 проверил это в реальном runtime.
 
 ## Research question
 
-Для target:
+Переживают ли PoliticalWorldAPI kingdom values:
 
 ```text
-WorldBox 0.51.2 build 719
-NeoModLoader 1.2.0.1
-Political World installed build under test
+write
+→ save
+→ полностью закрыть WorldBox
+→ запустить новый процесс WorldBox
+→ загрузить тот же save
+→ read без новой записи
 ```
 
-переживают ли значения:
+## Проверенная среда
 
 ```text
-save
-→ exit/reload
-→ load world
+WorldBox:          0.51.2
+build:             719
+git:               build-719@5dec
+NeoModLoader:      1.2.0.1
+PoliticalWorldAPI: 1.14.0
+WorldBox Modding Lab: 0.0.1
 ```
 
-без corruption?
+Lab также подтвердил runtime capabilities:
+
+```text
+kingdom.addon-data       YES
+kingdom.addon-data.v2    YES
+kingdom.addon-data.typed YES
+kingdom.tags             YES
+kingdom.addon-tags       YES
+diagnostics              YES
+```
 
 ## Test values
-
-Берём хорошо различимые значения:
 
 ```text
 int    = 170031
 string = "PW_SAVE_PROBE_Ж_ß_世界"
 bool   = true
 float  = 1234.5678f
-```
 
-Tags:
-
-```text
 private kingdom tag = "save_probe_private"
-shared kingdom tag  = "save_probe_shared"
+shared kingdom tag  = "Lous12.WorldBoxModdingLab.save_probe_shared"
 ```
 
-Если есть stable party:
+Marker:
 
 ```text
-party int    = 98765
-party string = "PW_PARTY_SAVE_PROBE"
-party bool   = true
-party float  = -42.125f
+WBML:0.0.1:TARGET
 ```
 
-## Phase 1 — baseline
+использовался только для поиска target kingdom после reload.
 
-1. Register probe addon.
-2. Выбрать kingdom.
-3. Записать identity/name и world year.
-4. Записать все values **только через public PoliticalWorldAPI**.
-5. Сразу прочитать.
-6. Log expected/actual.
-7. Записать stable party ID, если тестируем parties.
+## Phase 1 — immediate readback
 
-Expected:
+Probe выбрал kingdom:
 
 ```text
-all immediate reads match
+Iovalis
 ```
 
-## Phase 2 — normal save/load
+и записал все values через public PoliticalWorldAPI.
 
-1. Save world.
-2. Вернуться в menu.
-3. Load same world.
-4. Resolve same kingdom.
-5. Read all values.
-6. Resolve same party ID и read party values.
-
-Каждое поле:
+Результат:
 
 ```text
-PASS
-FAIL
-MISSING
-TYPE/PARSE ERROR
+int ............ PASS
+string ......... PASS
+bool ........... PASS
+float .......... PASS
+private tag .... PASS
+shared tag ..... PASS
+
+IMMEDIATE RESULT: 6/6 PASS
 ```
 
-## Phase 3 — full restart
+## Phase 2 — full process restart
 
-Повторить после полного закрытия и запуска WorldBox.
+WorldBox был полностью закрыт и запущен снова.
 
-Так мы отличим настоящий persistence от state, случайно оставшегося в static/runtime memory.
+Новый процесс заново загрузил Lab и сообщил ту же среду.
 
-## Phase 4 — смена языка
-
-Float сериализуется через `InvariantCulture`:
-
-1. write float на одном game language;
-2. save;
-3. switch language;
-4. reload;
-5. read float.
-
-Expected:
+Затем WorldBox загрузил:
 
 ```text
-same numeric value
+save27 / map.wbox
+Save Version 17
 ```
 
-## Phase 5 — world switch isolation
-
-1. Create/load второй world.
-2. Убедиться, что probe state не приехал из static dictionaries.
-3. Вернуться в original save.
-4. Проверить original values.
-
-## Phase 6 — legacy migration fixture
-
-Если безопасно подготовим controlled API 1.1 legacy value:
-
-1. записать только old-format key;
-2. убедиться, что v2 отсутствует;
-3. вызвать current public getter;
-4. проверить returned value;
-5. убедиться, что появилась v2 copy;
-6. проверить, что legacy key сохранился.
-
-Эта фаза может потребовать dev-only helper: обычный addon не должен строить internal keys.
-
-## Что сохраняем как evidence
+Lab снова нашёл target:
 
 ```text
-Player.log
-Political World version/API runtime report
-WorldBox build
-NML version
-world/save identifier
-test kingdom name/ID
-test party ID
-expected/actual values
-result table
+Iovalis
+discovery score = 15
 ```
 
-## Promotion rule
+без нового WRITE.
 
-Только после успешного probe общая документация получает:
+Post-load:
 
 ```text
-✅ Verified persistence on WorldBox X / NML Y / Political World Z
+marker ......... PASS
+int ............ PASS
+string ......... PASS
+bool ........... PASS
+float .......... PASS
+private tag .... PASS
+shared tag ..... PASS
+
+POST-LOAD RESULT: 6/6 PASS
 ```
 
-До этого:
+## Result
+
+✅ **Verified:** в проверенной среде PoliticalWorldAPI kingdom:
+
+- int;
+- string, включая mixed Unicode;
+- bool;
+- float;
+- addon-private tags;
+- shared kingdom tags;
+
+переживают полный restart процесса WorldBox и возвращаются вместе с тем же save.
+
+## Важная граница evidence
+
+Результат доказывает:
 
 ```text
-✅ source access pattern
-🧪 persistence runtime verification pending
+same save + new process → values return
 ```
 
-Это намеренное разделение evidence.
+Но сам по себе не устанавливает точный физический file/database, в котором лежит каждый value.
+
+Также пока не проверены:
+
+- persistence party-private data;
+- isolation между разными worlds;
+- float после language switch;
+- runtime migration API 1.1 → v2.
+
+Для этого будут отдельные probes.
+
+## Следующий эксперимент
+
+WBML-0002 проверяет:
+
+```text
+World A
+→ World B
+→ World A
+→ World B
+```
+
+чтобы понять, действительно ли addon state принадлежит конкретному world и не протекает через static/runtime state.

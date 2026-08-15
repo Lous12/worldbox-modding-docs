@@ -111,13 +111,33 @@ API 1.9 exposes:
 Implementation composes party identity/local key and reuses addon-private kingdom data.
 Setters verify the party exists before writing.
 
-## Persistence verification status
-Source storage paths and migration logic are verified by inspection.
+## Persistence verification status — WBML-0001
+Runtime Verified for the exact environment:
+- WorldBox 0.51.2 build 719
+- NeoModLoader 1.2.0.1
+- PoliticalWorldAPI 1.14.0
+- WorldBox Modding Lab 0.0.1
 
-A full runtime persistence probe is still explicitly pending for:
-write → save → process restart → load → read
+Verified after:
+write → save → fully close process → new process → load same save → read without rewriting
 
-Do not upgrade persistence status to Verified until that probe runs and records exact WorldBox/NML/Political World versions.
+PASS:
+- kingdom int
+- kingdom Unicode string
+- kingdom bool
+- kingdom float
+- addon-private kingdom tag
+- shared kingdom tag
+
+Not yet verified by WBML-0001:
+- party-private data
+- cross-world isolation
+- language-switch round trip
+- runtime legacy-v1 → v2 migration
+- other WorldBox/NML/API versions
+
+Evidence excerpt:
+public/evidence/wbml-0001-result.txt
 
 ## Stable ID migration lesson
 Political World's public identity changed to:
@@ -126,14 +146,17 @@ Lous12.PoliticalWorld
 Historical ukiol_* gameplay/save IDs were intentionally retained to protect existing saves.
 New addon IDs should use modern globally unique addon namespaces; legacy IDs should not be renamed merely for branding.
 
-## Current planned research
-Addon Data Save/Load Probe:
-- int/string/bool/float
-- private/shared tags
-- party-private typed data
-- full restart
+## WorldBox Modding Lab status
+WBML-0001 — Addon Data Save/Load Probe: VERIFIED for kingdom typed data + private/shared tags after full process restart.
+
+Next:
+WBML-0002 — World Isolation Probe:
+World A → World B → World A → World B
+Verify no addon state leaks between world saves and each world's state returns when reloaded.
+
+Still planned:
+- party-private typed persistence
 - language-switch float check
-- world isolation
 - controlled legacy-v1 → v2 migration fixture
 
 ## Project

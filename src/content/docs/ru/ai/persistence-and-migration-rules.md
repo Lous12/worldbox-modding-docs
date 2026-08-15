@@ -157,3 +157,27 @@ probe version
 ```
 
 Save behavior слишком важен для versionless claims.
+
+
+## Текущий Verified persistence record
+
+WBML-0001 повысил один claim до runtime Verified:
+
+```text
+WorldBox 0.51.2 build 719
+NeoModLoader 1.2.0.1
+PoliticalWorldAPI 1.14.0
+```
+
+После **полного process restart** подтверждены:
+
+```text
+kingdom int
+kingdom Unicode string
+kingdom bool
+kingdom float
+addon-private kingdom tag
+shared kingdom tag
+```
+
+Нельзя автоматически распространять этот result на party-private data, cross-world isolation, другие versions или legacy migration без отдельного evidence.

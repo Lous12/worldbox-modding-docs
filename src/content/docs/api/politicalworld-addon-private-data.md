@@ -4,7 +4,7 @@ description: Source-backed reference for collision-safe int, string, bool and fl
 ---
 
 <span class="doc-status">✅ Source verified</span>
-<span class="doc-status">🧪 Full save/load round trip still needs a dedicated runtime probe</span>
+<span class="doc-status">✅ Runtime persistence verified for kingdom int/string/bool/float</span>
 <span class="doc-status">API source generation 1.9.0</span>
 
 Political World exposes addon-owned state associated with a `Kingdom`.
@@ -200,18 +200,57 @@ See [Migrating collision-prone storage without destroying old data](../../case-s
 - legacy reads can copy forward into v2;
 - setters require registered addon.
 
-## What still needs runtime verification
+## Runtime persistence result — WBML-0001
 
-🧪 A dedicated test should still verify:
+WorldBox Modding Lab 0.0.1 executed a real full-process persistence test.
+
+Verified environment:
 
 ```text
-write
-→ save world
-→ leave/restart
-→ load
-→ read
+WorldBox:          0.51.2
+build:             719
+NeoModLoader:      1.2.0.1
+PoliticalWorldAPI: 1.14.0
+probe:             WBML 0.0.1
 ```
 
-for each supported type on the current WorldBox/NML build.
+The probe wrote through the **public PoliticalWorldAPI**, saved the world, fully closed WorldBox, started a new process, loaded the same save, and read the values without writing them again.
 
-The source strongly indicates persistence intent, but this documentation does not turn intent into a runtime result without the test.
+Result:
+
+```text
+int ............ PASS
+Unicode string . PASS
+bool ........... PASS
+float .......... PASS
+private tag .... PASS
+shared tag ..... PASS
+
+POST-LOAD RESULT: 6/6 PASS
+```
+
+The tested Unicode string was:
+
+```text
+PW_SAVE_PROBE_Ж_ß_世界
+```
+
+and survived unchanged.
+
+The float also returned the same numeric value after restart.
+
+See [WBML-0001 — addon data survives a full restart](../../case-studies/wbml-0001-addon-data-persistence/).
+
+## What is still not proven by WBML-0001
+
+This result does **not** yet verify:
+
+- party-private addon data;
+- world-to-world isolation;
+- language-switch round trips;
+- legacy API 1.1 → v2 migration at runtime;
+- every future WorldBox/NML/Political World version.
+
+Those remain separate experiments.
+
+Also, WBML-0001 proves that the values return with the same save after a process restart. It does not by itself prove which exact physical file/database inside the save system stores each value.

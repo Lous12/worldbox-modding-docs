@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.8 — First Lab-Verified Result
+- Promoted PoliticalWorldAPI kingdom typed-data persistence from Experimental to runtime Verified for WorldBox 0.51.2 build 719 / NML 1.2.0.1 / API 1.14.0.
+- Added WBML-0001 case study.
+- Recorded full-process restart evidence for int, Unicode string, bool, float, addon-private tag and shared tag.
+- Updated the Addon Data Save/Load Probe from planned research to a completed Verified result.
+- Added a sanitized evidence excerpt without local paths or account identifiers.
+- Updated AI persistence rules and `llms.txt` with strict evidence boundaries.
+- Added WBML-0001 to both home pages.
+- Kept party-private persistence, cross-world isolation, language-switch behavior and legacy runtime migration explicitly unverified.
+
 ## 0.1.7 — Project Support Links
 - Added a dedicated English/Russian Support page.
 - Added optional DonationAlerts and DALink support buttons to both home pages.

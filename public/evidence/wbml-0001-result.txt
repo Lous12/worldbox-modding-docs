@@ -1,0 +1,46 @@
+WBML-0001 — Sanitized Runtime Evidence
+=========================================
+
+Environment reported by the new WorldBox process:
+WorldBox Application.version: 0.51.2
+WorldBox build code: 719
+WorldBox git code: build-719@5dec
+NML assembly version: 1.2.0.1
+PoliticalWorldAPI: 1.14.0 (major=1, minor=14)
+
+Runtime capabilities:
+kingdom.addon-data = YES
+kingdom.addon-data.v2 = YES
+kingdom.addon-data.typed = YES
+kingdom.tags = YES
+kingdom.addon-tags = YES
+diagnostics = YES
+
+World load:
+Loading: map.wbox
+Folder: save27
+Save Version 17
+Loading Kingdoms
+Loading Cities
+Loading Civs
+World Loaded
+
+WBML verification:
+Kingdom discovery member: list | count=1
+Best target: Iovalis | discovery score=15
+
+POST-LOAD marker       PASS
+POST-LOAD int          PASS | expected=170031 | actual=170031
+POST-LOAD string       PASS | expected="PW_SAVE_PROBE_Ж_ß_世界" | actual="PW_SAVE_PROBE_Ж_ß_世界"
+POST-LOAD bool         PASS | expected=True | actual=True
+POST-LOAD float        PASS | expected=1234.56775 | actual=1234.56775
+POST-LOAD private-tag  PASS | expected=True | actual=True
+POST-LOAD shared-tag   PASS | expected=True | actual=True
+POST-LOAD RESULT: 6/6 PASS => PASS
+
+Source log:
+Player(20260815-194037).log
+
+Privacy note:
+This excerpt intentionally omits local file paths, Steam identifiers, unrelated
+mod output and unrelated network/authentication messages.

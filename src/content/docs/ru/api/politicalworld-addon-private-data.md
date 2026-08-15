@@ -4,7 +4,7 @@ description: Проверенный по исходнику reference для col
 ---
 
 <span class="doc-status">✅ Source verified</span>
-<span class="doc-status">🧪 Полный save/load round trip ещё требует отдельного runtime probe</span>
+<span class="doc-status">✅ Runtime persistence подтверждён для kingdom int/string/bool/float</span>
 <span class="doc-status">API source generation 1.9.0</span>
 
 Political World предоставляет addon-owned state, связанный с `Kingdom`.
@@ -200,18 +200,57 @@ Addon **не должен собирать этот key вручную**. Мы �
 - legacy read умеет copy-forward;
 - setter требует registered addon.
 
-## Что ещё нужно проверить
+## Runtime persistence result — WBML-0001
 
-🧪 Нужен отдельный runtime test:
+WorldBox Modding Lab 0.0.1 выполнил настоящий full-process persistence test.
+
+Проверенная среда:
 
 ```text
-write
-→ save world
-→ leave/restart
-→ load
-→ read
+WorldBox:          0.51.2
+build:             719
+NeoModLoader:      1.2.0.1
+PoliticalWorldAPI: 1.14.0
+probe:             WBML 0.0.1
 ```
 
-для каждого supported type на текущем WorldBox/NML.
+Probe записал значения **через public PoliticalWorldAPI**, сохранил мир, полностью закрыл WorldBox, запустил новый процесс, загрузил тот же save и прочитал значения без повторной записи.
 
-Source явно показывает persistence intent, но intent не заменяет runtime evidence.
+Результат:
+
+```text
+int ............ PASS
+Unicode string . PASS
+bool ........... PASS
+float .......... PASS
+private tag .... PASS
+shared tag ..... PASS
+
+POST-LOAD RESULT: 6/6 PASS
+```
+
+Тестовая Unicode-строка:
+
+```text
+PW_SAVE_PROBE_Ж_ß_世界
+```
+
+пережила restart без изменений.
+
+Float также вернулся с тем же numeric value.
+
+См. [WBML-0001 — addon data переживает полный restart](../../case-studies/wbml-0001-addon-data-persistence/).
+
+## Что WBML-0001 пока НЕ доказывает
+
+Этот результат ещё не проверяет:
+
+- party-private addon data;
+- isolation между разными мирами;
+- round trip после смены языка;
+- runtime migration API 1.1 → v2;
+- будущие версии WorldBox/NML/Political World.
+
+Это отдельные эксперименты.
+
+Также WBML-0001 доказывает возвращение values вместе с тем же save после process restart, но сам по себе не устанавливает, в каком именно физическом файле/database WorldBox хранит каждый value.

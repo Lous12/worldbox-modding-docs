@@ -1,167 +1,171 @@
 ---
 title: Addon Data Save/Load Probe
-description: Planned runtime experiment to verify PoliticalWorldAPI kingdom and party state across real WorldBox saves.
+description: WBML-0001 runtime result for PoliticalWorldAPI kingdom state across a full WorldBox process restart.
 ---
 
-<span class="doc-status">🧪 Experimental plan</span>
-<span class="doc-status">Research needed</span>
+<span class="doc-status">✅ Verified</span>
+<span class="doc-status">WBML-0001</span>
+<span class="doc-status">WorldBox 0.51.2 build 719</span>
 
-Source inspection confirms how Political World **writes and reads** addon-private values.
+Source inspection first showed how Political World **intended** addon-private values to be stored.
 
-The remaining question is runtime persistence across a real WorldBox save lifecycle.
-
-This probe is intentionally not marked Verified until it is executed.
+WBML-0001 tested the behavior in a real runtime.
 
 ## Research question
 
-For the current target:
+Do PoliticalWorldAPI kingdom values survive:
 
 ```text
-WorldBox 0.51.2 build 719
-NeoModLoader 1.2.0.1
-Political World installed build under test
+write
+→ save
+→ fully close WorldBox
+→ start a new WorldBox process
+→ load the same save
+→ read without rewriting
 ```
 
-do these values survive:
+## Verified environment
 
 ```text
-save
-→ exit/reload
-→ load world
+WorldBox:          0.51.2
+build:             719
+git:               build-719@5dec
+NeoModLoader:      1.2.0.1
+PoliticalWorldAPI: 1.14.0
+WorldBox Modding Lab: 0.0.1
 ```
 
-without corruption?
+The Lab also confirmed these relevant capabilities at runtime:
+
+```text
+kingdom.addon-data       YES
+kingdom.addon-data.v2    YES
+kingdom.addon-data.typed YES
+kingdom.tags             YES
+kingdom.addon-tags       YES
+diagnostics              YES
+```
 
 ## Test values
-
-Use deliberately distinctive values:
 
 ```text
 int    = 170031
 string = "PW_SAVE_PROBE_Ж_ß_世界"
 bool   = true
 float  = 1234.5678f
-```
 
-Also create:
-
-```text
 private kingdom tag = "save_probe_private"
-shared kingdom tag  = "save_probe_shared"
+shared kingdom tag  = "Lous12.WorldBoxModdingLab.save_probe_shared"
 ```
 
-If a stable party exists:
+The marker:
 
 ```text
-party int    = 98765
-party string = "PW_PARTY_SAVE_PROBE"
-party bool   = true
-party float  = -42.125f
+WBML:0.0.1:TARGET
 ```
 
-## Phase 1 — baseline write/read
+was used only to relocate the target kingdom after reload.
 
-1. Register the probe addon.
-2. Select one kingdom.
-3. Record kingdom identity/name and current world year.
-4. Write every test value through **public PoliticalWorldAPI only**.
-5. Read them immediately.
-6. Log expected vs actual.
-7. Record the stable party ID if party tests are enabled.
+## Phase 1 — immediate readback
 
-Expected:
+The probe selected kingdom:
 
 ```text
-all immediate reads match
+Iovalis
 ```
 
-## Phase 2 — normal save/load
+and wrote every value through the public PoliticalWorldAPI.
 
-1. Save world.
-2. Return to menu.
-3. Load the same world.
-4. Resolve the same kingdom.
-5. Read all values again.
-6. Resolve the same party ID and read party values.
-
-Record each field as:
+Immediate result:
 
 ```text
-PASS
-FAIL
-MISSING
-TYPE/PARSE ERROR
+int ............ PASS
+string ......... PASS
+bool ........... PASS
+float .......... PASS
+private tag .... PASS
+shared tag ..... PASS
+
+IMMEDIATE RESULT: 6/6 PASS
 ```
 
-## Phase 3 — full process restart
+## Phase 2 — full process restart
 
-Repeat after fully closing and restarting WorldBox.
+The game was fully restarted.
 
-This distinguishes persistence from state that accidentally survived only in static/runtime memory.
+The new process reloaded the Lab and reported the same environment.
 
-## Phase 4 — language change
-
-Because floats are serialized with `InvariantCulture`:
-
-1. write float under one game language;
-2. save;
-3. switch language;
-4. reload;
-5. read float.
-
-Expected:
+WorldBox then loaded:
 
 ```text
-same numeric value
+save27 / map.wbox
+Save Version 17
 ```
 
-## Phase 5 — world switch isolation
-
-1. Create/load a second world.
-2. Confirm probe state is not accidentally coming from static dictionaries.
-3. Return to original save.
-4. Confirm original values remain associated with the original world data.
-
-## Phase 6 — legacy migration fixture
-
-If we can safely construct a controlled legacy API 1.1 value:
-
-1. write only the old-format key;
-2. verify v2 key is absent;
-3. call the current public getter;
-4. confirm returned value equals legacy;
-5. inspect that v2 copy now exists;
-6. confirm legacy key still exists.
-
-This phase may require a dedicated development-only helper because addons should not normally construct internal keys.
-
-## Evidence to capture
+The Lab found the previous target again:
 
 ```text
-Player.log
-Political World version/API runtime report
-WorldBox build
-NML version
-world/save identifier
-test kingdom name/ID
-test party ID
-expected/actual values
-result table
+Iovalis
+discovery score = 15
 ```
 
-## Promotion rule
+without a new WRITE operation.
 
-Only after the probe passes should the general docs say:
+Post-load result:
 
 ```text
-✅ Verified persistence on WorldBox X / NML Y / Political World Z
+marker ......... PASS
+int ............ PASS
+string ......... PASS
+bool ........... PASS
+float .......... PASS
+private tag .... PASS
+shared tag ..... PASS
+
+POST-LOAD RESULT: 6/6 PASS
 ```
 
-Until then:
+## Result
+
+✅ **Verified:** for the tested environment, PoliticalWorldAPI kingdom:
+
+- int;
+- string, including mixed Unicode;
+- bool;
+- float;
+- addon-private tags;
+- shared kingdom tags;
+
+survive a full WorldBox process restart and return with the same save.
+
+## Important evidence boundary
+
+This result proves:
 
 ```text
-✅ source access pattern
-🧪 persistence runtime verification pending
+same save + new process → values return
 ```
 
-This distinction is deliberate.
+It does not by itself identify the exact physical file/database that stores each value.
+
+It also does not yet prove:
+
+- party-private data persistence;
+- world-to-world isolation;
+- language-switch float behavior;
+- legacy API 1.1 → v2 migration in runtime.
+
+Those are separate probes.
+
+## Next experiment
+
+WBML-0002 tests:
+
+```text
+World A
+→ World B
+→ World A
+→ World B
+```
+
+to verify that addon state belongs to the correct world rather than leaking through static/runtime state.

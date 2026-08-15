@@ -133,3 +133,28 @@ The shared/global tag key intentionally retains a legacy `ukiol_*` identifier.
 Do not rename a persistent key merely to match current branding.
 
 See [Stable IDs are data, not branding](../stable-ids-and-migrations/).
+
+
+## Runtime persistence — WBML-0001
+
+Both tag families were included in a full-process save/load probe.
+
+Verified environment:
+
+```text
+WorldBox 0.51.2 build 719
+NeoModLoader 1.2.0.1
+PoliticalWorldAPI 1.14.0
+WBML 0.0.1
+```
+
+After saving, fully closing WorldBox, starting a new process and loading the same save:
+
+```text
+addon-private kingdom tag ... PASS
+shared kingdom tag .......... PASS
+```
+
+This verifies persistence for the tested environment.
+
+It does **not** yet verify isolation between two different world saves. That is the purpose of WBML-0002.
