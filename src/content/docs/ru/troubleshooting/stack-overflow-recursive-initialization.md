@@ -102,4 +102,4 @@ Guard **не заменяет понимание причины**. Это доп
 
 Political World воспроизвёл этот паттерн, когда у нового государства отсутствовали данные формы правления.
 
-См.: [Political World — рекурсия при инициализации правительства](../case-studies/political-world-government-recursion/).
+См.: [Political World — рекурсия при инициализации правительства](../../case-studies/political-world-government-recursion/).

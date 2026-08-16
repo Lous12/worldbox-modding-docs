@@ -192,5 +192,5 @@ PASS=68 FAIL=0 SKIP=0
 
 ## Доказательства
 
-- [WBML-0004 Event Bus Runtime Suite](../research/event-bus-runtime-suite/)
+- [WBML-0004 Event Bus Runtime Suite](../../research/event-bus-runtime-suite/)
 - [Санитизированный результат WBML-0004](/worldbox-modding-docs/evidence/wbml-0004-result.txt)

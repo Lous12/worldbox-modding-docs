@@ -182,5 +182,5 @@ SUITE RESULT: PARTIAL PASS
 
 ## Доказательства
 
-- [Исследование WBML-0003](../research/persistence-lifecycle-suite/)
+- [Исследование WBML-0003](../../research/persistence-lifecycle-suite/)
 - [Санитизированный результат WBML-0003](/worldbox-modding-docs/evidence/wbml-0003-result.txt)

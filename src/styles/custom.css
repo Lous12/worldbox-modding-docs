@@ -1793,3 +1793,53 @@ textarea:focus-visible {
 @media (max-width: 44rem) {
   .beginner-launch-card { align-items: flex-start; flex-direction: column; }
 }
+
+/* v0.2.0-beta.1 — release-candidate accessibility/print cleanup */
+.beginner-link-grid a:focus-visible,
+.debug-stage-grid a:focus-visible,
+.journey-check:focus-visible,
+.beginner-launch-card > a:focus-visible,
+.trouble-entry:focus-visible,
+.research-door a:focus-visible,
+.support-text-link:focus-visible,
+.api-recipe-link:focus-visible,
+.generator-next a:focus-visible {
+  outline: 3px solid var(--sl-color-accent-high);
+  outline-offset: 3px;
+  border-radius: 0.35rem;
+}
+
+@media (prefers-contrast: more) {
+  .entry-card,
+  .goal-card,
+  .launch-card,
+  .recipe-card,
+  .status-card,
+  .beginner-link-grid a,
+  .debug-stage-grid > div,
+  .mental-stack > div {
+    border-width: 2px;
+  }
+}
+
+@media print {
+  .trust-strip,
+  .support-block,
+  .research-door,
+  .quick-link-row,
+  .journey-footer,
+  .filter-row,
+  .reset-row {
+    display: none !important;
+  }
+
+  .entry-card,
+  .goal-card,
+  .launch-card,
+  .recipe-card,
+  .status-card,
+  .beginner-journey {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+}

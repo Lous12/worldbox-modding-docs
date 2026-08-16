@@ -150,7 +150,7 @@ This result does **not** by itself prove:
 - behavior across future WorldBox/NML/Political World versions;
 - a full-process-restart isolation sequence.
 
-Full-process persistence is a separate verified result from [WBML-0001](./wbml-0001-addon-data-persistence/).
+Full-process persistence is a separate verified result from [WBML-0001](../wbml-0001-addon-data-persistence/).
 
 ## Methodology lesson
 

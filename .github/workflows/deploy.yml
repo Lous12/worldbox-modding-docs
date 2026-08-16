@@ -21,6 +21,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      - name: Audit documentation structure
+        run: node scripts/audit-docs.mjs
+
       - name: Install, build, and upload site
         uses: withastro/action@v6
         with:

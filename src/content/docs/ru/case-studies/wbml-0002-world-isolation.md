@@ -150,7 +150,7 @@ Current-run signature A не появилась в B, signature B не появ�
 - будущие версии WorldBox/NML/Political World;
 - isolation в последовательности с полным restart процесса.
 
-Full-process persistence отдельно подтверждён в [WBML-0001](./wbml-0001-addon-data-persistence/).
+Full-process persistence отдельно подтверждён в [WBML-0001](../wbml-0001-addon-data-persistence/).
 
 ## Методологический урок
 

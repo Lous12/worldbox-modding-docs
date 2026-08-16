@@ -169,4 +169,4 @@ World A
 
 with independent current-run signatures and a strict final gate.
 
-See [World Isolation Probe](./world-isolation-probe/) and [WBML-0002 case study](../case-studies/wbml-0002-world-isolation/).
+See [World Isolation Probe](../world-isolation-probe/) and [WBML-0002 case study](../../case-studies/wbml-0002-world-isolation/).

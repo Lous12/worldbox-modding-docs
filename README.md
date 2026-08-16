@@ -57,3 +57,13 @@ There is no paid documentation tier.
 ## Project status
 
 Active research and documentation project. The knowledge base is being expanded through source archaeology, reproducible failures, runtime probes, compatibility testing, and the WorldBox Modding Lab.
+
+## Documentation audit
+
+Before pushing a documentation change, run:
+
+```bash
+npm run audit
+```
+
+The audit is dependency-free and checks EN/RU page parity, internal routes, required frontmatter, code fences, referenced homepage artwork, sanitized evidence, and version/changelog consistency. GitHub Pages runs the same audit before building the site.

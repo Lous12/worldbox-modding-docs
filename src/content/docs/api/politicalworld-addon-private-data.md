@@ -187,7 +187,7 @@ When reading integer/string addon data, the internal bridge:
 
 That is a lazy read-migration.
 
-See [Migrating collision-prone storage without destroying old data](../case-studies/political-world-addon-data-v2-migration/).
+See [Migrating collision-prone storage without destroying old data](../../case-studies/political-world-addon-data-v2-migration/).
 
 ## What is verified here
 
@@ -240,7 +240,7 @@ and survived unchanged.
 
 The float also returned the same numeric value after restart.
 
-See [WBML-0001 — addon data survives a full restart](../case-studies/wbml-0001-addon-data-persistence/).
+See [WBML-0001 — addon data survives a full restart](../../case-studies/wbml-0001-addon-data-persistence/).
 
 
 ## Runtime world-isolation result — WBML-0002
@@ -278,7 +278,7 @@ and reported:
 FINAL RESULT: WORLD ISOLATION VERIFIED FOR THIS RUN.
 ```
 
-See [WBML-0002 — addon state stays isolated between world saves](../case-studies/wbml-0002-world-isolation/).
+See [WBML-0002 — addon state stays isolated between world saves](../../case-studies/wbml-0002-world-isolation/).
 
 ## What is still not proven by the current Lab results
 

@@ -186,7 +186,7 @@ Addon **не должен собирать этот key вручную**. Мы �
 
 Это lazy read-migration.
 
-См. [Миграция collision-prone storage без уничтожения старых данных](../case-studies/political-world-addon-data-v2-migration/).
+См. [Миграция collision-prone storage без уничтожения старых данных](../../case-studies/political-world-addon-data-v2-migration/).
 
 ## Что подтверждено
 
@@ -239,7 +239,7 @@ PW_SAVE_PROBE_Ж_ß_世界
 
 Float также вернулся с тем же numeric value.
 
-См. [WBML-0001 — addon data переживает полный restart](../case-studies/wbml-0001-addon-data-persistence/).
+См. [WBML-0001 — addon data переживает полный restart](../../case-studies/wbml-0001-addon-data-persistence/).
 
 
 ## Runtime world-isolation result — WBML-0002
@@ -277,7 +277,7 @@ A=PASS B=PASS C=PASS D=PASS
 FINAL RESULT: WORLD ISOLATION VERIFIED FOR THIS RUN.
 ```
 
-См. [WBML-0002 — addon state изолирован между world save](../case-studies/wbml-0002-world-isolation/).
+См. [WBML-0002 — addon state изолирован между world save](../../case-studies/wbml-0002-world-isolation/).
 
 ## Что текущие Lab results пока НЕ доказывают
 

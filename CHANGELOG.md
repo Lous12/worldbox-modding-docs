@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0-beta.1 — Cleanup & Release Candidate
+- Fixed internal cross-section links that were valid-looking in source but resolved to nested non-existent browser routes from leaf documentation pages.
+- Added a dependency-free documentation audit that checks frontmatter, balanced code fences, internal routes, homepage artwork assets, EN/RU file parity, sanitized evidence and package/changelog version agreement.
+- Wired the audit into GitHub Pages deployment before the Astro build so broken documentation fails CI early instead of reaching the public site.
+- Added `npm run audit` / `npm run check` for the same release checks locally.
+- Added a release checklist for the final v0.2.0 pass and expanded contribution rules around bilingual parity, privacy-safe evidence and task-first beginner documentation.
+- Kept the v0.2 Workbench feature set stable for beta: no new runtime claims, no new npm dependencies and no widening of WBML evidence boundaries.
+
 ## 0.2.0-alpha.6 — Beginner Experience
 - Rebuilt Getting Started as a real first-mod route instead of a short list of links.
 - Added a browser-local beginner progress checklist that persists only in localStorage and can be reset at any time.

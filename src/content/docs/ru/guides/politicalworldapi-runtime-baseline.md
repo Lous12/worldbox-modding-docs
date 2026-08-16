@@ -50,7 +50,7 @@ float
 общий тег королевства
 ```
 
-См. [Addon Data Save/Load Probe](../research/addon-data-save-load-probe/).
+См. [Addon Data Save/Load Probe](../../research/addon-data-save-load-probe/).
 
 ### 2. Проверенное состояние королевства не протекает между двумя сейвами
 
@@ -64,7 +64,7 @@ WBML-0002 использовал строгую последовательнос
 
 Это доказывает именно проверенный same-process путь изоляции. Это не означает автоматически «любые данные всегда изолированы при любых перезапусках».
 
-См. [World Isolation Probe](../research/world-isolation-probe/).
+См. [World Isolation Probe](../../research/world-isolation-probe/).
 
 ### 3. Party-private typed data переживает save/load и полный перезапуск
 
@@ -81,7 +81,7 @@ Get/SetPartyFloat
 
 Также проверено, что данные читаются, пока партия деактивирована, и остаются на месте после реактивации.
 
-См. [Persistence & Party Lifecycle Suite](../research/persistence-lifecycle-suite/).
+См. [Persistence & Party Lifecycle Suite](../../research/persistence-lifecycle-suite/).
 
 ### 4. Event Bus проверен именно в runtime
 
@@ -101,7 +101,7 @@ payload-объекты разных подписчиков изолирован�
 
 33 ms в stress-проверке — только наблюдение одного прогона, а не гарантия производительности.
 
-См. [Event Bus Runtime Suite](../research/event-bus-runtime-suite/).
+См. [Event Bus Runtime Suite](../../research/event-bus-runtime-suite/).
 
 ### 5. Actions, Conditions и Effects проверены как единая цепочка API
 
@@ -117,7 +117,7 @@ RegisterAction(тот же ID)
 
 После проверки replacement Lab сразу вернул canonical definition и продолжил остальные тесты.
 
-См. [Actions / Conditions / Effects Suite](../research/actions-conditions-effects-suite/).
+См. [Actions / Conditions / Effects Suite](../../research/actions-conditions-effects-suite/).
 
 ## Уже найденные ловушки
 
@@ -176,8 +176,8 @@ SUITE RESULT: PARTIAL PASS
 
 Если тебе нужно писать аддон, а не изучать всю историю лаборатории:
 
-- [Party-private addon data](../api/politicalworld-party-private-data/)
-- [PoliticalWorldAPI Event Bus](../api/politicalworld-event-bus/)
-- [Actions / Conditions / Effects](../api/politicalworld-actions-conditions-effects/)
+- [Party-private addon data](../../api/politicalworld-party-private-data/)
+- [PoliticalWorldAPI Event Bus](../../api/politicalworld-event-bus/)
+- [Actions / Conditions / Effects](../../api/politicalworld-actions-conditions-effects/)
 
 Если будущий runtime будет вести себя иначе, не надо молча переписывать старый факт. Запиши новую версию окружения и воспроизведи отличие отдельным probe.

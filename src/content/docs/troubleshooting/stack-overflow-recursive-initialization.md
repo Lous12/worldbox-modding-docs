@@ -102,4 +102,4 @@ A guard is **not** a substitute for understanding the cycle. It is a safety laye
 
 Political World reproduced this pattern when government data was missing for a newly created kingdom.
 
-See: [Political World — government initialization recursion](../case-studies/political-world-government-recursion/).
+See: [Political World — government initialization recursion](../../case-studies/political-world-government-recursion/).

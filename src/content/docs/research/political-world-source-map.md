@@ -143,7 +143,7 @@ The architecture documentation recommends aggregate/event-driven state, rare che
 
 The heavyweight political cycle is additionally split across successive rendered frames instead of running all major political systems in one frame.
 
-See: [Stagger heavy simulation work across frames](../guides/staggered-simulation-pipeline/).
+See: [Stagger heavy simulation work across frames](../../guides/staggered-simulation-pipeline/).
 
 ## Compatibility-sensitive legacy IDs
 

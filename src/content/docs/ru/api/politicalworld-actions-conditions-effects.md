@@ -317,5 +317,5 @@ SUITE RESULT: PARTIAL PASS
 
 ## Доказательства
 
-- [Исследование WBML-0005](../research/actions-conditions-effects-suite/)
+- [Исследование WBML-0005](../../research/actions-conditions-effects-suite/)
 - [Санитизированный результат WBML-0005](/worldbox-modding-docs/evidence/wbml-0005-result.txt)

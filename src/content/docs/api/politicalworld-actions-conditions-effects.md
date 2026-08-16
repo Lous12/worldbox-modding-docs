@@ -371,5 +371,5 @@ Before registering an action:
 
 ## Evidence
 
-- [WBML-0005 research page](../research/actions-conditions-effects-suite/)
+- [WBML-0005 research page](../../research/actions-conditions-effects-suite/)
 - [Sanitized WBML-0005 result](/worldbox-modding-docs/evidence/wbml-0005-result.txt)

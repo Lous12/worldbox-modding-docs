@@ -223,5 +223,5 @@ The implementation can evolve. Public API methods are the compatibility boundary
 
 ## Evidence
 
-- [WBML-0003 research page](../research/persistence-lifecycle-suite/)
+- [WBML-0003 research page](../../research/persistence-lifecycle-suite/)
 - [Sanitized WBML-0003 result](/worldbox-modding-docs/evidence/wbml-0003-result.txt)

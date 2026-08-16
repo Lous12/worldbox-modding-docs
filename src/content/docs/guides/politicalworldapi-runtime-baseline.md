@@ -50,7 +50,7 @@ addon-private kingdom tag
 shared kingdom tag
 ```
 
-See [Addon Data Save/Load Probe](../research/addon-data-save-load-probe/).
+See [Addon Data Save/Load Probe](../../research/addon-data-save-load-probe/).
 
 ### 2. Tested kingdom state stays isolated between two saves
 
@@ -64,7 +64,7 @@ sequence with a unique run token. Each save recovered its own current-run values
 
 This proves the tested same-process world-isolation path. It does **not** automatically prove every possible isolation path.
 
-See [World Isolation Probe](../research/world-isolation-probe/).
+See [World Isolation Probe](../../research/world-isolation-probe/).
 
 ### 3. Party-private typed data survives save/reload and full restart
 
@@ -81,7 +81,7 @@ The same party ID recovered all four typed values after a full WorldBox process 
 
 The suite also verified that party data remains readable while the party is inactive and after reactivation.
 
-See [Persistence & Party Lifecycle Suite](../research/persistence-lifecycle-suite/).
+See [Persistence & Party Lifecycle Suite](../../research/persistence-lifecycle-suite/).
 
 ### 4. Event Bus behavior is runtime-tested
 
@@ -101,7 +101,7 @@ recursive dispatch stopped at depth 16
 
 The 33 ms stress timing is only an observation from one run, not a performance guarantee.
 
-See [Event Bus Runtime Suite](../research/event-bus-runtime-suite/).
+See [Event Bus Runtime Suite](../../research/event-bus-runtime-suite/).
 
 ### 5. Actions, Conditions and Effects work as one creator-facing stack
 
@@ -117,7 +117,7 @@ RegisterAction(same ID)
 
 The suite re-registered the canonical definition after the replacement probe and continued testing the rest of the stack.
 
-See [Actions / Conditions / Effects Suite](../research/actions-conditions-effects-suite/).
+See [Actions / Conditions / Effects Suite](../../research/actions-conditions-effects-suite/).
 
 ## Important traps already discovered
 
@@ -176,8 +176,8 @@ For example, WBML-0005 closed with 90 PASS / 0 FAIL / 3 SKIP because the world h
 
 If you want to build an addon rather than read the research history, continue with:
 
-- [Party-private addon data](../api/politicalworld-party-private-data/)
-- [PoliticalWorldAPI Event Bus](../api/politicalworld-event-bus/)
-- [Actions / Conditions / Effects](../api/politicalworld-actions-conditions-effects/)
+- [Party-private addon data](../../api/politicalworld-party-private-data/)
+- [PoliticalWorldAPI Event Bus](../../api/politicalworld-event-bus/)
+- [Actions / Conditions / Effects](../../api/politicalworld-actions-conditions-effects/)
 
 If something in a future runtime contradicts these pages, record the new version and reproduce it with a focused probe instead of silently rewriting the old result.
