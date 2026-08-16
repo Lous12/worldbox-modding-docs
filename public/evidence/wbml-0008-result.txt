@@ -1,0 +1,85 @@
+WBML-0008 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0008 / 0.0.8 :: LOAD
+LOCALIZATION / LOCALE LOADING / FALLBACK SURFACE SUITE READY.
+This suite uses unique WBML locale keys/languages and does not intentionally change the user's selected language or WorldBox save.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+Wait for FINAL MATRIX. No F7/F8/F9/F10 sequence is needed.
+WBML-0008 / 0.0.8 :: AUTOMATED RUN START
+RUN TOKEN: fb1e5c36243f
+Runner will verify NML automatic locale files, LM JSON/CSV APIs, language-change hook surface, then clean temporary locale buckets.
+WBML-0008 :: A :: AUTOMATIC LOCALES DIRECTORY / JSON FILE AUTOLOAD / CURRENT LOOKUP
+ASSERT A.LOCALE.declaration                                 PASS | available
+ASSERT A.LOCALE.directory-contract                          PASS | actual=<local-path>
+ASSERT A.LOCALE.directory-exists                            PASS | path=<local-path>
+ASSERT A.LOCALE.en-json-exists                              PASS | Locales/en.json
+ASSERT A.LOCALE.ru-json-exists                              PASS | Locales/ru.json
+ASSERT A.LOCALE.store-reflection                            PASS | languageBuckets=75
+ASSERT A.LOCALE.auto-en-has                                 PASS | LM.Has(en)=True
+ASSERT A.LOCALE.auto-ru-has                                 PASS | LM.Has(ru)=True
+ASSERT A.LOCALE.auto-en-value                               PASS | actual=WBML English locale
+ASSERT A.LOCALE.auto-ru-value                               PASS | actual=WBML Russian locale
+ASSERT A.LOCALE.current-get-no-throw                        PASS | no exception
+ASSERT A.LOCALE.current-get-resolved                        PASS | actual=WBML Russian locale
+OBSERVED A.LOCALE.current-value                             WBML Russian locale | Current-language result; selected language is not changed by WBML-0008
+A SUMMARY: PASS=12 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0008 :: B :: LM.ADD / HAS / JSON STREAM / OVERWRITE / FAILURE BOUNDARIES
+ASSERT B.LM.add-has                                         PASS | language=wbml_0008_dynamic
+ASSERT B.LM.add-value                                       PASS | actual=one
+ASSERT B.LM.add-overwrite                                   PASS | actual=two
+ASSERT B.LM.has-missing-false                               PASS | expected false
+ASSERT B.JSON.hello-has                                     PASS | loaded from stream
+ASSERT B.JSON.unicode-value                                 PASS | actual=Привет мир
+ASSERT B.JSON.escape-newline                                PASS | newline decoded=True
+ASSERT B.JSON.malformed-throws                              PASS | exception=JsonReaderException
+ASSERT B.JSON.malformed-no-bucket                           PASS | bad language bucket absent=True
+ASSERT B.JSON.null-format-exception                         PASS | exception=FormatException
+B SUMMARY: PASS=10 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0008 :: C :: CSV STREAM / SEPARATOR / ESCAPES / PARTIAL ROW / MALFORMED ROW
+ASSERT C.CSV.en-has                                         PASS | loaded en bucket
+ASSERT C.CSV.ru-has                                         PASS | loaded ru bucket
+ASSERT C.CSV.en-value                                       PASS | actual=Hello
+ASSERT C.CSV.ru-unicode                                     PASS | actual=Привет
+ASSERT C.CSV.en-newline                                     PASS | escape converted
+ASSERT C.CSV.ru-newline                                     PASS | escape converted
+ASSERT C.CSV.partial-row-en                                 PASS | first language receives available cell
+ASSERT C.CSV.partial-row-ru-absent                          PASS | missing trailing cell does not invent value
+ASSERT C.CSV.custom-separator-en                            PASS | separator=';'
+ASSERT C.CSV.custom-separator-ru                            PASS | separator=';'
+ASSERT C.CSV.malformed-contained                            PASS | LM.LoadLocales(Stream) contains ParseCSV exception and returns
+ASSERT C.CSV.malformed-not-added                            PASS | malformed row did not commit wbml_bad
+C SUMMARY: PASS=12 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0008 :: D :: API SURFACE / LANGUAGE-CHANGE HARMONY HOOK / CLEANUP / REPORT
+ASSERT D.API.get                                            PASS | LM.Get(string)
+ASSERT D.API.has                                            PASS | LM.Has(string,string)
+ASSERT D.API.add                                            PASS | LM.Add(language,key,value)
+ASSERT D.API.add-current                                    PASS | LM.AddToCurrentLocale(key,value)
+ASSERT D.API.apply-current                                  PASS | LM.ApplyLocale(bool)
+ASSERT D.API.apply-language                                 PASS | LM.ApplyLocale(language,bool)
+ASSERT D.API.load-json-stream                               PASS | LM.LoadLocale(language,Stream)
+ASSERT D.API.load-json-file                                 PASS | LM.LoadLocale(language,path)
+ASSERT D.API.load-csv-stream                                PASS | LM.LoadLocales(Stream,char)
+ASSERT D.API.load-csv-file                                  PASS | LM.LoadLocales(path,char)
+ASSERT D.HOOK.localized-manager-type                        PASS | LocalizedTextManager
+ASSERT D.HOOK.set-language-method                           PASS | Void setLanguage(System.String)
+ASSERT D.HOOK.lm-postfix-installed                          PASS | postfixes=NeoModLoader.General.LM.setLanguagePostfix
+OBSERVED D.HOOK.behavior-boundary                           NOT FORCED | WBML-0008 does not call LocalizedTextManager.setLanguage because changing the user's selected language is intentionally outside this safe suite
+ASSERT D.CLEANUP.temporary-language-buckets                 PASS | removed=wbml_0008_dynamic,wbml_0008_json,wbml_0008_csv_en,wbml_0008_csv_ru,wbml_0008_semi_en,wbml_0008_semi_ru,wbml_0008_bad
+ASSERT D.CLEANUP.auto-en-preserved                          PASS | mod locale remains loaded
+ASSERT D.CLEANUP.auto-ru-preserved                          PASS | mod locale remains loaded
+ASSERT D.REPORT.write-preflight                             PASS | write/delete OK
+D SUMMARY: PASS=17 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0008 :: FINAL MATRIX
+ASSERTIONS PASS=51 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; optionally also send wbml-results/latest.json.

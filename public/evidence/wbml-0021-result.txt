@@ -1,0 +1,149 @@
+WBML-0021 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0021 / 0.0.21 :: LOAD
+WORLDTILE API BASICS READY.
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+FULL PASS: any fully loaded world/map. Kingdoms are NOT required.
+READ-ONLY: no intentional tile/world mutation.
+WBML-0021 / 0.0.21 :: AUTOMATED BATCH START
+RUN TOKEN: b7026118c856
+WBML-0021 :: P :: PREFLIGHT / LIVE WORLDTILE COLLECTION
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.worldtile                                     PASS | WorldTile
+ASSERT P.SINGLETON.mapbox                                   PASS | MapBox
+OBSERVED P.WORLD.instance                                   <not-resolved> | World is useful but not required when MapBox exposes tiles directly.
+OBSERVED P.TYPE.tilezone                                    TileZone | Optional relation target.
+ASSERT P.TILES.collection                                   PASS | source=MapBox.F:tiles_map count=65536
+ASSERT P.TILES.sample                                       PASS | WorldTile x=1 y=1 height=0
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=6 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0021 :: A :: STATIC SURFACE / SAFE SNAPSHOT
+ASSERT A.TYPE.worldtile                                     PASS | WorldTile
+OBSERVED A.WORLDTILE.type                                   WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.WORLDTILE.surface-counts                         fields=48 props=10 methods=82 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.WORLDTILE.identity-members                       F:data:WorldTileData,M:get_is_liquid,M:get_tile_id,M:setFireData,P:is_liquid:System.Boolean,P:tile_id:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.owner-members                          M:get_zone_city,M:hasCity,M:isSameCityHere,P:zone_city:City | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.leader-members                         <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.population-members                     F:_units:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:addUnit,M:clearUnits,M:countUnits,M:doUnits,M:hasUnits | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.buildings-members                      F:building:Building,F:minimap_building_x:System.Int32,F:minimap_building_y:System.Int32,M:hasBuilding | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.territory-members                      F:cur_tile_type:TileTypeBase,F:current_rendered_tile_graphics:UnityEngine.Tilemaps.TileBase,F:is_checked_tile:System.Boolean,F:last_rendered_border_pos_ocean:UnityEngine.Vector3Int,F:last_rendered_pos_tile:UnityEngine.Vector3Int,F:last_rendered_tile_type:TileTypeBase,F:tile_down:WorldTile,F:tile_left:WorldTile,F:tile_right:WorldTile,F:tile_up:WorldTile,F:world_tile_zone_border:WorldTileZoneBorder,F:zone:TileZone,M:getCreepTileRank,M:getNeighbourTileSameIsland,M:getTileAroundThisOnSameIsland,M:getTilesAround,M:getWalkableTileAround,M:get_has_tile_down,M:get_has_tile_left,M:get_has_tile_right,M:get_has_tile_up,M:get_tile_id,M:get_zone_city,M:isTileRank,M:setTileType,M:setTileTypes,M:setTopTileType,M:topTileEaten,P:has_tile_down:System.Boolean,P:has_tile_left:System.Boolean,P:has_tile_right:System.Boolean,P:has_tile_up:System.Boolean,P:tile_id:System.Int32,P:zone_city:City | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.lifecycle-members                      M:clear,M:clearUnits,M:removeBurn,M:removeGrass,M:removeTrees | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.mutation-members                       F:timestamp_type_changed:System.Double,M:addNeighbour,M:addUnit,M:removeBurn,M:removeGrass,M:removeTrees,M:resetNeighbourLists,M:setBurned,M:setBurnedStage,M:setFireData,M:setRoad,M:setTargetedBy,M:setTileType,M:setTileTypes,M:setTopTileType,M:set_Height | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.enumerables                            F:_units:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:neighbours:WorldTile[],F:neighboursAll:WorldTile[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.WORLDTILE.referrer-index                         MapAction@Assembly-CSharp,MapBox@Assembly-CSharp,ActionLibrary@Assembly-CSharp,BiomeAsset@Assembly-CSharp,DisasterLibrary@Assembly-CSharp,DropsLibrary@Assembly-CSharp,PowerLibrary@Assembly-CSharp,TileStepAction@Assembly-CSharp,TileActionLibrary@Assembly-CSharp,TileLibrary@Assembly-CSharp,TileType@Assembly-CSharp,GrowTypeSelector@Assembly-CSharp,TileTypeBase@Assembly-CSharp,TopTileType@Assembly-CSharp,WorldAction@Assembly-CSharp,AttackAction@Assembly-CSharp,GetHitAction@Assembly-CSharp,PowerActionWithID@Assembly-CSharp,PowerAction@Assembly-CSharp,DropsAction@Assembly-CSharp,DropsLandedAction@Assembly-CSharp,DeadAnimation@Assembly-CSharp,CombatActionActorTargetPosition@Assembly-CSharp,CombatActionLibrary@Assembly-CSharp,EffectAction@Assembly-CSharp,EffectsLibrary@Assembly-CSharp,TileEffectsLibrary@Assembly-CSharp,QuantumSpriteLibrary@Assembly-CSharp,StatusLibrary@Assembly-CSharp,TileManager@Assembly-CSharp,WallHelper@Assembly-CSharp,AttackData@Assembly-CSharp,BaseAnimatedObject@Assembly-CSharp,BaseMapObject@Assembly-CSharp,BaseModule@Assembly-CSharp,BaseSimObject@Assembly-CSharp,BattleContainer@Assembly-CSharp,Drop@Assembly-CSharp,DropManager@Assembly-CSharp,GameLoadedEvent@Assembly-CSharp,Magnet@Assembly-CSharp,WorldTileContainer@Assembly-CSharp,SimObjectsZones@Assembly-CSharp,TilemapExtended@Assembly-CSharp,WorldLayer@Assembly-CSharp,WorldLayerEdges@Assembly-CSharp,WorldLog@Assembly-CSharp,WorldTile@Assembly-CSharp,WorldTilemap@Assembly-CSharp,Actor@Assembly-CSharp,ActorManager@Assembly-CSharp,Boat@Assembly-CSharp,Army@Assembly-CSharp,MetaObjectWithTraits`2@Assembly-CSharp,Building@Assembly-CSharp,BuildingActions@Assembly-CSharp,BuildingHelper@Assembly-CSharp,BuildingManager@Assembly-CSharp,BuildingCreepWorker@Assembly-CSharp,BuildingMonolith@Assembly-CSharp,Docks@Assembly-CSharp,IceTower@Assembly-CSharp,BuildingWaypoint@Assembly-CSharp,BuildingWaypointAlienMold@Assembly-CSharp,BuildingWaypointComputer@Assembly-CSharp,BuildingWaypointGoldenEgg@Assembly-CSharp,BuildingWaypointHarp@Assembly-CSharp,Clan@Assembly-CSharp,ClanManager@Assembly-CSharp,Culture@Assembly-CSharp,CultureManager@Assembly-CSharp,Family@Assembly-CSharp,FamilyManager@Assembly-CSharp,DeadKingdom@Assembly-CSharp,Kingdom@Assembly-CSharp,Language@Assembly-CSharp,LanguageManager@Assembly-CSharp,MetaZoneClickAction@Assembly-CSharp,MetaZoneHighlightAction@Assembly-CSharp,MetaTypeLibrary@Assembly-CSharp,Projectile@Assembly-CSharp,Religion@Assembly-CSharp,ReligionManager@Assembly-CSharp,Subspecies@Assembly-CSharp,SubspeciesManager@Assembly-CSharp,DebugHighlightContainer@Assembly-CSharp,WorldBehaviourActionBiomes@Assembly-CSharp,WorldBehaviourActionBurnedTiles@Assembly-CSharp,WorldBehaviourActionCreepDecay@Assembly-CSharp,WorldBehaviourActionErosion@Assembly-CSharp,WorldBehaviourActionFire@Assembly-CSharp,WorldBehaviourActionLava@Assembly-CSharp,WorldBehaviourOcean@Assembly-CSharp,WorldBehaviourActions@Assembly-CSharp,WorldBehaviourTileEffects@Assembly-CSharp,WorldBehaviourTilesRunner@Assembly-CSharp,WorldBehaviourTilesTemperatureFreeze@Assembly-CSharp,WorldBehaviourTilesTemperatureFreezeWaves@Assembly-CSharp,WorldBehaviourTilesTemperatureUnFreeze@Assembly-CSharp,WorldBehaviourUnitTemperatures@Assembly-CSharp,City@Assembly-CSharp,CityZoneAbandon@Assembly-CSharp,CityZoneGrowth@Assembly-CSharp,PlayerControl@Assembly-CSharp,AntimatterBombEffect@Assembly-CSharp,BaseEffect@Assembly-CSharp,BaseEffectController@Assembly-CSharp,BoulderCharge@Assembly-CSharp,BurnedTilesLayer@Assembly-CSharp,Cloud@Assembly-CSharp,EffectDivineLight@Assembly-CSharp,EffectFlyingY@Assembly-CSharp,EffectHearts@Assembly-CSharp,EffectInfinityCoin@Assembly-CSharp,ExplosionFlash@Assembly-CSharp,ExplosionsEffects@Assembly-CSharp,FireLayer@Assembly-CSharp,Fireworks@Assembly-CSharp,HeatRayEffect@Assembly-CSharp,LavaLayer@Assembly-CSharp | Static signature index; no methods invoked.
+OBSERVED A.TILEZONE.type                                    TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.TILEZONE.surface-counts                          fields=35 props=3 methods=64 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.TILEZONE.identity-members                        F:id:System.Int32,F:last_color_asset_id:System.Int32,F:last_drawn_id:System.Int32,F:tiles_with_liquid:System.Int32,M:getDefaultMetaOnZone,M:hasLiquid | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.owner-members                           F:_good_for_new_city:System.Boolean,F:city:City,M:canBeClaimedByCity,M:canStartCityHere,M:getCityOnZone,M:getKingdomOnZone,M:get__city_place_finder,M:hasCity,M:isGoodForNewCity,M:isSameCityHere,M:setCity,M:setGoodForNewCity,P:_city_place_finder:CityPlaceFinder | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.leader-members                          M:getKingdomOnZone | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.population-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.buildings-members                       F:MAX_BUILDING_COLLECTIONS:System.Int32,F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:buildings_all:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:buildings_render_list:System.Collections.Generic.List`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:addBuildingMain,M:addBuildingToSet,M:clearBuildingLists,M:countBuildingsType,M:hasAnyBuildings,M:hasAnyBuildingsInSet,M:hasBuildingOf,M:hasReachedBuildingLimit,M:removeBuildingMain | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.territory-members                       F:_tile_types:System.Collections.Generic.Dictionary`2[[TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:centerTile:WorldTile,F:debug_zone_color:UnityEngine.Color,F:tiles:WorldTile[],F:tiles_with_ground:System.Int32,F:tiles_with_liquid:System.Int32,F:visible_main_centered:System.Boolean,F:zone_down:TileZone,F:zone_left:TileZone,F:zone_right:TileZone,F:zone_up:TileZone,M:addTile,M:addTileType,M:getAllianceOnZone,M:getArmyOnZone,M:getCityOnZone,M:getClanOnZone,M:getCultureOnZone,M:getDefaultMetaOnZone,M:getFamilyOnZone,M:getKingdomOnZone,M:getLanguageOnZone,M:getRandomTile,M:getReligionOnZone,M:getSubspeciesOnZone,M:getTileTypes,M:getTilesOfType,M:get_top_left_corner_tile,M:hasTilesOfType,M:hasZonesConnectedViaRegions,M:isZoneOnFire,M:removeTileType,P:top_left_corner_tile:WorldTile | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.lifecycle-members                       M:clear,M:clearBuildingLists,M:clearDebug,M:getHashsetOrCreate,M:removeBuildingMain,M:removeTileType | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.mutation-members                        F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:debug_can_settle:System.Boolean,F:last_color_asset_id:System.Int32,M:addBuildingMain,M:addBuildingToSet,M:addNeighbour,M:addTile,M:addTileType,M:checkCanSettleInThisBiomes,M:getHashset,M:getHashsetOrCreate,M:hasAnyBuildingsInSet,M:removeBuildingMain,M:removeTileType,M:resetRenderHelpers,M:setCity,M:setDirty,M:setGoodForNewCity | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.enumerables                             F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:_tile_types:System.Collections.Generic.Dictionary`2[[TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:buildings_all:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:buildings_render_list:System.Collections.Generic.List`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:debug_args:System.ValueTuple`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]][],F:neighbours:TileZone[],F:neighbours_all:TileZone[],F:tiles:WorldTile[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.TYPE.biome                                       BiomeAsset | Resolved optional BiomeAsset type.
+OBSERVED A.TYPE.tiletypebase                                TileTypeBase | Resolved optional terrain/tile-type base.
+ASSERT A.SAMPLE.available                                   PASS | WorldTile x=1 y=1 height=0
+OBSERVED A.SAMPLE.F._has_walls_around                       False | System.Boolean
+OBSERVED A.SAMPLE.F._targeted_by                            <null> | Actor
+OBSERVED A.SAMPLE.F._units                                  System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=0 | System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.SAMPLE.F.building                                <null> | Building
+OBSERVED A.SAMPLE.F.burned_stages                           0 | System.Int32
+OBSERVED A.SAMPLE.F.chunk                                   MapChunk | MapChunk
+OBSERVED A.SAMPLE.F.color_array                             <null> | ColorArray
+OBSERVED A.SAMPLE.F.cur_tile_type                           TileType | TileTypeBase
+OBSERVED A.SAMPLE.F.current_rendered_tile_graphics          <null> | UnityEngine.Tilemaps.TileBase
+OBSERVED A.SAMPLE.F.data                                    WorldTileData | WorldTileData
+OBSERVED A.SAMPLE.F.delayed_bomb_type                        | System.String
+OBSERVED A.SAMPLE.F.delayed_timer_bomb                      0 | System.Single
+OBSERVED A.SAMPLE.F.explosion_fx_stage                      0 | System.Int32
+OBSERVED A.SAMPLE.F.explosion_power                         0 | System.Int32
+OBSERVED A.SAMPLE.F.explosion_wave                          0 | System.Int32
+OBSERVED A.SAMPLE.F.flash_state                             0 | System.Int32
+OBSERVED A.SAMPLE.F.health                                  10 | System.Int32
+OBSERVED A.SAMPLE.F.heat                                    0 | System.Int32
+OBSERVED A.SAMPLE.F.is_checked_tile                         False | System.Boolean
+OBSERVED A.SAMPLE.F.last_rendered_border_pos_ocean          UnityEngine.Vector3Int | UnityEngine.Vector3Int
+OBSERVED A.SAMPLE.F.last_rendered_pos_tile                  UnityEngine.Vector3Int | UnityEngine.Vector3Int
+OBSERVED A.SAMPLE.F.last_rendered_tile_type                 TileType | TileTypeBase
+OBSERVED A.SAMPLE.F.main_type                               TileType | TileType
+OBSERVED A.SAMPLE.F.minimap_building_x                      0 | System.Int32
+OBSERVED A.SAMPLE.F.minimap_building_y                      0 | System.Int32
+OBSERVED A.SAMPLE.F.neighbours                              WorldTile[] count=4 | WorldTile[]
+OBSERVED A.SAMPLE.F.neighboursAll                           WorldTile[] count=8 | WorldTile[]
+OBSERVED A.SAMPLE.F.obstacle_is_around                      False | System.Boolean
+OBSERVED A.SAMPLE.F.pollinated                              0 | System.Int32
+OBSERVED A.SAMPLE.F.pos                                     UnityEngine.Vector2Int | UnityEngine.Vector2Int
+OBSERVED A.SAMPLE.F.posV                                    UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED A.SAMPLE.F.posV3                                   UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED A.SAMPLE.F.region                                  MapRegion | MapRegion
+OBSERVED A.SAMPLE.F.road_island                             <null> | TileIsland
+OBSERVED A.SAMPLE.F.score                                   -1 | System.Int32
+OBSERVED A.SAMPLE.F.tile_down                               WorldTile | WorldTile
+OBSERVED A.SAMPLE.F.tile_left                               WorldTile | WorldTile
+OBSERVED A.SAMPLE.F.tile_right                              WorldTile | WorldTile
+OBSERVED A.SAMPLE.F.tile_up                                 WorldTile | WorldTile
+OBSERVED A.SAMPLE.F.timestamp_type_changed                  0 | System.Double
+OBSERVED A.SAMPLE.F.top_type                                <null> | TopTileType
+OBSERVED A.SAMPLE.F.wall_check_dirty                        True | System.Boolean
+OBSERVED A.SAMPLE.F.world_edge                              False | System.Boolean
+OBSERVED A.SAMPLE.F.world_tile_zone_border                  WorldTileZoneBorder | WorldTileZoneBorder
+OBSERVED A.SAMPLE.F.x                                       1 | System.Int32
+OBSERVED A.SAMPLE.F.y                                       1 | System.Int32
+OBSERVED A.SAMPLE.F.zone                                    TileZone | TileZone
+OBSERVED A.SAMPLE.P.Height                                  0 | System.Int32
+OBSERVED A.SAMPLE.P.Type                                    TileType | TileTypeBase
+OBSERVED A.SAMPLE.P.has_tile_down                           True | System.Boolean
+OBSERVED A.SAMPLE.P.has_tile_left                           True | System.Boolean
+OBSERVED A.SAMPLE.P.has_tile_right                          True | System.Boolean
+OBSERVED A.SAMPLE.P.has_tile_up                             True | System.Boolean
+OBSERVED A.SAMPLE.P.is_liquid                               True | System.Boolean
+OBSERVED A.SAMPLE.P.random_animation_seed                   6172 | System.Int32
+OBSERVED A.SAMPLE.P.tile_id                                 257 | System.Int32
+OBSERVED A.SAMPLE.P.zone_city                               <null> | City
+OBSERVED A.SAMPLE.summary                                   emitted=57 readErrors=0 limit=96 | Safe-reader v2 reads fields and zero-index properties only; it never mass-invokes arbitrary methods.
+A SUMMARY: PASS=2 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0021 :: B :: TILE SEMANTICS / HEIGHT / ZONE / BIOME / NEIGHBOURS
+OBSERVED B.TILE.coordinates                                 x=1 y=1 | Best-effort direct/data coordinate read.
+OBSERVED B.TILE.height-direct                               0 | WorldTile Height/height candidate.
+OBSERVED B.TILE.height-data                                 0 | WorldTile.data.height candidate.
+ASSERT B.TILE.height-readable                               PASS | direct=0 data=0
+ASSERT B.TILE.height-coherent                               PASS | direct=0 data=0
+ASSERT B.TILE.zone                                          PASS | source=F:zone value=TileZone
+OBSERVED B.TILE.biome                                       <none/null> | Biome may legitimately be null/encoded differently for some tiles.
+ASSERT B.TILE.neighbours                                    PASS | source=WorldTile.F:neighboursAll count=8
+ASSERT B.TILE.neighbour-type                                PASS | WorldTile
+ASSERT B.TILE.neighbour-reciprocal                          PASS | reverseSource=Neighbour.F:neighboursAll reverseCount=5
+OBSERVED B.TILES.master                                     source=MapBox.F:tiles_map count=65536 | Authoritative live collection discovered for this run.
+B SUMMARY: PASS=6 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0021 :: C :: COLLECTION MEMBERSHIP / REFERENCE CONSISTENCY
+ASSERT C.TILE.in-master-collection                          PASS | masterCount=65536
+ASSERT C.NEIGHBOURS.in-master-collection                    PASS | checked=8 missing=0 source=WorldTile.F:neighboursAll
+ASSERT C.ZONE.reference-stable                              PASS | source=F:zone
+ASSERT C.HEIGHT.read-stable                                 PASS | first=0 second=0
+C SUMMARY: PASS=4 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0021 :: D :: 100/1000 READ STABILITY / NO-MUTATION GUARD
+ASSERT D.STABILITY.semantic-100                             PASS | actual=100
+ASSERT D.STABILITY.height-1000                              PASS | actual=1000
+OBSERVED D.STABILITY.elapsed-1000                           3ms | Machine/save-specific timing; not a benchmark threshold.
+ASSERT D.NO-MUTATION.tile-count                             PASS | before=65536 after=65536
+ASSERT D.NO-MUTATION.sample-membership                      PASS | sample still present
+ASSERT D.NO-MUTATION.height                                 PASS | before=0 after=0
+ASSERT D.NO-MUTATION.zone                                   PASS | sameRef=True
+ASSERT D.NO-MUTATION.neighbour-count                        PASS | before=8 after=8
+D SUMMARY: PASS=7 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0021 :: FINAL MATRIX
+ASSERTIONS PASS=25 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

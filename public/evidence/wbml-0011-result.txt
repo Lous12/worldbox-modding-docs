@@ -1,0 +1,78 @@
+WBML-0011 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0011 / 0.0.11 :: LOAD
+GAMEOBJECT / TRANSFORM / COMPONENT / CLONE / DESTROY BASICS SUITE READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+No save mutation is intended; all probes use WBML-owned temporary GameObjects.
+WBML-0011 / 0.0.11 :: AUTOMATED RUN START
+RUN TOKEN: ce2e4f604841
+WBML-0011 :: A :: GAMEOBJECT / TRANSFORM / PARENTING / COMPONENT LOOKUP
+ASSERT A.GO.created                                         PASS | WBML0011_A_Root
+ASSERT A.GO.active-self                                     PASS | activeSelf=True
+ASSERT A.GO.transform-present                               PASS | Transform
+ASSERT A.TRANSFORM.local-position                           PASS | actual=(1.25, -2.50, 3.75)
+ASSERT A.TRANSFORM.local-scale                              PASS | actual=(1.50, 0.75, 2.00)
+ASSERT A.PARENT.child-parent                                PASS | parent=WBML0011_A_Root
+ASSERT A.PARENT.child-count                                 PASS | childCount=1
+ASSERT A.PARENT.find-child                                  PASS | Transform.Find sameRef=True
+ASSERT A.COMP.added                                         PASS | Lous12.WorldBoxModdingLab.WBMLDataComponent
+ASSERT A.COMP.get-same                                      PASS | sameRef=True
+ASSERT A.COMP.fields-roundtrip                              PASS | int=42 text=WBML-data vec=(7.00, 8.00, 9.00)
+ASSERT A.COMP.parent-get-in-children                        PASS | GetComponentInChildren sameRef=True
+ASSERT A.COMP.component-count                               PASS | components=2
+ASSERT A.CLEANUP.root-destroyed                             PASS | unityNull=True
+ASSERT A.CLEANUP.child-destroyed-with-parent                PASS | unityNull=True
+ASSERT A.REPORT.write-preflight                             PASS | write/delete OK
+A SUMMARY: PASS=16 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0011 :: B :: MONOBEHAVIOUR LIFECYCLE / ENABLE-DISABLE / COMPONENT DESTROY
+ASSERT B.LIFE.component-added                               PASS | WBMLLifecycleComponent
+ASSERT B.LIFE.awake-once                                    PASS | Awake=1
+ASSERT B.LIFE.initial-enable-once                           PASS | OnEnable=1
+ASSERT B.LIFE.start-once                                    PASS | Start=1
+ASSERT B.LIFE.order-awake-enable-start                      PASS | events=Awake>OnEnable>Start
+ASSERT B.LIFE.component-disable                             PASS | OnDisable=1 enabled=False
+ASSERT B.LIFE.component-reenable                            PASS | OnEnable=2 enabled=True
+ASSERT B.LIFE.gameobject-disable                            PASS | activeSelf=False OnDisable=2
+ASSERT B.LIFE.gameobject-reenable                           PASS | activeSelf=True OnEnable=3
+ASSERT B.LIFE.start-not-repeated                            PASS | Start=1
+ASSERT B.LIFE.component-destroyed                           PASS | unityNull=True
+ASSERT B.LIFE.ondestroy-once                                PASS | OnDestroy=1
+ASSERT B.LIFE.gameobject-survives-component                 PASS | goUnityNull=False
+ASSERT B.CLEANUP.gameobject-destroyed                       PASS | unityNull=True
+B SUMMARY: PASS=14 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0011 :: C :: INSTANTIATE / COMPONENT FIELD COPY / CLONE INDEPENDENCE / ACTIVE STATE
+ASSERT C.CLONE.created                                      PASS | WBML0011_C_Original(Clone)
+ASSERT C.CLONE.distinct-reference                           PASS | distinct=True
+ASSERT C.CLONE.parent                                       PASS | parent=PrefabLibrary
+ASSERT C.CLONE.component-copied                             PASS | WBMLDataComponent
+ASSERT C.CLONE.fields-copied                                PASS | int=100 text=original vec=(10.00, 20.00, 30.00)
+ASSERT C.CLONE.transform-scale-copied                       PASS | cloneScale=(1.10, 1.20, 1.30) originalScale=(1.10, 1.20, 1.30)
+ASSERT C.CLONE.component-independent                        PASS | originalInt=100 originalText=original
+ASSERT C.CLONE.transform-independent                        PASS | originalScale=(1.10, 1.20, 1.30)
+ASSERT C.CLONE.active-state-independent                     PASS | cloneActive=False originalActive=True
+ASSERT C.CLEANUP.original-destroyed                         PASS | unityNull=True
+ASSERT C.CLEANUP.clone-destroyed                            PASS | unityNull=True
+C SUMMARY: PASS=11 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0011 :: D :: 128-OBJECT HIERARCHY STRESS / COMPONENT QUERY / DEFERRED HIERARCHY CLEANUP
+ASSERT D.STRESS.child-count                                 PASS | expected=128 actual=128
+ASSERT D.STRESS.component-query-count                       PASS | expected=128 actual=128
+ASSERT D.STRESS.component-values                            PASS | 128 indexed components roundtrip=True
+OBSERVED D.STRESS.create-ms                                 0,781 | Time to create/parent 128 WBML GameObjects and add one MonoBehaviour each.
+OBSERVED D.STRESS.memory-delta-bytes                        16384 | GC.GetTotalMemory(false) delta; observational only, not a leak proof.
+ASSERT D.CLEANUP.root-destroyed                             PASS | unityNull=True
+ASSERT D.CLEANUP.children-destroyed-with-root               PASS | expected=128 actual=128
+D SUMMARY: PASS=5 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0011 :: FINAL MATRIX
+ASSERTIONS PASS=46 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; latest.json is optional.

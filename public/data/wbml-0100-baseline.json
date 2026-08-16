@@ -1,0 +1,310 @@
+{
+  "schema": 1,
+  "baseline": "WBML 0.1.0 First Research Baseline",
+  "target": {
+    "worldbox": "0.51.2",
+    "game_build": 719,
+    "nml": "1.2.0.1",
+    "unity": "2022.3.60f1",
+    "research_engine": "v2.1.1",
+    "political_world": "1.7.0",
+    "political_world_api": "1.14.0"
+  },
+  "categories": {
+    "VERIFIED": [
+      {
+        "id": "addon-data-persistence",
+        "finding": "Addon Data save/load path worked in the tested runtime.",
+        "evidence": "0.0.1"
+      },
+      {
+        "id": "event-bus",
+        "finding": "Political World event bus suite closed without failures.",
+        "evidence": "0.0.4"
+      },
+      {
+        "id": "actions-conditions-effects",
+        "finding": "Actions/Conditions/Effects core path is usable; unsafe/unsupported branches remain separately classified.",
+        "evidence": "0.0.5"
+      },
+      {
+        "id": "automated-lifecycle-runner",
+        "finding": "Automated lifecycle/regression runner is usable; unsupported branches remain separately classified.",
+        "evidence": "0.0.6"
+      },
+      {
+        "id": "reflection-access-tools",
+        "finding": "Reflection + Harmony AccessTools suite closed PASS.",
+        "evidence": "0.0.7"
+      },
+      {
+        "id": "localization-lm",
+        "finding": "Localization / LM suite closed PASS.",
+        "evidence": "0.0.8"
+      },
+      {
+        "id": "ui-automation",
+        "finding": "Automated UI infrastructure checks closed PASS.",
+        "evidence": "0.0.9-fix3"
+      },
+      {
+        "id": "diagnostics-reports",
+        "finding": "Diagnostics/logging/report generation closed PASS.",
+        "evidence": "0.0.10"
+      },
+      {
+        "id": "gameobject-transform",
+        "finding": "GameObject / Transform API basics closed PASS.",
+        "evidence": "0.0.11"
+      },
+      {
+        "id": "asset-registry-lookup",
+        "finding": "AssetManager / AssetLibrary / registry / lookup suite closed PASS.",
+        "evidence": "0.0.12"
+      },
+      {
+        "id": "ownership-parent-child",
+        "finding": "Ownership / parent-child lifecycle closed PASS.",
+        "evidence": "0.0.13"
+      },
+      {
+        "id": "snapshot-mutate-restore",
+        "finding": "Snapshot / mutate / restore / transaction path closed PASS, including exception restoration.",
+        "evidence": "0.0.14"
+      },
+      {
+        "id": "unity-fake-null",
+        "finding": "Unity fake-null / stale-reference / destroy semantics were empirically characterized.",
+        "evidence": "0.0.15"
+      },
+      {
+        "id": "kingdom-api",
+        "finding": "Kingdom API basics closed PASS.",
+        "evidence": "0.0.16"
+      },
+      {
+        "id": "city-api",
+        "finding": "City API suite closed PASS.",
+        "evidence": "0.0.17"
+      },
+      {
+        "id": "actor-api",
+        "finding": "Actor API suite closed PASS.",
+        "evidence": "0.0.18-fix1"
+      },
+      {
+        "id": "entity-relationships",
+        "finding": "Kingdom↔City↔Actor relationship/liveness checks closed PASS.",
+        "evidence": "0.0.19"
+      },
+      {
+        "id": "destruction-ownership",
+        "finding": "Destruction & ownership lifecycle checks closed PASS.",
+        "evidence": "0.0.20"
+      },
+      {
+        "id": "worldtile-api",
+        "finding": "WorldTile API suite closed PASS.",
+        "evidence": "0.0.21"
+      },
+      {
+        "id": "terrain-biome-route",
+        "finding": "Terrain resolves through TileTypeBase; TileTypeBase exposes biome_asset:BiomeAsset.",
+        "evidence": "0.0.22"
+      },
+      {
+        "id": "map-services",
+        "finding": "WorldTile resolves TileZone, MapChunk and MapRegion; managers/services were stable in the tested map.",
+        "evidence": "0.0.23"
+      },
+      {
+        "id": "generate-new-map",
+        "finding": "MapBox.generateNewMap() performs a real world-generation lifecycle.",
+        "evidence": "0.0.24-fix6"
+      },
+      {
+        "id": "worldgen-finish-signal",
+        "finding": "MapBox.finishMakingWorld() is a working completion signal for generateNewMap() in the tested baseline.",
+        "evidence": "0.0.24-fix6"
+      },
+      {
+        "id": "worldgen-reuse-valid",
+        "finding": "Same-size worldgen can legally reuse tiles_map and WorldTile objects; identity replacement is not required.",
+        "evidence": "0.0.24-fix6"
+      },
+      {
+        "id": "triple-worldgen",
+        "finding": "Three sequential generateNewMap() cycles in one session completed with stable live state.",
+        "evidence": "0.0.25-fix1"
+      },
+      {
+        "id": "performance-read-paths",
+        "finding": "Read-only performance suite completed without state drift.",
+        "evidence": "0.0.26"
+      },
+      {
+        "id": "mass-stress",
+        "finding": "524,288 WorldTile reads, 250,000 coordinate lookups and 100,000 neighbour checks completed without corruption.",
+        "evidence": "0.0.27"
+      },
+      {
+        "id": "cross-mod-coexistence",
+        "finding": "Political World + Custom Worldsize + Scenario Tools coexisted with core lookups and Harmony state intact.",
+        "evidence": "0.0.28-fix1"
+      },
+      {
+        "id": "save-reload",
+        "finding": "SaveManager.saveToCurrentPath() and SaveManager.loadWorld() safely executed in the tested baseline.",
+        "evidence": "0.0.29-fix1"
+      },
+      {
+        "id": "reload-reuse-safety",
+        "finding": "After real reload, old WorldTile/collections/services/managers were reused in the tested run and old tile reads were safe 100/100.",
+        "evidence": "0.0.29-fix1"
+      },
+      {
+        "id": "full-integration-torture",
+        "finding": "Save→reload→two worldgen cycles→262,144 tile reads→100,000 GetTile comparisons completed with all gates PASS.",
+        "evidence": "0.0.30"
+      }
+    ],
+    "OBSERVED": [
+      {
+        "id": "game-language-library",
+        "finding": "GameLanguageLibrary observed count=40 with sample id=en.",
+        "evidence": "0.0.12"
+      },
+      {
+        "id": "default-map-shape",
+        "finding": "Tested default map contained 65,536 tiles with exact 256×256 coordinates.",
+        "evidence": "0.0.23"
+      },
+      {
+        "id": "height-ranges-vary",
+        "finding": "WorldTile height ranges varied across generated worlds and are world-state dependent.",
+        "evidence": "0.0.22/0.0.24"
+      },
+      {
+        "id": "height-load-normalization",
+        "finding": "WorldTile.Height can normalize/recompute during load; exact byte-for-byte equality is not a reload contract.",
+        "evidence": "0.0.29"
+      },
+      {
+        "id": "on-world-loaded-not-required",
+        "finding": "MapBox.on_world_loaded did not reliably fire for generateNewMap in the investigated path; finishMakingWorld was more useful.",
+        "evidence": "0.0.24-fix5/fix6"
+      },
+      {
+        "id": "lazy-framework-assemblies",
+        "finding": "Reflection/type inspection lazily loaded System.Net.Http, System.ServiceModel.Internals and System.Transactions.",
+        "evidence": "0.0.28-fix1"
+      },
+      {
+        "id": "pw-harmony-owner",
+        "finding": "The tested PW startWar Harmony owner id was fluttershy.politicalworld.politics.v1392.",
+        "evidence": "0.0.28/0.0.30"
+      },
+      {
+        "id": "save-load-signatures",
+        "finding": "saveToCurrentPath() and loadWorld() no-args signatures are version-bound implementation observations, not guaranteed public API.",
+        "evidence": "0.0.29"
+      },
+      {
+        "id": "tile-reuse-implementation",
+        "finding": "WorldTile/array/service/manager reuse across lifecycle transitions is an implementation behavior observed on WorldBox 0.51.2.",
+        "evidence": "0.0.24–0.0.30"
+      },
+      {
+        "id": "performance-numbers",
+        "finding": "Measured timings/ops-per-second are hardware/runtime observations, not pass/fail contracts.",
+        "evidence": "0.0.26"
+      }
+    ],
+    "FAILED_ASSUMPTION": [
+      {
+        "id": "require-tile-ref-replacement",
+        "finding": "Rejected: worldgen completion must not require the first WorldTile reference to change.",
+        "evidence": "0.0.24-fix2–fix5"
+      },
+      {
+        "id": "require-old-tile-removal",
+        "finding": "Rejected: an old WorldTile must not be required to disappear from the current map after same-size worldgen.",
+        "evidence": "0.0.24"
+      },
+      {
+        "id": "exact-height-reload-proof",
+        "finding": "Rejected: exact restoration of WorldTile.Height must not be the sole proof of reload.",
+        "evidence": "0.0.29"
+      },
+      {
+        "id": "raw-assembly-count-stability",
+        "finding": "Rejected: total AppDomain assembly count must not be required to remain constant across reflection inspection.",
+        "evidence": "0.0.28"
+      },
+      {
+        "id": "scene-owned-coroutine-survival",
+        "finding": "Rejected: a coroutine hosted on a world-owned object cannot be assumed to survive full world replacement.",
+        "evidence": "0.0.24-fix1"
+      },
+      {
+        "id": "worldloaded-callback-authority",
+        "finding": "Rejected: on_world_loaded callback alone is not an authoritative generateNewMap completion condition in this runtime.",
+        "evidence": "0.0.24-fix5/fix6"
+      }
+    ],
+    "UNSAFE": [
+      {
+        "id": "full-map-scan-per-frame",
+        "finding": "Unsafe/performance-hostile: scanning all 65,536 tiles in every wait-loop frame caused severe FPS degradation.",
+        "evidence": "0.0.24 original"
+      },
+      {
+        "id": "guess-save-load-args",
+        "finding": "Unsafe: never guess required SaveManager/load/save arguments or paths; only invoke proven safe signatures.",
+        "evidence": "0.0.29+"
+      },
+      {
+        "id": "destructive-tests-production-world",
+        "finding": "Unsafe: worldgen/save-reload/destruction suites must use disposable worlds.",
+        "evidence": "0.0.20/0.0.24/0.0.29/0.0.30"
+      },
+      {
+        "id": "plain-null-unity-liveness",
+        "finding": "Unsafe pattern: plain object/null assumptions are insufficient for UnityEngine.Object liveness because fake-null semantics exist.",
+        "evidence": "0.0.15"
+      }
+    ],
+    "UNKNOWN": [
+      {
+        "id": "world-isolation-return-tail",
+        "finding": "Final return-to-World-B identity/signature tail from World Isolation Probe remains unresolved; A/B/A is not to be rerun without a narrow reason.",
+        "evidence": "0.0.2"
+      },
+      {
+        "id": "persistence-unsafe-branch",
+        "finding": "Optional unsafe branch of Persistence & Lifecycle Suite remains intentionally unexecuted.",
+        "evidence": "0.0.3"
+      },
+      {
+        "id": "ui-escape-manual",
+        "finding": "UI Infrastructure automated checks are green; manual Escape behavior remains pending.",
+        "evidence": "0.0.9"
+      },
+      {
+        "id": "entity-stale-reuse-reload",
+        "finding": "Kingdom/City/Actor stale-vs-reuse across save/reload remains unobserved because tested registries were empty.",
+        "evidence": "0.0.29/0.0.30"
+      },
+      {
+        "id": "different-version-behavior",
+        "finding": "Behavior under other WorldBox/NML/PW versions is unknown until a new baseline diff is run.",
+        "evidence": "baseline policy"
+      },
+      {
+        "id": "nondefault-worldsize-lifecycle",
+        "finding": "Full save/reload + repeated worldgen lifecycle on non-default Custom Worldsize dimensions remains unverified.",
+        "evidence": "future"
+      }
+    ]
+  }
+}

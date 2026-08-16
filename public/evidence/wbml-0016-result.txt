@@ -1,0 +1,72 @@
+WBML-0016 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0016 / 0.0.16 :: LOAD
+KINGDOM API BASICS / LIVE READ-ONLY DISCOVERY SUITE READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+FULL PASS REQUIREMENT: load a disposable world containing at least ONE living kingdom before F6.
+This suite is read-only: it does not intentionally mutate Kingdom/City/Actor/world state.
+WBML-0016 / 0.0.16 :: AUTOMATED RUN START
+RUN TOKEN: e74053c35299
+WBML-0016 :: A :: KINGDOM TYPE / MANAGER / WORLD SINGLETON SURFACE
+ASSERT A.TYPE.kingdom                                       PASS | Kingdom, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT A.TYPE.kingdom-manager                               PASS | KingdomManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT A.TYPE.mapbox                                        PASS | MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT A.TYPE.world                                         PASS | World, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT A.SINGLETON.mapbox                                   PASS | MapBox
+OBSERVED A.SINGLETON.world                                  MapBox | Runtime singleton discovery using common instance/_instance/world members.
+OBSERVED A.SINGLETON.kingdom-manager                        NOT FOUND | A dedicated static KingdomManager singleton is not required if the manager is owned by MapBox/World.
+ASSERT A.KINGDOM.field-count-positive                       PASS | fields=32
+ASSERT A.KINGDOM.method-count-positive                      PASS | methods=269
+OBSERVED A.KINGDOM.surface-counts                           fields=32 props=14 methods=269 | Runtime reflection counts; not a stable API guarantee.
+OBSERVED A.KINGDOM.identity-members                         F:data,M:clearKingData,M:getID,M:getMetaData,M:getOldestVisibleUnitForNameplatesCached,M:getTypeID,M:get_id,M:get_name,M:get_obsidian_name_id,M:get_species_id,M:isInWarOnSameSide,M:loadData,M:setData,M:setName,M:set_name,M:trackName,P:id,P:name,P:obsidian_name_id,P:species_id | Members whose names contain id/name/data.
+OBSERVED A.KINGDOM.city-members                             F:capital,M:checkClearCapital,M:clearCapital,M:decreaseHappinessFromLostCityCapture,M:decreaseHappinessFromRazedCity,M:hasCapital,M:increaseHappinessFromDestroyingCity,M:increaseHappinessFromNewCityCapture,M:kingFledCity,M:listCity,M:logKingFledCapital,M:logKingFledCity,M:setCapital,M:setCityMetas | Potential city/capital ownership surface.
+OBSERVED A.KINGDOM.leader-members                           F:king,M:addRuler,M:affectKingByPowers,M:clearKingData,M:copyMetasFromOtherKingdom,M:countKings,M:countLeaders,M:createWildKingdom,M:getEnemiesKingdoms,M:getKingClan,M:getKingdoms,M:get_kingdomColor,M:hasKing,M:hasKingdoms,M:hasNearbyKingdoms,M:isOpinionTowardsKingdomGood,M:kingFledCity,M:kingLeftEvent,M:logKingDead,M:logKingFledCapital,M:logKingFledCity,M:logKingLeft,M:newCivKingdom,M:removeKing,M:rulerLeft,M:setKing,M:updateRulers,P:kingdomColor | Potential leader/ruler surface.
+ASSERT A.REPORT.write-preflight                             PASS | write/delete OK
+A SUMMARY: PASS=8 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0016 :: B :: LIVE KINGDOM DISCOVERY / COLLECTION / IDENTITY BASELINE
+ASSERT B.LIVE.source-found                                  PASS | MapBox
+ASSERT B.LIVE.collection-nonempty                           PASS | count=177 source=MapBox
+ASSERT B.LIVE.all-items-kingdom                             PASS | allKingdom=True
+ASSERT B.LIVE.unique-references                             PASS | uniqueRefs=177 total=177
+OBSERVED B.LIVE.first-id                                    1 | Best-effort read from field/property id/_id.
+OBSERVED B.LIVE.first-name                                  Brooshorth | Best-effort read using getName/name/name_data-style runtime surface.
+ASSERT B.LIVE.first-reference-nonnull                       PASS | type=Kingdom
+ASSERT B.LIVE.first-two-distinct-reference                  PASS | distinct=True
+OBSERVED B.LIVE.second-id                                   0 | Second live kingdom identity, when available.
+B SUMMARY: PASS=6 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0016 :: C :: LIVE KINGDOM READS / CITY-CAPITAL-LEADER SURFACE / READ STABILITY
+OBSERVED C.KINGDOM.id                                       1 | Best-effort identity read.
+OBSERVED C.KINGDOM.name                                     Brooshorth | Best-effort display-name read.
+OBSERVED C.KINGDOM.data-type                                KingdomData | Kingdom data object when exposed.
+ASSERT C.KINGDOM.city-surface                               PASS | System.Collections.Generic.List`1[[City, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+ASSERT C.KINGDOM.city-count-positive                        PASS | cityCount=1
+OBSERVED C.KINGDOM.capital                                  <not-resolved/null> | Potential capital reference.
+OBSERVED C.KINGDOM.leader                                   Actor | Potential leader/ruler reference.
+ASSERT C.STABILITY.reference-100                            PASS | expected=100 actual=100
+ASSERT C.STABILITY.id-100                                   PASS | expected=100 actual=100
+ASSERT C.STABILITY.name-100                                 PASS | expected=100 actual=100
+C SUMMARY: PASS=5 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0016 :: D :: MANAGER METHODS / 1000 READ-ONLY LOOKUPS / NO-MUTATION GUARD
+ASSERT D.STRESS.reference-1000                              PASS | expected=1000 actual=1000
+ASSERT D.STRESS.id-1000                                     PASS | expected=1000 actual=1000
+ASSERT D.STRESS.name-1000                                   PASS | expected=1000 actual=1000
+ASSERT D.NO-MUTATION.kingdom-count                          PASS | source=MapBox before=177 after=177
+ASSERT D.NO-MUTATION.first-reference                        PASS | sameRef=True
+OBSERVED D.STRESS.elapsed-ms                                139,813 | 1000 read-only collection/identity/name probes; observational only.
+OBSERVED D.MANAGER.relation-methods                         SendMessageUpwards | Potential diplomacy/relation-related runtime methods. Presence is not yet a verified behavioral contract.
+OBSERVED D.MANAGER.kingdom-methods                          <addClearWorld>b__161_0,<addClearWorld>b__161_1,<addKillAllUnits>b__162_0,<addLastStep>b__141_0,<addLoadAutoTester>b__163_0,GetComponent,GetComponentFastPath,GetComponentInChildren,GetComponentInParent,GetComponentIndex,GetComponents,GetComponentsInChildren,GetComponentsInParent,GetHashCode,GetInstanceID,GetScriptClassName,GetTile,GetTileSimple,GetType,TryGetComponent,addClearWorld,addKillAllUnits,addLastStep,addLoadAutoTester,addLoadWorldCallbacks,addNewSystem,addUnloadResources,checkAnyMetaAddedRemoved,getActorNearCursor,getArchitectColor,getArchitectMood,getCachedMapMetaAsset,getCivWorldPopulation,getCurSessionTime,getCurWorldTime,getMousePos,getMouseTilePos,getMouseTilePosCachedFrame,getRealTimeElapsedSince,getSelectedPowerAsset,getSelectedPowerHoldAnimation,getSelectedPowerID,getWorldTimeElapsedSince,get_camera,get_destroyCancellationToken,get_enabled,get_gameObject,get_hideFlags,get_isActiveAndEnabled,get_library_materials,get_move_camera,get_name,get_selected_power,get_tag,get_transform,get_useGUILayout,get_zone_camera | Potential manager API surface for later mutation/destruction suites.
+D SUMMARY: PASS=5 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0016 :: FINAL MATRIX
+ASSERTIONS PASS=24 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; latest.json is optional.

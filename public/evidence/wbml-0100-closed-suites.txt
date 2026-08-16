@@ -1,0 +1,34 @@
+# Closed suite ledger — WBML 0.1.0
+
+| Version | Result | Notes |
+|---|---:|---|
+| 0.0.1 | CLOSED PASS | Addon Data Save/Load Probe |
+| 0.0.2 | OPEN TAIL | Only final return-to-World-B identity/signature tail unresolved; do not redo A/B/A |
+| 0.0.3 | PARTIAL PASS 119/0/1 | Optional unsafe branch remains |
+| 0.0.4 | PASS 68/0/0 | Event Bus |
+| 0.0.5 | PARTIAL PASS 90/0/3 | Actions / Conditions / Effects |
+| 0.0.6 | PARTIAL PASS 36/0/2 | Automated Lifecycle / Regression Runner |
+| 0.0.7 | PASS 54/0/0 | Reflection + Harmony AccessTools |
+| 0.0.8 | PASS 51/0/0 | Localization / LM |
+| 0.0.9-fix3 | AUTOMATED PASS 126/0/0 | Manual Escape gate pending |
+| 0.0.10 | PASS 33/0/0 | Diagnostics / Logging / Reports |
+| 0.0.11 | PASS 46/0/0 | GameObject / Transform |
+| 0.0.12 | PASS 33/0/0 | AssetManager / AssetLibrary / Registry / Lookup |
+| 0.0.13 | PASS 46/0/0 | Ownership / Parent–Child Lifecycle |
+| 0.0.14 | PASS 49/0/0 | Snapshot / Mutate / Restore / Transactions |
+| 0.0.15 | PASS 37/0/0 | Unity Fake Null / Stale References / Destroy Semantics |
+| 0.0.16 | PASS 24/0/0 | Kingdom API Basics |
+| 0.0.17 | PASS 29/0/0 | City API |
+| 0.0.18-fix1 | PASS 35/0/0 | Actor API |
+| 0.0.19 | PASS 26/0/0 | Kingdom↔City↔Actor relationships/liveness |
+| 0.0.20 | PASS 35/0/0 | Destruction & Ownership Lifecycle |
+| 0.0.21 | PASS 25/0/0 | WorldTile API |
+| 0.0.22 | PASS 30/0/0 | Terrain / Biome API |
+| 0.0.23 | PASS 28/0/0 | World State / Map Services |
+| 0.0.24-fix6 | PASS 36/0/0 | Worldgen Pipeline |
+| 0.0.25-fix1 | PASS 44/0/0 | Worldgen Edge Cases |
+| 0.0.26 | PASS 37/0/0 | Performance |
+| 0.0.27 | PASS 44/0/0 | Mass Stress |
+| 0.0.28-fix1 | PASS 45/0/0 | Cross-Mod Conflicts |
+| 0.0.29-fix1 | PASS 26/0/0 | Save/Reload Stale-Ref Torture |
+| 0.0.30 | PASS 42/0/0 | Full Integration Torture |

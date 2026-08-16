@@ -1,0 +1,69 @@
+WBML-0019 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0019 / 0.0.19 :: LOAD
+KINGDOM <-> CITY <-> ACTOR RELATIONSHIPS + REFERENCE LIVENESS READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+FULL PASS: paused disposable world with >=1 Kingdom, >=1 City, >=1 living Actor.
+READ-ONLY: destructive stale-reference tests are reserved for WBML-0020.
+WBML-0019 / 0.0.19 :: AUTOMATED BATCH START
+RUN TOKEN: 29b2e824e8c0
+WBML-0019 :: P :: PREFLIGHT / LIVE RELATIONSHIP SAMPLES
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.kingdom                                       PASS | Kingdom
+ASSERT P.TYPE.city                                          PASS | City
+ASSERT P.TYPE.actor                                         PASS | Actor
+ASSERT P.MANAGER.kingdom                                    PASS | MapBox.F:kingdoms
+ASSERT P.MANAGER.city                                       PASS | MapBox.F:cities
+ASSERT P.MANAGER.actor                                      PASS | MapBox.F:units
+ASSERT P.SAMPLE.kingdom                                     PASS | Sierrad
+ASSERT P.SAMPLE.city                                        PASS | Dskowo
+ASSERT P.SAMPLE.actor                                       PASS | Nelimond
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=11 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0019 :: A :: KINGDOM <-> CITY RELATIONSHIP
+ASSERT A.KINGDOM.contains-city                              PASS | source=F:cities count=1
+ASSERT A.CITY.kingdom-backref                               PASS | source=F:kingdom
+OBSERVED A.CITY.leader                                      Luyna | source=F:leader
+ASSERT A.LEADER.city-backref                                PASS | source=F:city
+A SUMMARY: PASS=3 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0019 :: B :: CITY <-> ACTOR <-> KINGDOM RELATIONSHIP
+ASSERT B.CITY.contains-actor                                PASS | source=P:units count=4
+ASSERT B.ACTOR.city-backref                                 PASS | source=F:city
+ASSERT B.ACTOR.kingdom-consistent                           PASS | actor=F:kingdom city=F:kingdom
+B SUMMARY: PASS=3 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0019 :: C :: REFERENCE LIVENESS / MANAGER MEMBERSHIP
+OBSERVED C.KINGDOM.flag                                     F:exists=True | declared=System.Boolean
+OBSERVED C.KINGDOM.identity                                 1 | Reference identity snapshot.
+OBSERVED C.CITY.flag                                        F:exists=True | declared=System.Boolean
+OBSERVED C.CITY.identity                                    1 | Reference identity snapshot.
+OBSERVED C.ACTOR.flag                                       F:exists=True | declared=System.Boolean
+OBSERVED C.ACTOR.identity                                   5 | Reference identity snapshot.
+ASSERT C.MANAGER.contains-kingdom                           PASS | source=F:list
+ASSERT C.MANAGER.contains-city                              PASS | source=F:list
+ASSERT C.MANAGER.contains-actor                             PASS | source=F:units_only_alive
+OBSERVED C.STALE.destructive-test                           DEFERRED | Actual destroy/remove stale-reference checks are reserved for WBML-0020.
+C SUMMARY: PASS=3 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0019 :: D :: 1000 RELATIONSHIP READS / NO-MUTATION GUARD
+ASSERT D.REL.city-kingdom-1000                              PASS | actual=1000
+ASSERT D.REL.actor-city-1000                                PASS | actual=1000
+ASSERT D.REL.actor-kingdom-1000                             PASS | actual=1000
+OBSERVED D.STRESS.timing                                    elapsed_ms=129 | Machine-specific.
+ASSERT D.NO-MUTATION.kingdom-count                          PASS | before=2 after=2
+ASSERT D.NO-MUTATION.city-count                             PASS | before=2 after=2
+ASSERT D.NO-MUTATION.actor-count                            PASS | before=19 after=19
+D SUMMARY: PASS=6 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0019 :: FINAL MATRIX
+ASSERTIONS PASS=26 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

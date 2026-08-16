@@ -1,0 +1,79 @@
+WBML-0013 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0013 / 0.0.13-fix1 :: LOAD
+GAMEOBJECT OWNERSHIP / HIERARCHY / CLONE REFERENCES / MODFEATURE OBJECT LIFECYCLE READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+WBML-owned temporary objects only; no save mutation intended.
+WBML-0013 / 0.0.13-fix1 :: AUTOMATED RUN START
+RUN TOKEN: f2e249b041c9
+WBML-0013 :: A :: PARENT OWNS CHILDREN / DETACH SURVIVAL / REPARENT OWNERSHIP TRANSFER
+ASSERT A.SETUP.root-a                                       PASS | created=True
+ASSERT A.SETUP.root-b                                       PASS | created=True
+ASSERT A.SETUP.children-three                               PASS | childCount=3
+ASSERT A.DETACH.parent-changed                              PASS | parent=PrefabLibrary
+ASSERT A.TRANSFER.parent-b                                  PASS | parent=WBML0013_A_RootB
+ASSERT A.ROOTA.only-owned-remains                           PASS | childCount=1
+ASSERT A.DESTROY.root-a                                     PASS | unityNull=True
+ASSERT A.DESTROY.owned-child-dies                           PASS | unityNull=True
+ASSERT A.DETACH.survives-root-a                             PASS | unityNull=False
+ASSERT A.TRANSFER.survives-root-a                           PASS | unityNull=False
+ASSERT A.DESTROY.root-b                                     PASS | unityNull=True
+ASSERT A.TRANSFER.dies-with-new-parent                      PASS | unityNull=True
+ASSERT A.DETACH.still-survives                              PASS | unityNull=False
+ASSERT A.CLEANUP.detached-destroyed                         PASS | unityNull=True
+ASSERT A.REPORT.write-preflight                             PASS | write/delete OK
+A SUMMARY: PASS=15 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0013 :: B :: COMPONENT OWNERSHIP / DESTROY COMPONENT VS DESTROY GAMEOBJECT / UNITY NULL SEMANTICS
+ASSERT B.COMP.alive                                         PASS | component=True go=True
+ASSERT B.COMP.started                                       PASS | Start=1
+OBSERVED B.NULL.component-immediate                         unity==null:False referenceNull:False | Before end-of-frame destruction completes.
+ASSERT B.COMP.destroyed                                     PASS | unityNull=True
+ASSERT B.COMP.reference-still-managed                       PASS | ReferenceEquals(null)=False
+ASSERT B.COMP.owner-survives                                PASS | goUnityNull=False
+ASSERT B.COMP.ondestroy-once                                PASS | OnDestroy=1
+ASSERT B.GO.destroyed                                       PASS | unityNull=True
+ASSERT B.GO.component-destroyed-with-owner                  PASS | componentUnityNull=True
+ASSERT B.GO.component-ondestroy-triggered                   PASS | before=1 after=2
+B SUMMARY: PASS=9 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0013 :: C :: INSTANTIATE HIERARCHY / INTERNAL REFERENCE REMAP / EXTERNAL REFERENCE PRESERVATION
+ASSERT C.CLONE.created                                      PASS | clone=True holder=True
+ASSERT C.REF.internal-remapped                              PASS | cloneInternal=WBML0013_C_Internal
+ASSERT C.REF.self-remapped                                  PASS | self=WBML0013_C_Clone
+ASSERT C.REF.external-preserved                             PASS | externalSame=True
+ASSERT C.ORIGINAL.destroyed                                 PASS | original=True internal=True
+ASSERT C.CLONE.survives-original                            PASS | clone=True cloneInternal=True
+ASSERT C.CLONE.internal-ref-still-valid                     PASS | target=WBML0013_C_Internal
+ASSERT C.CLONE.external-ref-still-valid                     PASS | externalSame=True
+ASSERT C.EXTERNAL.destroyed                                 PASS | unityNull=True
+ASSERT C.CLONE.external-ref-becomes-unity-null              PASS | unityNull=True
+ASSERT C.CLONE.external-ref-managed-reference-remains       PASS | ReferenceEquals(null)=False
+ASSERT C.CLEANUP.clone-destroyed                            PASS | clone=True cloneInternal=True
+C SUMMARY: PASS=12 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0013 :: D :: NML MODOBJECTFEATURE OBJECT PROPERTY / DESTROYED UNITY OBJECT / REINIT REPLACEMENT
+OBSERVED D.FEATURE.discovery-boundary                       NESTED PRIVATE | NML 1.2.0.1 auto-discovers non-abstract IModFeature types but excludes nested-private classes; this probe is intentionally manual-only.
+ASSERT D.FEATURE.initial-object-null                        PASS | unityNull=True
+ASSERT D.FEATURE.init-true                                  PASS | Init=True
+ASSERT D.FEATURE.object-created                             PASS | object=WBML0013_D_FeatureObject_1
+ASSERT D.FEATURE.implicit-cast                              PASS | same=True
+ASSERT D.FEATURE.destroyed-object-unity-null                PASS | unityNull=True
+ASSERT D.FEATURE.destroyed-object-managed-ref-remains       PASS | ReferenceEquals(null)=False
+ASSERT D.FEATURE.reinit-true                                PASS | Init=True
+ASSERT D.FEATURE.reinit-new-object                          PASS | second=WBML0013_D_FeatureObject_2 ReferenceEquals(first)=False
+ASSERT D.FEATURE.object-property-replaced                   PASS | propertyIsSecond=True
+OBSERVED D.FEATURE.source-contract                          InitObject -> Object property; no automatic Unity lifetime cleanup in ModObjectFeature<T> | Runtime lifecycle result above is authoritative; source only explains the mechanism.
+ASSERT D.CLEANUP.second-destroyed                           PASS | unityNull=True
+D SUMMARY: PASS=10 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0013 :: FINAL MATRIX
+ASSERTIONS PASS=46 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; latest.json is optional.

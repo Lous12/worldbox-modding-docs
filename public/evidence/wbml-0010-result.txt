@@ -1,0 +1,67 @@
+WBML-0010 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0010 / 0.0.10 :: LOAD
+DIAGNOSTICS / LOGGING / ERROR CAPTURE / STRESS SUITE READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+IMPORTANT: this suite intentionally emits one Warning, one Error and one Exception probe line.
+Those probe lines are expected and must not be treated as a WorldBox/NML failure.
+WBML-0010 / 0.0.10 :: AUTOMATED RUN START
+RUN TOKEN: 8b616981f2cc
+WBML-0010 :: A :: DIAGNOSTICS SURFACE / UNITY LOGGER / EVENT HOOKS / NML LOG SERVICE DISCOVERY
+ASSERT A.UNITY.logger-nonnull                               PASS | UnityEngine.Logger
+ASSERT A.UNITY.logger-enabled                               PASS | logEnabled=True
+ASSERT A.UNITY.log-event                                    PASS | logMessageReceived
+ASSERT A.UNITY.threaded-log-event                           PASS | logMessageReceivedThreaded
+ASSERT A.UNITY.debug-log                                    PASS | Void Log(System.Object)
+ASSERT A.UNITY.debug-warning                                PASS | Void LogWarning(System.Object)
+ASSERT A.UNITY.debug-error                                  PASS | Void LogError(System.Object)
+ASSERT A.UNITY.debug-exception                              PASS | Void LogException(System.Exception)
+ASSERT A.NML.log-service-type                               PASS | NeoModLoader.services.LogService
+OBSERVED A.NML.log-service-methods                          Equals,Finalize,GetHashCode,GetType,Init,LogError,LogErrorConcurrent,LogException,LogInfo,LogInfoConcurrent,LogStackTraceAsError,LogStackTraceAsInfo,LogStackTraceAsWarning,LogWarning,LogWarningConcurrent,MemberwiseClone,PullAllConcurrentLogToCurrentThread,ToString | Runtime reflection only; presence does not imply every method is a stable public mod API.
+ASSERT A.REPORT.write-preflight                             PASS | write/delete OK
+A SUMMARY: PASS=10 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0010 :: B :: LOG TYPE CAPTURE / MESSAGE ROUNDTRIP / STACK TRACE / ERROR CONTAINMENT
+ASSERT B.CAPTURE.info-present                               PASS | captured=True
+ASSERT B.CAPTURE.warning-present                            PASS | captured=True
+ASSERT B.CAPTURE.error-present                              PASS | captured=True
+ASSERT B.CAPTURE.exception-present                          PASS | captured=True
+ASSERT B.CAPTURE.special-present                            PASS | captured=True
+ASSERT B.TYPE.info-log                                      PASS | Log
+ASSERT B.TYPE.warning                                       PASS | Warning
+ASSERT B.TYPE.error                                         PASS | Error
+ASSERT B.TYPE.exception                                     PASS | Exception
+ASSERT B.STACK.exception-nonempty                           PASS | stackLength=386
+ASSERT B.ROUNDTRIP.special-payload                          PASS | special payload preserved
+ASSERT B.CLEANUP.unsubscribe                                PASS | before=5 after=5
+B SUMMARY: PASS=12 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0010 :: C :: SUBSCRIPTION SEMANTICS / DUPLICATE HANDLER / PARTIAL UNSUBSCRIBE / SELF-REMOVAL
+ASSERT C.SUB.single-hit                                     PASS | hits=1
+ASSERT C.SUB.duplicate-handler-called-twice                 PASS | cumulativeHits=3
+ASSERT C.SUB.partial-unsubscribe-leaves-one                 PASS | cumulativeHits=4
+ASSERT C.SUB.full-unsubscribe                               PASS | before=4 after=4
+ASSERT C.SUB.self-removal                                   PASS | hits=1
+C SUMMARY: PASS=5 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0010 :: D :: LOGGING STRESS / 250 MESSAGE CAPTURE / TIMING / MEMORY / CLEANUP
+ASSERT D.STRESS.capture-count                               PASS | expected=250 actual=250
+OBSERVED D.STRESS.elapsed-ms                                4,294 | Time to emit/capture 250 main-thread Unity log messages in this runtime.
+OBSERVED D.STRESS.memory-delta-bytes                        10981376 | GC.GetTotalMemory(false) delta; observational only, not a leak proof.
+ASSERT D.STRESS.unsubscribe-clean                           PASS | before=250 after=250
+ASSERT D.EXCEPTION.caught                                   PASS | ApplicationException
+ASSERT D.EXCEPTION.outer-type                               PASS | System.ApplicationException
+ASSERT D.EXCEPTION.inner-preserved                          PASS | System.InvalidOperationException
+ASSERT D.EXCEPTION.message-preserved                        PASS | WBML outer diagnostic probe
+D SUMMARY: PASS=6 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0010 :: FINAL MATRIX
+ASSERTIONS PASS=33 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; latest.json is optional.

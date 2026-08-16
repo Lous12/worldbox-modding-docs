@@ -301,3 +301,54 @@ Diagnostics caveat:
 - Setup and cleanup/finalizer code are part of the experiment and can invalidate evidence.
 - One causal harness mistake can create several downstream FAIL lines; fix the earliest causal error.
 - SKIP is an evidence boundary, never an implicit PASS.
+
+## WBML 0.1.0 — First Research Baseline (0.0.1 through 0.0.30)
+This is the newer consolidated baseline and supersedes the earlier `WorldBox Modding Lab status` summary for current open/closed classification. Historical WBML-0001–0005 sections remain valid only within their stated evidence scope.
+
+Canonical machine-readable catalog:
+public/data/wbml-0100-baseline.json
+
+Baseline runtime:
+- WorldBox 0.51.2 build 719
+- Unity 2022.3.60f1
+- NeoModLoader 1.2.0.1
+- ResearchEngine v2.1.1
+- Political World 1.7.0 / PoliticalWorldAPI 1.14.0
+
+Catalog counts:
+- VERIFIED: 31
+- OBSERVED: 10
+- FAILED ASSUMPTION: 6
+- UNSAFE: 4
+- UNKNOWN: 6
+
+Mandatory lifecycle rules learned after WBML-0005:
+21. Never require WorldTile or tile-array reference replacement to prove worldgen/reload completion.
+22. For generateNewMap on this baseline, finishMakingWorld + live collections + a short stability window is Verified; on_world_loaded is not a universal completion contract.
+23. Never run a rich full-map reflection scan in every wait-loop frame; chunk heavy scans and validate after completion.
+24. Lifecycle-critical coroutines must be hosted persistently when the world can be replaced.
+25. WorldTile.Height can normalize/recompute during load; exact Height equality is not a reload contract.
+26. Do not guess SaveManager paths, slots or arguments. The tested no-arg saveToCurrentPath/loadWorld signatures are version-bound observations.
+27. Unity fake-null and delayed destruction require Unity-aware liveness checks; a managed wrapper existing is not proof of current liveness.
+28. Raw AppDomain assembly-count growth is not by itself a mod conflict; inspect concrete assemblies, core type uniqueness and Harmony owners.
+29. Measured performance timings are hardware observations, not compatibility thresholds.
+30. Preserve the WBML 0.1.0 UNKNOWN list. Do not invent answers for unresolved tails.
+31. Closed suites should be baseline-diffed when WorldBox/NML changes, not silently widened to future versions.
+
+Major verified runtime facts:
+- MapBox.generateNewMap() works; finishMakingWorld completed repeated generation in the tested path.
+- Same-size worldgen and tested save/reload reused WorldTile/array/service/manager references; reuse is observed implementation behavior, not a future requirement.
+- Three sequential worldgens passed; a later combined torture passed save→reload→two worldgens.
+- WorldTile terrain/biome route: cur_tile_type → TileTypeBase.biome_asset → BiomeAsset.
+- Tested map services resolved TileZone, MapChunk and MapRegion.
+- 524,288 tile visits + 250,000 coordinate lookups + 100,000 neighbour traversals completed without detected corruption.
+- SaveManager.saveToCurrentPath() and SaveManager.loadWorld() were safely invoked on the baseline.
+- Political World + Custom Worldsize + Scenario Tools remained loaded through cross-mod and integration torture; PW startWar Harmony ownership remained intact.
+
+Open baseline tails:
+- WBML-0002 final return-to-World-B identity/signature tail (the consolidated 0.1.0 baseline keeps this UNKNOWN even though the older WBML-0002 page records a historical all-green run);
+- WBML-0003 optional unsafe branch;
+- WBML-0009 manual Escape gate;
+- Kingdom/City/Actor entity-object stale-vs-reuse across reload with non-empty registries;
+- other runtime versions until baseline diff;
+- non-default Custom Worldsize save/reload + repeated worldgen lifecycle.

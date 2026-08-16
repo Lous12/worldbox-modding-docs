@@ -1,0 +1,241 @@
+WBML-0018 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0018 / 0.0.18-fix1 :: LOAD
+ACTOR API BASICS + RESEARCH ENGINE v2.1.1 READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+THIS RUN ALSO REFINES THE CITY POPULATION SEMANTIC FROM WBML-0017.
+FULL PASS: paused disposable world with >=1 civilized Kingdom, >=1 City and >=1 living Actor.
+READ-ONLY: no intentional Actor/City/Kingdom/world mutation.
+WBML-0018 / 0.0.18-fix1 :: AUTOMATED BATCH START
+RUN TOKEN: e25025821c03
+WBML-0018 :: P :: RESEARCH ENGINE v2.1.1 REGRESSION / CITY POPULATION REFINEMENT / ACTORMANAGER PREFLIGHT
+ASSERT P.TYPE.mapbox                                        PASS | MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT P.TYPE.actor                                         PASS | Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT P.TYPE.actor-manager                                 PASS | ActorManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT P.TYPE.city                                          PASS | City, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT P.TYPE.kingdom                                       PASS | Kingdom, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT P.SINGLETON.mapbox-strict                            PASS | MapBox
+ASSERT P.MANAGER.actor-manager-found                        PASS | ActorManager via MapBox.F:units
+ASSERT P.MANAGER.actor-registry-nonempty                    PASS | count=24 source=F:units_only_alive
+ASSERT P.CITY.units-collection                              PASS | source=P:units count=7
+OBSERVED P.CITY.population-people                           M:getPopulationPeople()=7 | Explicit allowlisted zero-argument numeric read; no arbitrary methods invoked.
+OBSERVED P.CITY.units-total                                 M:getUnitsTotal()=7 | Explicit allowlisted zero-argument numeric read; compared with units collection only as evidence, not as a semantic equality guarantee.
+OBSERVED P.CITY.population-primitive-v2.1.1                 <none> | No primitive candidate; this is preferable to selecting dirty/cache flags.
+ASSERT P.CITY.population-semantic-not-dirty-bool            PASS | no primitive candidate
+ASSERT P.CITY.population-readable                           PASS | unitsCount=7 populationPeople=True unitsTotal=True
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=12 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0018 :: A :: RESEARCH ENGINE v2.1.1 / ACTOR + ACTORMANAGER STATIC SURFACE INDEX
+ASSERT A.TYPE.actor                                         PASS | Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+ASSERT A.TYPE.actor-manager                                 PASS | ActorManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+OBSERVED A.ACTOR.type                                       Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.ACTOR.surface-counts                             fields=184 props=36 methods=760 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.ACTOR.identity-members                           F:_has_stop_idle_animation:System.Boolean,F:_is_in_liquid:System.Boolean,F:_last_decision_id:System.String,F:ate_last_item_id:System.String,F:data:ActorData,F:frame_data:AnimationFrameData,F:idle_loop_sound:ActorIdleLoopSound,F:inside_boat:Boat,F:inside_building:Building,F:is_inside_boat:System.Boolean,F:is_inside_building:System.Boolean,M:addSpecialEffectsFromMetas,M:checkActionsFromAllMetas,M:checkDeathOutsideMap,M:checkHeadID,M:checkIsInLiquid,M:generateName,M:generateNewName,M:getAnimationFrameData,M:getData,M:getID,M:getMetaObjectOfType,M:getMetaType,M:getMetaTypeAsset,M:getMismatchFactorForSideMovement,M:getName,M:getStatusesIds,M:getTypeID,M:getWeaponTextureId,M:get_coloredName,M:get_id,M:get_meta_type,M:get_name,M:hasStopIdleAnimation,M:hasSubspeciesMetaTag,M:haveMetallicArmor,M:haveMetallicWeapon,M:isAffectedByLiquid,M:isInLiquid,M:isInsideSomething,M:isTouchingLiquid,M:loadData,M:mustAvoidGround,M:paidTax,M:playIdleSound,M:removeByMetamorphosis,M:saveAssetID,M:setData,M:setMetasFromCity,M:setName,M:set_name,M:trackName,M:tryToConvertActorToMetaFromActor,M:u1_checkInside,M:wantsToSplitMeta,P:coloredName:System.String,P:id:System.Int64,P:meta_type:MetaType,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.ACTOR.owner-members                              F:city:City,F:kingdom:Kingdom,F:velocity:UnityEngine.Vector3,F:velocity_speed:System.Single,M:applyForcedKingdomTrait,M:buildCityAndStartCivilization,M:canBuildNewCity,M:canGetFoodFromCity,M:checkDefaultKingdom,M:checkKingdom,M:checkVelocityAgainstBlock,M:forgetKingdomAndCity,M:getCity,M:giveInventoryResourcesToCity,M:hasCity,M:hasHouseCityInBordersAndSameIsland,M:hasKingdom,M:hasSameCity,M:inOwnCityBorders,M:inOwnCityIsland,M:isCityLeader,M:isInCityIsland,M:isKingdomCiv,M:isKingdomMob,M:isOneCityKingdom,M:isSameKingdom,M:isSameKingdomAndAlmostDead,M:joinCity,M:joinKingdom,M:saveCity,M:saveKingdomCiv,M:setCity,M:setDefaultKingdom,M:setForcedKingdom,M:setKingdom,M:setMetasFromCity,M:updateVelocity | Name-based classification for Research Engine v2.
+OBSERVED A.ACTOR.leader-members                             F:cached_sprite_head:UnityEngine.Sprite,F:dirty_sprite_head:System.Boolean,F:kingdom:Kingdom,M:applyForcedKingdomTrait,M:checkDefaultKingdom,M:checkHeadID,M:checkKingdom,M:checkSpriteHead,M:forgetKingdomAndCity,M:getHeadOffsetPositionForFunRendering,M:get_has_rendered_sprite_head,M:get_is_looking_left,M:get_is_profession_king,M:get_is_profession_leader,M:hasKingdom,M:isArmyGroupLeader,M:isCityLeader,M:isKing,M:isKingdomCiv,M:isKingdomMob,M:isOneCityKingdom,M:isSameKingdom,M:isSameKingdomAndAlmostDead,M:joinKingdom,M:saveKingdomCiv,M:setDefaultKingdom,M:setForcedKingdom,M:setHeadSprite,M:setKingdom,P:has_rendered_sprite_head:System.Boolean,P:is_looking_left:System.Boolean,P:is_profession_king:System.Boolean,P:is_profession_leader:System.Boolean | Name-based classification for Research Engine v2.
+OBSERVED A.ACTOR.population-members                         F:_current_children:System.Int32,F:_state_adult:System.Boolean,F:children_pre_behaviour:System.Collections.Generic.List`1[[ActorSimpleComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:children_special:System.Collections.Generic.List`1[[BaseActorComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:citizen_job:CitizenJobAsset,F:has_tag_immunity_cold:System.Boolean,M:addChild,M:addChildSimple,M:addChildren,M:decreaseChildren,M:eventBecomeAdult,M:getChildren,M:getUnitTexturePath,M:get_current_children_count,M:get_is_profession_citizen,M:increaseChildren,M:isAdult,M:isCameraFollowingUnit,M:isChildOf,M:isCitizenJob,M:isUnitFitToRule,M:setCitizenJob,M:u2_updateChildren,M:updateChildrenList,M:updateChildrenListSimple,P:current_children_count:System.Int32,P:is_profession_citizen:System.Boolean | Name-based classification for Research Engine v2.
+OBSERVED A.ACTOR.buildings-members                          F:_home_building:Building,F:beh_building_target:Building,F:inside_building:Building,F:is_inside_building:System.Boolean,M:checkHomeBuilding,M:clearHomeBuilding,M:exitBuilding,M:getHomeBuilding,M:get_home_building,M:hasHomeBuilding,M:hasHouse,M:hasHouseCityInBordersAndSameIsland,M:inOwnHouseIsland,M:isBuilding,M:saveHomeBuilding,M:setHomeBuilding,M:stayInBuilding,P:home_building:Building | Name-based classification for Research Engine v2.
+OBSERVED A.ACTOR.territory-members                          F:FIND_TILE_SQ_DIST:System.Single,F:_next_step_tile:WorldTile,F:beh_tile_target:WorldTile,F:cur_transform_position:UnityEngine.Vector3,F:current_position:UnityEngine.Vector2,F:current_shadow_position:UnityEngine.Vector2,F:current_tile:WorldTile,F:dirty_current_tile:System.Boolean,F:next_step_position:UnityEngine.Vector2,F:next_step_position_possession:UnityEngine.Vector2,F:position_height:System.Single,F:scheduled_tile_target:WorldTile,F:tile_target:WorldTile,M:canSeeTileBasedOnDirection,M:checkCalibrateTargetPosition,M:checkFindCurrentTile,M:checkFlipAgainstTargetPosition,M:checkStepActionForTile,M:clearTileTarget,M:consumeTopTile,M:distanceToActorTile,M:findCurrentTile,M:getHeadOffsetPositionForFunRendering,M:getPossessionControlTargetPosition,M:getPossessionControlTargetPositionMovementVector,M:getRenderedItemPosition,M:getSlashPosition,M:getThrowStartPosition,M:get_current_zone,M:get_debug_next_step_tile,M:hasHouseCityInBordersAndSameIsland,M:inMapBorder,M:inOwnCityBorders,M:isInDangerZone,M:isTileOnTheLeft,M:lookTowardsPosition,M:setCurrentTile,M:setCurrentTilePosition,M:setTileTarget,M:u5_curTileAction,P:current_zone:TileZone,P:debug_next_step_tile:WorldTile | Name-based classification for Research Engine v2.
+OBSERVED A.ACTOR.lifecycle-members                          F:_cache_check_has_status_removed_on_damage:System.Boolean,M:clearAttackTarget,M:clearBeh,M:clearCombatActions,M:clearDecisions,M:clearGraphicsFully,M:clearHomeBuilding,M:clearIgnoreTargets,M:clearLastColorCache,M:clearLastTopicSprite,M:clearManagers,M:clearOldPath,M:clearPathForCalibration,M:clearSpells,M:clearSprites,M:clearTasks,M:clearTileTarget,M:clearTraitCache,M:clearTraits,M:clearWait,M:create,M:createDefaultCultureAndLanguageAndClan,M:createNewWeapon,M:dieAndDestroy,M:get_created_time_unscaled,M:loadData,M:loadFromSave,M:prepareForSave,M:reloadInventory,M:removeByMetamorphosis,M:removeFinishedStatusEffect,M:removeFromArmy,M:removeFromPreviousFaction,M:removeOppositeTraits,M:removeTrait,M:removeTraits,M:saveArmy,M:saveAssetID,M:saveCity,M:saveClan,M:saveCoordinates,M:saveCulture,M:saveEquipment,M:saveFamily,M:saveHomeBuilding,M:saveKingdomCiv,M:saveLanguage,M:saveLover,M:saveOriginFamily,M:savePlot,M:saveProfession,M:saveReligion,M:saveSubspecies,M:saveTraits,M:set_created_time_unscaled,M:setupRandomDecisionCooldowns,P:created_time_unscaled:System.Double | Name-based classification for Research Engine v2.
+OBSERVED A.ACTOR.mutation-members                           F:_attack_asset:EquipmentAsset,F:_cache_check_has_status_removed_on_damage:System.Boolean,F:_cached_hand_renderer_asset:IHandRenderer,F:_last_color_asset:ColorAsset,F:asset:ActorAsset,F:move_jump_offset:UnityEngine.Vector2,F:profession_asset:ProfessionAsset,F:shake_offset:UnityEngine.Vector2,F:sprite_offset:UnityEngine.Vector2,F:timestamp_profession_set:System.Double,M:addActionWaitAfterLand,M:addAfterglowStatus,M:addAggro,M:addChild,M:addChildSimple,M:addChildren,M:addDefaultItemAttackActions,M:addExperience,M:addForce,M:addInjuryTrait,M:addItemActions,M:addLoot,M:addMana,M:addMoney,M:addNutritionFromEating,M:addRenown,M:addSpecialEffectAugmentations,M:addSpecialEffectsFromMetas,M:addStamina,M:addStatusEffect,M:addToAttackPool,M:addToInventory,M:addTrait,M:canParallelSetColoredSprite,M:changeHappiness,M:changeHealth,M:changeMana,M:changeMoveJumpOffset,M:changeStamina,M:checkHappinessChangeFromDeathEvent,M:dieAndDestroy,M:getActorAsset,M:getCachedHandRendererAsset,M:getHandRendererAsset,M:getHeadOffsetPositionForFunRendering,M:getMetaTypeAsset,M:getTextureAsset,M:getWeaponAsset,M:get_favorite_food_asset,M:get_happiness_change_history,M:loadData,M:removeByMetamorphosis,M:removeFinishedStatusEffect,M:removeFromArmy,M:removeFromPreviousFaction,M:removeOppositeTraits,M:removeTrait,M:removeTraits,M:resetAttackTimeout,M:resetSocialize,M:saveAssetID,M:setActionTimeout,M:setActorScale,M:setAlive,M:setArmy,M:setAsset,M:setAttackTarget,M:setBestFriend,M:setCheckLanding,M:setCitizenJob,M:setCity,M:setClan,M:setCulture,M:setCurrentTile,M:setCurrentTilePosition,M:setData,M:setDecisionCooldown,M:setDecisionState,M:setDefaultKingdom,M:setDefaultValues,M:setFamily,M:setFlip,M:setFlying,M:setForcedKingdom,M:setHappiness,M:setHash,M:setHeadSprite,M:setHealth,M:setHomeBuilding,M:setHoverState,M:setIsMoving,M:setItemSpriteRenderDirty,M:setKingdom,M:setLanguage,M:setLover,M:setMana,M:setMaxHappiness,M:setMaxHealth,M:setMaxMana,M:setMaxStamina | Name-based classification for Research Engine v2.
+OBSERVED A.ACTOR.enumerables                                F:_aggression_targets:System.Collections.Generic.HashSet`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:_decision_cooldowns:System.Double[],F:_decision_disabled:System.Boolean[],F:_dict_special:System.Collections.Generic.Dictionary`2[[System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[BaseActorComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_last_happiness_history:System.Collections.Generic.Queue`1[[HappinessHistory, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_s_special_effect_augmentations:System.Collections.Generic.List`1[[BaseAugmentationAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_s_special_effect_augmentations_timers:System.Collections.Generic.Dictionary`2[[BaseAugmentationAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:_tempAugmentationList:System.Collections.Generic.List`1[[BaseAugmentationAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_traits_cache:System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:children_pre_behaviour:System.Collections.Generic.List`1[[ActorSimpleComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:children_special:System.Collections.Generic.List`1[[BaseActorComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:current_path:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:current_path_global:System.Collections.Generic.List`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:decisions:DecisionAsset[],F:dict_pre_behaviour:System.Collections.Generic.Dictionary`2[[System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[ActorSimpleComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:equipment:ActorEquipment,F:traits:System.Collections.Generic.HashSet`1[[ActorTrait, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],P:happiness_change_history:System.Collections.Generic.Queue`1[[HappinessHistory, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] | Enumerable fields/properties only; not invoked.
+OBSERVED A.ACTORMANAGER.type                                ActorManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.ACTORMANAGER.surface-counts                      fields=24 props=2 methods=67 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.ACTORMANAGER.identity-members                    F:render_data:ActorRenderData,F:type_id:System.String,M:checkOverrideUnitShooting,M:createBabyActorFromData,M:precalculateRenderDataNormal,M:precalculateRenderDataParallel,M:prepareForMetaChecks,M:startCollectHistoryData | Name-based classification for Research Engine v2.
+OBSERVED A.ACTORMANAGER.owner-members                       F:units_only_civ:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] | Name-based classification for Research Engine v2.
+OBSERVED A.ACTORMANAGER.leader-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.ACTORMANAGER.population-members                  F:_timestamp_sleeping_units:System.Double,F:_unit_visible_lists:System.Collections.Generic.List`1[[ActorVisibleDataArray, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:cached_sleeping_units:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:have_dying_units:System.Boolean,F:units_only_alive:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:units_only_civ:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:units_only_dying:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:units_only_wild:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:visible_units:ActorVisibleDataArray,F:visible_units_alive:ActorVisibleDataArray,F:visible_units_avatars:ActorVisibleDataArray,F:visible_units_just_ate:ActorVisibleDataArray,F:visible_units_socialize:ActorVisibleDataArray,F:visible_units_with_banner:ActorVisibleDataArray,F:visible_units_with_favorite:ActorVisibleDataArray,F:visible_units_with_status:ActorVisibleDataArray,M:checkOverrideUnitShooting,M:checkSleepingUnits,M:cloneUnit,M:createNewUnit,M:isUnitsDirty,M:parallelDirtyUnitsCheck,M:spawnNewUnit,M:spawnNewUnitByPlayer | Name-based classification for Research Engine v2.
+OBSERVED A.ACTORMANAGER.buildings-members                   F:event_houses:System.Boolean | Name-based classification for Research Engine v2.
+OBSERVED A.ACTORMANAGER.territory-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.ACTORMANAGER.lifecycle-members                   F:event_destroy:System.Boolean,M:ClearAllDisposed,M:checkObjectsToDestroy,M:clear,M:clearLastYearStats,M:clearLists,M:createBabyActorFromData,M:createNewUnit,M:destroyObject,M:loadFromSave,M:loadObject,M:removeObject,M:scheduleDestroyAllOnWorldClear,M:scheduleDestroyOnPlay,M:triggerActionsOnRemove | Name-based classification for Research Engine v2.
+OBSERVED A.ACTORMANAGER.mutation-members                    F:event_destroy:System.Boolean,M:addObject,M:addRandomTraitFromBiomeToActor,M:checkObjectsToDestroy,M:destroyObject,M:removeObject,M:scheduleDestroyAllOnWorldClear,M:scheduleDestroyOnPlay,M:scheduleToDisposeHashSet,M:somethingChanged,M:triggerActionsOnRemove | Name-based classification for Research Engine v2.
+OBSERVED A.ACTORMANAGER.enumerables                         F:_dead_objects:System.Collections.Generic.Stack`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_unit_visible_lists:System.Collections.Generic.List`1[[ActorVisibleDataArray, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:cached_sleeping_units:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:dict:System.Collections.Generic.Dictionary`2[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:units_only_alive:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:units_only_civ:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:units_only_dying:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:units_only_wild:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] | Enumerable fields/properties only; not invoked.
+OBSERVED A.ACTOR.referrer-index                             MapAction@Assembly-CSharp,MapBox@Assembly-CSharp,ActionLibrary@Assembly-CSharp,CitizenJobCondition@Assembly-CSharp,DisasterLibrary@Assembly-CSharp,PowerLibrary@Assembly-CSharp,TileStepAction@Assembly-CSharp,TileActionLibrary@Assembly-CSharp,AchievementLibrary@Assembly-CSharp,BookReadAction@Assembly-CSharp,BookRateCalc@Assembly-CSharp,BookRequirementCheck@Assembly-CSharp,BuildingStepAction@Assembly-CSharp,CombatActionCheckStart@Assembly-CSharp,CombatActionActor@Assembly-CSharp,CombatActionProjectile@Assembly-CSharp,CombatActionActorTargetPosition@Assembly-CSharp,CombatActionLibrary@Assembly-CSharp,TopicCheck@Assembly-CSharp,TopicPotFill@Assembly-CSharp,CommunicationTopicLibrary@Assembly-CSharp,DecisionAction@Assembly-CSharp,DecisionActionWeight@Assembly-CSharp,DecisionAsset@Assembly-CSharp,DecisionHelper@Assembly-CSharp,DynamicActorSpriteCreatorUI@Assembly-CSharp,DynamicSpriteCreator@Assembly-CSharp,DynamicSpritesLibrary@Assembly-CSharp,EffectAction@Assembly-CSharp,EffectsLibrary@Assembly-CSharp,HappinessDelegateCalc@Assembly-CSharp,ActorEquipment@Assembly-CSharp,ActorEquipmentSlot@Assembly-CSharp,EquipmentAsset@Assembly-CSharp,ItemAsset@Assembly-CSharp,ItemModAsset@Assembly-CSharp,NameGeneratorCheck@Assembly-CSharp,NameGeneratorChecks@Assembly-CSharp,NameGeneratorReplacer@Assembly-CSharp,NameGeneratorReplacers@Assembly-CSharp,PlotAsset@Assembly-CSharp,PlotsLibrary@Assembly-CSharp,PlotStart@Assembly-CSharp,PlotTryToStart@Assembly-CSharp,PlotAction@Assembly-CSharp,PlotCheckerDelegate@Assembly-CSharp,PlotActorDelegate@Assembly-CSharp,PlotActorPlotDelegate@Assembly-CSharp,QuantumSpriteLibrary@Assembly-CSharp,StatusLibrary@Assembly-CSharp,ActorTraitLibrary@Assembly-CSharp,BookTraitAction@Assembly-CSharp,AfterHatchFromEggAction@Assembly-CSharp,BaseActionActor@Assembly-CSharp,BaseSimObject@Assembly-CSharp,BattleContainer@Assembly-CSharp,BattleKeeperManager@Assembly-CSharp,Magnet@Assembly-CSharp,ActorContainer@Assembly-CSharp,SimObjectsZones@Assembly-CSharp,TraitTools@Assembly-CSharp,WorldLog@Assembly-CSharp,WorldLogMessage@Assembly-CSharp,WorldTile@Assembly-CSharp,Actor@Assembly-CSharp,ActorVisibleDataArray@Assembly-CSharp,ActorManager@Assembly-CSharp,ActorGetSprite@Assembly-CSharp,ActorGetSprites@Assembly-CSharp,ActorAsset@Assembly-CSharp,ActorSimpleComponent@Assembly-CSharp,BaseActorComponent@Assembly-CSharp,Boat@Assembly-CSharp,Alliance@Assembly-CSharp,Army@Assembly-CSharp,ArmyManager@Assembly-CSharp,IMetaObject@Assembly-CSharp,MetaObject`1@Assembly-CSharp,MetaObjectWithTraits`2@Assembly-CSharp,WorldObject@Assembly-CSharp,Book@Assembly-CSharp,BookManager@Assembly-CSharp,Building@Assembly-CSharp,BuildingManager@Assembly-CSharp,Docks@Assembly-CSharp,UnitSpawner@Assembly-CSharp,Clan@Assembly-CSharp,ClanManager@Assembly-CSharp,Culture@Assembly-CSharp,CultureManager@Assembly-CSharp,ActorDamageEffectData@Assembly-CSharp,ActorHighlightEffectData@Assembly-CSharp,PlotIconData@Assembly-CSharp,Family@Assembly-CSharp,FamilyManager@Assembly-CSharp,Item@Assembly-CSharp,ItemCrafting@Assembly-CSharp,ItemManager@Assembly-CSharp,DeadKingdom@Assembly-CSharp,DiplomacyHelpersRebellion@Assembly-CSharp | Static metadata index: types whose fields/properties/method signatures reference Actor; no methods invoked.
+OBSERVED A.ACTORMANAGER.instance                            ActorManager | resolved via MapBox.F:units
+A SUMMARY: PASS=2 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0018 :: B :: AUTO OBJECT DISCOVERY / LIVE ACTOR COLLECTION / CIVILIZED SAMPLE SELECTION
+ASSERT B.DISCOVERY.actor-items-nonempty                     PASS | count=24
+OBSERVED B.DISCOVERY.sources                                ActorManager.F:units_only_alive count=24 | MapBox.F:units count=24 | City.P:units count=7 | Kingdom.P:units count=7 | Research Engine v2.1.1 merged reference-unique Actor objects from safe collection sources.
+OBSERVED B.DISCOVERY.actor-manager-source                   MapBox.F:units | ActorManager is preferred when available.
+ASSERT B.DISCOVERY.all-items-actor                          PASS | allActor=True
+ASSERT B.DISCOVERY.unique-references                        PASS | uniqueRefs=24 total=24
+ASSERT B.SAMPLE.actor-found                                 PASS | id=14 name=Yaamnor
+ASSERT B.SAMPLE.from-city-units                             PASS | source=P:units
+B SUMMARY: PASS=5 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0018 :: C :: SAFE READER v2.1.1 / ACTOR IDENTITY / CITY-KINGDOM / SPECIES / AGE / TRAITS / STATS / EQUIPMENT
+OBSERVED C.AUTO.F._action_wait_after_land                   False | System.Boolean
+OBSERVED C.AUTO.F._action_wait_after_land_timer             0 | System.Single
+OBSERVED C.AUTO.F._aggression_targets                       System.Collections.Generic.HashSet`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=0 | System.Collections.Generic.HashSet`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED C.AUTO.F._alive                                    True | System.Boolean
+OBSERVED C.AUTO.F._attack_asset                             EquipmentAsset | EquipmentAsset
+OBSERVED C.AUTO.F._beh_skip                                 False | System.Boolean
+OBSERVED C.AUTO.F._cache_check_has_status_removed_on_damage False | System.Boolean
+OBSERVED C.AUTO.F._cached_hand_renderer_asset               <null> | IHandRenderer
+OBSERVED C.AUTO.F._cached_sprite_item                       <null> | UnityEngine.Sprite
+OBSERVED C.AUTO.F._combat_actions                           CombatActionHolder | CombatActionHolder
+OBSERVED C.AUTO.F._current_children                         0 | System.Int32
+OBSERVED C.AUTO.F._current_combined_movement_speed          1,496865 | System.Single
+OBSERVED C.AUTO.F._death_timer_alpha_stage_2                1 | System.Single
+OBSERVED C.AUTO.F._death_timer_color_stage_1                1 | System.Single
+OBSERVED C.AUTO.F._decision_cooldowns                       System.Double[] count=128 | System.Double[]
+OBSERVED C.AUTO.F._decision_disabled                        System.Boolean[] count=128 | System.Boolean[]
+OBSERVED C.AUTO.F._dict_special                             <null> | System.Collections.Generic.Dictionary`2[[System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[BaseActorComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F._dirty_sprite_item                        True | System.Boolean
+OBSERVED C.AUTO.F._flying                                   False | System.Boolean
+OBSERVED C.AUTO.F._has_animated_item                        False | System.Boolean
+OBSERVED C.AUTO.F._has_any_sick_trait                       False | System.Boolean
+OBSERVED C.AUTO.F._has_emotions                             True | System.Boolean
+OBSERVED C.AUTO.F._has_status_drowning                      False | System.Boolean
+OBSERVED C.AUTO.F._has_status_invincible                    False | System.Boolean
+OBSERVED C.AUTO.F._has_status_possessed                     False | System.Boolean
+OBSERVED C.AUTO.F._has_status_sleeping                      False | System.Boolean
+OBSERVED C.AUTO.F._has_status_strange_urge                  False | System.Boolean
+OBSERVED C.AUTO.F._has_status_tantrum                       False | System.Boolean
+OBSERVED C.AUTO.F._has_stop_idle_animation                  False | System.Boolean
+OBSERVED C.AUTO.F._has_tag_unconscious                      False | System.Boolean
+OBSERVED C.AUTO.F._has_trait_clone                          False | System.Boolean
+OBSERVED C.AUTO.F._has_trait_peaceful                       False | System.Boolean
+OBSERVED C.AUTO.F._has_trait_weightless                     True | System.Boolean
+OBSERVED C.AUTO.F._hashcode                                 2334 | System.Int32
+OBSERVED C.AUTO.F._home_building                            <null> | Building
+OBSERVED C.AUTO.F._hover_state                              Hover | HoverState
+OBSERVED C.AUTO.F._hover_timer                              0 | System.Single
+OBSERVED C.AUTO.F._ignore_fights                            False | System.Boolean
+OBSERVED C.AUTO.F._is_in_liquid                             False | System.Boolean
+OBSERVED C.AUTO.F._is_moving                                True | System.Boolean
+OBSERVED C.AUTO.F._jump_time                                0 | System.Single
+OBSERVED C.AUTO.F._last_attack_type                         Acid | AttackType
+OBSERVED C.AUTO.F._last_color_asset                         <null> | ColorAsset
+OBSERVED C.AUTO.F._last_color_effect_timestamp              0 | System.Double
+OBSERVED C.AUTO.F._last_colored_sprite                      <null> | UnityEngine.Sprite
+OBSERVED C.AUTO.F._last_decision_id                         reflection | System.String
+OBSERVED C.AUTO.F._last_happiness_history                   System.Collections.Generic.Queue`1[[HappinessHistory, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=3 | System.Collections.Generic.Queue`1[[HappinessHistory, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F._last_main_sprite                         <null> | UnityEngine.Sprite
+OBSERVED C.AUTO.F._last_stamina_reduce_timestamp            0 | System.Double
+OBSERVED C.AUTO.F._last_topic_sprite                        <null> | UnityEngine.Sprite
+OBSERVED C.AUTO.F._next_step_tile                           WorldTile | WorldTile
+OBSERVED C.AUTO.F._possessed_movement                       False | System.Boolean
+OBSERVED C.AUTO.F._possession_attack_happened_frame         0 | System.Double
+OBSERVED C.AUTO.F._precalc_movement_speed_skips             5 | System.Int32
+OBSERVED C.AUTO.F._profession                               Unit | UnitProfession
+OBSERVED C.AUTO.F._rotation_direction                       Left | RotationDirection
+OBSERVED C.AUTO.F._s_special_effect_augmentations           System.Collections.Generic.List`1[[BaseAugmentationAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=0 | System.Collections.Generic.List`1[[BaseAugmentationAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F._s_special_effect_augmentations_timers    System.Collections.Generic.Dictionary`2[[BaseAugmentationAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=0 | System.Collections.Generic.Dictionary`2[[BaseAugmentationAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED C.AUTO.F._shake_active                             False | System.Boolean
+OBSERVED C.AUTO.F._shake_horizontal                         True | System.Boolean
+OBSERVED C.AUTO.F._shake_timer                              0 | System.Single
+OBSERVED C.AUTO.F._shake_vertical                           True | System.Boolean
+OBSERVED C.AUTO.F._shake_volume                             0,1 | System.Single
+OBSERVED C.AUTO.F._spells                                   SpellHolder | SpellHolder
+OBSERVED C.AUTO.F._state_adult                              True | System.Boolean
+OBSERVED C.AUTO.F._state_baby                               False | System.Boolean
+OBSERVED C.AUTO.F._state_egg                                False | System.Boolean
+OBSERVED C.AUTO.F._timeout_targets                          0,430061 | System.Single
+OBSERVED C.AUTO.F._timestamp_augmentation_effects           0 | System.Double
+OBSERVED C.AUTO.F._traits_cache                             System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=10 | System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED C.AUTO.F._update_done                              False | System.Boolean
+OBSERVED C.AUTO.F.a                                         Actor | Actor
+OBSERVED C.AUTO.F.actor_scale                               0,1 | System.Single
+OBSERVED C.AUTO.F.ai                                        AiSystemActor | AiSystemActor
+OBSERVED C.AUTO.F.animation_container                       <null> | AnimationContainerUnit
+OBSERVED C.AUTO.F.army                                      <null> | Army
+OBSERVED C.AUTO.F.asset                                     ActorAsset | ActorAsset
+OBSERVED C.AUTO.F.ate_last_item_id                           | System.String
+OBSERVED C.AUTO.F.attack_target                             <null> | BaseSimObject
+OBSERVED C.AUTO.F.attack_timer                              -0,02 | System.Single
+OBSERVED C.AUTO.F.attackedBy                                <null> | BaseSimObject
+OBSERVED C.AUTO.F.avatar                                    <null> | UnityEngine.GameObject
+OBSERVED C.AUTO.F.b                                         <null> | Building
+OBSERVED C.AUTO.F.batch                                     BatchActors | BatchActors
+OBSERVED C.AUTO.F.beh_actor_target                          <null> | BaseSimObject
+OBSERVED C.AUTO.F.beh_book_target                           <null> | Book
+OBSERVED C.AUTO.F.beh_building_target                       <null> | Building
+OBSERVED C.AUTO.F.beh_tile_target                           WorldTile | WorldTile
+OBSERVED C.AUTO.F.cached_sprite_head                        <null> | UnityEngine.Sprite
+OBSERVED C.AUTO.F.callbacks_cancel_path_movement            <null> | BaseActionActor
+OBSERVED C.AUTO.F.callbacks_landed                          BaseActionActor | BaseActionActor
+OBSERVED C.AUTO.F.callbacks_magnet_update                   BaseActionActor | BaseActionActor
+OBSERVED C.AUTO.F.callbacks_on_death                        BaseActionActor | BaseActionActor
+OBSERVED C.AUTO.F.children_pre_behaviour                    <null> | System.Collections.Generic.List`1[[ActorSimpleComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.children_special                          <null> | System.Collections.Generic.List`1[[BaseActorComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.citizen_job                               <null> | CitizenJobAsset
+OBSERVED C.AUTO.F.city                                      City | City
+OBSERVED C.AUTO.F.clan                                      <null> | Clan
+OBSERVED C.AUTO.F.color                                     UnityEngine.Color | UnityEngine.Color
+OBSERVED C.AUTO.F.culture                                   Culture | Culture
+OBSERVED C.AUTO.F.cur_transform_position                    UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED C.AUTO.F.current_path                              System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=20 | System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.current_path_global                       System.Collections.Generic.List`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=2 | System.Collections.Generic.List`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.current_path_index                        20 | System.Int32
+OBSERVED C.AUTO.F.current_position                          UnityEngine.Vector2 | UnityEngine.Vector2
+OBSERVED C.AUTO.F.current_rotation                          UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED C.AUTO.F.current_scale                             UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED C.AUTO.F.current_shadow_position                   UnityEngine.Vector2 | UnityEngine.Vector2
+OBSERVED C.AUTO.F.current_tile                              WorldTile | WorldTile
+OBSERVED C.AUTO.F.data                                      ActorData | ActorData
+OBSERVED C.AUTO.F.decisions                                 DecisionAsset[] count=128 | DecisionAsset[]
+OBSERVED C.AUTO.F.decisions_counter                         28 | System.Int32
+OBSERVED C.AUTO.F.dict_pre_behaviour                        <null> | System.Collections.Generic.Dictionary`2[[System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[ActorSimpleComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.dirty_current_tile                        False | System.Boolean
+OBSERVED C.AUTO.F.dirty_sprite_head                         True | System.Boolean
+OBSERVED C.AUTO.F.dirty_sprite_main                         True | System.Boolean
+OBSERVED C.AUTO.F.equipment                                 ActorEquipment count=0 | ActorEquipment
+OBSERVED C.AUTO.F.event_full_stats                          False | System.Boolean
+OBSERVED C.AUTO.F.exists                                    True | System.Boolean
+OBSERVED C.AUTO.F.family                                    <null> | Family
+OBSERVED C.AUTO.F.flip                                      False | System.Boolean
+OBSERVED C.AUTO.F.flip_angle                                0 | System.Single
+OBSERVED C.AUTO.F.frame_data                                <null> | AnimationFrameData
+OBSERVED C.AUTO.F.has_attack_target                         False | System.Boolean
+OBSERVED C.AUTO.F.has_tag_generate_light                    False | System.Boolean
+OBSERVED C.AUTO.F.has_tag_immunity_cold                     False | System.Boolean
+OBSERVED C.AUTO.F.hitbox_bonus_height                       0,3 | System.Single
+OBSERVED C.AUTO.F.idle_loop_sound                           <null> | ActorIdleLoopSound
+OBSERVED C.AUTO.summary                                     emitted=128 readErrors=0 limit=128 | Safe-reader v2 reads fields and zero-index properties only; it never mass-invokes arbitrary methods.
+OBSERVED C.ACTOR.id                                         14 | Best-effort Actor identity read.
+OBSERVED C.ACTOR.name                                       Yaamnor | Best-effort Actor display-name read.
+OBSERVED C.ACTOR.city                                       City | source=F:city
+ASSERT C.RELATION.actor-city-same                           PASS | expected=Dona actual=Dona
+ASSERT C.RELATION.city-backref-actor                        PASS | source=P:units
+OBSERVED C.ACTOR.kingdom                                    Kingdom | source=F:kingdom
+ASSERT C.RELATION.actor-kingdom-same                        PASS | expected=Ranua actual=Ranua
+ASSERT C.RELATION.actor-city-kingdom-consistent             PASS | cityKingdomSource=F:kingdom
+OBSERVED C.ACTOR.species-race-candidate                     F:asset=ActorAsset | declared=ActorAsset
+OBSERVED C.ACTOR.age-candidate                              P:age=18 | declared=System.Int32
+OBSERVED C.ACTOR.life-candidate                             <none> | No primitive life-state-like member resolved.
+OBSERVED C.ACTOR.traits                                     System.Collections.Generic.HashSet`1[[ActorTrait, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=5 | source=F:traits
+OBSERVED C.ACTOR.stats-candidate                            F:stats=BaseStats | declared=BaseStats
+OBSERVED C.ACTOR.profession-candidate                       F:_profession=Unit | declared=UnitProfession
+OBSERVED C.ACTOR.equipment-candidate                        F:equipment=ActorEquipment count=0 | declared=ActorEquipment
+OBSERVED C.ACTOR.tile-position-candidate                    F:current_tile=WorldTile | WorldTile type=WorldTile
+C SUMMARY: PASS=4 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0018 :: D :: 100/1000 ACTOR READ STABILITY / REDISCOVERY / NO-MUTATION GUARD
+ASSERT D.STABILITY.id-100                                   PASS | expected=100 actual=100
+ASSERT D.STABILITY.name-100                                 PASS | expected=100 actual=100
+ASSERT D.STABILITY.city-100                                 PASS | expected=100 actual=100
+ASSERT D.STABILITY.kingdom-100                              PASS | expected=100 actual=100
+ASSERT D.STRESS.sample-present-1000                         PASS | expected=1000 actual=1000 owner=ActorManager
+ASSERT D.STRESS.id-1000                                     PASS | expected=1000 actual=1000
+ASSERT D.STRESS.name-1000                                   PASS | expected=1000 actual=1000
+OBSERVED D.STRESS.timing                                    elapsed_ms=29 | 1000 safe Actor rediscovery + identity/name reads; machine-specific performance evidence.
+ASSERT D.NO-MUTATION.discovery-count                        PASS | before=24 after=24
+ASSERT D.NO-MUTATION.sample-still-present                   PASS | sample reference remains discoverable
+ASSERT D.NO-MUTATION.city-reference                         PASS | source=F:city
+ASSERT D.NO-MUTATION.kingdom-reference                      PASS | source=F:kingdom
+ASSERT D.NO-MUTATION.city-units-count                       PASS | before=7 after=7
+D SUMMARY: PASS=12 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0018 :: FINAL MATRIX
+ASSERTIONS PASS=35 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

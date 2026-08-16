@@ -1,58 +1,31 @@
 ---
 title: WorldTile.Height
-description: Verified terrain-height storage used by WorldBox tiles on the current research baseline.
+description: Verified terrain-height storage used by WorldBox tiles, with WBML lifecycle caveats for reload and world generation.
 ---
 
-<span class="doc-status">✅ Verified</span>
-<span class="doc-status">WorldBox 0.51.2 build 719</span>
-<span class="doc-status">NeoModLoader 1.2.0.1</span>
+<span class="doc-status">✅ Verified storage path</span>
+<span class="doc-status">👁 Lifecycle value may normalize/recompute</span>
 
-`WorldTile.Height` is the **verified terrain-height storage** used in our WorldBox 0.51.2 research baseline.
+`WorldTile.Height` is the verified terrain-height storage in the WorldBox 0.51.2 research baseline. The same value is also observed through `WorldTile.data.height`.
 
-<div class="doc-meta">
+## Verified storage
 
-Also observed through the underlying data as `WorldTile.data.height`.
+TerraForge's storage probe established that `tile.Height` / `tile.data.height` affect terrain height; `tile.health` does not.
 
-</div>
+## New WBML lifecycle evidence
 
-## What was verified
+WBML-0022 read height across thousands of live tiles. WBML-0024/25 used height as part of post-worldgen fingerprints. WBML-0029 then discovered a crucial boundary: after a real save/reload, Height can normalize/recompute. The original reload run observed `before=1`, temporary marker `2`, `after=0` even though the load lifecycle clearly completed.
 
-During TerraForge's height-storage probe, both access paths changed the same tested tile set and produced matching results:
+Therefore:
 
-```csharp
-tile.Height
-tile.data.height
+```text
+Height is valid terrain state
+!=
+Height must be byte-for-byte identical after reload
 ```
 
-For TerraForge, `WorldTile.Height` became the preferred access path.
-
-## What it is not
-
-Do **not** confuse terrain height with:
-
-```csharp
-tile.health
-```
-
-That false match was used in an early TerraForge experiment and did not modify terrain height.
-
-## Why this matters
-
-A custom generator can calculate perfect continent masks and noise fields, but if the result is written to the wrong member, WorldBox terrain conversion never receives the intended height data.
-
-This is why TerraForge separated two questions:
-
-1. Is our generator math correct?
-2. Are we writing the result into the actual WorldBox height storage?
-
-The second question required a runtime probe instead of guessing from a field name.
-
-## Evidence
-
-**Origin:** TerraForge Height Storage Probe  
-**Evidence type:** runtime probe  
-**Result:** `WorldTile.Height` and `WorldTile.data.height` behaved as the same terrain-height storage in the tested environment.
+For reload proof, use lifecycle signal + marker disappearance + live collections + stability, not exact Height equality.
 
 ## Compatibility
 
-This page is verified for the baseline shown above. Re-test after significant WorldBox updates before treating the behavior as unchanged.
+Verified on WorldBox 0.51.2 build 719 / NML 1.2.0.1. Numeric ranges are world-state observations, not universal constants.

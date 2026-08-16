@@ -1,0 +1,87 @@
+WBML-0028 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0028-fix1 / 0.0.28-fix1 :: LOAD
+CROSS-MOD CONFLICT SUITE READY — READ-ONLY.
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+TEST: loaded-mod discovery + Harmony coexistence + core lookup/manager integrity + no-mutation drift checks.
+TARGET ENVIRONMENT: Political World + Custom Worldsize + Scenario Tools are detected dynamically by assembly/type names.
+NO WORLD MUTATION. NO WORLDGEN. NO DESTRUCTIVE CALLS.
+WBML-0028-fix1 / 0.0.28-fix1 :: AUTOMATED BATCH START
+RUN TOKEN: c029b910e003
+WBML-0028-fix1 :: P :: PREFLIGHT / CURRENT MODDED RUNTIME
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.worldtile                                     PASS | WorldTile
+ASSERT P.TYPE.kingdom                                       PASS | Kingdom
+ASSERT P.TYPE.city                                          PASS | City
+ASSERT P.TYPE.actor                                         PASS | Actor
+ASSERT P.SINGLETON.mapbox                                   PASS | MapBox
+ASSERT P.TILES.map                                          PASS | rank=2 count=65536 size=256x256
+ASSERT P.TILES.list                                         PASS | rank=1 map=65536 list=65536
+ASSERT P.SAMPLE.state                                       PASS | x=0 y=0 h=0 terrain=TileType zone=TileZone chunk=MapChunk region=MapRegion
+ASSERT P.MANAGER.kingdoms                                   PASS | KingdomManager
+ASSERT P.MANAGER.cities                                     PASS | CityManager
+ASSERT P.MANAGER.units                                      PASS | ActorManager
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=13 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0028-fix1 :: A :: LOADED MOD / ASSEMBLY COLLISION SURFACE
+ASSERT A.ASSEMBLIES.enumerated                              PASS | loadedAssemblies=180
+OBSERVED A.EXTERNAL.PoliticalWorld                          found=True asm=1 types=226 sample=asm:LOUS12_POLITICALWORLD | type:Lous12.PoliticalWorld.Main | type:Lous12.PoliticalWorld.PoliticalWorldAPI | type:Lous12.PoliticalWorld.Main+PendingWarDeclaration | type:Lous12.PoliticalWorld.Main+PendingDiplomaticCrisis | type:Lous12.PoliticalWorld.Main+ActiveWarSimulation | Evidence comes from normalized assembly names and loaded type full names.
+OBSERVED A.EXTERNAL.CustomWorldsize                         found=True asm=1 types=10 sample=asm:HUMANITYEVOLVED_CUSTOM_WORLDSIZE | type:CustomWorldsize.CustomWorldsizeMod | type:CustomWorldsize.CustomWorldsizePanel | type:CustomWorldsize.CustomWorldsizeSelfTest | type:CustomWorldsize.CustomWorldsizeState | type:CustomWorldsize.StartCustomGenerationPatch | Evidence comes from normalized assembly names and loaded type full names.
+OBSERVED A.EXTERNAL.ScenarioTools                           found=True asm=1 types=12 sample=asm:LOUS12_SCENARIOTOOLS | type:Lous12.ScenarioTools.Main | type:Lous12.ScenarioTools.ScenarioToolsWindow | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c__DisplayClass12_0 | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c__DisplayClass13_0 | Evidence comes from normalized assembly names and loaded type full names.
+ASSERT A.EXTERNAL.PoliticalWorld-found                      PASS | found=True asm=1 types=226 sample=asm:LOUS12_POLITICALWORLD | type:Lous12.PoliticalWorld.Main | type:Lous12.PoliticalWorld.PoliticalWorldAPI | type:Lous12.PoliticalWorld.Main+PendingWarDeclaration | type:Lous12.PoliticalWorld.Main+PendingDiplomaticCrisis | type:Lous12.PoliticalWorld.Main+ActiveWarSimulation
+ASSERT A.EXTERNAL.CustomWorldsize-found                     PASS | found=True asm=1 types=10 sample=asm:HUMANITYEVOLVED_CUSTOM_WORLDSIZE | type:CustomWorldsize.CustomWorldsizeMod | type:CustomWorldsize.CustomWorldsizePanel | type:CustomWorldsize.CustomWorldsizeSelfTest | type:CustomWorldsize.CustomWorldsizeState | type:CustomWorldsize.StartCustomGenerationPatch
+ASSERT A.EXTERNAL.ScenarioTools-found                       PASS | found=True asm=1 types=12 sample=asm:LOUS12_SCENARIOTOOLS | type:Lous12.ScenarioTools.Main | type:Lous12.ScenarioTools.ScenarioToolsWindow | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c__DisplayClass12_0 | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c__DisplayClass13_0
+ASSERT A.CORE.MapBox-single-definition                      PASS | type=MapBox definitions=1 sample=Assembly-CSharp:MapBox
+ASSERT A.CORE.WorldTile-single-definition                   PASS | type=WorldTile definitions=1 sample=Assembly-CSharp:WorldTile
+ASSERT A.CORE.Kingdom-single-definition                     PASS | type=Kingdom definitions=1 sample=Assembly-CSharp:Kingdom
+ASSERT A.CORE.City-single-definition                        PASS | type=City definitions=1 sample=Assembly-CSharp:City
+ASSERT A.CORE.Actor-single-definition                       PASS | type=Actor definitions=1 sample=Assembly-CSharp:Actor
+OBSERVED A.WBML.assembly                                    LOUS12_WORLDBOX_MODDING_LAB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Current suite assembly identity.
+A SUMMARY: PASS=9 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0028-fix1 :: B :: HARMONY PATCH COEXISTENCE / CORE LOOKUP INTEGRITY
+ASSERT B.HARMONY.inventory-safe                             PASS | safe=True methods=24 owners=3 error=<none>
+ASSERT B.HARMONY.has-patched-methods                        PASS | safe=True methods=24 owners=3 error=<none>
+OBSERVED B.HARMONY.owners                                   count=3 sample=wbom.nml | fluttershy.politicalworld.politics.v1392 | humanityevolved.custom_worldsize | Owner IDs are observational because naming conventions vary by mod.
+OBSERVED B.HARMONY.sample-methods                           count=24 sample=LocalizedTextManager.setLanguage(String pLanguage) -> Void | Resources.LoadAll(String path,Type systemTypeInstance) -> Object[] | Resources.Load(String path,Type systemTypeInstance) -> Object | RuntimeManager.Update() -> Void | MusicBox.playSound(String pSoundPath,Single pX,Single pY,Boolean pGameViewOnly,Boolean pVisibleOnly) -> Void | MusicBox.playDrawingSound(String pSoundPath,Single pX,Single pY) -> Void | MapBox.clearWorld() -> Void | Actor.updateStats() -> Void | First patched methods from the loaded runtime.
+ASSERT B.PW.startWar-method                                 PASS | DiplomacyManager.startWar(Kingdom pAttacker,Kingdom pDefender,WarTypeAsset pAsset,Boolean pLog) -> War
+ASSERT B.PW.startWar-patched                                PASS | method=DiplomacyManager.startWar(Kingdom pAttacker,Kingdom pDefender,WarTypeAsset pAsset,Boolean pLog) -> War patchInfo=HarmonyLib.Patches owners=count=1 [fluttershy.politicalworld.politics.v1392]
+ASSERT B.GETTILE.coherent-5k                                PASS | sameRef=5000/5000 method=MapBox.GetTile(Int32 pX,Int32 pY) -> WorldTile
+ASSERT B.CORE.collections-coherent                          PASS | map=65536/65536 list=65536/65536
+B SUMMARY: PASS=6 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0028-fix1 :: C :: CROSS-MOD RUNTIME READ STABILITY
+ASSERT C.REGISTRY.kingdoms                                  PASS | source=F:list count=0
+ASSERT C.REGISTRY.cities                                    PASS | source=F:list count=0
+ASSERT C.REGISTRY.actors                                    PASS | source=F:units_only_alive count=4
+ASSERT C.CORE.stability-100                                 PASS | stable=100/100
+ASSERT C.REGISTRY.counts-1000                               PASS | stable=1000/1000 kingdoms=0 cities=0 actors=4
+ASSERT C.EXTERNAL.targets-still-loaded                      PASS | PW=found=True asm=1 types=226 CWS=found=True asm=1 types=10 ST=found=True asm=1 types=12
+C SUMMARY: PASS=6 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0028-fix1 :: D :: POST-CONFLICT-CHECK NO-MUTATION / PATCH DRIFT
+OBSERVED D.POST.assembly-count                              before=180 after=183 | Raw assembly-count drift is observational because reflection/type loading can lazily load dependencies.
+OBSERVED D.POST.assembly-delta                              added=3 [System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a | System.ServiceModel.Internals, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | System.Transactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089] removed=0 [<none>] | Added/removed assembly identities after the inspection. Added framework/dependency assemblies are not conflicts by themselves.
+ASSERT D.POST.assembly-baseline-retained                    PASS | added=3 [System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a | System.ServiceModel.Internals, Version=0.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089 | System.Transactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089] removed=0 [<none>]
+ASSERT D.POST.target-assembly-cardinality                   PASS | PW=found=True asm=1 types=226 CWS=found=True asm=1 types=10 ST=found=True asm=1 types=12
+ASSERT D.POST.core-single-definitions                       PASS | MapBox=1 WorldTile=1 Kingdom=1 City=1 Actor=1
+ASSERT D.POST.patch-count                                   PASS | before=24 after=24 beforeSafe=True afterSafe=True
+ASSERT D.POST.collection-refs                               PASS | mapSame=True listSame=True
+ASSERT D.POST.tile-counts                                   PASS | map=65536/65536 list=65536/65536
+ASSERT D.POST.sample-state                                  PASS | before=x=0 y=0 h=0 terrain=TileType zone=TileZone chunk=MapChunk region=MapRegion after=x=0 y=0 h=0 terrain=TileType zone=TileZone chunk=MapChunk region=MapRegion
+ASSERT D.POST.manager-refs                                  PASS | kingdomsSame=True citiesSame=True unitsSame=True
+ASSERT D.POST.registry-counts                               PASS | kingdoms=0/0 cities=0/0 actors=4/4
+ASSERT D.POST.external-targets                              PASS | PW=found=True asm=1 types=226 CWS=found=True asm=1 types=10 ST=found=True asm=1 types=12
+ASSERT D.RUNNER.single                                      PASS | livePersistentRunners=1
+D SUMMARY: PASS=11 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0028-fix1 :: FINAL MATRIX
+ASSERTIONS PASS=45 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

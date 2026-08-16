@@ -1,58 +1,15 @@
 ---
 title: WorldTile.Height
-description: Подтверждённое хранилище высоты рельефа тайла в текущей базовой версии исследований.
+description: Подтверждённое хранилище высоты рельефа с WBML caveats для reload/worldgen.
 ---
 
-<span class="doc-status">✅ Verified</span>
-<span class="doc-status">WorldBox 0.51.2 build 719</span>
-<span class="doc-status">NeoModLoader 1.2.0.1</span>
+<span class="doc-status">✅ Verified storage path</span>
+<span class="doc-status">👁 На lifecycle value может normalize/recompute</span>
 
-`WorldTile.Height` — **подтверждённое хранилище высоты рельефа**, которое мы используем для базовой версии исследований WorldBox 0.51.2.
+`WorldTile.Height` — подтверждённое terrain-height storage на baseline 0.51.2. То же значение доступно через `WorldTile.data.height`; `tile.health` высотой не является.
 
-<div class="doc-meta">
+WBML-0029 показал важную границу: после настоящего save/reload Height может normalize/recompute. В исходном прогоне было `before=1`, marker `2`, `after=0`, хотя lifecycle load завершился. Поэтому exact Height equality нельзя использовать как единственный reload proof.
 
-То же значение наблюдалось через `WorldTile.data.height`.
+Правильнее: lifecycle signal + исчезновение marker + live collections + stability.
 
-</div>
-
-## Что было проверено
-
-Во время height-storage probe TerraForge оба пути меняли один и тот же тестовый набор тайлов и давали совпадающий результат:
-
-```csharp
-tile.Height
-tile.data.height
-```
-
-Для TerraForge основным способом доступа стал `WorldTile.Height`.
-
-## С чем это нельзя путать
-
-Высота рельефа — это **не**:
-
-```csharp
-tile.health
-```
-
-В раннем эксперименте TerraForge это поле было ошибочно принято за высоту, но рельеф оно не меняло.
-
-## Почему это важно
-
-Можно идеально рассчитать материки, маски и noise, но если результат записывается не в то поле, WorldBox никогда не получит нужную карту высот при преобразовании рельефа.
-
-Поэтому TerraForge разделил две разные проблемы:
-
-1. правильно ли работает наша математика генератора;
-2. записываем ли мы результат в реальное хранилище высоты WorldBox.
-
-На второй вопрос понадобился runtime-probe, а не догадка по названию поля.
-
-## Доказательство
-
-**Источник:** TerraForge Height Storage Probe  
-**Тип доказательства:** runtime-probe  
-**Результат:** `WorldTile.Height` и `WorldTile.data.height` в тестовой среде вели себя как одно хранилище высоты рельефа.
-
-## Совместимость
-
-Страница подтверждена только для указанной выше базовой среды. После крупных обновлений WorldBox результат нужно перепроверять.
+Verified: WorldBox 0.51.2 build 719 / NML 1.2.0.1. Числовые диапазоны height — состояние конкретного мира, не universal constants.

@@ -1,0 +1,10 @@
+# Known pitfalls — WBML 0.1.0
+
+1. **Do not require WorldTile identity replacement after worldgen or reload.** WorldBox 0.51.2 can reuse arrays and tile objects while rebuilding state.
+2. **Do not scan the full tile map in every wait-loop frame.** The original 0.0.24 methodology caused severe FPS degradation.
+3. **Do not host lifecycle-critical coroutines on objects that world replacement may destroy.** Use a persistent runner.
+4. **Do not use exact `WorldTile.Height` equality as the only reload proof.** Height can normalize/recompute.
+5. **Do not treat raw AppDomain assembly-count growth as a mod conflict.** Reflection can lazy-load framework dependencies.
+6. **Do not guess SaveManager arguments, paths or slots.** Invoke only signatures whose required parameters are proven safe.
+7. **Do not use ordinary CLR null checks as the only Unity object liveness test.** Unity fake-null semantics matter.
+8. **Do not promote one observed callback to a universal lifecycle contract.** `finishMakingWorld()` worked for generateNewMap in this baseline; `on_world_loaded` was not reliable there.

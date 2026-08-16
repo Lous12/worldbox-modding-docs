@@ -1,0 +1,83 @@
+WBML-0014 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0014 / 0.0.14 :: LOAD
+MUTATION / SNAPSHOT / ROLLBACK / RESTORE SUITE READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+WBML-owned objects only; real WorldBox assets/saves are not intentionally mutated.
+WBML-0014 / 0.0.14 :: AUTOMATED RUN START
+RUN TOKEN: 1c1a82659e33
+WBML-0014 :: A :: FULL GAMEOBJECT SNAPSHOT / MUTATE / RESTORE
+ASSERT A.SNAPSHOT.parent                                    PASS | parent=WBML0014_A_ParentA
+ASSERT A.SNAPSHOT.sibling-index                             PASS | index=1
+ASSERT A.SNAPSHOT.active                                    PASS | active=True
+ASSERT A.MUTATION.parent-changed                            PASS | parent=WBML0014_A_ParentB
+ASSERT A.MUTATION.inactive                                  PASS | activeSelf=False
+ASSERT A.MUTATION.data-changed                              PASS | int=-1 text=mutated
+ASSERT A.RESTORE.name                                       PASS | name=WBML0014_A_Target
+ASSERT A.RESTORE.parent                                     PASS | parent=WBML0014_A_ParentA
+ASSERT A.RESTORE.sibling-index                              PASS | index=1
+ASSERT A.RESTORE.position                                   PASS | actual=(1.50, -2.25, 3.75)
+ASSERT A.RESTORE.rotation                                   PASS | actualEuler=(15.00, 25.00, 35.00)
+ASSERT A.RESTORE.scale                                      PASS | actual=(1.25, 0.75, 2.00)
+ASSERT A.RESTORE.active                                     PASS | activeSelf=True
+ASSERT A.RESTORE.data                                       PASS | int=42 text=baseline vector=(7.00, 8.00, 9.00)
+ASSERT A.RESTORE.siblings-stable                            PASS | indexes=0,1,2
+ASSERT A.CLEANUP.parents                                    PASS | a=True b=True
+ASSERT A.REPORT.write-preflight                             PASS | write/delete OK
+A SUMMARY: PASS=17 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0014 :: B :: EXCEPTION-SAFE TRANSACTION / 50 MUTATE-THROW-ROLLBACK CYCLES
+ASSERT B.TRANSACTION.exceptions-caught                      PASS | expected=50 actual=50
+ASSERT B.TRANSACTION.restore-count                          PASS | expected=50 actual=50
+ASSERT B.TRANSACTION.final-name                             PASS | name=WBML0014_B_Transactional
+ASSERT B.TRANSACTION.final-position                         PASS | position=(2.00, 4.00, 6.00)
+ASSERT B.TRANSACTION.final-data                             PASS | int=100 text=stable vector=(3.00, 3.00, 3.00)
+ASSERT B.CLEANUP.destroyed                                  PASS | unityNull=True
+B SUMMARY: PASS=6 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0014 :: C :: ASSET ID MUTATION / REGISTRY KEY STALENESS / RESTORE
+ASSERT C.LIBRARY.created                                    PASS | Lous12.WorldBoxModdingLab.WBML014ProbeLibrary
+ASSERT C.LIBRARY.add-method                                 PASS | Lous12.WorldBoxModdingLab.WBML014ProbeAsset add(Lous12.WorldBoxModdingLab.WBML014ProbeAsset)
+ASSERT C.LIBRARY.get-method                                 PASS | Lous12.WorldBoxModdingLab.WBML014ProbeAsset get(System.String)
+ASSERT C.LIBRARY.list-field                                 PASS | list
+ASSERT C.BASELINE.list-one                                  PASS | count=1
+ASSERT C.BASELINE.lookup-original                           PASS | sameRef=True
+OBSERVED C.MUTATION.old-key-lookup                          ASSET | Lookup by the registration-time ID after changing asset.id in-place.
+OBSERVED C.MUTATION.new-key-lookup                          NULL | Lookup by the new asset.id before re-registering.
+ASSERT C.MUTATION.list-reference-stable                     PASS | count=1
+ASSERT C.MUTATION.object-id-changed                         PASS | asset.id=wbml_0014_mutated
+ASSERT C.RESTORE.asset-id                                   PASS | asset.id=wbml_0014_original
+ASSERT C.RESTORE.lookup-original                            PASS | sameRef=True
+ASSERT C.RESTORE.lookup-mutated-null                        PASS | mutatedLookup=null
+ASSERT C.RESTORE.list-one                                   PASS | count=1
+OBSERVED C.RESEARCH.warning                                 Changing asset.id after add can temporarily disagree with registry lookup semantics | Never assume mutating an Asset.id automatically rekeys its AssetLibrary. Restore or re-register deliberately.
+C SUMMARY: PASS=12 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0014 :: D :: DESTROY IS NOT ROLLBACK / BACKUP REPLACEMENT / STALE EXTERNAL REFERENCE REBIND
+ASSERT D.BACKUP.created                                     PASS | backup=True
+ASSERT D.BACKUP.child-present                               PASS | child=True
+ASSERT D.DESTROY.original-unity-null                        PASS | unityNull=True
+ASSERT D.DESTROY.original-managed-ref-remains               PASS | ReferenceEquals(null)=False
+ASSERT D.DESTROY.child-dies                                 PASS | unityNull=True
+ASSERT D.STALE.holder-unity-null                            PASS | unityNull=True
+ASSERT D.STALE.holder-managed-ref-remains                   PASS | ReferenceEquals(null)=False
+OBSERVED D.ROLLBACK.identity-boundary                       DESTROYED OBJECT CANNOT BE RESTORED IN-PLACE | A backup can recreate equivalent state, but cannot preserve the destroyed Unity object's identity/reference.
+ASSERT D.REPLACEMENT.created                                PASS | replacement=True data=True
+ASSERT D.REPLACEMENT.new-identity                           PASS | ReferenceEquals(old)=False
+ASSERT D.REPLACEMENT.state-restored                         PASS | int=555 text=baseline-before-destroy
+ASSERT D.REPLACEMENT.child-restored                         PASS | child=True
+ASSERT D.STALE.not-auto-rebound                             PASS | holder remains stale before explicit rebind=True
+ASSERT D.REBIND.explicit                                    PASS | sameRef=True
+ASSERT D.CLEANUP.all-destroyed                              PASS | backup=True replacement=True owner=True
+D SUMMARY: PASS=14 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0014 :: FINAL MATRIX
+ASSERTIONS PASS=49 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; latest.json is optional.

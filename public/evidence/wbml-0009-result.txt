@@ -1,0 +1,160 @@
+WBML-0009 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0009 / 0.0.9-fix3 :: LOAD
+UI INJECTION / BUTTON / WINDOW / TAB LIFECYCLE SUITE READY.
+fix3 tests the supported-style lifecycle: create one ScrollWindow, reuse it through repeated show/hide cycles, then perform one final safe cleanup.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+Wait for FINAL MATRIX. No F7/F8/F9/F10 sequence is needed.
+WBML-0009 / 0.0.9-fix3 :: AUTOMATED RUN START
+RUN TOKEN: efe4206c0fa3
+Runner will inspect UI infrastructure, test SimpleButton, recreate a real ScrollWindow, recreate a real PowersTab, then verify cleanup.
+WBML-0009 :: A :: UI INFRASTRUCTURE / RESOURCE / PUBLIC NML API SURFACE
+ASSERT A.UI.canvas-main                                     PASS | available
+ASSERT A.UI.canvas-ui                                       PASS | Canvas - UI/General
+ASSERT A.UI.windows-root                                    PASS | windows
+ASSERT A.UI.tab-container                                   PASS | Power Tabs
+ASSERT A.UI.tab-entry-container                             PASS | TabsButtons
+ASSERT A.RESOURCE.world-laws-powerbutton                    PASS | world_laws
+ASSERT A.RESOURCE.simplebutton-prefab                       PASS | SimpleButton
+ASSERT A.API.window-create                                  PASS | WindowCreator.CreateEmptyWindow
+ASSERT A.API.power-create-simple                            PASS | PowerButtonCreator.CreateSimpleButton
+ASSERT A.API.power-add-to-tab                               PASS | PowerButtonCreator.AddButtonToTab
+ASSERT A.API.power-get-tab                                  PASS | PowerButtonCreator.GetTab
+ASSERT A.API.tab-create                                     PASS | TabManager.CreateTab
+ASSERT A.LOC.window-title                                   PASS | actual=WBML UI Window
+ASSERT A.LOC.tab-title                                      PASS | actual=WBML UI Tab
+A SUMMARY: PASS=14 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0009 :: B :: SIMPLEBUTTON PREFAB / LISTENER REPLACEMENT / SIZE / TOGGLE / CLEANUP
+ASSERT B.SIMPLE.created                                     PASS | WBML0009_SimpleButton
+ASSERT B.SIMPLE.parent                                      PASS | parent=WBML0009_SimpleButtonHolder
+ASSERT B.SIMPLE.components                                  PASS | Button/Text/Icon/Background checked
+ASSERT B.SIMPLE.first-listener                              PASS | first=1
+ASSERT B.SIMPLE.text-mode                                   PASS | textActive=True iconActive=False
+ASSERT B.SIMPLE.size                                        PASS | size=(80.00, 24.00)
+ASSERT B.SIMPLE.listener-replaced                           PASS | first=1 second=1
+ASSERT B.SIMPLE.text-updated                                PASS | actual=WBML-2
+ASSERT B.SIMPLE.toggle-50                                   PASS | 50 disable/enable cycles; active=True
+ASSERT B.SIMPLE.cleanup-holder                              PASS | DestroyImmediate(holder)
+ASSERT B.SIMPLE.prefab-survives                             PASS | prefab still available
+B SUMMARY: PASS=11 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0009 :: C :: REAL WINDOW CREATE / SAME-ID REUSE / 10 SHOW-HIDE CYCLES / ONE FINAL SAFE CLEANUP
+ASSERT C.WINDOW.create                                      PASS | wbml_0009_window
+ASSERT C.WINDOW.same-id-reuse                               PASS | sameRef=True
+ASSERT C.WINDOW.registry-present                            PASS | registry contains id=True
+ASSERT C.WINDOW.parent                                      PASS | parent=windows
+ASSERT C.WINDOW.open-active-0                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-0                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-0                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-0                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-1                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-1                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-1                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-1                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-2                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-2                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-2                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-2                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-3                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-3                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-3                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-3                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-4                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-4                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-4                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-4                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-5                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-5                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-5                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-5                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-6                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-6                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-6                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-6                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-7                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-7                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-7                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-7                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-8                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-8                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-8                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-8                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-active-9                               PASS | showRequested=True activeSelf=True activeInHierarchy=True
+ASSERT C.WINDOW.hide-settled-9                              PASS | hideRequested=True activeSelf=False activeInHierarchy=False
+ASSERT C.WINDOW.tweens-quiesced-9                           PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.identity-stable-9                           PASS | windowAlive=True registryPresent=True
+ASSERT C.WINDOW.open-hide-cycle-count                       PASS | successfulCycles=10
+ASSERT C.WINDOW.registry-still-present-before-final-cleanup PASS | registry contains id=True
+ASSERT C.WINDOW.final-tweens-quiesced                       PASS | targets=88 activeBefore=0 killedTargets=0 activeAfter=0
+ASSERT C.WINDOW.final-cleanup-prepared                      PASS | localized-text removed; window registry removed; window asset: removed via reflected collection fields; DestroyImmediate intentionally NOT used in fix2
+ASSERT C.WINDOW.final-destroyed-after-frame                 PASS | unity-null-after-deferred-destroy=True
+ASSERT C.WINDOW.final-registry-clean                        PASS | registry contains id=False
+OBSERVED C.RESEARCH.fix2-recreate-boundary                  OBSERVED IN PREVIOUS RUN | fix2 safely removed DOTween warnings and restored Escape, but repeated destroy/recreate of the same window ID stopped becoming active from cycle 3 onward. fix3 therefore tests the reusable-window lifecycle separately from teardown.
+OBSERVED C.MANUAL.escape-after-cleanup                      PENDING USER CHECK | After FINAL MATRIX press Escape once. WBML-0009 is closed only if Escape still works after F6.
+C SUMMARY: PASS=50 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0009 :: D :: REAL TAB CREATE / POWERBUTTON INJECTION / RECREATE / MANAGER+ASSET CLEANUP
+ASSERT D.TAB.create-0                                       PASS | wbml_0009_tab
+ASSERT D.TAB.lookup-0                                       PASS | GetTab sameRef=True
+ASSERT D.TAB.manager-name-0                                 PASS | manager contains name=True
+ASSERT D.POWER.create-0                                     PASS | wbml_0009_power_0
+ASSERT D.POWER.button-component-0                           PASS | available
+ASSERT D.POWER.click-0                                      PASS | clickCount=1
+ASSERT D.POWER.parent-tab-0                                 PASS | parent=wbml_0009_tab
+ASSERT D.TAB.toggle-20-0                                    PASS | 20 disable/enable cycles
+ASSERT D.TAB.cleanup-0                                      PASS | TabManager lists cleaned; power-tab asset: removed via reflected collection fields; tab + entry objects destroyed
+ASSERT D.TAB.create-1                                       PASS | wbml_0009_tab
+ASSERT D.TAB.lookup-1                                       PASS | GetTab sameRef=True
+ASSERT D.TAB.manager-name-1                                 PASS | manager contains name=True
+ASSERT D.POWER.create-1                                     PASS | wbml_0009_power_1
+ASSERT D.POWER.button-component-1                           PASS | available
+ASSERT D.POWER.click-1                                      PASS | clickCount=2
+ASSERT D.POWER.parent-tab-1                                 PASS | parent=wbml_0009_tab
+ASSERT D.TAB.toggle-20-1                                    PASS | 20 disable/enable cycles
+ASSERT D.TAB.cleanup-1                                      PASS | TabManager lists cleaned; power-tab asset: removed via reflected collection fields; tab + entry objects destroyed
+ASSERT D.TAB.create-2                                       PASS | wbml_0009_tab
+ASSERT D.TAB.lookup-2                                       PASS | GetTab sameRef=True
+ASSERT D.TAB.manager-name-2                                 PASS | manager contains name=True
+ASSERT D.POWER.create-2                                     PASS | wbml_0009_power_2
+ASSERT D.POWER.button-component-2                           PASS | available
+ASSERT D.POWER.click-2                                      PASS | clickCount=3
+ASSERT D.POWER.parent-tab-2                                 PASS | parent=wbml_0009_tab
+ASSERT D.TAB.toggle-20-2                                    PASS | 20 disable/enable cycles
+ASSERT D.TAB.cleanup-2                                      PASS | TabManager lists cleaned; power-tab asset: removed via reflected collection fields; tab + entry objects destroyed
+ASSERT D.TAB.create-3                                       PASS | wbml_0009_tab
+ASSERT D.TAB.lookup-3                                       PASS | GetTab sameRef=True
+ASSERT D.TAB.manager-name-3                                 PASS | manager contains name=True
+ASSERT D.POWER.create-3                                     PASS | wbml_0009_power_3
+ASSERT D.POWER.button-component-3                           PASS | available
+ASSERT D.POWER.click-3                                      PASS | clickCount=4
+ASSERT D.POWER.parent-tab-3                                 PASS | parent=wbml_0009_tab
+ASSERT D.TAB.toggle-20-3                                    PASS | 20 disable/enable cycles
+ASSERT D.TAB.cleanup-3                                      PASS | TabManager lists cleaned; power-tab asset: removed via reflected collection fields; tab + entry objects destroyed
+ASSERT D.TAB.create-4                                       PASS | wbml_0009_tab
+ASSERT D.TAB.lookup-4                                       PASS | GetTab sameRef=True
+ASSERT D.TAB.manager-name-4                                 PASS | manager contains name=True
+ASSERT D.POWER.create-4                                     PASS | wbml_0009_power_4
+ASSERT D.POWER.button-component-4                           PASS | available
+ASSERT D.POWER.click-4                                      PASS | clickCount=5
+ASSERT D.POWER.parent-tab-4                                 PASS | parent=wbml_0009_tab
+ASSERT D.TAB.toggle-20-4                                    PASS | 20 disable/enable cycles
+ASSERT D.TAB.cleanup-4                                      PASS | TabManager lists cleaned; power-tab asset: removed via reflected collection fields; tab + entry objects destroyed
+ASSERT D.TAB.recreate-count                                 PASS | successfulCycles=5
+ASSERT D.TAB.click-count                                    PASS | clickCount=5
+ASSERT D.TAB.final-lookup-clean                             PASS | GetTab=null
+ASSERT D.TAB.final-manager-clean                            PASS | manager contains name=False
+ASSERT D.TAB.all-clean                                      PASS | all five cleanup cycles=True
+ASSERT D.REPORT.write-preflight                             PASS | write/delete OK
+D SUMMARY: PASS=51 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0009 :: FINAL MATRIX
+ASSERTIONS PASS=126 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. MANUAL GATE: press Escape once now. If it works and FAIL=0, WBML-0009 can be closed.

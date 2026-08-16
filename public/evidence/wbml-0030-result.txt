@@ -1,0 +1,109 @@
+WBML-0030 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0030 / 0.0.30 :: LOAD
+FULL INTEGRATION TORTURE READY — DESTRUCTIVE SESSION TEST.
+USE A DISPOSABLE WORLD THAT YOU MANUALLY SAVED TO ITS OWN SLOT BEFORE F6.
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+TEST: save/reload -> stale/reuse refs -> 2 worldgen cycles -> 262k tile reads -> 100k GetTile comparisons -> cross-mod final integrity.
+SAFETY: save/load signatures are never guessed; wait loops are lightweight and heavy scans are frame-chunked.
+EXPECT WORLD RELOAD + TWO WORLD REGENERATIONS. THIS WORLD IS DISPOSABLE.
+WBML-0030 / 0.0.30 :: AUTOMATED BATCH START
+RUN TOKEN: 14a7980c1b1c
+WBML-0030 :: P :: PREFLIGHT / SAVED DISPOSABLE WORLD
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.worldtile                                     PASS | WorldTile
+ASSERT P.TYPE.savemanager                                   PASS | SaveManager
+ASSERT P.SINGLETON.mapbox                                   PASS | MapBox
+ASSERT P.INSTANCE.savemanager                               PASS | SaveManager
+ASSERT P.TILES.map                                          PASS | rank=2 count=65536 size=256x256
+ASSERT P.TILES.list                                         PASS | rank=1 map=65536 list=65536
+ASSERT P.SAMPLE.state                                       PASS | x=121 y=6 h=30 terrain=TileType zone=TileZone chunk=MapChunk region=MapRegion
+ASSERT P.SAMPLE.height-writable                             PASS | P:Height:Int32
+OBSERVED P.LOAD.signal-hook                                 installed=True | patched=2 afterLoadEvent=MapBox.afterLoadEvent() -> Void finishingUpLoading=MapBox.finishingUpLoading() -> Void
+ASSERT P.WORLDGEN.generateNewMap                            PASS | MapBox.generateNewMap() -> Void
+OBSERVED P.WORLDGEN.signal-hook                             installed=True | patched=1 finishMakingWorld=MapBox.finishMakingWorld() -> Void
+ASSERT P.EXTERNAL.PoliticalWorld                            PASS | Lous12.PoliticalWorld.Main
+ASSERT P.EXTERNAL.CustomWorldsize                           PASS | CustomWorldsize.CustomWorldsizeMod
+ASSERT P.EXTERNAL.ScenarioTools                             PASS | Lous12.ScenarioTools.Main
+ASSERT P.PW.startWar-patched                                PASS | method=DiplomacyManager.startWar(Kingdom pAttacker,Kingdom pDefender,WarTypeAsset pAsset,Boolean pLog=?) -> War owners=count=1 [fluttershy.politicalworld.politics.v1392]
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=15 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0030 :: A :: SAVEMANAGER SURFACE / SAFE CALL PLAN
+OBSERVED A.SAVEMANAGER.type                                 SaveManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.SAVEMANAGER.surface-counts                       fields=18 props=11 methods=172 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.SAVEMANAGER.identity-members                     F:_tile_id_main:System.String,F:_tile_id_top:System.String,F:currentWorkshopMapData:WorkshopMapData,F:data:SavedMap,F:name_main_data:System.String,F:name_main_data_non_zip:System.String,F:name_main_data_old:System.String,F:name_meta_data:System.String,F:name_png_preview_main:System.String,F:name_png_preview_small:System.String,F:name_stats_data:System.String,F:persistentDataPath:System.String,M:GetInstanceID,M:GetScriptClassName,M:copyDataToClipboard,M:currentMetaExists,M:generateMetaPath,M:getCurrentMeta,M:getMetaFor,M:getMetaSlotPath,M:get_hideFlags,M:get_name,M:loadData,M:saveMapData,M:saveMetaData,M:saveMetaIn,M:setCurrentPathAndId,M:set_hideFlags,M:set_name,M:slotMetaExists,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.owner-members                        M:loadCivs02,M:loadKingdoms | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.leader-members                       M:IsInvoking,M:loadKingdoms,M:loadLeaders | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.population-members                   M:GetComponentInChildren,M:GetComponentsInChildren | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.buildings-members                    M:loadBuildings,M:setHomeBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.territory-members                    F:_tile_id_main:System.String,F:_tile_id_top:System.String,M:convertOldTilesToNewOnes,M:loadAncientTiles,M:loadTileArray,M:loadTiles | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.lifecycle-members                    F:_loading_animation_active:System.Boolean,F:autosaves_base:System.String,F:currentSavePath:System.String,F:saveslot_base:System.String,M:checkWorldLawsLoad,M:clearCurrentSelectedWorld,M:clickSaveSlot,M:currentWorldToSavedMap,M:deleteCurrentSave,M:deleteSavePath,M:doesSaveExist,M:generateAutosavesPath,M:getSavePath,M:getSlotSavePath,M:get_destroyCancellationToken,M:isLoadingSaveAnimationActive,M:loadActorLovers,M:loadActors,M:loadActorsOld,M:loadAlliances,M:loadAncientTiles,M:loadArmies,M:loadArmyCaptain,M:loadBoatStates,M:loadBooks,M:loadBuildings,M:loadCities,M:loadCivs02,M:loadClans,M:loadConway,M:loadCultures,M:loadData,M:loadDiplomacy,M:loadFamilies,M:loadFire,M:loadFrozen,M:loadItems,M:loadKingdoms,M:loadLanguages,M:loadLeaders,M:loadMapFromBytes,M:loadMapFromResources,M:loadPlotAuthors,M:loadPlots,M:loadReligions,M:loadStatsFrom,M:loadSubspecies,M:loadTileArray,M:loadTiles,M:loadWars,M:loadWorld,M:prepareLoading,M:saveImagePreview,M:saveMapData,M:saveMetaData,M:saveMetaIn,M:saveStatsIn,M:saveToCurrentPath,M:saveWorldToDirectory,M:startLoadSlot,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.mutation-members                     M:get__settings,M:get_destroyCancellationToken,M:loadData,M:loadDiplomacy,M:setCurrentPath,M:setCurrentPathAndId,M:setCurrentSlot,M:setHomeBuildings,M:set_enabled,M:set_hideFlags,M:set_name,M:set_tag,M:set_useGUILayout,P:_settings:Newtonsoft.Json.JsonSerializerSettings,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.enumerables                          P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.SAVE.surface                                     SaveManager.clickSaveSlot() -> Void | SaveManager.saveToCurrentPath() -> SavedMap | SaveManager.saveWorldToDirectory(String pFolder,Boolean pCompress=?,Boolean pCheckFolder=?) -> SavedMap | SaveManager.currentWorldToSavedMap() -> SavedMap | SaveManager.deleteSavePath(String pPath) -> Void | SaveManager.deleteCurrentSave() -> Void | SaveManager.saveMapData(String pFolder,Boolean pCompress=?) -> SavedMap | SaveManager.saveMetaData(MapMetaData pMetaData,String pPath) -> Void | SaveManager.saveMetaIn(String pFolder,MapMetaData pMetaData) -> Void | SaveManager.saveStatsIn(String pFolder) -> Void | SaveManager.doesSaveExist(String pFolder) -> Boolean | SaveManager.getSavePath(String pFolder) -> String | SaveManager.saveImagePreview(String pFolder) -> Void | SaveManager.getSlotSavePath(Int32 pSlot) -> String | SaveManager.generateAutosavesPath(String pFolder=?) -> String | SaveManager.isLoadingSaveAnimationActive() -> Boolean | Save-like methods are listed; nothing is invoked by this observation.
+OBSERVED A.LOAD.surface                                     SaveManager.loadStatsFrom(String pFolder) -> Boolean | SaveManager.loadWorld() -> Void | SaveManager.loadWorld(String pPath,Boolean pLoadWorkshop=?) -> Void | SaveManager.loadMapFromResources(String pPath) -> Void | SaveManager.loadMapFromBytes(Byte[] pMapData) -> Void | SaveManager.startLoadSlot() -> Void | SaveManager.prepareLoading() -> Void | SaveManager.loadTiles(String pString) -> Void | SaveManager.loadTileArray(SavedMap pData) -> Void | SaveManager.loadConway(List`1 conv0,List`1 conv1) -> Void | SaveManager.loadFrozen(List`1 pTileList) -> Void | SaveManager.loadFire(List`1 pTileList) -> Void | SaveManager.loadData(SavedMap pData,String pPath=?) -> Void | SaveManager.checkWorldLawsLoad() -> Void | SaveManager.loadBoatStates() -> Void | SaveManager.loadDiplomacy() -> Void | SaveManager.loadLeaders() -> Void | SaveManager.loadCivs02() -> Void | SaveManager.loadBuildings() -> Void | SaveManager.loadActors() -> Void | SaveManager.loadPlotAuthors() -> Void | SaveManager.loadActorLovers() -> Void | SaveManager.loadActorsOld(Int32 startIndex=?,Int32 pAmount=?) -> Void | SaveManager.loadCities() -> Void | SaveManager.loadWars() -> Void | SaveManager.loadPlots() -> Void | SaveManager.loadAlliances() -> Void | SaveManager.loadClans() -> Void | SaveManager.loadKingdoms() -> Void | SaveManager.loadCultures() -> Void | SaveManager.loadBooks() -> Void | SaveManager.loadSubspecies() -> Void | SaveManager.loadLanguages() -> Void | SaveManager.loadReligions() -> Void | SaveManager.loadItems() -> Void | SaveManager.loadFamilies() -> Void | SaveManager.loadArmies() -> Void | SaveManager.loadArmyCaptain() -> Void | SaveManager.loadAncientTiles() -> Void | SaveManager.isLoadingSaveAnimationActive() -> Boolean | Load-like methods are listed; nothing is invoked by this observation.
+OBSERVED A.SAVE.selected                                    callable=True score=275 method=SaveManager.saveToCurrentPath() -> SavedMap args=no-args owner=SaveManager | Only zero-argument or truly optional/default-argument methods are considered callable in 0.0.30.
+OBSERVED A.LOAD.selected                                    callable=True score=450 method=SaveManager.loadWorld() -> Void args=no-args owner=SaveManager | Unknown required path/slot/data parameters are rejected instead of guessed.
+ASSERT A.SAVE.safe-candidate                                PASS | callable=True score=275 method=SaveManager.saveToCurrentPath() -> SavedMap args=no-args owner=SaveManager
+ASSERT A.LOAD.safe-candidate                                PASS | callable=True score=450 method=SaveManager.loadWorld() -> Void args=no-args owner=SaveManager
+OBSERVED A.LOAD.counter-before                              1 | MapBox._load_counter before save/reload attempt.
+OBSERVED A.ENTITY.samples                                   kingdom=<none> city=<none> actor=<none> | Entity stale-ref evidence is optional; empty registries are valid.
+A SUMMARY: PASS=2 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0030 :: B :: SAFE SAVE / ONE-TILE MARKER
+ASSERT B.BRANCH.destructive                                 PASS | safe load plan + writable sample available
+ASSERT B.SAVE.invoke                                        PASS | INVOKED | callable=True score=275 method=SaveManager.saveToCurrentPath() -> SavedMap args=no-args owner=SaveManager return=SavedMap
+OBSERVED B.SAVE.wait                                        polls=6 quiet=6 | Waited for optional save busy flag / fallback quiet period before applying marker.
+ASSERT B.MARKER.write                                       PASS | original=30 target=31 readBack=31 writer=P:Height:Int32
+OBSERVED B.SAVE.mode                                        programmatic-save-invoked | Manual pre-save is an intentional fallback when no safe save signature is callable.
+B SUMMARY: PASS=3 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0030 :: C :: RELOAD / RESTORATION PROOF
+ASSERT C.LOAD.invoke                                        PASS | INVOKED | callable=True score=450 method=SaveManager.loadWorld() -> Void args=no-args owner=SaveManager return=<null/void>
+ASSERT C.LOAD.marker-cleared                                PASS | before=30 marker=31 after=30 | Exact pre-save Height equality is not required; WorldTile.Height can normalize/recompute on load.
+ASSERT C.LOAD.collections-live                              PASS | map=65536/65536 list=65536/65536 tile=WorldTile
+ASSERT C.LOAD.proven                                        PASS | signal=MapBox.finishingUpLoading observed=True markerCleared=True collectionsLive=True polls=9 stable=6
+OBSERVED C.LOAD.signal                                      observed=True signal=MapBox.finishingUpLoading | A WorldBox load lifecycle signal is part of the reload proof in fix1.
+OBSERVED C.LOAD.counter                                     before=1 after=2 | MapBox._load_counter is independent corroborating evidence; semantics are version-bound.
+C SUMMARY: PASS=4 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0030 :: D :: RELOAD REF TORTURE + WORLDGEN + MASS INTEGRATION
+OBSERVED D.REF.tile-classification                          REUSED_CURRENT | WorldBox may legally reuse objects across reload; identity change is not required.
+OBSERVED D.REF.collection-classification                    tilesMapSame=True tilesListSame=True | Collection reuse/replacement is observational.
+ASSERT D.REF.old-tile-safe-100                              PASS | safe=100/100 classification=reused
+ASSERT D.CURRENT.services-live                              PASS | zone=TileZone chunk=MapChunk region=MapRegion
+OBSERVED D.REF.service-classification                       zoneSame=True chunkSame=True regionSame=True | Service reference reuse after reload is evidence only.
+ASSERT D.CURRENT.managers-live                              PASS | kingdoms=KingdomManager cities=CityManager units=ActorManager
+OBSERVED D.REF.manager-classification                       kingdomsSame=True citiesSame=True unitsSame=True | Manager reuse/replacement is observational across load.
+OBSERVED D.ENTITY.oldref.actor                              ABSENT_BEFORE | Optional actor stale/reuse evidence.
+OBSERVED D.ENTITY.oldref.city                               ABSENT_BEFORE | Optional city stale/reuse evidence.
+OBSERVED D.ENTITY.oldref.kingdom                            ABSENT_BEFORE | Optional kingdom stale/reuse evidence.
+ASSERT D.STABILITY.post-load-100                            PASS | stable=100/100 loadedHeightBaseline=30 preSaveHeight=30
+ASSERT D.WORLDGEN1.invoke                                   PASS | MapBox.generateNewMap() -> Void return=<null/void>
+ASSERT D.WORLDGEN1.completed                                PASS | signal=MapBox.finishMakingWorld observed=True polls=9 stable=6 map=65536 list=65536
+OBSERVED D.WORLDGEN1.reuse                                  tilesMapSame=True tilesListSame=True firstSame=True | Identity reuse is valid; the assertion is lifecycle completion and live state, not object replacement.
+ASSERT D.WORLDGEN2.invoke                                   PASS | MapBox.generateNewMap() -> Void return=<null/void>
+ASSERT D.WORLDGEN2.completed                                PASS | signal=MapBox.finishMakingWorld observed=True polls=9 stable=6 map=65536 list=65536
+OBSERVED D.WORLDGEN2.reuse                                  tilesMapSame=True tilesListSame=True firstSame=True | Identity reuse is valid; the assertion is lifecycle completion and live state, not object replacement.
+ASSERT D.WORLDGEN.completed-2                               PASS | completed=2/2
+ASSERT D.STRESS.tile-reads                                  PASS | safe=262144/262144 expected=262144
+ASSERT D.STRESS.unique-coordinates                          PASS | unique=65536/65536
+ASSERT D.STRESS.gettile-100k                                PASS | sameRef=100000/100000
+ASSERT D.REF.original-tile-safe-after-all                   PASS | safe=100/100 after reload + 2 worldgen cycles
+ASSERT D.PW.startWar-still-patched                          PASS | beforeOwners=count=1 [fluttershy.politicalworld.politics.v1392] afterOwners=count=1 [fluttershy.politicalworld.politics.v1392]
+ASSERT D.EXTERNAL.mods-still-loaded                         PASS | PW=True CWS=True ST=True
+ASSERT D.FINAL.map-live                                     PASS | map=65536/65536 list=65536/65536
+ASSERT D.FINAL.reload-marker-proof-retained                 PASS | mutationApplied=True marker=31 postReloadHeight=30 | Final worldgen state is intentionally not compared to the marker because terrain generation may legitimately produce the same Height value.
+ASSERT D.RUNNER.single                                      PASS | livePersistentRunners=1
+D SUMMARY: PASS=18 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0030 :: FINAL MATRIX
+ASSERTIONS PASS=42 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

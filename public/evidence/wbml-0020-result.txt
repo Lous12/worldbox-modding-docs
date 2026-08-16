@@ -1,0 +1,80 @@
+WBML-0020 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0020 / 0.0.20 :: LOAD
+DESTRUCTION + OWNERSHIP LIFECYCLE READY.
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+IMPORTANT: THIS TEST DESTROYS ONE ACTOR AND ONE CITY.
+USE A DISPOSABLE WORLD WITH >=1 KINGDOM AND >=2 CITIES.
+WBML-0020 / 0.0.20 :: AUTOMATED BATCH START
+RUN TOKEN: e32111645c6f
+WBML-0020 :: P :: PREFLIGHT / SACRIFICIAL SAMPLES
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.kingdom                                       PASS | Kingdom
+ASSERT P.TYPE.city                                          PASS | City
+ASSERT P.TYPE.actor                                         PASS | Actor
+ASSERT P.MANAGER.kingdom                                    PASS | KingdomManager
+ASSERT P.MANAGER.city                                       PASS | CityManager
+ASSERT P.MANAGER.actor                                      PASS | ActorManager
+ASSERT P.SAMPLE.kingdom                                     PASS | Oreero
+ASSERT P.SAMPLE.control-city                                PASS | Nenona
+ASSERT P.SAMPLE.victim-city                                 PASS | Lyah Heon
+ASSERT P.SAMPLE.control-actor                               PASS | Enor
+ASSERT P.SAMPLE.victim-actor                                PASS | Uaau
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=13 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0020 :: A :: ACTOR DESTRUCTION / MANAGER + CITY REMOVAL
+ASSERT A.BEFORE.manager-contains-victim                     PASS | source=F:units_only_civ count=5385
+ASSERT A.BEFORE.city-contains-victim                        PASS | source=P:units count=691
+ASSERT A.BEFORE.control-distinct                            PASS | Enor
+OBSERVED A.BEFORE.victim-id                                 47354 | stored stale-reference candidate
+A SUMMARY: PASS=3 FAIL=0 SKIP=0
+A GATE: PASS
+OBSERVED A.DESTROY.actor-invocation                         INVOKED | ActorManager.destroyObject(Actor)
+WBML-0020 :: A2 :: ACTOR POST-DESTROY / STALE REFERENCE
+ASSERT A2.AFTER.manager-removed-victim                      PASS | source=F:units_only_civ count=5384
+ASSERT A2.AFTER.city-removed-victim                         PASS | source=P:units count=690
+ASSERT A2.AFTER.control-still-live                          PASS | Enor
+OBSERVED A2.STALE.actor                                     identity=<none> name=<none> | Reference object retained only for stale-reference safety research; manager membership is authoritative for live lookup.
+A2 SUMMARY: PASS=3 FAIL=0 SKIP=0
+A2 GATE: PASS
+WBML-0020 :: B :: CITY DESTRUCTION / KINGDOM + MANAGER REMOVAL
+ASSERT B.BEFORE.manager-contains-victim                     PASS | source=F:list count=29
+ASSERT B.BEFORE.kingdom-contains-victim                     PASS | source=F:cities count=26
+ASSERT B.BEFORE.control-city-distinct                       PASS | Nenona
+OBSERVED B.BEFORE.victim-id                                 2 | stored stale-reference candidate
+B SUMMARY: PASS=3 FAIL=0 SKIP=0
+B GATE: PASS
+OBSERVED B.DESTROY.city-invocation                          INVOKED | City.destroyCity()
+WBML-0020 :: B2 :: CITY POST-DESTROY / OWNERSHIP CLEANUP
+ASSERT B2.AFTER.manager-removed-victim                      PASS | source=F:list count=28
+ASSERT B2.AFTER.kingdom-removed-victim                      PASS | source=F:cities count=25
+ASSERT B2.AFTER.control-city-still-live                     PASS | Nenona
+OBSERVED B2.STALE.city                                      identity=<none> name=<none> | Reference object retained only for stale-reference safety research; manager membership is authoritative for live lookup.
+B2 SUMMARY: PASS=3 FAIL=0 SKIP=0
+B2 GATE: PASS
+WBML-0020 :: C :: OWNERSHIP / CONTROL OBJECT INTEGRITY
+ASSERT C.KINGDOM.still-registered                           PASS | source=F:list
+ASSERT C.CITY.control-still-registered                      PASS | source=F:list
+ASSERT C.ACTOR.control-still-registered                     PASS | source=F:units_only_civ
+ASSERT C.REL.control-city-kingdom                           PASS | source=F:kingdom
+ASSERT C.REL.control-actor-city                             PASS | source=F:city
+C SUMMARY: PASS=5 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0020 :: D :: STALE-REFERENCE SAFE STORAGE / 100 READS
+ASSERT D.STALE.actor-safe-100                               PASS | actual=100
+ASSERT D.STALE.city-safe-100                                PASS | actual=100
+ASSERT D.CONTROL.relationships-100                          PASS | actual=100
+ASSERT D.STALE.city-not-reintroduced                        PASS | count=28
+ASSERT D.STALE.actor-not-reintroduced                       PASS | count=5384
+D SUMMARY: PASS=5 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0020 :: FINAL MATRIX
+ASSERTIONS PASS=35 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS A2=PASS B=PASS B2=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

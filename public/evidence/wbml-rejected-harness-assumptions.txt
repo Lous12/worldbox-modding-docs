@@ -1,0 +1,416 @@
+WBML rejected harness assumptions — sanitized excerpts
+These are preserved as negative knowledge. A failed harness is not a WorldBox API failure.
+
+## WBML-0018 original classifier failure
+OBSERVED C.AUTO.F._shake_timer                              0 | System.Single
+OBSERVED C.AUTO.F._shake_vertical                           True | System.Boolean
+OBSERVED C.AUTO.F._shake_volume                             0,1 | System.Single
+OBSERVED C.AUTO.F._spells                                   SpellHolder | SpellHolder
+OBSERVED C.AUTO.F._state_adult                              True | System.Boolean
+OBSERVED C.AUTO.F._state_baby                               False | System.Boolean
+OBSERVED C.AUTO.F._state_egg                                False | System.Boolean
+OBSERVED C.AUTO.F._timeout_targets                          0,6977245 | System.Single
+OBSERVED C.AUTO.F._timestamp_augmentation_effects           0 | System.Double
+OBSERVED C.AUTO.F._traits_cache                             System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=9 | System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED C.AUTO.F._update_done                              False | System.Boolean
+OBSERVED C.AUTO.F.a                                         Actor | Actor
+OBSERVED C.AUTO.F.actor_scale                               0,1 | System.Single
+OBSERVED C.AUTO.F.ai                                        AiSystemActor | AiSystemActor
+OBSERVED C.AUTO.F.animation_container                       <null> | AnimationContainerUnit
+OBSERVED C.AUTO.F.army                                      <null> | Army
+OBSERVED C.AUTO.F.asset                                     ActorAsset | ActorAsset
+OBSERVED C.AUTO.F.ate_last_item_id                           | System.String
+OBSERVED C.AUTO.F.attack_target                             <null> | BaseSimObject
+OBSERVED C.AUTO.F.attack_timer                              -0,02 | System.Single
+OBSERVED C.AUTO.F.attackedBy                                <null> | BaseSimObject
+OBSERVED C.AUTO.F.avatar                                    <null> | UnityEngine.GameObject
+OBSERVED C.AUTO.F.b                                         <null> | Building
+OBSERVED C.AUTO.F.batch                                     BatchActors | BatchActors
+OBSERVED C.AUTO.F.beh_actor_target                          <null> | BaseSimObject
+OBSERVED C.AUTO.F.beh_book_target                           <null> | Book
+OBSERVED C.AUTO.F.beh_building_target                       Building | Building
+OBSERVED C.AUTO.F.beh_tile_target                           WorldTile | WorldTile
+OBSERVED C.AUTO.F.cached_sprite_head                        <null> | UnityEngine.Sprite
+OBSERVED C.AUTO.F.callbacks_cancel_path_movement            <null> | BaseActionActor
+OBSERVED C.AUTO.F.callbacks_landed                          BaseActionActor | BaseActionActor
+OBSERVED C.AUTO.F.callbacks_magnet_update                   BaseActionActor | BaseActionActor
+OBSERVED C.AUTO.F.callbacks_on_death                        BaseActionActor | BaseActionActor
+OBSERVED C.AUTO.F.children_pre_behaviour                    <null> | System.Collections.Generic.List`1[[ActorSimpleComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.children_special                          <null> | System.Collections.Generic.List`1[[BaseActorComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.citizen_job                               CitizenJobAsset | CitizenJobAsset
+OBSERVED C.AUTO.F.city                                      City | City
+OBSERVED C.AUTO.F.clan                                      <null> | Clan
+OBSERVED C.AUTO.F.color                                     UnityEngine.Color | UnityEngine.Color
+OBSERVED C.AUTO.F.culture                                   Culture | Culture
+OBSERVED C.AUTO.F.cur_transform_position                    UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED C.AUTO.F.current_path                              System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=1 | System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.current_path_global                       <null> | System.Collections.Generic.List`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.current_path_index                        1 | System.Int32
+OBSERVED C.AUTO.F.current_position                          UnityEngine.Vector2 | UnityEngine.Vector2
+OBSERVED C.AUTO.F.current_rotation                          UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED C.AUTO.F.current_scale                             UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED C.AUTO.F.current_shadow_position                   UnityEngine.Vector2 | UnityEngine.Vector2
+OBSERVED C.AUTO.F.current_tile                              WorldTile | WorldTile
+OBSERVED C.AUTO.F.data                                      ActorData | ActorData
+OBSERVED C.AUTO.F.decisions                                 DecisionAsset[] count=128 | DecisionAsset[]
+OBSERVED C.AUTO.F.decisions_counter                         29 | System.Int32
+OBSERVED C.AUTO.F.dict_pre_behaviour                        <null> | System.Collections.Generic.Dictionary`2[[System.Type, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[ActorSimpleComponent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED C.AUTO.F.dirty_current_tile                        False | System.Boolean
+OBSERVED C.AUTO.F.dirty_sprite_head                         True | System.Boolean
+OBSERVED C.AUTO.F.dirty_sprite_main                         True | System.Boolean
+OBSERVED C.AUTO.F.equipment                                 ActorEquipment count=0 | ActorEquipment
+OBSERVED C.AUTO.F.event_full_stats                          False | System.Boolean
+OBSERVED C.AUTO.F.exists                                    True | System.Boolean
+OBSERVED C.AUTO.F.family                                    <null> | Family
+OBSERVED C.AUTO.F.flip                                      False | System.Boolean
+OBSERVED C.AUTO.F.flip_angle                                60 | System.Single
+OBSERVED C.AUTO.F.frame_data                                <null> | AnimationFrameData
+OBSERVED C.AUTO.F.has_attack_target                         False | System.Boolean
+OBSERVED C.AUTO.F.has_tag_generate_light                    False | System.Boolean
+OBSERVED C.AUTO.F.has_tag_immunity_cold                     False | System.Boolean
+OBSERVED C.AUTO.F.hitbox_bonus_height                       0,3 | System.Single
+OBSERVED C.AUTO.F.idle_loop_sound                           <null> | ActorIdleLoopSound
+OBSERVED C.AUTO.summary                                     emitted=128 readErrors=0 limit=128 | Safe-reader v2 reads fields and zero-index properties only; it never mass-invokes arbitrary methods.
+OBSERVED C.ACTOR.id                                         5 | Best-effort Actor identity read.
+OBSERVED C.ACTOR.name                                       Stanoman | Best-effort Actor display-name read.
+OBSERVED C.ACTOR.city                                       City | source=F:city
+ASSERT C.RELATION.city-backref-actor                        FAIL | source=F:_capturing_units
+OBSERVED C.ACTOR.kingdom                                    Kingdom | source=F:kingdom
+OBSERVED C.ACTOR.species-race-candidate                     F:asset=ActorAsset | declared=ActorAsset
+OBSERVED C.ACTOR.age-candidate                              P:age=18 | declared=System.Int32
+OBSERVED C.ACTOR.life-candidate                             F:_alive=True | declared=System.Boolean
+OBSERVED C.ACTOR.traits                                     System.Collections.Generic.HashSet`1[[ActorTrait, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=2 | source=F:traits
+OBSERVED C.ACTOR.stats-candidate                            F:stats=BaseStats | declared=BaseStats
+OBSERVED C.ACTOR.profession-candidate                       F:_profession=Unit | declared=UnitProfession
+OBSERVED C.ACTOR.equipment-candidate                        F:equipment=ActorEquipment count=0 | declared=ActorEquipment
+OBSERVED C.ACTOR.tile-position-candidate                    F:current_tile=WorldTile | WorldTile type=WorldTile
+C SUMMARY: PASS=3 FAIL=1 SKIP=0
+C GATE: FAIL
+OBSERVED D.STRESS.timing                                    elapsed_ms=32 | 1000 safe Actor rediscovery + identity/name reads; machine-specific performance evidence.
+D SUMMARY: PASS=12 FAIL=0 SKIP=0
+WBML-0018 :: FINAL MATRIX
+ASSERTIONS PASS=32 FAIL=3 SKIP=0
+FINAL GATES: P=FAIL A=PASS B=FAIL C=FAIL D=PASS
+SUITE RESULT: FAIL
+
+## WBML-0024 original per-frame/full-scan generation attempt
+WORLDGEN PIPELINE READY — DESTRUCTIVE TEST.
+ASSERT P.SAMPLE.before                                      PASS | WorldTile x=0 y=0 height=166
+P SUMMARY: PASS=12 FAIL=0 SKIP=0
+WBML-0024 :: A :: WORLDGEN SURFACE / PIPELINE METHODS
+OBSERVED A.MAPBOX.type                                      MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPBOX.surface-counts                            fields=127 props=14 methods=250 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPBOX.identity-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_meta_skip:System.Boolean,F:_search_grid_ground:EpPathFinding.cs.StaticGrid,F:_tile_id:System.Int32,F:current_world_seed_id:System.Int32,F:hotkey_tabs_data:HotkeyTabsData,F:nameplate_manager:NameplateManager,F:width:System.Int32,M:GetInstanceID,M:GetScriptClassName,M:checkAnyMetaAddedRemoved,M:checkDirtyMetaObjects,M:checkMetaObjectsDestroy,M:getCachedMapMetaAsset,M:getSelectedPowerID,M:get_hideFlags,M:get_name,M:isPointerInsideMapBounds,M:set_hideFlags,M:set_name,M:updateDirtyMetaContainersAndCleanup,M:updateMetaHistory,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.owner-members                             F:city_zone_helper:CityZoneHelper,F:civilization_maker:AutoCivilization,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:checkCityZone,M:getCivWorldPopulation | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.leader-members                            F:<camera>k__BackingField:UnityEngine.Camera,F:<move_camera>k__BackingField:MoveCamera,F:<zone_camera>k__BackingField:ZoneCamera,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:IsInvoking,M:finishMakingWorld | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.population-members                        F:_unit_select_effect:UnitSelectionEffect,F:transform_units:UnityEngine.Transform,F:unit_layer:UnitLayer,F:units:ActorManager,M:<addKillAllUnits>b__162_0,M:GetComponentInChildren,M:GetComponentsInChildren,M:addKillAllUnits,M:checkDirtyUnits,M:checkEventUnitsDestroy,M:followUnit,M:getCivWorldPopulation,M:isControllingUnit | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.buildings-members                         F:buildings:BuildingManager,M:checkEventBuildingsDestroy,M:checkEventHouses,M:debugHouses,M:updateBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.territory-members                         F:<zone_camera>k__BackingField:ZoneCamera,F:_map_border:MapBorder,F:_tile_id:System.Int32,F:city_zone_helper:CityZoneHelper,F:dirty_tiles_last:System.Int32,F:projectiles:ProjectileManager,F:sim_object_zones:SimObjectsZones,F:tile_manager:TileManager,F:tilemap:WorldTilemap,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:zone_calculator:ZoneCalculator,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:GetTile,M:GetTileSimple,M:allTilesDirty,M:applyForceOnTile,M:centerCamera,M:checkCityZone,M:clearTiles,M:createTiles,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:get_zone_camera,M:highlightTilesBrush,M:locatePosition,M:redrawRenderedTile,M:redrawTiles,M:resetTiles,M:setTileDirty,M:set_zone_camera,M:updateDirtyTile,P:zone_camera:ZoneCamera | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.lifecycle-members                         F:_load_counter:System.Int32,F:on_world_loaded:System.Action,F:save_manager:SaveManager,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addLoadAutoTester>b__163_0,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:<recreateSizes>b__170_0,M:<recreateSizes>b__170_1,M:<recreateSizes>b__170_2,M:<recreateSizes>b__170_3,M:addClearWorld,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addUnloadResources,M:afterLoadEvent,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:clearArchitectMood,M:clearFrameCaches,M:clearTiles,M:clearWorld,M:createTiles,M:finishingUpLoading,M:get_destroyCancellationToken,M:preloadRenderedSprites,M:recreateSizes,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.mutation-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:quality_changer:QualityChanger,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addKillAllUnits>b__162_0,M:<addLastStep>b__141_0,M:<addLoadAutoTester>b__163_0,M:addClearWorld,M:addKillAllUnits,M:addLastStep,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addNewSystem,M:addUnloadResources,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:getCachedMapMetaAsset,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:getSelectedPowerAsset,M:get_destroyCancellationToken,M:resetRedrawTimer,M:resetTiles,M:setMapSize,M:setTileDirty,M:setZoomOrthographic,M:set_camera,M:set_enabled,M:set_hideFlags,M:set_move_camera,M:set_name,M:set_tag,M:set_useGUILayout,M:set_zone_camera,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.enumerables                               F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_sim_objects_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_systems:System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_layers:System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_modules:System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_shake_camera:UnityEngine.Transform,F:alliances:AllianceManager,F:armies:ArmyManager,F:books:BookManager,F:buildings:BuildingManager,F:cities:CityManager,F:clans:ClanManager,F:cultures:CultureManager,F:diplomacy:DiplomacyManager,F:drag_parent:UnityEngine.Transform,F:families:FamilyManager,F:items:ItemManager,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,F:languages:LanguageManager,F:list_all_sim_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:plots:PlotManager,F:projectiles:ProjectileManager,F:religions:ReligionManager,F:statuses:StatusManager,F:subspecies:SubspeciesManager,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:transform_units:UnityEngine.Transform,F:units:ActorManager,F:wars:WarManager,P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPGENERATOR.type                                MapGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPGENERATOR.surface-counts                      fields=6 props=1 methods=41 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPGENERATOR.identity-members                    F:_width:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.owner-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.leader-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.population-members                  <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.buildings-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.territory-members                   F:_tilesMap:WorldTile[,],M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:carveZone,M:fillTiles,M:scheduleUpdateTileTypes | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.lifecycle-members                   M:clear,M:createDoors,M:recreateSoilList,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.mutation-members                    M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:addMountainEdges,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.enumerables                         F:_rooms:System.Collections.Generic.List`1[[GeneratedRoom, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tilesMap:WorldTile[,] | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPBOX.generateMap                               MapBox.generateMap(String pType) -> Void | Surface only; not invoked in this suite.
+OBSERVED A.MAPBOX.recreateSizes                             MapBox.recreateSizes() -> Void | Surface only; not invoked directly in this suite.
+OBSERVED A.PIPELINE.biome-steps                             MapGenerator.tryMakeBiomeSteps(WorldTile pStartTile,BiomeAsset pBiome) -> Int32 | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.PIPELINE.cleanup-biomes                          MapGenerator.removeSmallBiomePatches(HashSetWorldTile pTiles,WorldTile pStartTile) -> Void | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.MAPGENERATOR.instance                            <not-resolved> | Instance is optional for this suite because MapBox.generateNewMap is the tested public entrypoint.
+A SUMMARY: PASS=4 FAIL=0 SKIP=0
+ASSERT B.GENERATE.invoke                                    PASS | INVOKED | MapBox.generateNewMap() -> Void return=<null/void>
+B SUMMARY: PASS=1 FAIL=0 SKIP=0
+
+## WBML-0024-fix2
+WORLDGEN PIPELINE READY — DESTRUCTIVE TEST.
+FIX2: suite coroutine runs on a DontDestroyOnLoad persistent runner.
+ASSERT P.SAMPLE.before                                      PASS | WorldTile x=0 y=0 height=175
+P SUMMARY: PASS=12 FAIL=0 SKIP=0
+WBML-0024-fix2 :: A :: WORLDGEN SURFACE / PIPELINE METHODS
+OBSERVED A.MAPBOX.type                                      MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPBOX.surface-counts                            fields=127 props=14 methods=250 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPBOX.identity-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_meta_skip:System.Boolean,F:_search_grid_ground:EpPathFinding.cs.StaticGrid,F:_tile_id:System.Int32,F:current_world_seed_id:System.Int32,F:hotkey_tabs_data:HotkeyTabsData,F:nameplate_manager:NameplateManager,F:width:System.Int32,M:GetInstanceID,M:GetScriptClassName,M:checkAnyMetaAddedRemoved,M:checkDirtyMetaObjects,M:checkMetaObjectsDestroy,M:getCachedMapMetaAsset,M:getSelectedPowerID,M:get_hideFlags,M:get_name,M:isPointerInsideMapBounds,M:set_hideFlags,M:set_name,M:updateDirtyMetaContainersAndCleanup,M:updateMetaHistory,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.owner-members                             F:city_zone_helper:CityZoneHelper,F:civilization_maker:AutoCivilization,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:checkCityZone,M:getCivWorldPopulation | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.leader-members                            F:<camera>k__BackingField:UnityEngine.Camera,F:<move_camera>k__BackingField:MoveCamera,F:<zone_camera>k__BackingField:ZoneCamera,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:IsInvoking,M:finishMakingWorld | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.population-members                        F:_unit_select_effect:UnitSelectionEffect,F:transform_units:UnityEngine.Transform,F:unit_layer:UnitLayer,F:units:ActorManager,M:<addKillAllUnits>b__162_0,M:GetComponentInChildren,M:GetComponentsInChildren,M:addKillAllUnits,M:checkDirtyUnits,M:checkEventUnitsDestroy,M:followUnit,M:getCivWorldPopulation,M:isControllingUnit | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.buildings-members                         F:buildings:BuildingManager,M:checkEventBuildingsDestroy,M:checkEventHouses,M:debugHouses,M:updateBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.territory-members                         F:<zone_camera>k__BackingField:ZoneCamera,F:_map_border:MapBorder,F:_tile_id:System.Int32,F:city_zone_helper:CityZoneHelper,F:dirty_tiles_last:System.Int32,F:projectiles:ProjectileManager,F:sim_object_zones:SimObjectsZones,F:tile_manager:TileManager,F:tilemap:WorldTilemap,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:zone_calculator:ZoneCalculator,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:GetTile,M:GetTileSimple,M:allTilesDirty,M:applyForceOnTile,M:centerCamera,M:checkCityZone,M:clearTiles,M:createTiles,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:get_zone_camera,M:highlightTilesBrush,M:locatePosition,M:redrawRenderedTile,M:redrawTiles,M:resetTiles,M:setTileDirty,M:set_zone_camera,M:updateDirtyTile,P:zone_camera:ZoneCamera | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.lifecycle-members                         F:_load_counter:System.Int32,F:on_world_loaded:System.Action,F:save_manager:SaveManager,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addLoadAutoTester>b__163_0,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:<recreateSizes>b__170_0,M:<recreateSizes>b__170_1,M:<recreateSizes>b__170_2,M:<recreateSizes>b__170_3,M:addClearWorld,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addUnloadResources,M:afterLoadEvent,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:clearArchitectMood,M:clearFrameCaches,M:clearTiles,M:clearWorld,M:createTiles,M:finishingUpLoading,M:get_destroyCancellationToken,M:preloadRenderedSprites,M:recreateSizes,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.mutation-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:quality_changer:QualityChanger,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addKillAllUnits>b__162_0,M:<addLastStep>b__141_0,M:<addLoadAutoTester>b__163_0,M:addClearWorld,M:addKillAllUnits,M:addLastStep,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addNewSystem,M:addUnloadResources,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:getCachedMapMetaAsset,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:getSelectedPowerAsset,M:get_destroyCancellationToken,M:resetRedrawTimer,M:resetTiles,M:setMapSize,M:setTileDirty,M:setZoomOrthographic,M:set_camera,M:set_enabled,M:set_hideFlags,M:set_move_camera,M:set_name,M:set_tag,M:set_useGUILayout,M:set_zone_camera,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.enumerables                               F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_sim_objects_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_systems:System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_layers:System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_modules:System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_shake_camera:UnityEngine.Transform,F:alliances:AllianceManager,F:armies:ArmyManager,F:books:BookManager,F:buildings:BuildingManager,F:cities:CityManager,F:clans:ClanManager,F:cultures:CultureManager,F:diplomacy:DiplomacyManager,F:drag_parent:UnityEngine.Transform,F:families:FamilyManager,F:items:ItemManager,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,F:languages:LanguageManager,F:list_all_sim_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:plots:PlotManager,F:projectiles:ProjectileManager,F:religions:ReligionManager,F:statuses:StatusManager,F:subspecies:SubspeciesManager,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:transform_units:UnityEngine.Transform,F:units:ActorManager,F:wars:WarManager,P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPGENERATOR.type                                MapGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPGENERATOR.surface-counts                      fields=6 props=1 methods=41 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPGENERATOR.identity-members                    F:_width:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.owner-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.leader-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.population-members                  <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.buildings-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.territory-members                   F:_tilesMap:WorldTile[,],M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:carveZone,M:fillTiles,M:scheduleUpdateTileTypes | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.lifecycle-members                   M:clear,M:createDoors,M:recreateSoilList,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.mutation-members                    M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:addMountainEdges,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.enumerables                         F:_rooms:System.Collections.Generic.List`1[[GeneratedRoom, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tilesMap:WorldTile[,] | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPBOX.generateMap                               MapBox.generateMap(String pType) -> Void | Surface only; not invoked in this suite.
+OBSERVED A.MAPBOX.recreateSizes                             MapBox.recreateSizes() -> Void | Surface only; not invoked directly in this suite.
+OBSERVED A.PIPELINE.biome-steps                             MapGenerator.tryMakeBiomeSteps(WorldTile pStartTile,BiomeAsset pBiome) -> Int32 | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.PIPELINE.cleanup-biomes                          MapGenerator.removeSmallBiomePatches(HashSetWorldTile pTiles,WorldTile pStartTile) -> Void | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.MAPGENERATOR.instance                            <not-resolved> | Instance is optional for this suite because MapBox.generateNewMap is the tested public entrypoint.
+A SUMMARY: PASS=4 FAIL=0 SKIP=0
+ASSERT B.GENERATE.invoke                                    PASS | INVOKED | MapBox.generateNewMap() -> Void return=<null/void>
+B SUMMARY: PASS=1 FAIL=0 SKIP=0
+WBML-0024-fix2 :: B2 :: WORLDGEN COMPLETION / NEW MAP IDENTITY
+ASSERT B2.GENERATE.completed                                FAIL | waitedPolls=240 stablePolls=0 source=<none> count=-1
+ASSERT B2.OLD.sample-removed                                FAIL | oldSample=WorldTile x=0 y=0 height=39 presentAfter=False
+ASSERT B2.NEW.sample                                        FAIL | null
+OBSERVED B2.COLLECTION.reference                            sameRef=False | Collection object may be replaced or reused; old WorldTile membership is the authoritative rebuild signal.
+B2 SUMMARY: PASS=0 FAIL=3 SKIP=0
+B2 GATE: FAIL
+ASSERT C.NEW.map-required                                   FAIL | post-generation tiles/sample missing
+C SUMMARY: PASS=0 FAIL=1 SKIP=0
+C GATE: FAIL
+WBML-0024-fix2 :: D :: POST-WORLDGEN STABILITY / 100+1000 READS
+ASSERT D.NEW.map-required                                   FAIL | post-generation tiles/sample missing
+D SUMMARY: PASS=0 FAIL=1 SKIP=0
+D GATE: FAIL
+WBML-0024-fix2 :: FINAL MATRIX
+ASSERTIONS PASS=17 FAIL=5 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS B2=FAIL C=FAIL D=FAIL
+SUITE RESULT: FAIL
+
+## WBML-0024-fix3
+WORLDGEN PIPELINE READY — DESTRUCTIVE TEST.
+FIX2: suite coroutine runs on a DontDestroyOnLoad persistent runner.
+ASSERT P.SAMPLE.before                                      PASS | WorldTile x=0 y=0 height=0
+P SUMMARY: PASS=12 FAIL=0 SKIP=0
+WBML-0024-fix3 :: A :: WORLDGEN SURFACE / PIPELINE METHODS
+OBSERVED A.MAPBOX.type                                      MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPBOX.surface-counts                            fields=127 props=14 methods=250 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPBOX.identity-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_meta_skip:System.Boolean,F:_search_grid_ground:EpPathFinding.cs.StaticGrid,F:_tile_id:System.Int32,F:current_world_seed_id:System.Int32,F:hotkey_tabs_data:HotkeyTabsData,F:nameplate_manager:NameplateManager,F:width:System.Int32,M:GetInstanceID,M:GetScriptClassName,M:checkAnyMetaAddedRemoved,M:checkDirtyMetaObjects,M:checkMetaObjectsDestroy,M:getCachedMapMetaAsset,M:getSelectedPowerID,M:get_hideFlags,M:get_name,M:isPointerInsideMapBounds,M:set_hideFlags,M:set_name,M:updateDirtyMetaContainersAndCleanup,M:updateMetaHistory,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.owner-members                             F:city_zone_helper:CityZoneHelper,F:civilization_maker:AutoCivilization,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:checkCityZone,M:getCivWorldPopulation | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.leader-members                            F:<camera>k__BackingField:UnityEngine.Camera,F:<move_camera>k__BackingField:MoveCamera,F:<zone_camera>k__BackingField:ZoneCamera,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:IsInvoking,M:finishMakingWorld | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.population-members                        F:_unit_select_effect:UnitSelectionEffect,F:transform_units:UnityEngine.Transform,F:unit_layer:UnitLayer,F:units:ActorManager,M:<addKillAllUnits>b__162_0,M:GetComponentInChildren,M:GetComponentsInChildren,M:addKillAllUnits,M:checkDirtyUnits,M:checkEventUnitsDestroy,M:followUnit,M:getCivWorldPopulation,M:isControllingUnit | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.buildings-members                         F:buildings:BuildingManager,M:checkEventBuildingsDestroy,M:checkEventHouses,M:debugHouses,M:updateBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.territory-members                         F:<zone_camera>k__BackingField:ZoneCamera,F:_map_border:MapBorder,F:_tile_id:System.Int32,F:city_zone_helper:CityZoneHelper,F:dirty_tiles_last:System.Int32,F:projectiles:ProjectileManager,F:sim_object_zones:SimObjectsZones,F:tile_manager:TileManager,F:tilemap:WorldTilemap,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:zone_calculator:ZoneCalculator,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:GetTile,M:GetTileSimple,M:allTilesDirty,M:applyForceOnTile,M:centerCamera,M:checkCityZone,M:clearTiles,M:createTiles,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:get_zone_camera,M:highlightTilesBrush,M:locatePosition,M:redrawRenderedTile,M:redrawTiles,M:resetTiles,M:setTileDirty,M:set_zone_camera,M:updateDirtyTile,P:zone_camera:ZoneCamera | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.lifecycle-members                         F:_load_counter:System.Int32,F:on_world_loaded:System.Action,F:save_manager:SaveManager,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addLoadAutoTester>b__163_0,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:<recreateSizes>b__170_0,M:<recreateSizes>b__170_1,M:<recreateSizes>b__170_2,M:<recreateSizes>b__170_3,M:addClearWorld,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addUnloadResources,M:afterLoadEvent,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:clearArchitectMood,M:clearFrameCaches,M:clearTiles,M:clearWorld,M:createTiles,M:finishingUpLoading,M:get_destroyCancellationToken,M:preloadRenderedSprites,M:recreateSizes,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.mutation-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:quality_changer:QualityChanger,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addKillAllUnits>b__162_0,M:<addLastStep>b__141_0,M:<addLoadAutoTester>b__163_0,M:addClearWorld,M:addKillAllUnits,M:addLastStep,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addNewSystem,M:addUnloadResources,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:getCachedMapMetaAsset,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:getSelectedPowerAsset,M:get_destroyCancellationToken,M:resetRedrawTimer,M:resetTiles,M:setMapSize,M:setTileDirty,M:setZoomOrthographic,M:set_camera,M:set_enabled,M:set_hideFlags,M:set_move_camera,M:set_name,M:set_tag,M:set_useGUILayout,M:set_zone_camera,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.enumerables                               F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_sim_objects_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_systems:System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_layers:System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_modules:System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_shake_camera:UnityEngine.Transform,F:alliances:AllianceManager,F:armies:ArmyManager,F:books:BookManager,F:buildings:BuildingManager,F:cities:CityManager,F:clans:ClanManager,F:cultures:CultureManager,F:diplomacy:DiplomacyManager,F:drag_parent:UnityEngine.Transform,F:families:FamilyManager,F:items:ItemManager,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,F:languages:LanguageManager,F:list_all_sim_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:plots:PlotManager,F:projectiles:ProjectileManager,F:religions:ReligionManager,F:statuses:StatusManager,F:subspecies:SubspeciesManager,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:transform_units:UnityEngine.Transform,F:units:ActorManager,F:wars:WarManager,P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPGENERATOR.type                                MapGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPGENERATOR.surface-counts                      fields=6 props=1 methods=41 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPGENERATOR.identity-members                    F:_width:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.owner-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.leader-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.population-members                  <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.buildings-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.territory-members                   F:_tilesMap:WorldTile[,],M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:carveZone,M:fillTiles,M:scheduleUpdateTileTypes | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.lifecycle-members                   M:clear,M:createDoors,M:recreateSoilList,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.mutation-members                    M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:addMountainEdges,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.enumerables                         F:_rooms:System.Collections.Generic.List`1[[GeneratedRoom, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tilesMap:WorldTile[,] | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPBOX.generateMap                               MapBox.generateMap(String pType) -> Void | Surface only; not invoked in this suite.
+OBSERVED A.MAPBOX.recreateSizes                             MapBox.recreateSizes() -> Void | Surface only; not invoked directly in this suite.
+OBSERVED A.PIPELINE.biome-steps                             MapGenerator.tryMakeBiomeSteps(WorldTile pStartTile,BiomeAsset pBiome) -> Int32 | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.PIPELINE.cleanup-biomes                          MapGenerator.removeSmallBiomePatches(HashSetWorldTile pTiles,WorldTile pStartTile) -> Void | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.MAPGENERATOR.instance                            <not-resolved> | Instance is optional for this suite because MapBox.generateNewMap is the tested public entrypoint.
+A SUMMARY: PASS=4 FAIL=0 SKIP=0
+ASSERT B.GENERATE.invoke                                    PASS | INVOKED | MapBox.generateNewMap() -> Void return=<null/void>
+B SUMMARY: PASS=1 FAIL=0 SKIP=0
+WBML-0024-fix3 :: B2 :: WORLDGEN COMPLETION / NEW MAP IDENTITY
+ASSERT B2.GENERATE.completed                                FAIL | waitedPolls=240 stablePolls=0 source=<none> count=-1
+ASSERT B2.OLD.sample-removed                                FAIL | oldSample=WorldTile x=0 y=0 height=0 presentAfter=False
+ASSERT B2.NEW.sample                                        FAIL | null
+OBSERVED B2.COLLECTION.reference                            sameRef=False | Collection object may be replaced or reused; old WorldTile membership is the authoritative rebuild signal.
+B2 SUMMARY: PASS=0 FAIL=3 SKIP=0
+B2 GATE: FAIL
+ASSERT C.NEW.map-required                                   FAIL | post-generation tiles/sample missing
+C SUMMARY: PASS=0 FAIL=1 SKIP=0
+C GATE: FAIL
+WBML-0024-fix3 :: D :: POST-WORLDGEN STABILITY / 100+1000 READS
+ASSERT D.NEW.map-required                                   FAIL | post-generation tiles/sample missing
+D SUMMARY: PASS=0 FAIL=1 SKIP=0
+D GATE: FAIL
+WBML-0024-fix3 :: FINAL MATRIX
+ASSERTIONS PASS=17 FAIL=5 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS B2=FAIL C=FAIL D=FAIL
+SUITE RESULT: FAIL
+
+## WBML-0024-fix4
+WORLDGEN PIPELINE READY — DESTRUCTIVE TEST.
+FIX2: suite coroutine runs on a DontDestroyOnLoad persistent runner.
+ASSERT P.SAMPLE.before                                      PASS | WorldTile x=0 y=0 height=0
+P SUMMARY: PASS=12 FAIL=0 SKIP=0
+WBML-0024-fix4 :: A :: WORLDGEN SURFACE / PIPELINE METHODS
+OBSERVED A.MAPBOX.type                                      MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPBOX.surface-counts                            fields=127 props=14 methods=250 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPBOX.identity-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_meta_skip:System.Boolean,F:_search_grid_ground:EpPathFinding.cs.StaticGrid,F:_tile_id:System.Int32,F:current_world_seed_id:System.Int32,F:hotkey_tabs_data:HotkeyTabsData,F:nameplate_manager:NameplateManager,F:width:System.Int32,M:GetInstanceID,M:GetScriptClassName,M:checkAnyMetaAddedRemoved,M:checkDirtyMetaObjects,M:checkMetaObjectsDestroy,M:getCachedMapMetaAsset,M:getSelectedPowerID,M:get_hideFlags,M:get_name,M:isPointerInsideMapBounds,M:set_hideFlags,M:set_name,M:updateDirtyMetaContainersAndCleanup,M:updateMetaHistory,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.owner-members                             F:city_zone_helper:CityZoneHelper,F:civilization_maker:AutoCivilization,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:checkCityZone,M:getCivWorldPopulation | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.leader-members                            F:<camera>k__BackingField:UnityEngine.Camera,F:<move_camera>k__BackingField:MoveCamera,F:<zone_camera>k__BackingField:ZoneCamera,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:IsInvoking,M:finishMakingWorld | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.population-members                        F:_unit_select_effect:UnitSelectionEffect,F:transform_units:UnityEngine.Transform,F:unit_layer:UnitLayer,F:units:ActorManager,M:<addKillAllUnits>b__162_0,M:GetComponentInChildren,M:GetComponentsInChildren,M:addKillAllUnits,M:checkDirtyUnits,M:checkEventUnitsDestroy,M:followUnit,M:getCivWorldPopulation,M:isControllingUnit | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.buildings-members                         F:buildings:BuildingManager,M:checkEventBuildingsDestroy,M:checkEventHouses,M:debugHouses,M:updateBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.territory-members                         F:<zone_camera>k__BackingField:ZoneCamera,F:_map_border:MapBorder,F:_tile_id:System.Int32,F:city_zone_helper:CityZoneHelper,F:dirty_tiles_last:System.Int32,F:projectiles:ProjectileManager,F:sim_object_zones:SimObjectsZones,F:tile_manager:TileManager,F:tilemap:WorldTilemap,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:zone_calculator:ZoneCalculator,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:GetTile,M:GetTileSimple,M:allTilesDirty,M:applyForceOnTile,M:centerCamera,M:checkCityZone,M:clearTiles,M:createTiles,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:get_zone_camera,M:highlightTilesBrush,M:locatePosition,M:redrawRenderedTile,M:redrawTiles,M:resetTiles,M:setTileDirty,M:set_zone_camera,M:updateDirtyTile,P:zone_camera:ZoneCamera | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.lifecycle-members                         F:_load_counter:System.Int32,F:on_world_loaded:System.Action,F:save_manager:SaveManager,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addLoadAutoTester>b__163_0,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:<recreateSizes>b__170_0,M:<recreateSizes>b__170_1,M:<recreateSizes>b__170_2,M:<recreateSizes>b__170_3,M:addClearWorld,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addUnloadResources,M:afterLoadEvent,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:clearArchitectMood,M:clearFrameCaches,M:clearTiles,M:clearWorld,M:createTiles,M:finishingUpLoading,M:get_destroyCancellationToken,M:preloadRenderedSprites,M:recreateSizes,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.mutation-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:quality_changer:QualityChanger,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addKillAllUnits>b__162_0,M:<addLastStep>b__141_0,M:<addLoadAutoTester>b__163_0,M:addClearWorld,M:addKillAllUnits,M:addLastStep,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addNewSystem,M:addUnloadResources,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:getCachedMapMetaAsset,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:getSelectedPowerAsset,M:get_destroyCancellationToken,M:resetRedrawTimer,M:resetTiles,M:setMapSize,M:setTileDirty,M:setZoomOrthographic,M:set_camera,M:set_enabled,M:set_hideFlags,M:set_move_camera,M:set_name,M:set_tag,M:set_useGUILayout,M:set_zone_camera,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.enumerables                               F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_sim_objects_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_systems:System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_layers:System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_modules:System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_shake_camera:UnityEngine.Transform,F:alliances:AllianceManager,F:armies:ArmyManager,F:books:BookManager,F:buildings:BuildingManager,F:cities:CityManager,F:clans:ClanManager,F:cultures:CultureManager,F:diplomacy:DiplomacyManager,F:drag_parent:UnityEngine.Transform,F:families:FamilyManager,F:items:ItemManager,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,F:languages:LanguageManager,F:list_all_sim_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:plots:PlotManager,F:projectiles:ProjectileManager,F:religions:ReligionManager,F:statuses:StatusManager,F:subspecies:SubspeciesManager,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:transform_units:UnityEngine.Transform,F:units:ActorManager,F:wars:WarManager,P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPGENERATOR.type                                MapGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPGENERATOR.surface-counts                      fields=6 props=1 methods=41 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPGENERATOR.identity-members                    F:_width:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.owner-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.leader-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.population-members                  <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.buildings-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.territory-members                   F:_tilesMap:WorldTile[,],M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:carveZone,M:fillTiles,M:scheduleUpdateTileTypes | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.lifecycle-members                   M:clear,M:createDoors,M:recreateSoilList,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.mutation-members                    M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:addMountainEdges,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.enumerables                         F:_rooms:System.Collections.Generic.List`1[[GeneratedRoom, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tilesMap:WorldTile[,] | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPBOX.generateMap                               MapBox.generateMap(String pType) -> Void | Surface only; not invoked in this suite.
+OBSERVED A.MAPBOX.recreateSizes                             MapBox.recreateSizes() -> Void | Surface only; not invoked directly in this suite.
+OBSERVED A.PIPELINE.biome-steps                             MapGenerator.tryMakeBiomeSteps(WorldTile pStartTile,BiomeAsset pBiome) -> Int32 | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.PIPELINE.cleanup-biomes                          MapGenerator.removeSmallBiomePatches(HashSetWorldTile pTiles,WorldTile pStartTile) -> Void | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.MAPGENERATOR.instance                            <not-resolved> | Instance is optional for this suite because MapBox.generateNewMap is the tested public entrypoint.
+A SUMMARY: PASS=4 FAIL=0 SKIP=0
+ASSERT B.GENERATE.invoke                                    PASS | INVOKED | MapBox.generateNewMap() -> Void return=<null/void>
+B SUMMARY: PASS=1 FAIL=0 SKIP=0
+WBML-0024-fix4 :: B2 :: WORLDGEN COMPLETION / NEW MAP IDENTITY
+ASSERT B2.GENERATE.completed                                FAIL | waitedPolls=240 stablePolls=0 source=<none> count=-1
+ASSERT B2.OLD.sample-removed                                FAIL | oldSample=WorldTile x=0 y=0 height=0 presentAfter=False
+ASSERT B2.NEW.sample                                        FAIL | null
+OBSERVED B2.COLLECTION.reference                            sameRef=False | Collection object may be replaced or reused; old WorldTile membership is the authoritative rebuild signal.
+B2 SUMMARY: PASS=0 FAIL=3 SKIP=0
+B2 GATE: FAIL
+ASSERT C.NEW.map-required                                   FAIL | post-generation tiles/sample missing
+C SUMMARY: PASS=0 FAIL=1 SKIP=0
+C GATE: FAIL
+WBML-0024-fix4 :: D :: POST-WORLDGEN STABILITY / 100+1000 READS
+ASSERT D.NEW.map-required                                   FAIL | post-generation tiles/sample missing
+D SUMMARY: PASS=0 FAIL=1 SKIP=0
+D GATE: FAIL
+WBML-0024-fix4 :: FINAL MATRIX
+ASSERTIONS PASS=17 FAIL=5 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS B2=FAIL C=FAIL D=FAIL
+SUITE RESULT: FAIL
+
+## WBML-0024-fix5
+WORLDGEN PIPELINE READY — DESTRUCTIVE TEST.
+FIX2: suite coroutine runs on a DontDestroyOnLoad persistent runner.
+ASSERT P.SAMPLE.before                                      PASS | WorldTile x=0 y=0 height=0
+P SUMMARY: PASS=12 FAIL=0 SKIP=0
+WBML-0024-fix5 :: A :: WORLDGEN SURFACE / PIPELINE METHODS
+OBSERVED A.MAPBOX.type                                      MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPBOX.surface-counts                            fields=127 props=14 methods=250 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPBOX.identity-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_meta_skip:System.Boolean,F:_search_grid_ground:EpPathFinding.cs.StaticGrid,F:_tile_id:System.Int32,F:current_world_seed_id:System.Int32,F:hotkey_tabs_data:HotkeyTabsData,F:nameplate_manager:NameplateManager,F:width:System.Int32,M:GetInstanceID,M:GetScriptClassName,M:checkAnyMetaAddedRemoved,M:checkDirtyMetaObjects,M:checkMetaObjectsDestroy,M:getCachedMapMetaAsset,M:getSelectedPowerID,M:get_hideFlags,M:get_name,M:isPointerInsideMapBounds,M:set_hideFlags,M:set_name,M:updateDirtyMetaContainersAndCleanup,M:updateMetaHistory,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.owner-members                             F:city_zone_helper:CityZoneHelper,F:civilization_maker:AutoCivilization,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:checkCityZone,M:getCivWorldPopulation | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.leader-members                            F:<camera>k__BackingField:UnityEngine.Camera,F:<move_camera>k__BackingField:MoveCamera,F:<zone_camera>k__BackingField:ZoneCamera,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:IsInvoking,M:finishMakingWorld | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.population-members                        F:_unit_select_effect:UnitSelectionEffect,F:transform_units:UnityEngine.Transform,F:unit_layer:UnitLayer,F:units:ActorManager,M:<addKillAllUnits>b__162_0,M:GetComponentInChildren,M:GetComponentsInChildren,M:addKillAllUnits,M:checkDirtyUnits,M:checkEventUnitsDestroy,M:followUnit,M:getCivWorldPopulation,M:isControllingUnit | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.buildings-members                         F:buildings:BuildingManager,M:checkEventBuildingsDestroy,M:checkEventHouses,M:debugHouses,M:updateBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.territory-members                         F:<zone_camera>k__BackingField:ZoneCamera,F:_map_border:MapBorder,F:_tile_id:System.Int32,F:city_zone_helper:CityZoneHelper,F:dirty_tiles_last:System.Int32,F:projectiles:ProjectileManager,F:sim_object_zones:SimObjectsZones,F:tile_manager:TileManager,F:tilemap:WorldTilemap,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:zone_calculator:ZoneCalculator,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:GetTile,M:GetTileSimple,M:allTilesDirty,M:applyForceOnTile,M:centerCamera,M:checkCityZone,M:clearTiles,M:createTiles,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:get_zone_camera,M:highlightTilesBrush,M:locatePosition,M:redrawRenderedTile,M:redrawTiles,M:resetTiles,M:setTileDirty,M:set_zone_camera,M:updateDirtyTile,P:zone_camera:ZoneCamera | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.lifecycle-members                         F:_load_counter:System.Int32,F:on_world_loaded:System.Action,F:save_manager:SaveManager,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addLoadAutoTester>b__163_0,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:<recreateSizes>b__170_0,M:<recreateSizes>b__170_1,M:<recreateSizes>b__170_2,M:<recreateSizes>b__170_3,M:addClearWorld,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addUnloadResources,M:afterLoadEvent,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:clearArchitectMood,M:clearFrameCaches,M:clearTiles,M:clearWorld,M:createTiles,M:finishingUpLoading,M:get_destroyCancellationToken,M:preloadRenderedSprites,M:recreateSizes,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.mutation-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:quality_changer:QualityChanger,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addKillAllUnits>b__162_0,M:<addLastStep>b__141_0,M:<addLoadAutoTester>b__163_0,M:addClearWorld,M:addKillAllUnits,M:addLastStep,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addNewSystem,M:addUnloadResources,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:getCachedMapMetaAsset,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:getSelectedPowerAsset,M:get_destroyCancellationToken,M:resetRedrawTimer,M:resetTiles,M:setMapSize,M:setTileDirty,M:setZoomOrthographic,M:set_camera,M:set_enabled,M:set_hideFlags,M:set_move_camera,M:set_name,M:set_tag,M:set_useGUILayout,M:set_zone_camera,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.enumerables                               F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_sim_objects_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_systems:System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_layers:System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_modules:System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_shake_camera:UnityEngine.Transform,F:alliances:AllianceManager,F:armies:ArmyManager,F:books:BookManager,F:buildings:BuildingManager,F:cities:CityManager,F:clans:ClanManager,F:cultures:CultureManager,F:diplomacy:DiplomacyManager,F:drag_parent:UnityEngine.Transform,F:families:FamilyManager,F:items:ItemManager,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,F:languages:LanguageManager,F:list_all_sim_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:plots:PlotManager,F:projectiles:ProjectileManager,F:religions:ReligionManager,F:statuses:StatusManager,F:subspecies:SubspeciesManager,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:transform_units:UnityEngine.Transform,F:units:ActorManager,F:wars:WarManager,P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPGENERATOR.type                                MapGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPGENERATOR.surface-counts                      fields=6 props=1 methods=41 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPGENERATOR.identity-members                    F:_width:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.owner-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.leader-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.population-members                  <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.buildings-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.territory-members                   F:_tilesMap:WorldTile[,],M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:carveZone,M:fillTiles,M:scheduleUpdateTileTypes | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.lifecycle-members                   M:clear,M:createDoors,M:recreateSoilList,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.mutation-members                    M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:addMountainEdges,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.enumerables                         F:_rooms:System.Collections.Generic.List`1[[GeneratedRoom, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tilesMap:WorldTile[,] | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPBOX.generateMap                               MapBox.generateMap(String pType) -> Void | Surface only; not invoked in this suite.
+OBSERVED A.MAPBOX.recreateSizes                             MapBox.recreateSizes() -> Void | Surface only; not invoked directly in this suite.
+OBSERVED A.PIPELINE.biome-steps                             MapGenerator.tryMakeBiomeSteps(WorldTile pStartTile,BiomeAsset pBiome) -> Int32 | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.PIPELINE.cleanup-biomes                          MapGenerator.removeSmallBiomePatches(HashSetWorldTile pTiles,WorldTile pStartTile) -> Void | Surface only; parameterized pipeline helper, not invoked standalone.
+OBSERVED A.MAPGENERATOR.instance                            <not-resolved> | Instance is optional for this suite because MapBox.generateNewMap is the tested public entrypoint.
+A SUMMARY: PASS=4 FAIL=0 SKIP=0
+ASSERT B.GENERATE.invoke                                    PASS | INVOKED | MapBox.generateNewMap() -> Void return=<null/void>
+B SUMMARY: PASS=1 FAIL=0 SKIP=0
+WBML-0024-fix5 :: B2 :: WORLDGEN COMPLETION / NEW MAP IDENTITY
+OBSERVED B2.WORLD-LOADED.callback                           fired=False source=<none> count=-1 | MapBox.on_world_loaded capture is primary evidence in fix5; live-object discovery remains fallback.
+ASSERT B2.GENERATE.completed                                FAIL | waitedPolls=240 stablePolls=0 source=<none> count=-1
+ASSERT B2.OLD.sample-removed                                FAIL | oldSample=WorldTile x=0 y=0 height=0 presentAfter=False
+ASSERT B2.NEW.sample                                        FAIL | null
+OBSERVED B2.COLLECTION.reference                            sameRef=False | Collection object may be replaced or reused; old WorldTile membership is the authoritative rebuild signal.
+B2 SUMMARY: PASS=0 FAIL=3 SKIP=0
+B2 GATE: FAIL
+ASSERT C.NEW.map-required                                   FAIL | post-generation tiles/sample missing
+C SUMMARY: PASS=0 FAIL=1 SKIP=0
+C GATE: FAIL
+WBML-0024-fix5 :: D :: POST-WORLDGEN STABILITY / 100+1000 READS
+ASSERT D.NEW.map-required                                   FAIL | post-generation tiles/sample missing
+D SUMMARY: PASS=0 FAIL=1 SKIP=0
+D GATE: FAIL
+WBML-0024-fix5 :: FINAL MATRIX
+ASSERTIONS PASS=17 FAIL=5 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS B2=FAIL C=FAIL D=FAIL
+SUITE RESULT: FAIL
+
+## WBML-0028 raw assembly-count failure
+NO WORLD MUTATION. NO WORLDGEN. NO DESTRUCTIVE CALLS.
+P SUMMARY: PASS=13 FAIL=0 SKIP=0
+WBML-0028 :: A :: LOADED MOD / ASSEMBLY COLLISION SURFACE
+ASSERT A.ASSEMBLIES.enumerated                              PASS | loadedAssemblies=180
+OBSERVED A.EXTERNAL.PoliticalWorld                          found=True asm=1 types=226 sample=asm:LOUS12_POLITICALWORLD | type:Lous12.PoliticalWorld.Main | type:Lous12.PoliticalWorld.PoliticalWorldAPI | type:Lous12.PoliticalWorld.Main+PendingWarDeclaration | type:Lous12.PoliticalWorld.Main+PendingDiplomaticCrisis | type:Lous12.PoliticalWorld.Main+ActiveWarSimulation | Evidence comes from normalized assembly names and loaded type full names.
+OBSERVED A.EXTERNAL.CustomWorldsize                         found=True asm=1 types=10 sample=asm:HUMANITYEVOLVED_CUSTOM_WORLDSIZE | type:CustomWorldsize.CustomWorldsizeMod | type:CustomWorldsize.CustomWorldsizePanel | type:CustomWorldsize.CustomWorldsizeSelfTest | type:CustomWorldsize.CustomWorldsizeState | type:CustomWorldsize.StartCustomGenerationPatch | Evidence comes from normalized assembly names and loaded type full names.
+OBSERVED A.EXTERNAL.ScenarioTools                           found=True asm=1 types=12 sample=asm:LOUS12_SCENARIOTOOLS | type:Lous12.ScenarioTools.Main | type:Lous12.ScenarioTools.ScenarioToolsWindow | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c__DisplayClass12_0 | type:Lous12.ScenarioTools.ScenarioToolsWindow+<>c__DisplayClass13_0 | Evidence comes from normalized assembly names and loaded type full names.
+OBSERVED A.WBML.assembly                                    LOUS12_WORLDBOX_MODDING_LAB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Current suite assembly identity.
+A SUMMARY: PASS=9 FAIL=0 SKIP=0
+OBSERVED B.HARMONY.owners                                   count=3 sample=wbom.nml | fluttershy.politicalworld.politics.v1392 | humanityevolved.custom_worldsize | Owner IDs are observational because naming conventions vary by mod.
+OBSERVED B.HARMONY.sample-methods                           count=24 sample=LocalizedTextManager.setLanguage(String pLanguage) -> Void | Resources.LoadAll(String path,Type systemTypeInstance) -> Object[] | Resources.Load(String path,Type systemTypeInstance) -> Object | RuntimeManager.Update() -> Void | MusicBox.playSound(String pSoundPath,Single pX,Single pY,Boolean pGameViewOnly,Boolean pVisibleOnly) -> Void | MusicBox.playDrawingSound(String pSoundPath,Single pX,Single pY) -> Void | MapBox.clearWorld() -> Void | Actor.updateStats() -> Void | First patched methods from the loaded runtime.
+B SUMMARY: PASS=6 FAIL=0 SKIP=0
+C SUMMARY: PASS=6 FAIL=0 SKIP=0
+ASSERT D.POST.assembly-count                                FAIL | before=180 after=183
+D SUMMARY: PASS=8 FAIL=1 SKIP=0
+D GATE: FAIL
+WBML-0028 :: FINAL MATRIX
+ASSERTIONS PASS=42 FAIL=1 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=FAIL
+SUITE RESULT: FAIL
+
+## WBML-0029 exact-Height reload proof failure
+TEST: SaveManager discovery -> optional safe save -> 1-tile height marker -> reload -> stale/reuse reference torture.
+ASSERT P.SAMPLE.height-writable                             PASS | P:Height:Int32
+OBSERVED P.LOAD.signal-hook                                 installed=True | patched=2 afterLoadEvent=MapBox.afterLoadEvent() -> Void finishingUpLoading=MapBox.finishingUpLoading() -> Void
+P SUMMARY: PASS=10 FAIL=0 SKIP=0
+OBSERVED A.SAVEMANAGER.type                                 SaveManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.SAVEMANAGER.surface-counts                       fields=18 props=11 methods=172 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.SAVEMANAGER.identity-members                     F:_tile_id_main:System.String,F:_tile_id_top:System.String,F:currentWorkshopMapData:WorkshopMapData,F:data:SavedMap,F:name_main_data:System.String,F:name_main_data_non_zip:System.String,F:name_main_data_old:System.String,F:name_meta_data:System.String,F:name_png_preview_main:System.String,F:name_png_preview_small:System.String,F:name_stats_data:System.String,F:persistentDataPath:System.String,M:GetInstanceID,M:GetScriptClassName,M:copyDataToClipboard,M:currentMetaExists,M:generateMetaPath,M:getCurrentMeta,M:getMetaFor,M:getMetaSlotPath,M:get_hideFlags,M:get_name,M:loadData,M:saveMapData,M:saveMetaData,M:saveMetaIn,M:setCurrentPathAndId,M:set_hideFlags,M:set_name,M:slotMetaExists,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.owner-members                        M:loadCivs02,M:loadKingdoms | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.leader-members                       M:IsInvoking,M:loadKingdoms,M:loadLeaders | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.population-members                   M:GetComponentInChildren,M:GetComponentsInChildren | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.buildings-members                    M:loadBuildings,M:setHomeBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.territory-members                    F:_tile_id_main:System.String,F:_tile_id_top:System.String,M:convertOldTilesToNewOnes,M:loadAncientTiles,M:loadTileArray,M:loadTiles | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.lifecycle-members                    F:_loading_animation_active:System.Boolean,F:autosaves_base:System.String,F:currentSavePath:System.String,F:saveslot_base:System.String,M:checkWorldLawsLoad,M:clearCurrentSelectedWorld,M:clickSaveSlot,M:currentWorldToSavedMap,M:deleteCurrentSave,M:deleteSavePath,M:doesSaveExist,M:generateAutosavesPath,M:getSavePath,M:getSlotSavePath,M:get_destroyCancellationToken,M:isLoadingSaveAnimationActive,M:loadActorLovers,M:loadActors,M:loadActorsOld,M:loadAlliances,M:loadAncientTiles,M:loadArmies,M:loadArmyCaptain,M:loadBoatStates,M:loadBooks,M:loadBuildings,M:loadCities,M:loadCivs02,M:loadClans,M:loadConway,M:loadCultures,M:loadData,M:loadDiplomacy,M:loadFamilies,M:loadFire,M:loadFrozen,M:loadItems,M:loadKingdoms,M:loadLanguages,M:loadLeaders,M:loadMapFromBytes,M:loadMapFromResources,M:loadPlotAuthors,M:loadPlots,M:loadReligions,M:loadStatsFrom,M:loadSubspecies,M:loadTileArray,M:loadTiles,M:loadWars,M:loadWorld,M:prepareLoading,M:saveImagePreview,M:saveMapData,M:saveMetaData,M:saveMetaIn,M:saveStatsIn,M:saveToCurrentPath,M:saveWorldToDirectory,M:startLoadSlot,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.mutation-members                     M:get__settings,M:get_destroyCancellationToken,M:loadData,M:loadDiplomacy,M:setCurrentPath,M:setCurrentPathAndId,M:setCurrentSlot,M:setHomeBuildings,M:set_enabled,M:set_hideFlags,M:set_name,M:set_tag,M:set_useGUILayout,P:_settings:Newtonsoft.Json.JsonSerializerSettings,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.SAVEMANAGER.enumerables                          P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.SAVE.surface                                     SaveManager.clickSaveSlot() -> Void | SaveManager.saveToCurrentPath() -> SavedMap | SaveManager.saveWorldToDirectory(String pFolder,Boolean pCompress=?,Boolean pCheckFolder=?) -> SavedMap | SaveManager.currentWorldToSavedMap() -> SavedMap | SaveManager.deleteSavePath(String pPath) -> Void | SaveManager.deleteCurrentSave() -> Void | SaveManager.saveMapData(String pFolder,Boolean pCompress=?) -> SavedMap | SaveManager.saveMetaData(MapMetaData pMetaData,String pPath) -> Void | SaveManager.saveMetaIn(String pFolder,MapMetaData pMetaData) -> Void | SaveManager.saveStatsIn(String pFolder) -> Void | SaveManager.doesSaveExist(String pFolder) -> Boolean | SaveManager.getSavePath(String pFolder) -> String | SaveManager.saveImagePreview(String pFolder) -> Void | SaveManager.getSlotSavePath(Int32 pSlot) -> String | SaveManager.generateAutosavesPath(String pFolder=?) -> String | SaveManager.isLoadingSaveAnimationActive() -> Boolean | Save-like methods are listed; nothing is invoked by this observation.
+OBSERVED A.LOAD.surface                                     SaveManager.loadStatsFrom(String pFolder) -> Boolean | SaveManager.loadWorld() -> Void | SaveManager.loadWorld(String pPath,Boolean pLoadWorkshop=?) -> Void | SaveManager.loadMapFromResources(String pPath) -> Void | SaveManager.loadMapFromBytes(Byte[] pMapData) -> Void | SaveManager.startLoadSlot() -> Void | SaveManager.prepareLoading() -> Void | SaveManager.loadTiles(String pString) -> Void | SaveManager.loadTileArray(SavedMap pData) -> Void | SaveManager.loadConway(List`1 conv0,List`1 conv1) -> Void | SaveManager.loadFrozen(List`1 pTileList) -> Void | SaveManager.loadFire(List`1 pTileList) -> Void | SaveManager.loadData(SavedMap pData,String pPath=?) -> Void | SaveManager.checkWorldLawsLoad() -> Void | SaveManager.loadBoatStates() -> Void | SaveManager.loadDiplomacy() -> Void | SaveManager.loadLeaders() -> Void | SaveManager.loadCivs02() -> Void | SaveManager.loadBuildings() -> Void | SaveManager.loadActors() -> Void | SaveManager.loadPlotAuthors() -> Void | SaveManager.loadActorLovers() -> Void | SaveManager.loadActorsOld(Int32 startIndex=?,Int32 pAmount=?) -> Void | SaveManager.loadCities() -> Void | SaveManager.loadWars() -> Void | SaveManager.loadPlots() -> Void | SaveManager.loadAlliances() -> Void | SaveManager.loadClans() -> Void | SaveManager.loadKingdoms() -> Void | SaveManager.loadCultures() -> Void | SaveManager.loadBooks() -> Void | SaveManager.loadSubspecies() -> Void | SaveManager.loadLanguages() -> Void | SaveManager.loadReligions() -> Void | SaveManager.loadItems() -> Void | SaveManager.loadFamilies() -> Void | SaveManager.loadArmies() -> Void | SaveManager.loadArmyCaptain() -> Void | SaveManager.loadAncientTiles() -> Void | SaveManager.isLoadingSaveAnimationActive() -> Boolean | Load-like methods are listed; nothing is invoked by this observation.
+OBSERVED A.SAVE.selected                                    callable=True score=275 method=SaveManager.saveToCurrentPath() -> SavedMap args=no-args owner=SaveManager | Only zero-argument or truly optional/default-argument methods are considered callable in 0.0.29.
+OBSERVED A.LOAD.selected                                    callable=True score=450 method=SaveManager.loadWorld() -> Void args=no-args owner=SaveManager | Unknown required path/slot/data parameters are rejected instead of guessed.
+ASSERT A.LOAD.safe-candidate                                PASS | callable=True score=450 method=SaveManager.loadWorld() -> Void args=no-args owner=SaveManager
+OBSERVED A.LOAD.counter-before                              0 | MapBox._load_counter before save/reload attempt.
+OBSERVED A.ENTITY.samples                                   kingdom=<none> city=<none> actor=<none> | Entity stale-ref evidence is optional; empty registries are valid.
+A SUMMARY: PASS=2 FAIL=0 SKIP=0
+OBSERVED B.SAVE.wait                                        polls=6 quiet=6 | Waited for optional save busy flag / fallback quiet period before applying marker.
+OBSERVED B.SAVE.mode                                        programmatic-save-invoked | Manual pre-save is an intentional fallback when no safe save signature is callable.
+B SUMMARY: PASS=3 FAIL=0 SKIP=0
+ASSERT C.LOAD.invoke                                        PASS | INVOKED | callable=True score=450 method=SaveManager.loadWorld() -> Void args=no-args owner=SaveManager return=<null/void>
+ASSERT C.LOAD.restored-marker                               FAIL | before=1 marker=2 after=0 polls=240 stable=0
+ASSERT C.LOAD.collections-live                              PASS | map=65536/65536 list=65536/65536 tile=WorldTile
+OBSERVED C.LOAD.signal                                      observed=True signal=MapBox.finishingUpLoading | Marker restoration is authoritative proof even if a particular callback is not emitted.
+OBSERVED C.LOAD.counter                                     before=0 after=1 | MapBox._load_counter is evidence only; semantics are version-bound.
+C SUMMARY: PASS=2 FAIL=1 SKIP=0
+C GATE: FAIL
+OBSERVED D.CLEANUP.best-effort                              restoredOriginalHeight=True | Only used when reload proof failed, to avoid leaving the disposable session marker behind.
+ASSERT D.FINAL.marker-cleared                               PASS | mutationApplied=True finalHeight=1 expected=1
+D SUMMARY: PASS=3 FAIL=0 SKIP=2
+WBML-0029 :: FINAL MATRIX
+ASSERTIONS PASS=20 FAIL=1 SKIP=2
+FINAL GATES: P=PASS A=PASS B=PASS C=FAIL D=PASS
+SUITE RESULT: FAIL
+

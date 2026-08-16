@@ -1,0 +1,60 @@
+WBML-0100 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0100 / 0.1.0 :: LOAD
+FIRST RESEARCH BASELINE READY — READ-ONLY.
+CLOSED SUITES ARE NOT RERUN. F6 performs only a lightweight baseline/runtime audit.
+KNOWLEDGE: BASELINE.md + baseline.json + CLOSED_SUITES.md + KNOWN_PITFALLS.md.
+TARGET BASELINE: WorldBox 0.51.2 build 719 / NML 1.2.0.1 / Unity 2022.3.60f1 / ResearchEngine v2.1.1.
+F6=RUN BASELINE AUDIT
+WBML-0100 / 0.1.0 :: BASELINE AUDIT START
+RUN TOKEN: bcdde0ce74bb
+WBML-0100 :: P :: BASELINE FINGERPRINT / LIVE RUNTIME
+ASSERT P.WORLDBOX.baseline                                  PASS | expected=0.51.2 actual=0.51.2
+ASSERT P.UNITY.baseline                                     PASS | expected=2022.3.60f1 actual=2022.3.60f1
+ASSERT P.NML.baseline                                       PASS | expected=1.2.0.1 actual=1.2.0.1
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.worldtile                                     PASS | WorldTile
+ASSERT P.TYPE.savemanager                                   PASS | SaveManager
+ASSERT P.SINGLETON.mapbox                                   PASS | MapBox
+ASSERT P.TILES.live                                         PASS | map=65536 list=65536 mapRank=2
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=9 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0100 :: A :: CROSS-MOD BASELINE / PATCH PRESENCE
+ASSERT A.PW.loaded                                          PASS | Lous12.PoliticalWorld.Main
+ASSERT A.CWS.loaded                                         PASS | CustomWorldsize.CustomWorldsizeMod
+ASSERT A.SCENARIO.loaded                                    PASS | Lous12.ScenarioTools.Main
+ASSERT A.PW.startWar-patched                                PASS | method=DiplomacyManager.startWar(Kingdom pAttacker,Kingdom pDefender,WarTypeAsset pAsset,Boolean pLog) -> War owners=count=1 [fluttershy.politicalworld.politics.v1392]
+OBSERVED A.RUNTIME.map-size                                 256x256 count=65536 | Map shape is observational; Custom Worldsize can legitimately change it.
+A SUMMARY: PASS=4 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0100 :: B :: FIRST RESEARCH BASELINE CATALOG
+ASSERT B.CATALOG.baseline-file                              PASS | BASELINE.md
+ASSERT B.CATALOG.json-file                                  PASS | baseline.json
+ASSERT B.CATALOG.closed-suites                              PASS | CLOSED_SUITES.md
+ASSERT B.CATALOG.pitfalls                                   PASS | KNOWN_PITFALLS.md
+OBSERVED B.CATALOG.verified                                 31 | Runtime/API facts supported by completed WBML evidence.
+OBSERVED B.CATALOG.observed                                 10 | Version/environment-bound observations that are not promoted to universal contracts.
+OBSERVED B.CATALOG.failed-assumptions                       6 | Rejected methodological assumptions retained as negative knowledge.
+OBSERVED B.CATALOG.unsafe                                   4 | Patterns/actions explicitly marked unsafe or disposable-world-only.
+OBSERVED B.CATALOG.unknown                                  6 | Open questions intentionally not guessed or retested here.
+B SUMMARY: PASS=4 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0100 :: C :: BASELINE POLICY / NO CLOSED-SUITE RERUN
+ASSERT C.POLICY.read-only                                   PASS | 0.1.0 performs no world mutation, save/load, worldgen, destruction, or stress loop.
+ASSERT C.POLICY.closed-suites-preserved                     PASS | 0.0.1–0.0.30 evidence is cataloged; closed suites are not rerun by this baseline audit.
+OBSERVED C.OPEN.world-isolation-tail                        UNKNOWN | 0.0.2 final return-to-World-B identity/signature tail remains unresolved.
+OBSERVED C.OPEN.persistence-unsafe-branch                   UNKNOWN | 0.0.3 optional unsafe branch remains intentionally unexecuted.
+OBSERVED C.OPEN.ui-escape                                   UNKNOWN | 0.0.9 automated suite is green; manual Escape gate remains pending.
+OBSERVED C.OPEN.entity-load-stale                           UNKNOWN | Kingdom/City/Actor stale-vs-reuse across reload was not observed because registries were empty in the torture runs.
+C SUMMARY: PASS=2 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0100 :: FINAL MATRIX
+ASSERTIONS PASS=19 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+BASELINE AUDIT COMPLETE. Closed suites were not rerun.

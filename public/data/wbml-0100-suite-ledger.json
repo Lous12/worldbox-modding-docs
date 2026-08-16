@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "baseline": "WBML 0.1.0",
+  "suites": [
+    {
+      "version": "0.0.1",
+      "title": "Addon Data Save/Load Probe",
+      "verdict": "CLOSED PASS",
+      "detail": "existing evidence"
+    },
+    {
+      "version": "0.0.2",
+      "title": "World Isolation Probe",
+      "verdict": "OPEN TAIL",
+      "detail": "final return-to-World-B identity/signature tail remains unresolved in 0.1.0 baseline"
+    },
+    {
+      "version": "0.0.3",
+      "title": "Persistence & Party Lifecycle",
+      "verdict": "PARTIAL PASS",
+      "detail": "119 / 0 / 1"
+    },
+    {
+      "version": "0.0.4",
+      "title": "Event Bus",
+      "verdict": "PASS",
+      "detail": "68 / 0 / 0"
+    },
+    {
+      "version": "0.0.5",
+      "title": "Actions / Conditions / Effects",
+      "verdict": "PARTIAL PASS",
+      "detail": "90 / 0 / 3"
+    },
+    {
+      "version": "0.0.6-fix1",
+      "title": "Automated Lifecycle / Regression Runner",
+      "verdict": "PARTIAL PASS",
+      "detail": "36 / 0 / 2"
+    },
+    {
+      "version": "0.0.7",
+      "title": "Reflection + Harmony AccessTools",
+      "verdict": "PASS",
+      "detail": "54 / 0 / 0"
+    },
+    {
+      "version": "0.0.8",
+      "title": "Localization / LM",
+      "verdict": "PASS",
+      "detail": "51 / 0 / 0"
+    },
+    {
+      "version": "0.0.9-fix3",
+      "title": "UI Infrastructure",
+      "verdict": "AUTOMATED PASS",
+      "detail": "126 / 0 / 0; manual Escape gate pending"
+    },
+    {
+      "version": "0.0.10",
+      "title": "Diagnostics / Logging / Reports",
+      "verdict": "PASS",
+      "detail": "33 / 0 / 0"
+    },
+    {
+      "version": "0.0.11",
+      "title": "GameObject / Transform",
+      "verdict": "PASS",
+      "detail": "46 / 0 / 0"
+    },
+    {
+      "version": "0.0.12-fix1",
+      "title": "AssetManager / AssetLibrary / Registry / Lookup",
+      "verdict": "PASS",
+      "detail": "33 / 0 / 0"
+    },
+    {
+      "version": "0.0.13-fix1",
+      "title": "Ownership / Parent–Child Lifecycle",
+      "verdict": "PASS",
+      "detail": "46 / 0 / 0"
+    },
+    {
+      "version": "0.0.14",
+      "title": "Snapshot / Mutate / Restore / Transactions",
+      "verdict": "PASS",
+      "detail": "49 / 0 / 0"
+    },
+    {
+      "version": "0.0.15",
+      "title": "Unity Fake Null / Stale References / Destroy",
+      "verdict": "PASS",
+      "detail": "37 / 0 / 0"
+    },
+    {
+      "version": "0.0.16",
+      "title": "Kingdom API Basics",
+      "verdict": "PASS",
+      "detail": "24 / 0 / 0"
+    },
+    {
+      "version": "0.0.17",
+      "title": "City API",
+      "verdict": "PASS",
+      "detail": "29 / 0 / 0"
+    },
+    {
+      "version": "0.0.18-fix1",
+      "title": "Actor API",
+      "verdict": "PASS",
+      "detail": "35 / 0 / 0"
+    },
+    {
+      "version": "0.0.19",
+      "title": "Kingdom↔City↔Actor Relationships / Liveness",
+      "verdict": "PASS",
+      "detail": "26 / 0 / 0"
+    },
+    {
+      "version": "0.0.20",
+      "title": "Destruction & Ownership Lifecycle",
+      "verdict": "PASS",
+      "detail": "35 / 0 / 0"
+    },
+    {
+      "version": "0.0.21",
+      "title": "WorldTile API",
+      "verdict": "PASS",
+      "detail": "25 / 0 / 0"
+    },
+    {
+      "version": "0.0.22",
+      "title": "Terrain / Biome API",
+      "verdict": "PASS",
+      "detail": "30 / 0 / 0"
+    },
+    {
+      "version": "0.0.23",
+      "title": "World State / Map Services",
+      "verdict": "PASS",
+      "detail": "28 / 0 / 0"
+    },
+    {
+      "version": "0.0.24-fix6",
+      "title": "Worldgen Pipeline",
+      "verdict": "PASS",
+      "detail": "36 / 0 / 0"
+    },
+    {
+      "version": "0.0.25-fix1",
+      "title": "Worldgen Edge Cases",
+      "verdict": "PASS",
+      "detail": "44 / 0 / 0"
+    },
+    {
+      "version": "0.0.26",
+      "title": "Performance",
+      "verdict": "PASS",
+      "detail": "37 / 0 / 0"
+    },
+    {
+      "version": "0.0.27",
+      "title": "Mass Stress",
+      "verdict": "PASS",
+      "detail": "44 / 0 / 0"
+    },
+    {
+      "version": "0.0.28-fix1",
+      "title": "Cross-Mod Conflicts",
+      "verdict": "PASS",
+      "detail": "45 / 0 / 0"
+    },
+    {
+      "version": "0.0.29-fix1",
+      "title": "Save/Reload Stale-Ref Torture",
+      "verdict": "PASS",
+      "detail": "26 / 0 / 0"
+    },
+    {
+      "version": "0.0.30",
+      "title": "Full Integration Torture",
+      "verdict": "PASS",
+      "detail": "42 / 0 / 0"
+    },
+    {
+      "version": "0.1.0",
+      "title": "First Research Baseline Audit",
+      "verdict": "PASS",
+      "detail": "19 / 0 / 0"
+    }
+  ]
+}

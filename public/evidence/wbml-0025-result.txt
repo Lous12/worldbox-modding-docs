@@ -1,0 +1,117 @@
+WBML-0025 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0025-fix1 / 0.0.25-fix1 :: LOAD
+WORLDGEN EDGE CASES READY — DESTRUCTIVE TEST.
+F6 WILL REGENERATE THE WORLD THREE TIMES. USE A DISPOSABLE TEST WORLD ONLY.
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+TEST: 3 sequential generateNewMap() cycles -> reuse/stale classification -> final stability.
+COMPLETION: finishMakingWorld/finishingUpLoading + stable live tile collection.
+IMPORTANT: WorldTile/array identity reuse is valid and is OBSERVED, never required to change.
+WBML-0025-fix1 / 0.0.25-fix1 :: AUTOMATED BATCH START
+RUN TOKEN: 4fcbebbc2ed7
+WBML-0025-fix1 :: P :: PREFLIGHT / THREE DESTRUCTIVE REGENERATIONS
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.mapgenerator                                  PASS | MapGenerator
+ASSERT P.TYPE.worldtile                                     PASS | WorldTile
+ASSERT P.TYPE.tilezone                                      PASS | TileZone
+ASSERT P.TYPE.mapchunk                                      PASS | MapChunk
+ASSERT P.TYPE.mapregion                                     PASS | MapRegion
+ASSERT P.SINGLETON.mapbox                                   PASS | MapBox
+ASSERT P.METHOD.generateNewMap                              PASS | MapBox.generateNewMap() -> Void
+ASSERT P.FINISH.patch                                       PASS | patched=2 finishMakingWorld=MapBox.finishMakingWorld() -> Void finishingUpLoading=MapBox.finishingUpLoading() -> Void
+ASSERT P.INITIAL.map                                        PASS | source=MapBox.F:tiles_map count=65536 bounds=readable=65536 unique=65536 x=0..255 y=0..255 size=256x256
+ASSERT P.INITIAL.services                                   PASS | zone=TileZone chunk=MapChunk region=MapRegion
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=12 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0025-fix1 :: A :: WORLDGEN EDGE-CASE SURFACE
+OBSERVED A.MAPBOX.type                                      MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPBOX.surface-counts                            fields=127 props=14 methods=250 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPBOX.identity-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_meta_skip:System.Boolean,F:_search_grid_ground:EpPathFinding.cs.StaticGrid,F:_tile_id:System.Int32,F:current_world_seed_id:System.Int32,F:hotkey_tabs_data:HotkeyTabsData,F:nameplate_manager:NameplateManager,F:width:System.Int32,M:GetInstanceID,M:GetScriptClassName,M:checkAnyMetaAddedRemoved,M:checkDirtyMetaObjects,M:checkMetaObjectsDestroy,M:getCachedMapMetaAsset,M:getSelectedPowerID,M:get_hideFlags,M:get_name,M:isPointerInsideMapBounds,M:set_hideFlags,M:set_name,M:updateDirtyMetaContainersAndCleanup,M:updateMetaHistory,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.owner-members                             F:city_zone_helper:CityZoneHelper,F:civilization_maker:AutoCivilization,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:checkCityZone,M:getCivWorldPopulation | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.leader-members                            F:<camera>k__BackingField:UnityEngine.Camera,F:<move_camera>k__BackingField:MoveCamera,F:<zone_camera>k__BackingField:ZoneCamera,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:IsInvoking,M:finishMakingWorld | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.population-members                        F:_unit_select_effect:UnitSelectionEffect,F:transform_units:UnityEngine.Transform,F:unit_layer:UnitLayer,F:units:ActorManager,M:<addKillAllUnits>b__162_0,M:GetComponentInChildren,M:GetComponentsInChildren,M:addKillAllUnits,M:checkDirtyUnits,M:checkEventUnitsDestroy,M:followUnit,M:getCivWorldPopulation,M:isControllingUnit | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.buildings-members                         F:buildings:BuildingManager,M:checkEventBuildingsDestroy,M:checkEventHouses,M:debugHouses,M:updateBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.territory-members                         F:<zone_camera>k__BackingField:ZoneCamera,F:_map_border:MapBorder,F:_tile_id:System.Int32,F:city_zone_helper:CityZoneHelper,F:dirty_tiles_last:System.Int32,F:projectiles:ProjectileManager,F:sim_object_zones:SimObjectsZones,F:tile_manager:TileManager,F:tilemap:WorldTilemap,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:zone_calculator:ZoneCalculator,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:GetTile,M:GetTileSimple,M:allTilesDirty,M:applyForceOnTile,M:centerCamera,M:checkCityZone,M:clearTiles,M:createTiles,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:get_zone_camera,M:highlightTilesBrush,M:locatePosition,M:redrawRenderedTile,M:redrawTiles,M:resetTiles,M:setTileDirty,M:set_zone_camera,M:updateDirtyTile,P:zone_camera:ZoneCamera | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.lifecycle-members                         F:_load_counter:System.Int32,F:on_world_loaded:System.Action,F:save_manager:SaveManager,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addLoadAutoTester>b__163_0,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:<recreateSizes>b__170_0,M:<recreateSizes>b__170_1,M:<recreateSizes>b__170_2,M:<recreateSizes>b__170_3,M:addClearWorld,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addUnloadResources,M:afterLoadEvent,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:clearArchitectMood,M:clearFrameCaches,M:clearTiles,M:clearWorld,M:createTiles,M:finishingUpLoading,M:get_destroyCancellationToken,M:preloadRenderedSprites,M:recreateSizes,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.mutation-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:quality_changer:QualityChanger,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addKillAllUnits>b__162_0,M:<addLastStep>b__141_0,M:<addLoadAutoTester>b__163_0,M:addClearWorld,M:addKillAllUnits,M:addLastStep,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addNewSystem,M:addUnloadResources,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:getCachedMapMetaAsset,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:getSelectedPowerAsset,M:get_destroyCancellationToken,M:resetRedrawTimer,M:resetTiles,M:setMapSize,M:setTileDirty,M:setZoomOrthographic,M:set_camera,M:set_enabled,M:set_hideFlags,M:set_move_camera,M:set_name,M:set_tag,M:set_useGUILayout,M:set_zone_camera,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.enumerables                               F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_sim_objects_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_systems:System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_layers:System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_modules:System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_shake_camera:UnityEngine.Transform,F:alliances:AllianceManager,F:armies:ArmyManager,F:books:BookManager,F:buildings:BuildingManager,F:cities:CityManager,F:clans:ClanManager,F:cultures:CultureManager,F:diplomacy:DiplomacyManager,F:drag_parent:UnityEngine.Transform,F:families:FamilyManager,F:items:ItemManager,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,F:languages:LanguageManager,F:list_all_sim_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:plots:PlotManager,F:projectiles:ProjectileManager,F:religions:ReligionManager,F:statuses:StatusManager,F:subspecies:SubspeciesManager,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:transform_units:UnityEngine.Transform,F:units:ActorManager,F:wars:WarManager,P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPGENERATOR.type                                MapGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPGENERATOR.surface-counts                      fields=6 props=1 methods=41 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPGENERATOR.identity-members                    F:_width:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.owner-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.leader-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.population-members                  <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.buildings-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.territory-members                   F:_tilesMap:WorldTile[,],M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:carveZone,M:fillTiles,M:scheduleUpdateTileTypes | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.lifecycle-members                   M:clear,M:createDoors,M:recreateSoilList,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.mutation-members                    M:addCenterGradient,M:addCenterLake,M:addCenterMountains,M:addMountainEdges,M:removeMountains,M:removeSmallBiomePatches | Name-based classification for Research Engine v2.
+OBSERVED A.MAPGENERATOR.enumerables                         F:_rooms:System.Collections.Generic.List`1[[GeneratedRoom, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tilesMap:WorldTile[,] | Enumerable fields/properties only; not invoked.
+ASSERT A.MAPBOX.generateNewMap                              PASS | MapBox.generateNewMap() -> Void
+ASSERT A.MAPBOX.finishMakingWorld                           PASS | MapBox.finishMakingWorld() -> Void
+ASSERT A.MAPBOX.finishingUpLoading                          PASS | MapBox.finishingUpLoading() -> Void
+ASSERT A.PIPELINE.prepare                                   PASS | MapGenerator.prepare() -> Void
+OBSERVED A.PIPELINE.generateMap                             MapBox.generateMap(String pType) -> Void | Surface only; parameterized overloads are not invoked in this suite.
+A SUMMARY: PASS=4 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0025-fix1 :: B :: THREE SEQUENTIAL WORLDGEN CYCLES
+ASSERT B.CYCLE1.invoke                                      PASS | MapBox.generateNewMap() -> Void return=<null/void>
+ASSERT B.CYCLE1.completed                                   PASS | waitedPolls=10 stablePolls=6 finishSignal=finishMakingWorld source=MapBox[0].F:tiles_map count=65536
+ASSERT B.CYCLE1.rectangular                                 PASS | readable=65536 unique=65536 x=0..255 y=0..255 size=256x256
+ASSERT B.CYCLE1.services                                    PASS | zone=TileZone chunk=MapChunk region=MapRegion
+ASSERT B.CYCLE1.terrain-height                              PASS | terrainDistinct=33 height=reads=8192 min=0 max=95
+OBSERVED B.CYCLE1.identity                                  collectionReused=True firstReused=True oldSamplePresent=True | Reuse and replacement are both valid. Same-size worldgen was observed to reuse WorldTile objects in WBML-0024-fix6.
+OBSERVED B.CYCLE1.fingerprint                               before=0x81A947C6DF4624E7 after=0x050B3254DE7D395C changed=True | Fingerprint is supporting evidence that tile state was rewritten; equality is not an automatic failure because deterministic generation is possible.
+OBSERVED B.CYCLE1.mapbox                                    MapBox | MapBox instance owning the accepted live tile collection.
+ASSERT B.CYCLE2.invoke                                      PASS | MapBox.generateNewMap() -> Void return=<null/void>
+ASSERT B.CYCLE2.completed                                   PASS | waitedPolls=9 stablePolls=6 finishSignal=finishMakingWorld source=MapBox[0].F:tiles_map count=65536
+ASSERT B.CYCLE2.rectangular                                 PASS | readable=65536 unique=65536 x=0..255 y=0..255 size=256x256
+ASSERT B.CYCLE2.services                                    PASS | zone=TileZone chunk=MapChunk region=MapRegion
+ASSERT B.CYCLE2.terrain-height                              PASS | terrainDistinct=36 height=reads=8192 min=0 max=176
+OBSERVED B.CYCLE2.identity                                  collectionReused=True firstReused=True oldSamplePresent=True | Reuse and replacement are both valid. Same-size worldgen was observed to reuse WorldTile objects in WBML-0024-fix6.
+OBSERVED B.CYCLE2.fingerprint                               before=0x050B3254DE7D395C after=0xE69C344E5CF9FA27 changed=True | Fingerprint is supporting evidence that tile state was rewritten; equality is not an automatic failure because deterministic generation is possible.
+OBSERVED B.CYCLE2.mapbox                                    MapBox | MapBox instance owning the accepted live tile collection.
+ASSERT B.CYCLE3.invoke                                      PASS | MapBox.generateNewMap() -> Void return=<null/void>
+ASSERT B.CYCLE3.completed                                   PASS | waitedPolls=9 stablePolls=6 finishSignal=finishMakingWorld source=MapBox[0].F:tiles_map count=65536
+ASSERT B.CYCLE3.rectangular                                 PASS | readable=65536 unique=65536 x=0..255 y=0..255 size=256x256
+ASSERT B.CYCLE3.services                                    PASS | zone=TileZone chunk=MapChunk region=MapRegion
+ASSERT B.CYCLE3.terrain-height                              PASS | terrainDistinct=28 height=reads=8192 min=0 max=133
+OBSERVED B.CYCLE3.identity                                  collectionReused=True firstReused=True oldSamplePresent=True | Reuse and replacement are both valid. Same-size worldgen was observed to reuse WorldTile objects in WBML-0024-fix6.
+OBSERVED B.CYCLE3.fingerprint                               before=0xE69C344E5CF9FA27 after=0xAE4B39542748B55A changed=True | Fingerprint is supporting evidence that tile state was rewritten; equality is not an automatic failure because deterministic generation is possible.
+OBSERVED B.CYCLE3.mapbox                                    MapBox | MapBox instance owning the accepted live tile collection.
+ASSERT B.CYCLES.completed-all                               PASS | completed=3/3
+B SUMMARY: PASS=16 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0025-fix1 :: C :: CROSS-CYCLE REUSE / OLD-REFERENCE SAFETY
+ASSERT C.CYCLES.complete                                    PASS | completed=3/3
+OBSERVED C.REUSE.summary                                    tileReuseCycles=3/3 collectionReuseCycles=3/3 | Identity reuse is valid; this records the runtime strategy used by WorldBox.
+OBSERVED C.REWRITE.summary                                  fingerprintsChanged=3/3 | Supporting evidence only; deterministic generation can legally produce an equal sampled fingerprint.
+OBSERVED C.OLD0.classification                              safe=True presentInFinal=True sample=WorldTile x=0 y=0 height=0 | Reference was reused and is still a current tile.
+OBSERVED C.OLD1.classification                              safe=True presentInFinal=True sample=WorldTile x=0 y=0 height=0 | Reference was reused and is still a current tile.
+OBSERVED C.OLD2.classification                              safe=True presentInFinal=True sample=WorldTile x=0 y=0 height=0 | Reference was reused and is still a current tile.
+ASSERT C.OLDREF.safe-all                                    PASS | safe=3/3 current=3 stale=0
+ASSERT C.POST.maps-nonempty                                 PASS | cycles=3
+ASSERT C.POST.bounds-valid                                  PASS | cycles=3
+C SUMMARY: PASS=4 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0025-fix1 :: D :: FINAL MAP STABILITY / RUNNER SURVIVAL
+ASSERT D.STABILITY.sample-100                               PASS | actual=100
+ASSERT D.STABILITY.count-1000                               PASS | actual=1000
+OBSERVED D.STABILITY.elapsed-1000                           0ms | Machine-specific timing.
+ASSERT D.FINAL.tile-count                                   PASS | expected=65536 actual=65536
+ASSERT D.FINAL.bounds                                       PASS | before=readable=65536 unique=65536 x=0..255 y=0..255 size=256x256 after=readable=65536 unique=65536 x=0..255 y=0..255 size=256x256
+ASSERT D.FINAL.services                                     PASS | zone=TileZone chunk=MapChunk region=MapRegion
+ASSERT D.RUNNER.alive                                       PASS | Lous12.WorldBoxModdingLab.WBMLPersistentRunner
+ASSERT D.RUNNER.single                                      PASS | livePersistentRunners=1
+ASSERT D.CYCLES.snapshot-count                              PASS | snapshots=4
+D SUMMARY: PASS=8 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0025-fix1 :: FINAL MATRIX
+ASSERTIONS PASS=44 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

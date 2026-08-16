@@ -1,0 +1,72 @@
+WBML-0012 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0012 / 0.0.12-fix1 :: LOAD
+ASSET LIBRARY / REGISTRY / LOOKUP / NML FOREACH SUITE READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+Real WorldBox AssetManager libraries are inspected read-only.
+Mutation tests use an isolated WBML AssetLibrary<WBMLProbeAsset> only.
+WBML-0012 / 0.0.12-fix1 :: AUTOMATED RUN START
+RUN TOKEN: f641b43f873b
+WBML-0012 :: A :: REAL ASSETMANAGER / LIBRARY ENUMERATION / READ-ONLY REGISTRY SURFACE
+ASSERT A.ASSETMANAGER.instance                              PASS | AssetManager
+ASSERT A.ASSETMANAGER.library-list                          PASS | count=127
+ASSERT A.ASSETMANAGER.library-count-positive                PASS | count=127
+ASSERT A.ASSETMANAGER.nonnull-libraries                     PASS | nonnull=127 total=127
+ASSERT A.ASSETMANAGER.unique-library-references             PASS | uniqueRefs=127 total=127
+ASSERT A.ASSETMANAGER.list-surface-common                   PASS | librariesWithListField=127/127
+ASSERT A.ASSETMANAGER.get-surface-common                    PASS | librariesWithGet(string)=127/127
+OBSERVED A.ASSETMANAGER.sample-library-types                GameLanguageLibrary | OptionsLibrary | TileEffectsLibrary | BaseStatsLibrary | WorldLogLibrary | HistoryGroupLibrary | DecisionsLibrary | NeuralLayerLibrary | GraphTimeLibrary | HistoryDataLibrary | db.HistoryMetaDataLibrary | WorldLawLibrary | First runtime AssetManager library types, read-only.
+ASSERT A.API.asset-extension-foreach                        PASS | NeoModLoader.General.Game.extensions.AssetExtension.ForEach
+OBSERVED A.ASSETLIBRARY.generic-type                        isAbstract=True isSealed=False | fix1 records why directly Activator-constructing AssetLibrary<T> may be invalid; isolated probes use a concrete WBMLProbeLibrary subclass.
+ASSERT A.REPORT.write-preflight                             PASS | write/delete OK
+A SUMMARY: PASS=9 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0012 :: B :: ISOLATED ASSETLIBRARY CREATE / ADD / GET / LIST / DUPLICATE-ID OBSERVATION
+ASSERT B.LIBRARY.created                                    PASS | Lous12.WorldBoxModdingLab.WBMLProbeLibrary
+ASSERT B.LIBRARY.list-field                                 PASS | list
+ASSERT B.LIBRARY.add-method                                 PASS | Lous12.WorldBoxModdingLab.WBMLProbeAsset add(Lous12.WorldBoxModdingLab.WBMLProbeAsset)
+ASSERT B.LIBRARY.get-method                                 PASS | Lous12.WorldBoxModdingLab.WBMLProbeAsset get(System.String)
+ASSERT B.ADD.list-count-two                                 PASS | count=2
+ASSERT B.GET.a-same-reference                               PASS | sameRef=True
+ASSERT B.GET.b-same-reference                               PASS | sameRef=True
+ASSERT B.GET.missing-null                                   PASS | actual=null
+OBSERVED B.DUPLICATE.add-outcome                            NO EXCEPTION | Isolated library duplicate-id add; observational because WorldBox may define replacement/ignore/duplicate semantics.
+OBSERVED B.DUPLICATE.list-count                             2 -> 2 | Duplicate-id list count before/after.
+OBSERVED B.DUPLICATE.lookup-owner                           DUPLICATE | Which object is returned by get(id) after duplicate-id add.
+ASSERT B.ORIGINAL.assets-unchanged                          PASS | a=10 b=20
+B SUMMARY: PASS=9 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0012 :: C :: NML ASSETEXTENSION.FOREACH / EXISTING + FUTURE ASSETS / TWO SUBSCRIBERS
+ASSERT C.LIBRARY.created                                    PASS | Lous12.WorldBoxModdingLab.WBMLProbeLibrary
+ASSERT C.LIBRARY.add-method                                 PASS | Lous12.WorldBoxModdingLab.WBMLProbeAsset add(Lous12.WorldBoxModdingLab.WBMLProbeAsset)
+ASSERT C.FOREACH.first-immediate-existing                   PASS | firstCount=2 ids=wbml_0012_c_a,wbml_0012_c_b
+ASSERT C.FOREACH.first-future-c                             PASS | firstCount=3 ids=wbml_0012_c_a,wbml_0012_c_b,wbml_0012_c_c
+ASSERT C.FOREACH.second-immediate-three                     PASS | secondCount=3 ids=wbml_0012_c_a,wbml_0012_c_b,wbml_0012_c_c
+ASSERT C.FOREACH.future-reaches-both                        PASS | first=4 second=4
+ASSERT C.FOREACH.no-duplicate-existing-callbacks            PASS | firstIds=wbml_0012_c_a,wbml_0012_c_b,wbml_0012_c_c,wbml_0012_c_d
+ASSERT C.FOREACH.second-future-after-multiple-adds          PASS | first=5 second=5
+OBSERVED C.FOREACH.runtime-note                             NML ForEach installs a Harmony postfix on AssetLibrary<T>.add | Source-backed design note; runtime callback behavior above is the actual evidence.
+C SUMMARY: PASS=8 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0012 :: D :: REAL LIBRARY SAMPLE LOOKUP / MISSING-ID / 1000 LOOKUPS / NO-MUTATION GUARD
+ASSERT D.REAL.library-list                                  PASS | count=127
+ASSERT D.REAL.sample-library-found                          PASS | GameLanguageLibrary
+ASSERT D.REAL.sample-id-present                             PASS | id=en
+ASSERT D.REAL.lookup-same-reference                         PASS | library=GameLanguageLibrary id=en sameRef=True
+ASSERT D.REAL.missing-id-null                               PASS | library=GameLanguageLibrary id=__wbml_0012_missing_f641b43f873b actual=null
+ASSERT D.REAL.lookup-1000-consistent                        PASS | expected=1000 actual=1000
+OBSERVED D.REAL.lookup-1000-ms                              0,862 | 1000 reflected get(id) calls against one real WorldBox AssetLibrary; observational only.
+ASSERT D.REAL.no-mutation-count                             PASS | library=GameLanguageLibrary before=40 after=40
+OBSERVED D.REAL.sample-library                              GameLanguageLibrary count=40 sampleId=en | One real WorldBox library chosen for read-only lookup validation.
+D SUMMARY: PASS=7 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0012 :: FINAL MATRIX
+ASSERTIONS PASS=33 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; latest.json is optional.

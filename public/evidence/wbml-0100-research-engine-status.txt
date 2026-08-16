@@ -1,0 +1,19 @@
+# Research Engine status at WBML 0.1.0
+
+Current reusable engine capabilities validated by the research program:
+- type discovery / reflection-backed inspection
+- object discovery with Unity liveness-aware fallback patterns in suites
+- safe reader patterns
+- stability classification
+- relationship verification
+- static/reflection surface inspection combined with runtime evidence
+- machine-readable JSON + Markdown run reports
+
+Not yet complete and **must not be claimed as finished**:
+- generic declarative suite configuration
+- multi-suite batch orchestration across the roadmap
+- baseline diff engine
+- full automatic documentation generation from raw probes
+- Error Doctor / automated repair reasoning
+
+The next tooling track should build these on top of the 0.1.0 evidence baseline rather than rerunning closed suites.

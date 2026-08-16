@@ -1,0 +1,329 @@
+WBML-0023 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0023 / 0.0.23 :: LOAD
+WORLD STATE / MAP SERVICES READY.
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+FULL PASS: any fully loaded world/map. Kingdoms are NOT required.
+READ-ONLY: dimensions, tiles, zones, chunks, regions and services are only read.
+WBML-0023 / 0.0.23 :: AUTOMATED BATCH START
+RUN TOKEN: e1087ea89833
+WBML-0023 :: P :: PREFLIGHT / LIVE MAP STATE
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.worldtile                                     PASS | WorldTile
+ASSERT P.TYPE.tilezone                                      PASS | TileZone
+ASSERT P.TYPE.mapchunk                                      PASS | MapChunk
+ASSERT P.TYPE.mapregion                                     PASS | MapRegion
+ASSERT P.SINGLETON.mapbox                                   PASS | MapBox
+OBSERVED P.WORLD.instance                                   <not-resolved> | World is optional here; MapBox is the authoritative map entrypoint on this tested baseline when World is not directly exposed.
+ASSERT P.TILES.collection                                   PASS | source=MapBox.F:tiles_map count=65536
+ASSERT P.TILES.sample                                       PASS | WorldTile x=0 y=0 height=0
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=9 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0023 :: A :: STATIC SURFACE / MAP SERVICES
+OBSERVED A.MAPBOX.type                                      MapBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPBOX.surface-counts                            fields=127 props=14 methods=250 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPBOX.identity-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_meta_skip:System.Boolean,F:_search_grid_ground:EpPathFinding.cs.StaticGrid,F:_tile_id:System.Int32,F:current_world_seed_id:System.Int32,F:hotkey_tabs_data:HotkeyTabsData,F:nameplate_manager:NameplateManager,F:width:System.Int32,M:GetInstanceID,M:GetScriptClassName,M:checkAnyMetaAddedRemoved,M:checkDirtyMetaObjects,M:checkMetaObjectsDestroy,M:getCachedMapMetaAsset,M:getSelectedPowerID,M:get_hideFlags,M:get_name,M:isPointerInsideMapBounds,M:set_hideFlags,M:set_name,M:updateDirtyMetaContainersAndCleanup,M:updateMetaHistory,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.owner-members                             F:city_zone_helper:CityZoneHelper,F:civilization_maker:AutoCivilization,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:checkCityZone,M:getCivWorldPopulation | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.leader-members                            F:<camera>k__BackingField:UnityEngine.Camera,F:<move_camera>k__BackingField:MoveCamera,F:<zone_camera>k__BackingField:ZoneCamera,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,M:IsInvoking,M:finishMakingWorld | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.population-members                        F:_unit_select_effect:UnitSelectionEffect,F:transform_units:UnityEngine.Transform,F:unit_layer:UnitLayer,F:units:ActorManager,M:<addKillAllUnits>b__162_0,M:GetComponentInChildren,M:GetComponentsInChildren,M:addKillAllUnits,M:checkDirtyUnits,M:checkEventUnitsDestroy,M:followUnit,M:getCivWorldPopulation,M:isControllingUnit | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.buildings-members                         F:buildings:BuildingManager,M:checkEventBuildingsDestroy,M:checkEventHouses,M:debugHouses,M:updateBuildings | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.territory-members                         F:<zone_camera>k__BackingField:ZoneCamera,F:_map_border:MapBorder,F:_tile_id:System.Int32,F:city_zone_helper:CityZoneHelper,F:dirty_tiles_last:System.Int32,F:projectiles:ProjectileManager,F:sim_object_zones:SimObjectsZones,F:tile_manager:TileManager,F:tilemap:WorldTilemap,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:zone_calculator:ZoneCalculator,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:GetTile,M:GetTileSimple,M:allTilesDirty,M:applyForceOnTile,M:centerCamera,M:checkCityZone,M:clearTiles,M:createTiles,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:get_zone_camera,M:highlightTilesBrush,M:locatePosition,M:redrawRenderedTile,M:redrawTiles,M:resetTiles,M:setTileDirty,M:set_zone_camera,M:updateDirtyTile,P:zone_camera:ZoneCamera | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.lifecycle-members                         F:_load_counter:System.Int32,F:on_world_loaded:System.Action,F:save_manager:SaveManager,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addLoadAutoTester>b__163_0,M:<createTiles>b__146_0,M:<createTiles>b__146_1,M:<createTiles>b__146_2,M:<createTiles>b__146_3,M:<createTiles>b__146_4,M:<createTiles>b__146_5,M:<createTiles>b__146_6,M:<recreateSizes>b__170_0,M:<recreateSizes>b__170_1,M:<recreateSizes>b__170_2,M:<recreateSizes>b__170_3,M:addClearWorld,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addUnloadResources,M:afterLoadEvent,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:clearArchitectMood,M:clearFrameCaches,M:clearTiles,M:clearWorld,M:createTiles,M:finishingUpLoading,M:get_destroyCancellationToken,M:preloadRenderedSprites,M:recreateSizes,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.mutation-members                          F:_cached_map_meta_asset:MetaTypeAsset,F:quality_changer:QualityChanger,M:<addClearWorld>b__161_0,M:<addClearWorld>b__161_1,M:<addKillAllUnits>b__162_0,M:<addLastStep>b__141_0,M:<addLoadAutoTester>b__163_0,M:addClearWorld,M:addKillAllUnits,M:addLastStep,M:addLoadAutoTester,M:addLoadWorldCallbacks,M:addNewSystem,M:addUnloadResources,M:checkAnyMetaAddedRemoved,M:checkEventBuildingsDestroy,M:checkEventUnitsDestroy,M:checkMetaObjectsDestroy,M:checkObjectsToDestroy,M:getCachedMapMetaAsset,M:getMouseTilePos,M:getMouseTilePosCachedFrame,M:getSelectedPowerAsset,M:get_destroyCancellationToken,M:resetRedrawTimer,M:resetTiles,M:setMapSize,M:setTileDirty,M:setZoomOrthographic,M:set_camera,M:set_enabled,M:set_hideFlags,M:set_move_camera,M:set_name,M:set_tag,M:set_useGUILayout,M:set_zone_camera,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.MAPBOX.enumerables                               F:_list_meta_main_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_meta_other_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_sim_objects_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_list_systems:System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_layers:System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map_modules:System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_shake_camera:UnityEngine.Transform,F:alliances:AllianceManager,F:armies:ArmyManager,F:books:BookManager,F:buildings:BuildingManager,F:cities:CityManager,F:clans:ClanManager,F:cultures:CultureManager,F:diplomacy:DiplomacyManager,F:drag_parent:UnityEngine.Transform,F:families:FamilyManager,F:items:ItemManager,F:kingdoms:KingdomManager,F:kingdoms_wild:WildKingdomsManager,F:languages:LanguageManager,F:list_all_sim_managers:System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:plots:PlotManager,F:projectiles:ProjectileManager,F:religions:ReligionManager,F:statuses:StatusManager,F:subspecies:SubspeciesManager,F:tiles_dirty:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles_list:WorldTile[],F:tiles_map:WorldTile[,],F:transform_units:UnityEngine.Transform,F:units:ActorManager,F:wars:WarManager,P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.WORLD.type                                       World, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.WORLD.surface-counts                             fields=0 props=2 methods=8 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.WORLD.identity-members                           <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLD.owner-members                              <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLD.leader-members                             <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLD.population-members                         <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLD.buildings-members                          <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLD.territory-members                          <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLD.lifecycle-members                          <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLD.mutation-members                           <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLD.enumerables                                <none> | Enumerable fields/properties only; not invoked.
+OBSERVED A.WORLDTILE.type                                   WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.WORLDTILE.surface-counts                         fields=48 props=10 methods=82 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.WORLDTILE.identity-members                       F:data:WorldTileData,M:get_is_liquid,M:get_tile_id,M:setFireData,P:is_liquid:System.Boolean,P:tile_id:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.owner-members                          M:get_zone_city,M:hasCity,M:isSameCityHere,P:zone_city:City | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.leader-members                         <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.population-members                     F:_units:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:addUnit,M:clearUnits,M:countUnits,M:doUnits,M:hasUnits | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.buildings-members                      F:building:Building,F:minimap_building_x:System.Int32,F:minimap_building_y:System.Int32,M:hasBuilding | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.territory-members                      F:cur_tile_type:TileTypeBase,F:current_rendered_tile_graphics:UnityEngine.Tilemaps.TileBase,F:is_checked_tile:System.Boolean,F:last_rendered_border_pos_ocean:UnityEngine.Vector3Int,F:last_rendered_pos_tile:UnityEngine.Vector3Int,F:last_rendered_tile_type:TileTypeBase,F:tile_down:WorldTile,F:tile_left:WorldTile,F:tile_right:WorldTile,F:tile_up:WorldTile,F:world_tile_zone_border:WorldTileZoneBorder,F:zone:TileZone,M:getCreepTileRank,M:getNeighbourTileSameIsland,M:getTileAroundThisOnSameIsland,M:getTilesAround,M:getWalkableTileAround,M:get_has_tile_down,M:get_has_tile_left,M:get_has_tile_right,M:get_has_tile_up,M:get_tile_id,M:get_zone_city,M:isTileRank,M:setTileType,M:setTileTypes,M:setTopTileType,M:topTileEaten,P:has_tile_down:System.Boolean,P:has_tile_left:System.Boolean,P:has_tile_right:System.Boolean,P:has_tile_up:System.Boolean,P:tile_id:System.Int32,P:zone_city:City | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.lifecycle-members                      M:clear,M:clearUnits,M:removeBurn,M:removeGrass,M:removeTrees | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.mutation-members                       F:timestamp_type_changed:System.Double,M:addNeighbour,M:addUnit,M:removeBurn,M:removeGrass,M:removeTrees,M:resetNeighbourLists,M:setBurned,M:setBurnedStage,M:setFireData,M:setRoad,M:setTargetedBy,M:setTileType,M:setTileTypes,M:setTopTileType,M:set_Height | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.enumerables                            F:_units:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:neighbours:WorldTile[],F:neighboursAll:WorldTile[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.TILEZONE.type                                    TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.TILEZONE.surface-counts                          fields=35 props=3 methods=64 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.TILEZONE.identity-members                        F:id:System.Int32,F:last_color_asset_id:System.Int32,F:last_drawn_id:System.Int32,F:tiles_with_liquid:System.Int32,M:getDefaultMetaOnZone,M:hasLiquid | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.owner-members                           F:_good_for_new_city:System.Boolean,F:city:City,M:canBeClaimedByCity,M:canStartCityHere,M:getCityOnZone,M:getKingdomOnZone,M:get__city_place_finder,M:hasCity,M:isGoodForNewCity,M:isSameCityHere,M:setCity,M:setGoodForNewCity,P:_city_place_finder:CityPlaceFinder | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.leader-members                          M:getKingdomOnZone | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.population-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.buildings-members                       F:MAX_BUILDING_COLLECTIONS:System.Int32,F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:buildings_all:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:buildings_render_list:System.Collections.Generic.List`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:addBuildingMain,M:addBuildingToSet,M:clearBuildingLists,M:countBuildingsType,M:hasAnyBuildings,M:hasAnyBuildingsInSet,M:hasBuildingOf,M:hasReachedBuildingLimit,M:removeBuildingMain | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.territory-members                       F:_tile_types:System.Collections.Generic.Dictionary`2[[TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:centerTile:WorldTile,F:debug_zone_color:UnityEngine.Color,F:tiles:WorldTile[],F:tiles_with_ground:System.Int32,F:tiles_with_liquid:System.Int32,F:visible_main_centered:System.Boolean,F:zone_down:TileZone,F:zone_left:TileZone,F:zone_right:TileZone,F:zone_up:TileZone,M:addTile,M:addTileType,M:getAllianceOnZone,M:getArmyOnZone,M:getCityOnZone,M:getClanOnZone,M:getCultureOnZone,M:getDefaultMetaOnZone,M:getFamilyOnZone,M:getKingdomOnZone,M:getLanguageOnZone,M:getRandomTile,M:getReligionOnZone,M:getSubspeciesOnZone,M:getTileTypes,M:getTilesOfType,M:get_top_left_corner_tile,M:hasTilesOfType,M:hasZonesConnectedViaRegions,M:isZoneOnFire,M:removeTileType,P:top_left_corner_tile:WorldTile | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.lifecycle-members                       M:clear,M:clearBuildingLists,M:clearDebug,M:getHashsetOrCreate,M:removeBuildingMain,M:removeTileType | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.mutation-members                        F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:debug_can_settle:System.Boolean,F:last_color_asset_id:System.Int32,M:addBuildingMain,M:addBuildingToSet,M:addNeighbour,M:addTile,M:addTileType,M:checkCanSettleInThisBiomes,M:getHashset,M:getHashsetOrCreate,M:hasAnyBuildingsInSet,M:removeBuildingMain,M:removeTileType,M:resetRenderHelpers,M:setCity,M:setDirty,M:setGoodForNewCity | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.enumerables                             F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:_tile_types:System.Collections.Generic.Dictionary`2[[TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:buildings_all:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:buildings_render_list:System.Collections.Generic.List`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:debug_args:System.ValueTuple`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]][],F:neighbours:TileZone[],F:neighbours_all:TileZone[],F:tiles:WorldTile[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPCHUNK.type                                    MapChunk, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPCHUNK.surface-counts                          fields=42 props=1 methods=36 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPCHUNK.identity-members                        F:_simple_data:System.Collections.Generic.List`1[[MusicBoxTileData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:id:System.Int32,M:getSimpleData | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNK.owner-members                           <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNK.leader-members                          <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNK.population-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNK.buildings-members                       F:_buildings_dirty:System.Boolean,M:finishBuildingsCheck,M:get_buildings_dirty,M:setBuildingsDirty,P:buildings_dirty:System.Boolean | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNK.territory-members                       F:MAX_TILE_TYPES:System.Int32,F:_temp_tiles:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tile_types_count:System.Collections.Generic.Dictionary`2[[TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:_tile_types_dirty:System.Boolean,F:tiles:WorldTile[],F:world_center_x:System.Single,F:world_center_y:System.Single,F:zones:System.Collections.Generic.List`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:addTile,M:clearTiles,M:countTilesOfType,M:getTileTypesCount,M:processTileNeighbours,M:setTileTypesDirty,M:shuffleRegionTiles | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNK.lifecycle-members                       M:clearIsland,M:clearObjects,M:clearRegions,M:clearTiles,M:saveToConnection | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNK.mutation-members                        M:addNeighbour,M:addTile,M:setBuildingsDirty,M:setTileTypesDirty | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNK.enumerables                             F:_new_hashes:System.Collections.Generic.List`1[[TempLinkStruct, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_simple_data:System.Collections.Generic.List`1[[MusicBoxTileData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_temp_tiles:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tile_types_count:System.Collections.Generic.Dictionary`2[[TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:_wave:System.Collections.Generic.Queue`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:bounds_down:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:bounds_left:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:bounds_right:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:bounds_up:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:chunk_bounds:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:edges_all:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:neighbours:MapChunk[],F:neighbours_all:MapChunk[],F:regions:System.Collections.Generic.List`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles:WorldTile[],F:zones:System.Collections.Generic.List`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPREGION.type                                   MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPREGION.surface-counts                         fields=26 props=0 methods=25 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPREGION.identity-members                       F:_outside_edge_regions:System.Collections.Generic.HashSet`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_outside_islands:System.Collections.Generic.HashSet`1[[TileIsland, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:id:System.Int32,F:path_wave_id:System.Int32,F:region_path_id:System.Int32,M:linkSortByID | Name-based classification for Research Engine v2.
+OBSERVED A.MAPREGION.owner-members                          <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPREGION.leader-members                         <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPREGION.population-members                     <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPREGION.buildings-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPREGION.territory-members                      F:_edge_tiles:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:center_region:System.Boolean,F:edge_tiles_set:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:zones:System.Collections.Generic.HashSet`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:calculateCenterRegion,M:calculateTileEdges,M:checkZones,M:getEdgeTiles,M:getRandomTile | Name-based classification for Research Engine v2.
+OBSERVED A.MAPREGION.lifecycle-members                      F:created:System.Single,F:created_time_last:System.Single,M:clear | Name-based classification for Research Engine v2.
+OBSERVED A.MAPREGION.mutation-members                       F:edge_tiles_set:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:addLink,M:reset | Name-based classification for Research Engine v2.
+OBSERVED A.MAPREGION.enumerables                            F:_edge_tiles:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_links:System.Collections.Generic.List`1[[RegionLink, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_neighbours_hash:System.Collections.Generic.HashSet`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_outside_edge_regions:System.Collections.Generic.HashSet`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_outside_islands:System.Collections.Generic.HashSet`1[[TileIsland, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:debug_blink_edges_down:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:debug_blink_edges_left:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:debug_blink_edges_right:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:debug_blink_edges_up:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:edge_tiles_set:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:neighbours:System.Collections.Generic.List`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:tiles:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:zones:System.Collections.Generic.HashSet`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] | Enumerable fields/properties only; not invoked.
+OBSERVED A.TILEMANAGER.type                                 TileManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.TILEMANAGER.surface-counts                       fields=5 props=0 methods=11 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.TILEMANAGER.identity-members                     <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILEMANAGER.owner-members                        <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILEMANAGER.leader-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILEMANAGER.population-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILEMANAGER.buildings-members                    <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILEMANAGER.territory-members                    F:positions_vector3:UnityEngine.Vector3[],F:tiles_count:System.Int32,M:setupVector3Positions | Name-based classification for Research Engine v2.
+OBSERVED A.TILEMANAGER.lifecycle-members                    M:clear,M:setup,M:setupAnimationSeeds,M:setupFires,M:setupVector3Positions | Name-based classification for Research Engine v2.
+OBSERVED A.TILEMANAGER.mutation-members                     F:fire_animation_set:System.Int32[],M:setup,M:setupAnimationSeeds,M:setupFires,M:setupVector3Positions | Name-based classification for Research Engine v2.
+OBSERVED A.TILEMANAGER.enumerables                          F:fire_animation_set:System.Int32[],F:fires:System.Boolean[],F:positions_vector3:UnityEngine.Vector3[],F:random_seeds:System.Int32[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.MAPCHUNKMANAGER.type                             MapChunkManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.MAPCHUNKMANAGER.surface-counts                   fields=19 props=3 methods=42 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.MAPCHUNKMANAGER.identity-members                 M:getByID | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNKMANAGER.owner-members                    <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNKMANAGER.leader-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNKMANAGER.population-members               <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNKMANAGER.buildings-members                <none> | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNKMANAGER.territory-members                M:calc_centerRegions,M:calc_shuffleRegionTiles,M:calc_tileCornersPrepare,M:calc_tileEdges,M:fillAndLinkTileZones | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNKMANAGER.lifecycle-members                M:calc_clearRegions,M:clearAll | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNKMANAGER.mutation-members                 F:_region_set:System.Collections.Generic.HashSet`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:setAllLinksDirty,M:setDirty | Name-based classification for Research Engine v2.
+OBSERVED A.MAPCHUNKMANAGER.enumerables                      F:_dirty_chunks_links:System.Collections.Generic.List`1[[MapChunk, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_dirty_chunks_regions:System.Collections.Generic.List`1[[MapChunk, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_last_dirty_chunks:System.Collections.Generic.List`1[[MapChunk, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_last_dirty_links:System.Collections.Generic.List`1[[MapChunk, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_map:MapChunk[,],F:_region_set:System.Collections.Generic.HashSet`1[[MapRegion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_temp_dirty_neighbours_islands:System.Collections.Generic.List`1[[TileIsland, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:chunks:MapChunk[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.WORLDTILEMAP.type                                WorldTilemap, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.WORLDTILEMAP.surface-counts                      fields=26 props=9 methods=99 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.WORLDTILEMAP.identity-members                    M:GetInstanceID,M:GetScriptClassName,M:get_hideFlags,M:get_name,M:set_hideFlags,M:set_name,P:hideFlags:UnityEngine.HideFlags,P:name:System.String | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEMAP.owner-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEMAP.leader-members                      M:IsInvoking | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEMAP.population-members                  M:GetComponentInChildren,M:GetComponentsInChildren | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEMAP.buildings-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEMAP.territory-members                   F:EMPTY_TILE_POS:UnityEngine.Vector3Int,F:_asset_border_pit:TileType,F:_asset_border_water_outline:TileType,F:_asset_border_water_runup:TileType,F:_clear_list_zones:System.Collections.Generic.List`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_color_border_water_runup_default:UnityEngine.Color,F:_dirty_zones:System.Collections.Generic.HashSet`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_layer_border_water_runup:TilemapExtended,F:_prefab_tilemap_layer:TilemapExtended,F:_tiles_by_zone:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:current_position:UnityEngine.Vector2,F:current_tile:WorldTile,F:position_height:System.Single,M:checkZoneToRender,M:createTileMapFor,M:enableTiles,M:redrawTiles,M:renderTile | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEMAP.lifecycle-members                   F:_clear_list_zones:System.Collections.Generic.List`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:created:System.Boolean,M:clear,M:create,M:createTileMapFor,M:get_destroyCancellationToken,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEMAP.mutation-members                    F:WATER_RUNUP_SPEED_CHANGE:System.Single,F:_asset_border_pit:TileType,F:_asset_border_water_outline:TileType,F:_asset_border_water_runup:TileType,M:addToQueueToRedraw,M:get_destroyCancellationToken,M:set_enabled,M:set_hideFlags,M:set_name,M:set_tag,M:set_useGUILayout,P:destroyCancellationToken:System.Threading.CancellationToken | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEMAP.enumerables                         F:_clear_list_zones:System.Collections.Generic.List`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_dirty_zones:System.Collections.Generic.HashSet`1[[TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_layers:System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[TilemapExtended, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:_tiles_by_zone:System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:m_transform:UnityEngine.Transform,P:transform:UnityEngine.Transform | Enumerable fields/properties only; not invoked.
+OBSERVED A.SERVICE.tilemanager                              TileManager | Resolved by direct MapBox reference or strict singleton lookup; unresolved is still useful evidence.
+OBSERVED A.SERVICE.chunkmanager                             MapChunkManager | Resolved by direct MapBox reference or strict singleton lookup; unresolved is still useful evidence.
+OBSERVED A.SERVICE.worldtilemap                             WorldTilemap | Optional rendering/map service; no methods invoked.
+OBSERVED A.SERVICE.world                                    <not-resolved> expected=World | Optional World object; no mutation or lifecycle method invoked.
+OBSERVED A.MAPBOX.sample.F._camera_k__BackingField          UnityEngine.Camera | UnityEngine.Camera
+OBSERVED A.MAPBOX.sample.F._move_camera_k__BackingField     MoveCamera | MoveCamera
+OBSERVED A.MAPBOX.sample.F._zone_camera_k__BackingField     ZoneCamera | ZoneCamera
+OBSERVED A.MAPBOX.sample.F._cached_architect_mood           <null> | ArchitectMood
+OBSERVED A.MAPBOX.sample.F._cached_map_meta_asset           MetaTypeAsset | MetaTypeAsset
+OBSERVED A.MAPBOX.sample.F._debug_layer                     DebugLayer | DebugLayer
+OBSERVED A.MAPBOX.sample.F._debug_text_group_system         DebugTextGroupSystem | DebugTextGroupSystem
+OBSERVED A.MAPBOX.sample.F._first_gen                       False | System.Boolean
+OBSERVED A.MAPBOX.sample.F._initiated                       True | System.Boolean
+OBSERVED A.MAPBOX.sample.F._is_paused                       True | System.Boolean
+OBSERVED A.MAPBOX.sample.F._lava_layer                      LavaLayer | LavaLayer
+OBSERVED A.MAPBOX.sample.F._list_meta_main_managers         System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=14 | System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.MAPBOX.sample.F._list_meta_other_managers        System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=4 | System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.MAPBOX.sample.F._list_sim_objects_managers       System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=2 | System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.MAPBOX.sample.F._list_systems                    System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=1 | System.Collections.Generic.List`1[[SpriteGroupSystem`1[[GroupSpriteObject, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.MAPBOX.sample.F._load_counter                    0 | System.Int32
+OBSERVED A.MAPBOX.sample.F._map_border                      MapBorder | MapBorder
+OBSERVED A.MAPBOX.sample.F._map_layers                      System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=13 | System.Collections.Generic.List`1[[MapLayer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.MAPBOX.sample.F._map_modules                     System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=2 | System.Collections.Generic.List`1[[BaseModule, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.MAPBOX.sample.F._meta_skip                       True | System.Boolean
+OBSERVED A.MAPBOX.sample.F._redraw_timer                    -0,09866869 | System.Single
+OBSERVED A.MAPBOX.sample.F._render_skip                     0 | System.Int32
+OBSERVED A.MAPBOX.sample.F._search_grid_ground              EpPathFinding.cs.StaticGrid | EpPathFinding.cs.StaticGrid
+OBSERVED A.MAPBOX.sample.F._shake_camera                    UnityEngine.Transform count=1 | UnityEngine.Transform
+OBSERVED A.MAPBOX.sample.F._shake_intensity                 1 | System.Single
+OBSERVED A.MAPBOX.sample.F._shake_interval                  0,1 | System.Single
+OBSERVED A.MAPBOX.sample.F._shake_interval_timer            0 | System.Single
+OBSERVED A.MAPBOX.sample.F._shake_timer                     0 | System.Single
+OBSERVED A.MAPBOX.sample.F._shake_x                         True | System.Boolean
+OBSERVED A.MAPBOX.sample.F._shake_y                         True | System.Boolean
+OBSERVED A.MAPBOX.sample.F._signal_manager                  SignalManager | SignalManager
+OBSERVED A.MAPBOX.sample.F._unit_select_effect              UnitSelectionEffect | UnitSelectionEffect
+OBSERVED A.MAPBOX.sample.F._world_layer_switch_effect       UnityEngine.SpriteRenderer | UnityEngine.SpriteRenderer
+OBSERVED A.MAPBOX.sample.F._world_log                       WorldLog | WorldLog
+OBSERVED A.MAPBOX.sample.F.alliances                        AllianceManager count=0 | AllianceManager
+OBSERVED A.MAPBOX.sample.F.armies                           ArmyManager count=0 | ArmyManager
+OBSERVED A.MAPBOX.sample.F.auto_tester                      AutoTesterBot | AutoTesterBot
+OBSERVED A.MAPBOX.sample.F.books                            BookManager count=0 | BookManager
+OBSERVED A.MAPBOX.sample.F.buildings                        BuildingManager count=2035 | BuildingManager
+OBSERVED A.MAPBOX.sample.F.burned_layer                     BurnedTilesLayer | BurnedTilesLayer
+OBSERVED A.MAPBOX.sample.F.canvas                           UnityEngine.Canvas | UnityEngine.Canvas
+OBSERVED A.MAPBOX.sample.F.cities                           CityManager count=0 | CityManager
+OBSERVED A.MAPBOX.sample.F.city_zone_helper                 CityZoneHelper | CityZoneHelper
+OBSERVED A.MAPBOX.sample.F.civilization_maker               <null> | AutoCivilization
+OBSERVED A.MAPBOX.sample.F.clans                            ClanManager count=0 | ClanManager
+OBSERVED A.MAPBOX.sample.F.console                          WorldBoxConsole.Console | WorldBoxConsole.Console
+OBSERVED A.MAPBOX.sample.F.conway_layer                     ConwayLife | ConwayLife
+OBSERVED A.MAPBOX.sample.F.cultures                         CultureManager count=0 | CultureManager
+OBSERVED A.MAPBOX.sample.F.delayed_actions_manager          DelayedActionsManager | DelayedActionsManager
+OBSERVED A.MAPBOX.sample.F.delta_time                       0,02 | System.Single
+OBSERVED A.MAPBOX.sample.F.diplomacy                        DiplomacyManager count=0 | DiplomacyManager
+OBSERVED A.MAPBOX.sample.F.dirty_tiles_last                 65536 | System.Int32
+OBSERVED A.MAPBOX.sample.F.drag_parent                      UnityEngine.RectTransform count=0 | UnityEngine.Transform
+OBSERVED A.MAPBOX.sample.F.drop_manager                     DropManager | DropManager
+OBSERVED A.MAPBOX.sample.F.earthquake_manager               <null> | Earthquake
+OBSERVED A.MAPBOX.sample.F.elapsed                          0,02 | System.Single
+OBSERVED A.MAPBOX.sample.F.era_manager                      WorldAgeManager | WorldAgeManager
+OBSERVED A.MAPBOX.sample.F.explosion_checker                ExplosionChecker | ExplosionChecker
+OBSERVED A.MAPBOX.sample.F.explosion_layer                  ExplosionsEffects | ExplosionsEffects
+OBSERVED A.MAPBOX.sample.F.families                         FamilyManager count=0 | FamilyManager
+OBSERVED A.MAPBOX.sample.F.fire_layer                       FireLayer | FireLayer
+OBSERVED A.MAPBOX.sample.F.fixed_delta_time                 0,02 | System.Single
+OBSERVED A.MAPBOX.sample.F.flash_effects                    PixelFlashEffects | PixelFlashEffects
+OBSERVED A.MAPBOX.sample.F.fx_divine_light                  EffectDivineLight | EffectDivineLight
+OBSERVED A.MAPBOX.sample.F.game_stats                       GameStats | GameStats
+OBSERVED A.MAPBOX.sample.F.grey_goo_layer                   GreyGooLayer | GreyGooLayer
+OBSERVED A.MAPBOX.sample.F.has_focus                        True | System.Boolean
+OBSERVED A.MAPBOX.sample.F.heat                             Heat | Heat
+OBSERVED A.MAPBOX.sample.F.heat_ray_fx                      HeatRayEffect | HeatRayEffect
+OBSERVED A.MAPBOX.sample.F.hotkey_tabs_data                 HotkeyTabsData | HotkeyTabsData
+OBSERVED A.MAPBOX.sample.F.islands_calculator               IslandsCalculator | IslandsCalculator
+OBSERVED A.MAPBOX.sample.F.items                            ItemManager count=4 | ItemManager
+OBSERVED A.MAPBOX.sample.F.joys                             UnityEngine.GameObject | UnityEngine.GameObject
+OBSERVED A.MAPBOX.sample.F.kingdoms                         KingdomManager count=0 | KingdomManager
+OBSERVED A.MAPBOX.sample.F.kingdoms_wild                    WildKingdomsManager count=176 | WildKingdomsManager
+OBSERVED A.MAPBOX.sample.F.languages                        LanguageManager count=0 | LanguageManager
+OBSERVED A.MAPBOX.sample.F.list_all_sim_managers            System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=20 | System.Collections.Generic.List`1[[BaseSystemManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.MAPBOX.sample.F.magnet                           Magnet | Magnet
+OBSERVED A.MAPBOX.sample.F.map_chunk_manager                MapChunkManager | MapChunkManager
+OBSERVED A.MAPBOX.sample.F.map_stats                        MapStats | MapStats
+OBSERVED A.MAPBOX.sample.F.nameplate_manager                NameplateManager | NameplateManager
+OBSERVED A.MAPBOX.sample.F.parallel_options                 System.Threading.Tasks.ParallelOptions | System.Threading.Tasks.ParallelOptions
+OBSERVED A.MAPBOX.sample.F.particles_fire                   GlowParticles | GlowParticles
+OBSERVED A.MAPBOX.sample.F.particles_smoke                  GlowParticles | GlowParticles
+OBSERVED A.MAPBOX.sample.F.path_finding_visualiser          PathFindingVisualiser | PathFindingVisualiser
+OBSERVED A.MAPBOX.sample.F.pathfinding_param                EpPathFinding.cs.AStarParam | EpPathFinding.cs.AStarParam
+OBSERVED A.MAPBOX.sample.F.player_control                   PlayerControl | PlayerControl
+OBSERVED A.MAPBOX.sample.F.plots                            PlotManager count=0 | PlotManager
+OBSERVED A.MAPBOX.sample.F.projectiles                      ProjectileManager count=0 | ProjectileManager
+OBSERVED A.MAPBOX.sample.F.quality_changer                  QualityChanger | QualityChanger
+OBSERVED A.MAPBOX.sample.F.region_path_finder               RegionPathFinder | RegionPathFinder
+OBSERVED A.MAPBOX.sample.F.religions                        ReligionManager count=0 | ReligionManager
+OBSERVED A.MAPBOX.sample.F.resource_throw_manager           ResourceThrowManager | ResourceThrowManager
+OBSERVED A.MAPBOX.sample.F.roads_calculator                 RoadsCalculator | RoadsCalculator
+OBSERVED A.MAPBOX.sample.F.save_manager                     SaveManager | SaveManager
+OBSERVED A.MAPBOX.sample.F.selected_buttons                 PowerButtonSelector | PowerButtonSelector
+OBSERVED A.MAPBOX.sample.summary                            emitted=96 readErrors=0 limit=96 | Safe-reader v2 reads fields and zero-index properties only; it never mass-invokes arbitrary methods.
+OBSERVED A.TILE.sample.F._has_walls_around                  False | System.Boolean
+OBSERVED A.TILE.sample.F._targeted_by                       <null> | Actor
+OBSERVED A.TILE.sample.F._units                             System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=1 | System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.TILE.sample.F.building                           <null> | Building
+OBSERVED A.TILE.sample.F.burned_stages                      0 | System.Int32
+OBSERVED A.TILE.sample.F.chunk                              MapChunk | MapChunk
+OBSERVED A.TILE.sample.F.color_array                        <null> | ColorArray
+OBSERVED A.TILE.sample.F.cur_tile_type                      TileType | TileTypeBase
+OBSERVED A.TILE.sample.F.current_rendered_tile_graphics     <null> | UnityEngine.Tilemaps.TileBase
+OBSERVED A.TILE.sample.F.data                               WorldTileData | WorldTileData
+OBSERVED A.TILE.sample.F.delayed_bomb_type                   | System.String
+OBSERVED A.TILE.sample.F.delayed_timer_bomb                 0 | System.Single
+OBSERVED A.TILE.sample.F.explosion_fx_stage                 0 | System.Int32
+OBSERVED A.TILE.sample.F.explosion_power                    0 | System.Int32
+OBSERVED A.TILE.sample.F.explosion_wave                     0 | System.Int32
+OBSERVED A.TILE.sample.F.flash_state                        0 | System.Int32
+OBSERVED A.TILE.sample.F.health                             10 | System.Int32
+OBSERVED A.TILE.sample.F.heat                               0 | System.Int32
+OBSERVED A.TILE.sample.F.is_checked_tile                    False | System.Boolean
+OBSERVED A.TILE.sample.F.last_rendered_border_pos_ocean     UnityEngine.Vector3Int | UnityEngine.Vector3Int
+OBSERVED A.TILE.sample.F.last_rendered_pos_tile             UnityEngine.Vector3Int | UnityEngine.Vector3Int
+OBSERVED A.TILE.sample.F.last_rendered_tile_type            TileType | TileTypeBase
+OBSERVED A.TILE.sample.F.main_type                          TileType | TileType
+OBSERVED A.TILE.sample.F.minimap_building_x                 0 | System.Int32
+OBSERVED A.TILE.sample.F.minimap_building_y                 0 | System.Int32
+OBSERVED A.TILE.sample.F.neighbours                         WorldTile[] count=2 | WorldTile[]
+OBSERVED A.TILE.sample.F.neighboursAll                      WorldTile[] count=3 | WorldTile[]
+OBSERVED A.TILE.sample.F.obstacle_is_around                 False | System.Boolean
+OBSERVED A.TILE.sample.F.pollinated                         0 | System.Int32
+OBSERVED A.TILE.sample.F.pos                                UnityEngine.Vector2Int | UnityEngine.Vector2Int
+OBSERVED A.TILE.sample.F.posV                               UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED A.TILE.sample.F.posV3                              UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED A.TILE.sample.F.region                             MapRegion | MapRegion
+OBSERVED A.TILE.sample.F.road_island                        <null> | TileIsland
+OBSERVED A.TILE.sample.F.score                              -1 | System.Int32
+OBSERVED A.TILE.sample.F.tile_down                          <null> | WorldTile
+OBSERVED A.TILE.sample.F.tile_left                          <null> | WorldTile
+OBSERVED A.TILE.sample.F.tile_right                         WorldTile | WorldTile
+OBSERVED A.TILE.sample.F.tile_up                            WorldTile | WorldTile
+OBSERVED A.TILE.sample.F.timestamp_type_changed             0 | System.Double
+OBSERVED A.TILE.sample.F.top_type                           <null> | TopTileType
+OBSERVED A.TILE.sample.F.wall_check_dirty                   True | System.Boolean
+OBSERVED A.TILE.sample.F.world_edge                         True | System.Boolean
+OBSERVED A.TILE.sample.F.world_tile_zone_border             WorldTileZoneBorder | WorldTileZoneBorder
+OBSERVED A.TILE.sample.F.x                                  0 | System.Int32
+OBSERVED A.TILE.sample.F.y                                  0 | System.Int32
+OBSERVED A.TILE.sample.F.zone                               TileZone | TileZone
+OBSERVED A.TILE.sample.P.Height                             0 | System.Int32
+OBSERVED A.TILE.sample.P.Type                               TileType | TileTypeBase
+OBSERVED A.TILE.sample.P.has_tile_down                      False | System.Boolean
+OBSERVED A.TILE.sample.P.has_tile_left                      False | System.Boolean
+OBSERVED A.TILE.sample.P.has_tile_right                     True | System.Boolean
+OBSERVED A.TILE.sample.P.has_tile_up                        True | System.Boolean
+OBSERVED A.TILE.sample.P.is_liquid                          True | System.Boolean
+OBSERVED A.TILE.sample.P.random_animation_seed              7791 | System.Int32
+OBSERVED A.TILE.sample.P.tile_id                            0 | System.Int32
+OBSERVED A.TILE.sample.P.zone_city                          <null> | City
+OBSERVED A.TILE.sample.summary                              emitted=57 readErrors=0 limit=72 | Safe-reader v2 reads fields and zero-index properties only; it never mass-invokes arbitrary methods.
+ASSERT A.SAMPLE.available                                   PASS | WorldTile x=0 y=0 height=0
+A SUMMARY: PASS=1 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0023 :: B :: MAP DIMENSIONS / COORDINATES / TILE RELATIONS
+ASSERT B.COORD.readable-all                                 PASS | readable=65536 tileCount=65536
+ASSERT B.COORD.unique                                       PASS | unique=65536 tileCount=65536
+ASSERT B.MAP.rectangular-area                               PASS | x=0..255 y=0..255 inferred=256x256 area=65536 tiles=65536
+OBSERVED B.MAP.inferred-size                                256x256 | Inferred from live WorldTile coordinate bounds, independent of any size field name.
+OBSERVED B.MAP.width-candidate                              <none>=<null> | Best-effort MapBox numeric field/property discovery; inferred tile bounds remain authoritative evidence for this suite.
+OBSERVED B.MAP.height-candidate                             <none>=<null> | Best-effort MapBox numeric field/property discovery; inferred tile bounds remain authoritative evidence for this suite.
+ASSERT B.TILE.zone                                          PASS | source=F:zone value=TileZone
+ASSERT B.TILE.chunk                                         PASS | source=F:chunk value=MapChunk
+ASSERT B.TILE.region                                        PASS | source=F:region value=MapRegion
+OBSERVED B.TILE.height                                      0 | Read-only height sample.
+B SUMMARY: PASS=6 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0023 :: C :: MAP SERVICES / OWNERSHIP COLLECTIONS
+ASSERT C.ZONE.contains-sample                               PASS | source=TileZone.F:tiles count=64
+ASSERT C.CHUNK.contains-sample                              PASS | source=MapChunk.F:tiles count=256
+OBSERVED C.REGION.zones                                     source=MapRegion.F:zones count=4 | Direct region->zone enumerable discovered.
+OBSERVED C.SERVICE.tilemanager                              TileManager | Read-only instance discovery.
+OBSERVED C.SERVICE.chunkmanager                             MapChunkManager | Read-only instance discovery.
+OBSERVED C.SERVICE.worldtilemap                             WorldTilemap | Read-only instance discovery.
+ASSERT C.SERVICE.any-resolved                               PASS | resolved=3/3 (TileManager, MapChunkManager, WorldTilemap)
+ASSERT C.MAP.tile-count-still-readable                      PASS | expected=65536 actual=65536
+C SUMMARY: PASS=4 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0023 :: D :: 100/1000 READ STABILITY / NO-MUTATION GUARD
+ASSERT D.STABILITY.sample-state-100                         PASS | actual=100
+ASSERT D.STABILITY.tile-count-1000                          PASS | actual=1000
+OBSERVED D.STABILITY.tile-count-1000-elapsed                0ms | Machine/save-specific timing; not a benchmark threshold.
+ASSERT D.NO-MUTATION.tile-count                             PASS | before=65536 after=65536
+ASSERT D.NO-MUTATION.bounds                                 PASS | before=readable=65536 unique=65536 x=0..255 y=0..255 size=256x256 after=readable=65536 unique=65536 x=0..255 y=0..255 size=256x256
+ASSERT D.NO-MUTATION.zone                                   PASS | sameRef=True
+ASSERT D.NO-MUTATION.chunk                                  PASS | sameRef=True
+ASSERT D.NO-MUTATION.region                                 PASS | sameRef=True
+ASSERT D.NO-MUTATION.height                                 PASS | before=0 after=0
+D SUMMARY: PASS=8 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0023 :: FINAL MATRIX
+ASSERTIONS PASS=28 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

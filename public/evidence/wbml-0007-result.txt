@@ -1,0 +1,90 @@
+WBML-0007 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0007 / 0.0.7 :: LOAD
+HARMONY + REFLECTION COMPATIBILITY SUITE READY.
+This suite uses only internal disposable fixtures; it does not intentionally modify a WorldBox save.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+Wait for FINAL MATRIX. No F7/F8/F9/F10 sequence is needed.
+WBML-0007 / 0.0.7 :: AUTOMATED RUN START
+RUN TOKEN: 74be2c762e56
+Runner will test reflection first, then NML ReflectionHelper, then Harmony patch/unpatch and cleanup.
+WBML-0007 :: A :: SYSTEM REFLECTION + HARMONY ACCESSTOOLS
+ASSERT A.REFLECTION.private-field-found                     PASS | _secret
+ASSERT A.REFLECTION.private-field-read                      PASS | actual=10
+ASSERT A.REFLECTION.private-field-write                     PASS | actual=21
+ASSERT A.REFLECTION.private-static-field                    PASS | actual=alpha
+ASSERT A.REFLECTION.private-static-write                    PASS | actual=beta
+ASSERT A.REFLECTION.private-method-invoke                   PASS | actual=15
+ASSERT A.ACCESSTOOLS.overload-int                           PASS | Int32 Overload(Int32)
+ASSERT A.ACCESSTOOLS.overload-string                        PASS | System.String Overload(System.String)
+ASSERT A.ACCESSTOOLS.private-field                          PASS | actual=10
+ASSERT A.ACCESSTOOLS.inherited-private-field                PASS | actual=7
+ASSERT A.ACCESSTOOLS.missing-no-throw                       PASS | no exception
+ASSERT A.ACCESSTOOLS.missing-null                           PASS | method=null field=null
+A SUMMARY: PASS=12 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0007 :: B :: NEOMODLOADER REFLECTIONHELPER RUNTIME CONTRACT
+ASSERT B.NML.helper-type                                    PASS | NeoModLoader.utils.ReflectionHelper
+ASSERT B.NML.is-assembly-loaded-method                      PASS | Boolean IsAssemblyLoaded(System.String)
+ASSERT B.NML.is-assembly-loaded-true                        PASS | 0Harmony/runtime Harmony assembly detected=True
+ASSERT B.NML.is-assembly-loaded-false                       PASS | fake assembly detected=False
+ASSERT B.NML.field-getter-definition                        PASS | System.Func`2[InstanceType,OutType] CreateFieldGetter[InstanceType,OutType](System.String)
+ASSERT B.NML.field-getter-created                           PASS | System.Func`2[[Lous12.WorldBoxModdingLab.ReflectionFixture, LOUS12_WORLDBOXMODDINGLAB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+ASSERT B.NML.field-getter-value                             PASS | actual=10
+ASSERT B.NML.field-setter-definition                        PASS | System.Action`2[TI,TF] CreateFieldSetter[TI,TF](System.String)
+ASSERT B.NML.field-setter-created                           PASS | System.Action`2[[Lous12.WorldBoxModdingLab.ReflectionFixture, LOUS12_WORLDBOXMODDINGLAB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+ASSERT B.NML.field-setter-value                             PASS | actual=33
+ASSERT B.NML.method-delegate-helper                         PASS | System.Delegate GetMethod(System.Type, System.String, Boolean)
+ASSERT B.NML.method-delegate-created                        PASS | System.Func`4[[Lous12.WorldBoxModdingLab.ReflectionFixture, LOUS12_WORLDBOXMODDINGLAB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+ASSERT B.NML.method-delegate-invoke                         PASS | actual=15
+OBSERVED B.NML.reflection-helper-visibility                 NONPUBLIC | runtime type visibility is recorded; source tag 1.2.0.1 declares ReflectionHelper internal
+B SUMMARY: PASS=13 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0007 :: C :: HARMONY PREFIX / POSTFIX / ARGUMENT / RESULT / UNPATCH
+ASSERT C.HARMONY.target-found                               PASS | Int32 Compute(Int32)
+ASSERT C.HARMONY.patch-methods-found                        PASS | prefix=found postfix=found
+ASSERT C.HARMONY.baseline                                   PASS | actual=15
+ASSERT C.HARMONY.patch-info-present                         PASS | owners=Lous12.WorldBoxModdingLab.WBML0007.Primary
+ASSERT C.HARMONY.primary-owner                              PASS | owners=Lous12.WorldBoxModdingLab.WBML0007.Primary
+ASSERT C.HARMONY.prefix-called                              PASS | calls=1
+ASSERT C.HARMONY.postfix-called                             PASS | calls=1
+ASSERT C.HARMONY.argument-mutated                           PASS | prefix __state=5; input 5 becomes 7 before original
+ASSERT C.HARMONY.result-mutated                             PASS | expected=(5+2)+10+3=20 actual=20
+ASSERT C.HARMONY.unpatch-call                               PASS | Harmony.Unpatch(MethodBase, All, owner)
+ASSERT C.HARMONY.unpatch-restores-baseline                  PASS | actual=15
+ASSERT C.HARMONY.owner-removed                              PASS | owners=
+ASSERT C.HARMONY.prefix-skip-original                       PASS | result=77 originalCalls=0
+ASSERT C.HARMONY.prefix-skip-called                         PASS | calls=1
+ASSERT C.HARMONY.skip-unpatch-restores                      PASS | result=8 originalCalls=1
+C SUMMARY: PASS=15 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0007 :: D :: PRIVATE FIELD INJECTION / MULTI-OWNER / EXCEPTION / CLEANUP
+ASSERT D.HARMONY.private-target-found                       PASS | target=found prefix=found
+ASSERT D.HARMONY.private-field-injection-seen               PASS | before=10
+ASSERT D.HARMONY.private-field-injection-write              PASS | methodResult=14 field=14
+ASSERT D.HARMONY.multi-owner-primary                        PASS | owners=Lous12.WorldBoxModdingLab.WBML0007.Primary,Lous12.WorldBoxModdingLab.WBML0007.Secondary
+ASSERT D.HARMONY.multi-owner-secondary                      PASS | owners=Lous12.WorldBoxModdingLab.WBML0007.Primary,Lous12.WorldBoxModdingLab.WBML0007.Secondary
+ASSERT D.HARMONY.multi-owner-result                         PASS | expected 120 actual=120
+ASSERT D.HARMONY.secondary-unpatch                          PASS | Harmony.Unpatch(MethodBase, All, owner)
+ASSERT D.HARMONY.primary-survives-secondary-unpatch         PASS | actual=20
+ASSERT D.HARMONY.primary-unpatch                            PASS | Harmony.Unpatch(MethodBase, All, owner)
+ASSERT D.HARMONY.multi-owner-clean-baseline                 PASS | actual=15
+OBSERVED D.HARMONY.patch-exception-propagation              NO EXCEPTION PROPAGATED | patched call returned without a propagated exception
+ASSERT D.HARMONY.exception-unpatch-restores                 PASS | actual=1
+OBSERVED D.WORLDBOX.type-discovery                          WorldTile=PRESENT; Kingdom=PRESENT; City=PRESENT; Actor=PRESENT | read-only type discovery only; object mechanics are deferred to later suites
+OBSERVED D.WORLDBOX.worldtile-data-field                    PRESENT | WorldTileData
+ASSERT D.REPORT.write-preflight                             PASS | write/delete OK
+ASSERT D.CLEANUP.no-primary-patches                         PASS | tracked targets checked after cleanup
+ASSERT D.CLEANUP.no-secondary-patches                       PASS | tracked targets checked after cleanup
+D SUMMARY: PASS=14 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0007 :: FINAL MATRIX
+ASSERTIONS PASS=54 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; optionally also send wbml-results/latest.json.

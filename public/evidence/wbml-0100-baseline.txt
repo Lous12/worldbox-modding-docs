@@ -1,0 +1,152 @@
+# WBML 0.1.0 — First Research Baseline
+
+This is the first consolidated research baseline after suites **0.0.1–0.0.30**.
+It is a knowledge snapshot, not a request to rerun closed suites.
+
+Baseline environment used for the strongest evidence:
+- WorldBox **0.51.2**, build **719**
+- NeoModLoader **1.2.0.1**
+- Unity **2022.3.60f1**
+- ResearchEngine **v2.1.1**
+- Political World **1.7.0**, API **1.14.0**
+- Cross-mod tests included Political World, Custom Worldsize and Scenario Tools
+
+Classification policy:
+- **VERIFIED** — supported by completed WBML assertions/evidence in this baseline.
+- **OBSERVED** — empirically seen but version-, world-, hardware- or implementation-bound.
+- **FAILED ASSUMPTION** — a hypothesis or test criterion falsified by evidence; keep it as negative knowledge.
+- **UNSAFE** — do not use as a generic modding pattern without an explicit disposable/sandboxed context.
+- **UNKNOWN** — deliberately unresolved; do not guess.
+
+## VERIFIED (31)
+
+1. **`addon-data-persistence`** — Addon Data save/load path worked in the tested runtime.  
+   Evidence: `0.0.1`
+2. **`event-bus`** — Political World event bus suite closed without failures.  
+   Evidence: `0.0.4`
+3. **`actions-conditions-effects`** — Actions/Conditions/Effects core path is usable; unsafe/unsupported branches remain separately classified.  
+   Evidence: `0.0.5`
+4. **`automated-lifecycle-runner`** — Automated lifecycle/regression runner is usable; unsupported branches remain separately classified.  
+   Evidence: `0.0.6`
+5. **`reflection-access-tools`** — Reflection + Harmony AccessTools suite closed PASS.  
+   Evidence: `0.0.7`
+6. **`localization-lm`** — Localization / LM suite closed PASS.  
+   Evidence: `0.0.8`
+7. **`ui-automation`** — Automated UI infrastructure checks closed PASS.  
+   Evidence: `0.0.9-fix3`
+8. **`diagnostics-reports`** — Diagnostics/logging/report generation closed PASS.  
+   Evidence: `0.0.10`
+9. **`gameobject-transform`** — GameObject / Transform API basics closed PASS.  
+   Evidence: `0.0.11`
+10. **`asset-registry-lookup`** — AssetManager / AssetLibrary / registry / lookup suite closed PASS.  
+   Evidence: `0.0.12`
+11. **`ownership-parent-child`** — Ownership / parent-child lifecycle closed PASS.  
+   Evidence: `0.0.13`
+12. **`snapshot-mutate-restore`** — Snapshot / mutate / restore / transaction path closed PASS, including exception restoration.  
+   Evidence: `0.0.14`
+13. **`unity-fake-null`** — Unity fake-null / stale-reference / destroy semantics were empirically characterized.  
+   Evidence: `0.0.15`
+14. **`kingdom-api`** — Kingdom API basics closed PASS.  
+   Evidence: `0.0.16`
+15. **`city-api`** — City API suite closed PASS.  
+   Evidence: `0.0.17`
+16. **`actor-api`** — Actor API suite closed PASS.  
+   Evidence: `0.0.18-fix1`
+17. **`entity-relationships`** — Kingdom↔City↔Actor relationship/liveness checks closed PASS.  
+   Evidence: `0.0.19`
+18. **`destruction-ownership`** — Destruction & ownership lifecycle checks closed PASS.  
+   Evidence: `0.0.20`
+19. **`worldtile-api`** — WorldTile API suite closed PASS.  
+   Evidence: `0.0.21`
+20. **`terrain-biome-route`** — Terrain resolves through TileTypeBase; TileTypeBase exposes biome_asset:BiomeAsset.  
+   Evidence: `0.0.22`
+21. **`map-services`** — WorldTile resolves TileZone, MapChunk and MapRegion; managers/services were stable in the tested map.  
+   Evidence: `0.0.23`
+22. **`generate-new-map`** — MapBox.generateNewMap() performs a real world-generation lifecycle.  
+   Evidence: `0.0.24-fix6`
+23. **`worldgen-finish-signal`** — MapBox.finishMakingWorld() is a working completion signal for generateNewMap() in the tested baseline.  
+   Evidence: `0.0.24-fix6`
+24. **`worldgen-reuse-valid`** — Same-size worldgen can legally reuse tiles_map and WorldTile objects; identity replacement is not required.  
+   Evidence: `0.0.24-fix6`
+25. **`triple-worldgen`** — Three sequential generateNewMap() cycles in one session completed with stable live state.  
+   Evidence: `0.0.25-fix1`
+26. **`performance-read-paths`** — Read-only performance suite completed without state drift.  
+   Evidence: `0.0.26`
+27. **`mass-stress`** — 524,288 WorldTile reads, 250,000 coordinate lookups and 100,000 neighbour checks completed without corruption.  
+   Evidence: `0.0.27`
+28. **`cross-mod-coexistence`** — Political World + Custom Worldsize + Scenario Tools coexisted with core lookups and Harmony state intact.  
+   Evidence: `0.0.28-fix1`
+29. **`save-reload`** — SaveManager.saveToCurrentPath() and SaveManager.loadWorld() safely executed in the tested baseline.  
+   Evidence: `0.0.29-fix1`
+30. **`reload-reuse-safety`** — After real reload, old WorldTile/collections/services/managers were reused in the tested run and old tile reads were safe 100/100.  
+   Evidence: `0.0.29-fix1`
+31. **`full-integration-torture`** — Save→reload→two worldgen cycles→262,144 tile reads→100,000 GetTile comparisons completed with all gates PASS.  
+   Evidence: `0.0.30`
+## OBSERVED (10)
+
+1. **`game-language-library`** — GameLanguageLibrary observed count=40 with sample id=en.  
+   Evidence: `0.0.12`
+2. **`default-map-shape`** — Tested default map contained 65,536 tiles with exact 256×256 coordinates.  
+   Evidence: `0.0.23`
+3. **`height-ranges-vary`** — WorldTile height ranges varied across generated worlds and are world-state dependent.  
+   Evidence: `0.0.22/0.0.24`
+4. **`height-load-normalization`** — WorldTile.Height can normalize/recompute during load; exact byte-for-byte equality is not a reload contract.  
+   Evidence: `0.0.29`
+5. **`on-world-loaded-not-required`** — MapBox.on_world_loaded did not reliably fire for generateNewMap in the investigated path; finishMakingWorld was more useful.  
+   Evidence: `0.0.24-fix5/fix6`
+6. **`lazy-framework-assemblies`** — Reflection/type inspection lazily loaded System.Net.Http, System.ServiceModel.Internals and System.Transactions.  
+   Evidence: `0.0.28-fix1`
+7. **`pw-harmony-owner`** — The tested PW startWar Harmony owner id was fluttershy.politicalworld.politics.v1392.  
+   Evidence: `0.0.28/0.0.30`
+8. **`save-load-signatures`** — saveToCurrentPath() and loadWorld() no-args signatures are version-bound implementation observations, not guaranteed public API.  
+   Evidence: `0.0.29`
+9. **`tile-reuse-implementation`** — WorldTile/array/service/manager reuse across lifecycle transitions is an implementation behavior observed on WorldBox 0.51.2.  
+   Evidence: `0.0.24–0.0.30`
+10. **`performance-numbers`** — Measured timings/ops-per-second are hardware/runtime observations, not pass/fail contracts.  
+   Evidence: `0.0.26`
+## FAILED ASSUMPTIONS (6)
+
+1. **`require-tile-ref-replacement`** — Rejected: worldgen completion must not require the first WorldTile reference to change.  
+   Evidence: `0.0.24-fix2–fix5`
+2. **`require-old-tile-removal`** — Rejected: an old WorldTile must not be required to disappear from the current map after same-size worldgen.  
+   Evidence: `0.0.24`
+3. **`exact-height-reload-proof`** — Rejected: exact restoration of WorldTile.Height must not be the sole proof of reload.  
+   Evidence: `0.0.29`
+4. **`raw-assembly-count-stability`** — Rejected: total AppDomain assembly count must not be required to remain constant across reflection inspection.  
+   Evidence: `0.0.28`
+5. **`scene-owned-coroutine-survival`** — Rejected: a coroutine hosted on a world-owned object cannot be assumed to survive full world replacement.  
+   Evidence: `0.0.24-fix1`
+6. **`worldloaded-callback-authority`** — Rejected: on_world_loaded callback alone is not an authoritative generateNewMap completion condition in this runtime.  
+   Evidence: `0.0.24-fix5/fix6`
+## UNSAFE (4)
+
+1. **`full-map-scan-per-frame`** — Unsafe/performance-hostile: scanning all 65,536 tiles in every wait-loop frame caused severe FPS degradation.  
+   Evidence: `0.0.24 original`
+2. **`guess-save-load-args`** — Unsafe: never guess required SaveManager/load/save arguments or paths; only invoke proven safe signatures.  
+   Evidence: `0.0.29+`
+3. **`destructive-tests-production-world`** — Unsafe: worldgen/save-reload/destruction suites must use disposable worlds.  
+   Evidence: `0.0.20/0.0.24/0.0.29/0.0.30`
+4. **`plain-null-unity-liveness`** — Unsafe pattern: plain object/null assumptions are insufficient for UnityEngine.Object liveness because fake-null semantics exist.  
+   Evidence: `0.0.15`
+## UNKNOWN (6)
+
+1. **`world-isolation-return-tail`** — Final return-to-World-B identity/signature tail from World Isolation Probe remains unresolved; A/B/A is not to be rerun without a narrow reason.  
+   Evidence: `0.0.2`
+2. **`persistence-unsafe-branch`** — Optional unsafe branch of Persistence & Lifecycle Suite remains intentionally unexecuted.  
+   Evidence: `0.0.3`
+3. **`ui-escape-manual`** — UI Infrastructure automated checks are green; manual Escape behavior remains pending.  
+   Evidence: `0.0.9`
+4. **`entity-stale-reuse-reload`** — Kingdom/City/Actor stale-vs-reuse across save/reload remains unobserved because tested registries were empty.  
+   Evidence: `0.0.29/0.0.30`
+5. **`different-version-behavior`** — Behavior under other WorldBox/NML/PW versions is unknown until a new baseline diff is run.  
+   Evidence: `baseline policy`
+6. **`nondefault-worldsize-lifecycle`** — Full save/reload + repeated worldgen lifecycle on non-default Custom Worldsize dimensions remains unverified.  
+   Evidence: `future`
+## Baseline rules going forward
+
+- Do **not** rerun closed suites merely to reconfirm them.
+- Rerun or diff only when the WorldBox/NML/PW baseline changes, or when a narrow unresolved question requires it.
+- Preserve `OBSERVED` for implementation details that are not contracts.
+- Prefer `SKIP`/`UNKNOWN` over invented failures when prerequisites are absent.
+- WorldTile identity replacement is never a lifecycle-completion requirement.
+- Heavy full-map scans belong after lifecycle completion and should yield in chunks; never put them in per-frame wait polling.

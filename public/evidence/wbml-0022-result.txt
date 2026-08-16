@@ -1,0 +1,257 @@
+WBML-0022 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0022 / 0.0.22 :: LOAD
+TERRAIN / BIOME API READY.
+F6=RUN ENTIRE BATCH AUTOMATICALLY
+FULL PASS: any fully loaded world/map. Kingdoms are NOT required.
+READ-ONLY: terrain/biome registries and counts are only read.
+WBML-0022 / 0.0.22 :: AUTOMATED BATCH START
+RUN TOKEN: f822716070d6
+WBML-0022 :: P :: PREFLIGHT / TERRAIN + BIOME DISCOVERY
+ASSERT P.TYPE.mapbox                                        PASS | MapBox
+ASSERT P.TYPE.worldtile                                     PASS | WorldTile
+ASSERT P.TYPE.tiletypebase                                  PASS | TileTypeBase
+ASSERT P.TYPE.biomeasset                                    PASS | BiomeAsset
+ASSERT P.SINGLETON.mapbox                                   PASS | MapBox
+ASSERT P.TILES.collection                                   PASS | source=MapBox.F:tiles_map count=65536
+ASSERT P.TILES.sample                                       PASS | WorldTile x=4 y=0 height=0 terrain=TileType id=deep_ocean via F:cur_tile_type
+OBSERVED P.BIOMES.registry                                  source=BiomeLibrary.F:pool_biomes count=60 | Read-only BiomeAsset collection discovery.
+OBSERVED P.BIOMES.sample                                    BiomeAsset id=biome_grass | First live BiomeAsset from discovered registry.
+ASSERT P.REPORT.write-preflight                             PASS | write/delete OK
+P SUMMARY: PASS=8 FAIL=0 SKIP=0
+P GATE: PASS
+WBML-0022 :: A :: STATIC SURFACE / TERRAIN + BIOME TYPES
+ASSERT A.TYPE.worldtile                                     PASS | WorldTile
+ASSERT A.TYPE.tiletypebase                                  PASS | TileTypeBase
+ASSERT A.TYPE.biomeasset                                    PASS | BiomeAsset
+OBSERVED A.WORLDTILE.type                                   WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.WORLDTILE.surface-counts                         fields=48 props=10 methods=82 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.WORLDTILE.identity-members                       F:data:WorldTileData,M:get_is_liquid,M:get_tile_id,M:setFireData,P:is_liquid:System.Boolean,P:tile_id:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.owner-members                          M:get_zone_city,M:hasCity,M:isSameCityHere,P:zone_city:City | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.leader-members                         <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.population-members                     F:_units:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:addUnit,M:clearUnits,M:countUnits,M:doUnits,M:hasUnits | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.buildings-members                      F:building:Building,F:minimap_building_x:System.Int32,F:minimap_building_y:System.Int32,M:hasBuilding | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.territory-members                      F:cur_tile_type:TileTypeBase,F:current_rendered_tile_graphics:UnityEngine.Tilemaps.TileBase,F:is_checked_tile:System.Boolean,F:last_rendered_border_pos_ocean:UnityEngine.Vector3Int,F:last_rendered_pos_tile:UnityEngine.Vector3Int,F:last_rendered_tile_type:TileTypeBase,F:tile_down:WorldTile,F:tile_left:WorldTile,F:tile_right:WorldTile,F:tile_up:WorldTile,F:world_tile_zone_border:WorldTileZoneBorder,F:zone:TileZone,M:getCreepTileRank,M:getNeighbourTileSameIsland,M:getTileAroundThisOnSameIsland,M:getTilesAround,M:getWalkableTileAround,M:get_has_tile_down,M:get_has_tile_left,M:get_has_tile_right,M:get_has_tile_up,M:get_tile_id,M:get_zone_city,M:isTileRank,M:setTileType,M:setTileTypes,M:setTopTileType,M:topTileEaten,P:has_tile_down:System.Boolean,P:has_tile_left:System.Boolean,P:has_tile_right:System.Boolean,P:has_tile_up:System.Boolean,P:tile_id:System.Int32,P:zone_city:City | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.lifecycle-members                      M:clear,M:clearUnits,M:removeBurn,M:removeGrass,M:removeTrees | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.mutation-members                       F:timestamp_type_changed:System.Double,M:addNeighbour,M:addUnit,M:removeBurn,M:removeGrass,M:removeTrees,M:resetNeighbourLists,M:setBurned,M:setBurnedStage,M:setFireData,M:setRoad,M:setTargetedBy,M:setTileType,M:setTileTypes,M:setTopTileType,M:set_Height | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILE.enumerables                            F:_units:System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:neighbours:WorldTile[],F:neighboursAll:WorldTile[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.WORLDTILEDATA.type                               WorldTileData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.WORLDTILEDATA.surface-counts                     fields=6 props=0 methods=7 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.WORLDTILEDATA.identity-members                   F:tile_id:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEDATA.owner-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEDATA.leader-members                     <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEDATA.population-members                 <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEDATA.buildings-members                  <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEDATA.territory-members                  F:tile_id:System.Int32 | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEDATA.lifecycle-members                  M:clear | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEDATA.mutation-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.WORLDTILEDATA.enumerables                        <none> | Enumerable fields/properties only; not invoked.
+OBSERVED A.TILEZONE.type                                    TileZone, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.TILEZONE.surface-counts                          fields=35 props=3 methods=64 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.TILEZONE.identity-members                        F:id:System.Int32,F:last_color_asset_id:System.Int32,F:last_drawn_id:System.Int32,F:tiles_with_liquid:System.Int32,M:getDefaultMetaOnZone,M:hasLiquid | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.owner-members                           F:_good_for_new_city:System.Boolean,F:city:City,M:canBeClaimedByCity,M:canStartCityHere,M:getCityOnZone,M:getKingdomOnZone,M:get__city_place_finder,M:hasCity,M:isGoodForNewCity,M:isSameCityHere,M:setCity,M:setGoodForNewCity,P:_city_place_finder:CityPlaceFinder | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.leader-members                          M:getKingdomOnZone | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.population-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.buildings-members                       F:MAX_BUILDING_COLLECTIONS:System.Int32,F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:buildings_all:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:buildings_render_list:System.Collections.Generic.List`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],M:addBuildingMain,M:addBuildingToSet,M:clearBuildingLists,M:countBuildingsType,M:hasAnyBuildings,M:hasAnyBuildingsInSet,M:hasBuildingOf,M:hasReachedBuildingLimit,M:removeBuildingMain | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.territory-members                       F:_tile_types:System.Collections.Generic.Dictionary`2[[TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:centerTile:WorldTile,F:debug_zone_color:UnityEngine.Color,F:tiles:WorldTile[],F:tiles_with_ground:System.Int32,F:tiles_with_liquid:System.Int32,F:visible_main_centered:System.Boolean,F:zone_down:TileZone,F:zone_left:TileZone,F:zone_right:TileZone,F:zone_up:TileZone,M:addTile,M:addTileType,M:getAllianceOnZone,M:getArmyOnZone,M:getCityOnZone,M:getClanOnZone,M:getCultureOnZone,M:getDefaultMetaOnZone,M:getFamilyOnZone,M:getKingdomOnZone,M:getLanguageOnZone,M:getRandomTile,M:getReligionOnZone,M:getSubspeciesOnZone,M:getTileTypes,M:getTilesOfType,M:get_top_left_corner_tile,M:hasTilesOfType,M:hasZonesConnectedViaRegions,M:isZoneOnFire,M:removeTileType,P:top_left_corner_tile:WorldTile | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.lifecycle-members                       M:clear,M:clearBuildingLists,M:clearDebug,M:getHashsetOrCreate,M:removeBuildingMain,M:removeTileType | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.mutation-members                        F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:debug_can_settle:System.Boolean,F:last_color_asset_id:System.Int32,M:addBuildingMain,M:addBuildingToSet,M:addNeighbour,M:addTile,M:addTileType,M:checkCanSettleInThisBiomes,M:getHashset,M:getHashsetOrCreate,M:hasAnyBuildingsInSet,M:removeBuildingMain,M:removeTileType,M:resetRenderHelpers,M:setCity,M:setDirty,M:setGoodForNewCity | Name-based classification for Research Engine v2.
+OBSERVED A.TILEZONE.enumerables                             F:_building_hashset_types_array:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]][],F:_tile_types:System.Collections.Generic.Dictionary`2[[TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Collections.Generic.HashSet`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:buildings_all:System.Collections.Generic.HashSet`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:buildings_render_list:System.Collections.Generic.List`1[[Building, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:debug_args:System.ValueTuple`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]][],F:neighbours:TileZone[],F:neighbours_all:TileZone[],F:tiles:WorldTile[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.TILETYPEBASE.type                                TileTypeBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.TILETYPEBASE.surface-counts                      fields=120 props=0 methods=22 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.TILETYPEBASE.identity-members                    F:biome_id:System.String,F:considered_empty_tile:System.Boolean,F:decrease_to_id:System.String,F:draw_layer_name:System.String,F:freeze_to_id:System.String,F:id:System.String,F:increase_to_id:System.String,F:index_id:System.Int32,F:last_index_id:System.Int32,F:liquid:System.Boolean,M:getIndexID,M:overlapsBiomeTags,M:setIndexID | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPEBASE.owner-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPEBASE.leader-members                      <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPEBASE.population-members                  F:damage_units:System.Boolean,F:unit_death_action:WorldAction | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPEBASE.buildings-members                   <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPEBASE.territory-members                   F:_current_tiles:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:considered_empty_tile:System.Boolean,M:getCurrentTiles | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPEBASE.lifecycle-members                   F:can_be_removed_with_axe:System.Boolean,F:can_be_removed_with_bucket:System.Boolean,F:can_be_removed_with_demolish:System.Boolean,F:can_be_removed_with_pickaxe:System.Boolean,F:can_be_removed_with_sickle:System.Boolean,F:can_be_removed_with_spade:System.Boolean,F:remove_on_freeze:System.Boolean,F:remove_on_heat:System.Boolean,M:create,M:hashsetClear,M:hashsetRemove | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPEBASE.mutation-members                    F:_hashset_dirty:System.Boolean,F:additional_height:System.Int32[],F:biome_asset:BiomeAsset,F:can_be_removed_with_axe:System.Boolean,F:can_be_removed_with_bucket:System.Boolean,F:can_be_removed_with_demolish:System.Boolean,F:can_be_removed_with_pickaxe:System.Boolean,F:can_be_removed_with_sickle:System.Boolean,F:can_be_removed_with_spade:System.Boolean,F:can_be_set_on_fire:System.Boolean,F:can_be_set_on_fire_by_burning_feet:System.Boolean,F:hashset:HashSetWorldTile,F:lava_change_state_after:System.Int32,F:music_assets:System.Collections.Generic.List`1[[MusicAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:remove_on_freeze:System.Boolean,F:remove_on_heat:System.Boolean,M:hashsetAdd,M:hashsetClear,M:hashsetRemove,M:isTemplateAsset,M:setBiome,M:setDrawLayer,M:setHash,M:setIndexID | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPEBASE.enumerables                         F:_current_tiles:System.Collections.Generic.List`1[[WorldTile, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:additional_height:System.Int32[],F:biome_tags:System.Collections.Generic.HashSet`1[[BiomeTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:hashset:HashSetWorldTile,F:music_assets:System.Collections.Generic.List`1[[MusicAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] | Enumerable fields/properties only; not invoked.
+OBSERVED A.TILETYPE.type                                    TileType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.TILETYPE.surface-counts                          fields=109 props=0 methods=22 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.TILETYPE.identity-members                        F:biome_id:System.String,F:considered_empty_tile:System.Boolean,F:decrease_to_id:System.String,F:draw_layer_name:System.String,F:freeze_to_id:System.String,F:id:System.String,F:increase_to_id:System.String,F:index_id:System.Int32,F:liquid:System.Boolean,M:getIndexID,M:overlapsBiomeTags,M:setIndexID | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPE.owner-members                           <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPE.leader-members                          <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPE.population-members                      F:damage_units:System.Boolean,F:unit_death_action:WorldAction | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPE.buildings-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPE.territory-members                       F:considered_empty_tile:System.Boolean,M:getCurrentTiles | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPE.lifecycle-members                       F:can_be_removed_with_axe:System.Boolean,F:can_be_removed_with_bucket:System.Boolean,F:can_be_removed_with_demolish:System.Boolean,F:can_be_removed_with_pickaxe:System.Boolean,F:can_be_removed_with_sickle:System.Boolean,F:can_be_removed_with_spade:System.Boolean,F:remove_on_freeze:System.Boolean,F:remove_on_heat:System.Boolean,M:create,M:hashsetClear,M:hashsetRemove | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPE.mutation-members                        F:additional_height:System.Int32[],F:biome_asset:BiomeAsset,F:can_be_removed_with_axe:System.Boolean,F:can_be_removed_with_bucket:System.Boolean,F:can_be_removed_with_demolish:System.Boolean,F:can_be_removed_with_pickaxe:System.Boolean,F:can_be_removed_with_sickle:System.Boolean,F:can_be_removed_with_spade:System.Boolean,F:can_be_set_on_fire:System.Boolean,F:can_be_set_on_fire_by_burning_feet:System.Boolean,F:hashset:HashSetWorldTile,F:lava_change_state_after:System.Int32,F:music_assets:System.Collections.Generic.List`1[[MusicAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:remove_on_freeze:System.Boolean,F:remove_on_heat:System.Boolean,M:hashsetAdd,M:hashsetClear,M:hashsetRemove,M:isTemplateAsset,M:setBiome,M:setDrawLayer,M:setHash,M:setIndexID | Name-based classification for Research Engine v2.
+OBSERVED A.TILETYPE.enumerables                             F:additional_height:System.Int32[],F:biome_tags:System.Collections.Generic.HashSet`1[[BiomeTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:hashset:HashSetWorldTile,F:music_assets:System.Collections.Generic.List`1[[MusicAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] | Enumerable fields/properties only; not invoked.
+OBSERVED A.TOPTILETYPE.type                                 TopTileType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.TOPTILETYPE.surface-counts                       fields=109 props=0 methods=22 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.TOPTILETYPE.identity-members                     F:biome_id:System.String,F:considered_empty_tile:System.Boolean,F:decrease_to_id:System.String,F:draw_layer_name:System.String,F:freeze_to_id:System.String,F:id:System.String,F:increase_to_id:System.String,F:index_id:System.Int32,F:liquid:System.Boolean,M:getIndexID,M:overlapsBiomeTags,M:setIndexID | Name-based classification for Research Engine v2.
+OBSERVED A.TOPTILETYPE.owner-members                        <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TOPTILETYPE.leader-members                       <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TOPTILETYPE.population-members                   F:damage_units:System.Boolean,F:unit_death_action:WorldAction | Name-based classification for Research Engine v2.
+OBSERVED A.TOPTILETYPE.buildings-members                    <none> | Name-based classification for Research Engine v2.
+OBSERVED A.TOPTILETYPE.territory-members                    F:considered_empty_tile:System.Boolean,M:getCurrentTiles | Name-based classification for Research Engine v2.
+OBSERVED A.TOPTILETYPE.lifecycle-members                    F:can_be_removed_with_axe:System.Boolean,F:can_be_removed_with_bucket:System.Boolean,F:can_be_removed_with_demolish:System.Boolean,F:can_be_removed_with_pickaxe:System.Boolean,F:can_be_removed_with_sickle:System.Boolean,F:can_be_removed_with_spade:System.Boolean,F:remove_on_freeze:System.Boolean,F:remove_on_heat:System.Boolean,M:create,M:hashsetClear,M:hashsetRemove | Name-based classification for Research Engine v2.
+OBSERVED A.TOPTILETYPE.mutation-members                     F:additional_height:System.Int32[],F:biome_asset:BiomeAsset,F:can_be_removed_with_axe:System.Boolean,F:can_be_removed_with_bucket:System.Boolean,F:can_be_removed_with_demolish:System.Boolean,F:can_be_removed_with_pickaxe:System.Boolean,F:can_be_removed_with_sickle:System.Boolean,F:can_be_removed_with_spade:System.Boolean,F:can_be_set_on_fire:System.Boolean,F:can_be_set_on_fire_by_burning_feet:System.Boolean,F:hashset:HashSetWorldTile,F:lava_change_state_after:System.Int32,F:music_assets:System.Collections.Generic.List`1[[MusicAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:remove_on_freeze:System.Boolean,F:remove_on_heat:System.Boolean,M:hashsetAdd,M:hashsetClear,M:hashsetRemove,M:isTemplateAsset,M:setBiome,M:setDrawLayer,M:setHash,M:setIndexID | Name-based classification for Research Engine v2.
+OBSERVED A.TOPTILETYPE.enumerables                          F:additional_height:System.Int32[],F:biome_tags:System.Collections.Generic.HashSet`1[[BiomeTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],F:hashset:HashSetWorldTile,F:music_assets:System.Collections.Generic.List`1[[MusicAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] | Enumerable fields/properties only; not invoked.
+OBSERVED A.BIOMEASSET.type                                  BiomeAsset, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null | Runtime type identity.
+OBSERVED A.BIOMEASSET.surface-counts                        fields=45 props=0 methods=33 | Runtime reflection counts; version-bound, not a stable public API guarantee.
+OBSERVED A.BIOMEASSET.identity-members                      F:id:System.String,F:spread_by_drops_acid:System.Boolean,F:subspecies_name_suffix:System.String[],M:getDescriptionID,M:getIndexID,M:getLocaleID,M:getLocaleIDs,M:setIndexID | Name-based classification for Research Engine v2.
+OBSERVED A.BIOMEASSET.owner-members                         <none> | Name-based classification for Research Engine v2.
+OBSERVED A.BIOMEASSET.leader-members                        <none> | Name-based classification for Research Engine v2.
+OBSERVED A.BIOMEASSET.population-members                    F:pot_sapient_units_spawn:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:pot_spawn_units_auto:System.Boolean,F:pot_units_spawn:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],M:addSapientUnit,M:addUnit | Name-based classification for Research Engine v2.
+OBSERVED A.BIOMEASSET.buildings-members                     <none> | Name-based classification for Research Engine v2.
+OBSERVED A.BIOMEASSET.territory-members                     F:_cached_tile_high:TopTileType,F:_cached_tile_low:TopTileType,F:tile_high:System.String,F:tile_low:System.String,M:getTile,M:getTileCount,M:getTileHigh,M:getTileLow | Name-based classification for Research Engine v2.
+OBSERVED A.BIOMEASSET.lifecycle-members                     M:create | Name-based classification for Research Engine v2.
+OBSERVED A.BIOMEASSET.mutation-members                      M:addActorTrait,M:addBush,M:addClanTrait,M:addCultureTrait,M:addLanguageTrait,M:addMineral,M:addPlant,M:addReligionTrait,M:addSapientUnit,M:addSubspeciesTrait,M:addSubspeciesTraitAlways,M:addSubspeciesTraitEvolution,M:addTree,M:addUnit,M:isTemplateAsset,M:setHash,M:setIndexID | Name-based classification for Research Engine v2.
+OBSERVED A.BIOMEASSET.enumerables                           F:evolution_trait_subspecies:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:pot_bushes_spawn:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:pot_minerals_spawn:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:pot_plants_spawn:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:pot_sapient_units_spawn:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:pot_trees_spawn:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:pot_units_spawn:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:spawn_trait_actor:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:spawn_trait_clan:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:spawn_trait_culture:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:spawn_trait_language:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:spawn_trait_religion:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:spawn_trait_subspecies:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:spawn_trait_subspecies_always:System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],F:subspecies_name_suffix:System.String[] | Enumerable fields/properties only; not invoked.
+OBSERVED A.BIOMEASSET.referrer-index                        ActionLibrary@Assembly-CSharp,BiomeLibrary@Assembly-CSharp,TileType@Assembly-CSharp,TileTypeBase@Assembly-CSharp,TopTileType@Assembly-CSharp,WorldTile@Assembly-CSharp,BuildingCreepWorker@Assembly-CSharp,BuildingSpreadBiome@Assembly-CSharp,MapGenerator@Assembly-CSharp,BiomeAsset+<getLocaleIDs>d__64@Assembly-CSharp,DropsLibrary+<>c__DisplayClass11_0@Assembly-CSharp | Static signature index; no methods invoked.
+OBSERVED A.TYPE.assetmanager                                AssetManager | AssetManager runtime type resolved.
+ASSERT A.SAMPLE.available                                   PASS | WorldTile x=4 y=0 height=0 terrain=TileType id=deep_ocean via F:cur_tile_type
+OBSERVED A.TILE.sample.F._has_walls_around                  False | System.Boolean
+OBSERVED A.TILE.sample.F._targeted_by                       <null> | Actor
+OBSERVED A.TILE.sample.F._units                             System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]] count=0 | System.Collections.Generic.List`1[[Actor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+OBSERVED A.TILE.sample.F.building                           <null> | Building
+OBSERVED A.TILE.sample.F.burned_stages                      0 | System.Int32
+OBSERVED A.TILE.sample.F.chunk                              MapChunk | MapChunk
+OBSERVED A.TILE.sample.F.color_array                        <null> | ColorArray
+OBSERVED A.TILE.sample.F.cur_tile_type                      TileType | TileTypeBase
+OBSERVED A.TILE.sample.F.current_rendered_tile_graphics     UnityEngine.Tilemaps.Tile | UnityEngine.Tilemaps.TileBase
+OBSERVED A.TILE.sample.F.data                               WorldTileData | WorldTileData
+OBSERVED A.TILE.sample.F.delayed_bomb_type                   | System.String
+OBSERVED A.TILE.sample.F.delayed_timer_bomb                 0 | System.Single
+OBSERVED A.TILE.sample.F.explosion_fx_stage                 0 | System.Int32
+OBSERVED A.TILE.sample.F.explosion_power                    0 | System.Int32
+OBSERVED A.TILE.sample.F.explosion_wave                     0 | System.Int32
+OBSERVED A.TILE.sample.F.flash_state                        0 | System.Int32
+OBSERVED A.TILE.sample.F.health                             10 | System.Int32
+OBSERVED A.TILE.sample.F.heat                               0 | System.Int32
+OBSERVED A.TILE.sample.F.is_checked_tile                    False | System.Boolean
+OBSERVED A.TILE.sample.F.last_rendered_border_pos_ocean     UnityEngine.Vector3Int | UnityEngine.Vector3Int
+OBSERVED A.TILE.sample.F.last_rendered_pos_tile             UnityEngine.Vector3Int | UnityEngine.Vector3Int
+OBSERVED A.TILE.sample.F.last_rendered_tile_type            TileType | TileTypeBase
+OBSERVED A.TILE.sample.F.main_type                          TileType | TileType
+OBSERVED A.TILE.sample.F.minimap_building_x                 0 | System.Int32
+OBSERVED A.TILE.sample.F.minimap_building_y                 0 | System.Int32
+OBSERVED A.TILE.sample.F.neighbours                         WorldTile[] count=3 | WorldTile[]
+OBSERVED A.TILE.sample.F.neighboursAll                      WorldTile[] count=5 | WorldTile[]
+OBSERVED A.TILE.sample.F.obstacle_is_around                 False | System.Boolean
+OBSERVED A.TILE.sample.F.pollinated                         0 | System.Int32
+OBSERVED A.TILE.sample.F.pos                                UnityEngine.Vector2Int | UnityEngine.Vector2Int
+OBSERVED A.TILE.sample.F.posV                               UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED A.TILE.sample.F.posV3                              UnityEngine.Vector3 | UnityEngine.Vector3
+OBSERVED A.TILE.sample.F.region                             MapRegion | MapRegion
+OBSERVED A.TILE.sample.F.road_island                        <null> | TileIsland
+OBSERVED A.TILE.sample.F.score                              -1 | System.Int32
+OBSERVED A.TILE.sample.F.tile_down                          <null> | WorldTile
+OBSERVED A.TILE.sample.F.tile_left                          WorldTile | WorldTile
+OBSERVED A.TILE.sample.F.tile_right                         WorldTile | WorldTile
+OBSERVED A.TILE.sample.F.tile_up                            WorldTile | WorldTile
+OBSERVED A.TILE.sample.F.timestamp_type_changed             0 | System.Double
+OBSERVED A.TILE.sample.F.top_type                           <null> | TopTileType
+OBSERVED A.TILE.sample.F.wall_check_dirty                   True | System.Boolean
+OBSERVED A.TILE.sample.F.world_edge                         True | System.Boolean
+OBSERVED A.TILE.sample.F.world_tile_zone_border             WorldTileZoneBorder | WorldTileZoneBorder
+OBSERVED A.TILE.sample.F.x                                  4 | System.Int32
+OBSERVED A.TILE.sample.F.y                                  0 | System.Int32
+OBSERVED A.TILE.sample.F.zone                               TileZone | TileZone
+OBSERVED A.TILE.sample.P.Height                             0 | System.Int32
+OBSERVED A.TILE.sample.P.Type                               TileType | TileTypeBase
+OBSERVED A.TILE.sample.P.has_tile_down                      False | System.Boolean
+OBSERVED A.TILE.sample.P.has_tile_left                      True | System.Boolean
+OBSERVED A.TILE.sample.P.has_tile_right                     True | System.Boolean
+OBSERVED A.TILE.sample.P.has_tile_up                        True | System.Boolean
+OBSERVED A.TILE.sample.P.is_liquid                          True | System.Boolean
+OBSERVED A.TILE.sample.P.random_animation_seed              2381 | System.Int32
+OBSERVED A.TILE.sample.P.tile_id                            4 | System.Int32
+OBSERVED A.TILE.sample.P.zone_city                          <null> | City
+OBSERVED A.TILE.sample.summary                              emitted=57 readErrors=0 limit=80 | Safe-reader v2 reads fields and zero-index properties only; it never mass-invokes arbitrary methods.
+OBSERVED A.BIOME.sample.F._cached_tile_high                 TopTileType | TopTileType
+OBSERVED A.BIOME.sample.F._cached_tile_low                  TopTileType | TopTileType
+OBSERVED A.BIOME.sample.F.cold_biome                        False | System.Boolean
+OBSERVED A.BIOME.sample.F.dark_biome                        False | System.Boolean
+OBSERVED A.BIOME.sample.F.evolution_trait_subspecies        <null> | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.generator_max_size                0 | System.Int32
+OBSERVED A.BIOME.sample.F.generator_pot_amount              8 | System.Int32
+OBSERVED A.BIOME.sample.F.grow_minerals_auto                True | System.Boolean
+OBSERVED A.BIOME.sample.F.grow_strength                     5 | System.Int32
+OBSERVED A.BIOME.sample.F.grow_type_selector_bushes         GrowTypeSelector | GrowTypeSelector
+OBSERVED A.BIOME.sample.F.grow_type_selector_minerals       GrowTypeSelector | GrowTypeSelector
+OBSERVED A.BIOME.sample.F.grow_type_selector_plants         GrowTypeSelector | GrowTypeSelector
+OBSERVED A.BIOME.sample.F.grow_type_selector_trees          GrowTypeSelector | GrowTypeSelector
+OBSERVED A.BIOME.sample.F.grow_vegetation_auto              True | System.Boolean
+OBSERVED A.BIOME.sample.F.id                                biome_grass | System.String
+OBSERVED A.BIOME.sample.F.localized_key                     Grass | System.String
+OBSERVED A.BIOME.sample.F.loot_generation                   0 | System.Int32
+OBSERVED A.BIOME.sample.F.pot_bushes_spawn                  System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=1 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.pot_minerals_spawn                System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=7 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.pot_plants_spawn                  System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=18 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.pot_sapient_units_spawn           System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=10 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.pot_spawn_units_auto              True | System.Boolean
+OBSERVED A.BIOME.sample.F.pot_trees_spawn                   System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=3 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.pot_units_spawn                   System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=25 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.spawn_trait_actor                 <null> | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.spawn_trait_clan                  <null> | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.spawn_trait_culture               System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=3 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.spawn_trait_language              System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=1 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.spawn_trait_religion              <null> | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.spawn_trait_subspecies            System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]] count=1 | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.spawn_trait_subspecies_always     <null> | System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]
+OBSERVED A.BIOME.sample.F.special_biome                     False | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_biome                      True | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_by_drops_acid              False | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_by_drops_blessing          False | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_by_drops_coffee            False | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_by_drops_curse             False | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_by_drops_fire              False | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_by_drops_powerup           False | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_by_drops_water             True | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_ignore_burned_stages       False | System.Boolean
+OBSERVED A.BIOME.sample.F.spread_only_in_era                <null> | System.String
+OBSERVED A.BIOME.sample.F.subspecies_name_suffix            System.String[] count=3 | System.String[]
+OBSERVED A.BIOME.sample.F.tile_high                         grass_high | System.String
+OBSERVED A.BIOME.sample.F.tile_low                          grass_low | System.String
+OBSERVED A.BIOME.sample.summary                             emitted=45 readErrors=0 limit=80 | Safe-reader v2 reads fields and zero-index properties only; it never mass-invokes arbitrary methods.
+ASSERT A.BIOME.getTileCount-surface                         PASS | getTileCount returns System.Int32
+A SUMMARY: PASS=5 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0022 :: B :: TERRAIN SEMANTICS / CURRENT + MAIN + TOP / DIVERSITY
+ASSERT B.TERRAIN.current-readable                           PASS | source=F:cur_tile_type value=TileType id=deep_ocean
+ASSERT B.TERRAIN.main-readable                              PASS | source=F:main_type value=TileType id=deep_ocean
+OBSERVED B.TERRAIN.top                                      source=<none> value=<null> | Top terrain may legitimately be null on tiles without an overlay/top type.
+ASSERT B.TERRAIN.distinct-nonempty                          PASS | distinctRefs=24 tileCount=65536
+ASSERT B.TERRAIN.current-in-discovered                      PASS | distinctRefs=24
+OBSERVED B.TERRAIN.sample-assets                            TileType id=deep_ocean | TileType id=close_ocean | TileType id=shallow_waters | TileType id=sand | TopTileType id=grass_low | TileType id=soil_low | TopTileType id=birch_low | TopTileType id=maple_low | TopTileType id=savanna_low | TopTileType id=rocklands_low | TopTileType id=rocklands_high | TileType id=soil_high | TopTileType id=savanna_high | TopTileType id=birch_high | TopTileType id=flower_high | TopTileType id=crystal_high | TopTileType id=crystal_low | TopTileType id=candy_high | TopTileType id=garlic_high | TopTileType id=garlic_low | TopTileType id=candy_low | TopTileType id=flower_low | TopTileType id=celestial_high | TopTileType id=celestial_low | Distinct TileTypeBase-derived live references from sampled WorldTiles.
+ASSERT B.HEIGHT.sample-range-readable                       PASS | reads=8192 min=0 max=177
+OBSERVED B.HEIGHT.sample-range                              min=0 max=177 reads=8192 | Sampled read-only height range; not a global-map guarantee unless all tiles were sampled.
+B SUMMARY: PASS=5 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0022 :: C :: BIOME REGISTRY / TERRAIN LINKS / TILE COUNTS
+OBSERVED C.BIOME.registry                                   source=BiomeLibrary.F:pool_biomes count=60 | Global read-only BiomeAsset enumerable.
+OBSERVED C.BIOME.terrain-linked                             count=13 first=TileType id=sand -> F:biome_asset | Direct runtime references found from terrain assets and sampled tile/data only; zero does not imply biomes are absent.
+OBSERVED C.BIOME.tile-direct                                source=<none> value=<null> | Direct tile->BiomeAsset may be absent because WorldBox can encode biome ownership indirectly.
+ASSERT C.BIOME.getTileCount-method                          PASS | getTileCount
+ASSERT C.BIOME.live-sample                                  PASS | BiomeAsset id=biome_grass
+ASSERT C.BIOME.tile-count-readable                          PASS | getTileCount()=1105
+OBSERVED C.BIOME.sample-tile-count                          1105 | BiomeAsset tile count on the selected live biome.
+ASSERT C.BIOME.registry-counts-readable                     PASS | checked=60 readable=60 summedTileCount=33925
+OBSERVED C.BIOME.registry-summary                           checked=60 summedTileCount=33925 | Sum is evidence only; overlap/encoding semantics are not assumed here.
+C SUMMARY: PASS=4 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0022 :: D :: 100/1000 STABILITY / NO-MUTATION GUARD
+ASSERT D.STABILITY.terrain-height-100                       PASS | actual=100
+ASSERT D.STABILITY.biome-count-1000                         PASS | actual=1000
+OBSERVED D.STABILITY.biome-count-1000-elapsed               0ms | Machine/save-specific timing.
+ASSERT D.NO-MUTATION.tile-count                             PASS | before=65536 after=65536
+ASSERT D.NO-MUTATION.sample-terrain                         PASS | before=TileType id=deep_ocean after=TileType id=deep_ocean
+ASSERT D.NO-MUTATION.sample-height                          PASS | before=0 after=0
+ASSERT D.NO-MUTATION.terrain-distinct-count                 PASS | before=12 after=12
+ASSERT D.NO-MUTATION.biome-registry-count                   PASS | before=60 after=60
+ASSERT D.NO-MUTATION.biome-sample-count                     PASS | before=1105 after=1105
+D SUMMARY: PASS=8 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0022 :: FINAL MATRIX
+ASSERTIONS PASS=30 FAIL=0 SKIP=0
+FINAL GATES: P=PASS A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED BATCH COMPLETE. Send Player.log; latest.json is optional.

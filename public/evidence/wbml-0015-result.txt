@@ -1,0 +1,85 @@
+WBML-0015 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0015 / 0.0.15 :: LOAD
+OBJECT EDGE CASES / FAKE NULL / STALE COLLECTIONS / SCHEDULED DESTROY SUITE READY.
+F5=ENVIRONMENT + STATUS
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+WBML-owned objects and isolated assets only; no save mutation intended.
+WBML-0015 / 0.0.15 :: AUTOMATED RUN START
+RUN TOKEN: 936f46c76254
+WBML-0015 :: A :: UNITY FAKE-NULL MATRIX / LIST-DICTIONARY STALE REFERENCES
+ASSERT A.BASELINE.go-alive                                  PASS | unityNull=False referenceNull=False
+ASSERT A.BASELINE.component-alive                           PASS | unityNull=False referenceNull=False
+ASSERT A.BASELINE.collections                               PASS | list=1 dict=1
+OBSERVED A.DESTROY.immediate-go-null                        unity==null:False referenceNull:False implicitBool:True | Immediately after Object.Destroy, before end-of-frame.
+OBSERVED A.DESTROY.immediate-component-null                 unity==null:False referenceNull:False implicitBool:True | Component on an owner scheduled for destruction, before end-of-frame.
+ASSERT A.AFTER.go-unity-null                                PASS | unityNull=True
+ASSERT A.AFTER.go-managed-ref-remains                       PASS | ReferenceEquals(null)=False
+ASSERT A.AFTER.component-unity-null                         PASS | unityNull=True
+ASSERT A.AFTER.component-managed-ref-remains                PASS | ReferenceEquals(null)=False
+ASSERT A.COLLECTION.list-count-stale                        PASS | count=1
+ASSERT A.COLLECTION.list-item-unity-null                    PASS | unityNull=True
+ASSERT A.COLLECTION.list-item-managed-ref                   PASS | ReferenceEquals(null)=False
+OBSERVED A.COLLECTION.dictionary-contains-destroyed-key     VALUE:True | Dictionary lookup using the same destroyed managed Unity wrapper.
+OBSERVED A.COLLECTION.dictionary-tryget-destroyed-key       VALUE:FOUND:alive | TryGetValue using the same destroyed managed Unity wrapper.
+OBSERVED A.COLLECTION.dictionary-remove-destroyed-key       VALUE:True | Removal using the same destroyed managed Unity wrapper.
+ASSERT A.COLLECTION.dictionary-clean-after-remove           PASS | count=0
+OBSERVED A.COLLECTION.list-remove-null                      removed=False remaining=1 | Does List<GameObject>.Remove(null) consider a destroyed Unity wrapper equal to null?
+ASSERT A.CLEANUP.local-collections                          PASS | list=0 dict=0
+OBSERVED A.IDENTITY.instance-id-before-destroy              -345602 | Recorded before destruction; no claim that calling GetInstanceID after destroy is safe.
+ASSERT A.REPORT.write-preflight                             PASS | write/delete OK
+A SUMMARY: PASS=13 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0015 :: B :: DESTROYED OBJECT MEMBER ACCESS / MISSINGREFERENCE BEHAVIOR
+ASSERT B.BASELINE.go-unity-null                             PASS | unityNull=True
+ASSERT B.BASELINE.component-unity-null                      PASS | unityNull=True
+ASSERT B.BASELINE.transform-unity-null                      PASS | unityNull=True
+OBSERVED B.ACCESS.go-name                                   EXCEPTION:NullReferenceException | Member access after destruction.
+OBSERVED B.ACCESS.go-transform                              EXCEPTION:NullReferenceException | GameObject.transform after destruction.
+OBSERVED B.ACCESS.go-instance-id                            VALUE:0 | GetInstanceID after destruction.
+OBSERVED B.ACCESS.component-enabled                         EXCEPTION:NullReferenceException | MonoBehaviour.enabled after destruction.
+OBSERVED B.ACCESS.component-gameobject                      EXCEPTION:NullReferenceException | MonoBehaviour.gameObject after owner destruction.
+OBSERVED B.ACCESS.transform-position                        EXCEPTION:NullReferenceException | Transform.localPosition after destruction.
+ASSERT B.FAKE-NULL.go-managed-ref                           PASS | ReferenceEquals(null)=False
+ASSERT B.FAKE-NULL.component-managed-ref                    PASS | ReferenceEquals(null)=False
+ASSERT B.FAKE-NULL.transform-managed-ref                    PASS | ReferenceEquals(null)=False
+B SUMMARY: PASS=6 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0015 :: C :: DUPLICATE ASSET OWNER / DISPLACED OBJECT / RE-REGISTRATION
+ASSERT C.LIBRARY.surfaces                                   PASS | add=True get=True list=True
+ASSERT C.BASELINE.two-assets                                PASS | count=2
+ASSERT C.DUPLICATE.count-stable                             PASS | count=2
+ASSERT C.DUPLICATE.lookup-replacement                       PASS | lookupIsReplacement=True
+ASSERT C.DUPLICATE.other-stable                             PASS | lookupOther=True
+OBSERVED C.DUPLICATE.list-owner                             original=False replacement=True | Which same-ID object physically remains in AssetLibrary.list after overwrite.
+ASSERT C.DISPLACED.old-object-new-id-unregistered           PASS | get(z)=null
+ASSERT C.DISPLACED.registry-x-still-replacement             PASS | lookupIsReplacement=True
+ASSERT C.REREGISTER.lookup-z-original                       PASS | sameRef=True
+ASSERT C.REREGISTER.count-three                             PASS | count=3
+ASSERT C.REREGISTER.lookup-x-still-replacement              PASS | sameRef=True
+OBSERVED C.RESEARCH.edge                                    OVERWRITTEN ASSET OBJECT MAY STILL EXIST AS A MANAGED OBJECT | Registry ownership and object lifetime are separate. Re-register explicitly if the displaced object should become addressable again.
+C SUMMARY: PASS=10 FAIL=0 SKIP=0
+C GATE: PASS
+WBML-0015 :: D :: SCHEDULED DESTROY HIERARCHY RACES / DOUBLE DESTROY / DESTROY NULL
+ASSERT D.DETACH.no-sync-exception                           PASS | exception=False
+OBSERVED D.DETACH.immediate-parent-null                     parentUnityNull=False childUnityNull=False | After scheduling parent destruction and immediately detaching child.
+ASSERT D.DETACH.parent-destroyed                            PASS | unityNull=True
+OBSERVED D.DETACH.child-survival                            SURVIVED | Child was detached after parent destruction was scheduled but before end-of-frame.
+ASSERT D.ATTACH.no-sync-exception                           PASS | exception=False
+ASSERT D.ATTACH.parent-destroyed                            PASS | unityNull=True
+OBSERVED D.ATTACH.child-survival                            DESTROYED | Child was attached to a parent after that parent had already been scheduled for destruction.
+ASSERT D.DOUBLE.no-sync-exception                           PASS | none
+ASSERT D.NULL.no-sync-exception                             PASS | none
+ASSERT D.DOUBLE.destroyed                                   PASS | unityNull=True
+ASSERT D.CLEANUP.survivors                                  PASS | detach=True attach=True
+D SUMMARY: PASS=8 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0015 :: FINAL MATRIX
+ASSERTIONS PASS=37 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; latest.json is optional.

@@ -1,0 +1,97 @@
+WBML-0006 sanitized evidence excerpt
+Source: final accepted Player.log for the suite
+Privacy: absolute local paths and Steam IDs removed; WBMLJSON duplicates omitted.
+
+WBML-0006 / 0.0.6-fix1 :: LOAD
+NML LIFECYCLE SUITE + AUTOMATED RUNNER v1 READY.
+This suite does not modify a WorldBox save.
+F5=ENVIRONMENT + STATUS + LIFECYCLE TRACE
+F6=RUN ENTIRE SUITE AUTOMATICALLY
+After F6, wait for FINAL MATRIX. No F7/F8/F9/F10 sequence is needed.
+WBML-0006 / 0.0.6-fix1 :: ENVIRONMENT
+Probe version: 0.0.6-fix1
+WorldBox Application.version: 0.51.2
+WorldBox build code: 719
+WorldBox git code: build-719@5dec
+NML assembly version: 1.2.0.1
+Unity version: 2022.3.60f1
+WBML-0006 / 0.0.6-fix1 :: ENVIRONMENT
+Probe version: 0.0.6-fix1
+WorldBox Application.version: 0.51.2
+WorldBox build code: 719
+WorldBox git code: build-719@5dec
+NML assembly version: 1.2.0.1
+Unity version: 2022.3.60f1
+STATUS ready=True running=False completed=False
+CALLBACKS OnModLoad=1 Awake=1 OnEnable=1 Start=1 Update=298 Init=1 PostInit=1 Reload=0
+LIFECYCLE TRACE: OnModLoad@f3952 -> Awake@f3952 -> OnEnable@f3952 -> Start@f3952 -> Update:first@f3953 -> Init@f3954 -> PostInit@f3954
+WBML-0006 / 0.0.6-fix1 :: AUTOMATED RUN START
+RUN TOKEN: c2d26790c880
+PROCESS TOKEN: ff0733dc
+Runner will wait briefly for staged lifecycle callbacks, execute all phases, clean its temporary prefab, then write a structured report.
+WBML-0006 :: A :: LIFECYCLE CALLBACK CAPTURE / ORDER / FRAME OBSERVATION
+ASSERT A.LIFECYCLE.onmodload-once                           PASS | calls=1
+ASSERT A.LIFECYCLE.awake-once                               PASS | calls=1
+ASSERT A.LIFECYCLE.onenable-seen                            PASS | calls=1
+ASSERT A.LIFECYCLE.start-once                               PASS | calls=1
+ASSERT A.LIFECYCLE.update-seen                              PASS | calls=346
+ASSERT A.LIFECYCLE.init-once                                PASS | calls=1
+ASSERT A.LIFECYCLE.postinit-once                            PASS | calls=1
+ASSERT A.ORDER.onmodload-init-postinit                      PASS | indices OnModLoad=0 Init=5 PostInit=6
+OBSERVED A.ORDER.basicmod-source-comment                    MATCH | source comment expectation=OnModLoad -> Awake -> OnEnable -> Start -> Update:first | runtime=OnModLoad@f3952 -> Awake@f3952 -> OnEnable@f3952 -> Start@f3952 -> Update:first@f3953 -> Init@f3954 -> PostInit@f3954
+OBSERVED A.ORDER.full-runtime-trace                         OnModLoad@f3952 -> Awake@f3952 -> OnEnable@f3952 -> Start@f3952 -> Update:first@f3953 -> Init@f3954 -> PostInit@f3954 | captured before automated assertions
+OBSERVED A.FRAMES.staged-deltas                             Init-OnModLoad=2; PostInit-Init=0 | OnModLoad=3952 Init=3954 PostInit=3954
+A SUMMARY: PASS=8 FAIL=0 SKIP=0
+A GATE: PASS
+WBML-0006 :: B :: BASICMOD INSTANCE / DECLARATION / CONFIG / GAMEOBJECT CONTRACT
+ASSERT B.INSTANCE.main-instance                             PASS | Main.Instance == this
+ASSERT B.INSTANCE.shortcut-i                                PASS | Main.I == this
+ASSERT B.GAMEOBJECT.non-null                                PASS | name=WorldBox Modding Lab
+ASSERT B.GAMEOBJECT.component-identity                      PASS | GetComponent<Main>() == this
+ASSERT B.GAMEOBJECT.active                                  PASS | activeInHierarchy=True
+ASSERT B.DECL.non-null                                      PASS | available
+ASSERT B.DECL.guid                                          PASS | configured=Lous12.WorldBoxModdingLab expected-runtime=LOUS12_WORLDBOXMODDINGLAB actual=LOUS12_WORLDBOXMODDINGLAB
+OBSERVED B.DECL.guid-normalization                          LOUS12_WORLDBOXMODDINGLAB | NML 1.2.0.1 normalizes configured GUID/dependency symbols to uppercase and replaces ASCII punctuation such as '.' with '_'
+ASSERT B.DECL.name                                          PASS | actual=WorldBox Modding Lab
+ASSERT B.DECL.author                                        PASS | actual=Lous12
+ASSERT B.DECL.version                                       PASS | actual=0.0.6.1
+ASSERT B.DECL.no-hard-dependencies                          PASS | count=0
+OBSERVED B.DECL.target-game-build-runtime                   0 | mod.json requests targetGameBuild=719; runtime declaration value is recorded, not assumed
+OBSERVED B.DECL.workshop-loaded                             False | local test install is expected to differ from Workshop installs
+ASSERT B.LOCALE.directory-contract                          PASS | leaf=Locales
+ASSERT B.CONFIG.non-null                                    PASS | available
+ASSERT B.FEATURE-MANAGER.non-null                           PASS | NeoModLoader.api.ModFeatureManager`1[[Lous12.WorldBoxModdingLab.Main, LOUS12_WORLDBOXMODDINGLAB, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+B SUMMARY: PASS=14 FAIL=0 SKIP=0
+B GATE: PASS
+WBML-0006 :: C :: STAGED LOAD / RELOAD SURFACE / UNLOAD BOUNDARY
+ASSERT C.STAGED.interface                                   PASS | BasicMod implements IStagedLoad
+ASSERT C.STAGED.init-called                                 PASS | calls=1
+ASSERT C.STAGED.postinit-called                             PASS | calls=1
+ASSERT C.RELOAD.interface                                   PASS | WBML-0006 implements IReloadable
+OBSERVED C.RELOAD.service-runtime-surface                   PRESENT | methods=HotfixMethods,ReloadLocales,ReloadResources
+ASSERT C.RELOAD.dispatch-runtime                            SKIP | not invoked automatically: recompilation/hotfix is intentionally outside this first safe runner; IReloadable surface is recorded without pretending direct self-call proves NML dispatch
+ASSERT C.UNLOAD.interface-present                           PASS | NeoModLoader.api.IUnloadable
+ASSERT C.UNLOAD.obsolete-marker                             PASS | present
+OBSERVED C.UNLOAD.obsolete-message                          This interface is deprecated, it is useless and it has not actual effect now. | runtime assembly metadata
+ASSERT C.UNLOAD.dispatch-runtime                            SKIP | not forced: destroying/disabling the real WBML mod object would invalidate the runner, and the exact NML 1.2.0.1 source marks IUnloadable deprecated/no-effect; runtime callback behavior remains unverified
+OBSERVED C.RELOAD.callback-count                            0 | spontaneous/direct callback count during this process
+C SUMMARY: PASS=6 FAIL=0 SKIP=2
+C GATE: PASS
+WBML-0006 :: D :: PREFAB LIBRARY / CLEANUP / REPORT WRITER PREFLIGHT
+ASSERT D.PREFAB.library-non-null                            PASS | name=PrefabLibrary
+ASSERT D.PREFAB.library-stable-reference                    PASS | first == second
+ASSERT D.PREFAB.library-parent                              PASS | parent-is-mod=True
+ASSERT D.PREFAB.library-name                                PASS | actual=PrefabLibrary
+ASSERT D.PREFAB.new-prefab-non-null                         PASS | WBML_0006_probe_c2d26790c880
+ASSERT D.PREFAB.new-prefab-parent                           PASS | parent-is-library=True
+ASSERT D.REPORT.write-preflight                             PASS | write/delete OK
+ASSERT D.PREFAB.cleanup                                     PASS | destroyed after frame boundary
+D SUMMARY: PASS=8 FAIL=0 SKIP=0
+D GATE: PASS
+WBML-0006 :: FINAL MATRIX
+ASSERTIONS PASS=36 FAIL=0 SKIP=2
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PARTIAL PASS
+REPORT: wbml-results/latest.json + latest.md
+AUTOMATION REPORT READY: wbml-results/latest.json + latest.md
+AUTOMATED RUN COMPLETE. Send Player.log; optionally also send wbml-results/latest.json.
