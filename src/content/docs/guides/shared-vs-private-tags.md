@@ -132,7 +132,7 @@ The shared/global tag key intentionally retains a legacy `ukiol_*` identifier.
 
 Do not rename a persistent key merely to match current branding.
 
-See [Stable IDs are data, not branding](../stable-ids-and-migrations/).
+See [Stable IDs are data, not branding](./stable-ids-and-migrations/).
 
 
 ## Runtime persistence — WBML-0001

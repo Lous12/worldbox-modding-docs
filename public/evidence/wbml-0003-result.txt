@@ -1,0 +1,59 @@
+WBML-0003 — Persistence & Lifecycle Suite
+Sanitized runtime evidence excerpt
+
+Environment
+WorldBox: 0.51.2
+Build: 719
+Git: build-719@5dec
+NeoModLoader: 1.2.0.1
+PoliticalWorldAPI: 1.14.0
+Probe: 0.0.3-fix1
+
+Restart-resume proof
+RESTORED PRE-RESTART MATRIX: PASS=76 FAIL=0 SKIP=1
+C.resume.marker-found: PASS
+C.resume.phase-is-2: PASS
+C.resume.gate-a: PASS
+C.resume.gate-b: PASS
+C.resume.counters-restored: PASS
+
+After a full WorldBox process restart
+C.KINGDOM.RESTART.marker: PASS
+C.KINGDOM.RESTART.int: PASS
+C.KINGDOM.RESTART.string: PASS
+C.KINGDOM.RESTART.bool: PASS
+C.KINGDOM.RESTART.float: PASS
+C.KINGDOM.RESTART.private-tag: PASS
+C.KINGDOM.RESTART.shared-tag: PASS
+C.PARTY.RESTART.int: PASS
+C.PARTY.RESTART.string: PASS
+C.PARTY.RESTART.bool: PASS
+C.PARTY.RESTART.float: PASS
+C.KINGDOM.CROSS-OBJECT.marker-unique: PASS
+
+Invalid party behavior
+D.INVALID-PARTY.get-int-fallback: PASS
+D.INVALID-PARTY.get-string-fallback: PASS
+D.INVALID-PARTY.get-bool-fallback: PASS
+D.INVALID-PARTY.get-float-fallback: PASS
+D.INVALID-PARTY.set-int-rejected: PASS
+D.INVALID-PARTY.set-string-rejected: PASS
+D.INVALID-PARTY.set-bool-rejected: PASS
+D.INVALID-PARTY.set-float-rejected: PASS
+
+Party lifecycle
+Lifecycle target was an active, non-ruling party.
+D.LIFECYCLE.SEED.int/string/bool/float: PASS
+D.LIFECYCLE.deactivate: PASS
+D.LIFECYCLE.inactive-visible: PASS (active=False)
+D.LIFECYCLE.DATA-WHILE-INACTIVE.int/string/bool/float: PASS
+D.LIFECYCLE.reactivate: PASS
+D.LIFECYCLE.restored-active: PASS
+
+Final matrix
+PASS=119 FAIL=0 SKIP=1
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PARTIAL PASS
+
+Evidence boundary
+The one skipped branch was not promoted. Same-kingdom party-to-party isolation was not executed in this world because the required second party was unavailable.

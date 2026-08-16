@@ -15,13 +15,13 @@ This page tracks **what knowledge can be extracted from it** and what still need
 ### Government initialization recursion
 A real `StackOverflow` caused by a getter/setter initialization cycle.
 
-- [Case study](../../case-studies/political-world-government-recursion/)
-- [Troubleshooting pattern](../../troubleshooting/stack-overflow-recursive-initialization/)
+- [Case study](../case-studies/political-world-government-recursion/)
+- [Troubleshooting pattern](../troubleshooting/stack-overflow-recursive-initialization/)
 
 ### Event-feed throttling
 Quiet Feed separated simulation events from player-visible notifications.
 
-- [Case study](../../case-studies/political-world-quiet-feed/)
+- [Case study](../case-studies/political-world-quiet-feed/)
 
 ## High-value areas to extract next
 

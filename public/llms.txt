@@ -113,6 +113,8 @@ API 1.9 exposes:
 Implementation composes party identity/local key and reuses addon-private kingdom data.
 Setters verify the party exists before writing.
 
+WBML-0003 runtime 1.14.0 evidence additionally verified int/string/bool/float party values after a full process restart, missing-party getter fallbacks/setter rejection, and data availability across the tested deactivate/reactivate lifecycle. Same-kingdom party-to-party isolation remained SKIP/unverified.
+
 ## Persistence verification status — WBML-0001
 Runtime Verified for the exact environment:
 - WorldBox 0.51.2 build 719
@@ -174,12 +176,124 @@ Do not convert this into a claim about party-private isolation, full-process-res
 ## WorldBox Modding Lab status
 WBML-0001 — Addon Data Save/Load Probe: VERIFIED for kingdom typed data + private/shared tags after full process restart.
 WBML-0002 — World Isolation Probe: VERIFIED for the tested kingdom state across two saves in an A → B → A → B same-process sequence.
+WBML-0003 — Persistence & Party Lifecycle Suite: executed branches VERIFIED; 119 PASS / 0 FAIL / 1 SKIP.
+WBML-0004 — Event Bus Suite: VERIFIED; 68 PASS / 0 FAIL / 0 SKIP.
+WBML-0005 — Actions / Conditions / Effects Suite: executed branches VERIFIED; 90 PASS / 0 FAIL / 3 SKIP.
 
-Still planned:
-- party-private typed persistence
-- language-switch float check
-- controlled legacy-v1 → v2 migration fixture
+Still open/planned:
+- same-kingdom party-to-party isolation;
+- exact party support mutation/restoration with >=2 active parties;
+- language-switch float check;
+- controlled legacy-v1 → v2 migration fixture;
+- dedicated diagnostics bookkeeping probe for same-ID action replacement history.
 
 ## Project
 Repository: https://github.com/Lous12/worldbox-modding-docs
 Site: https://lous12.github.io/worldbox-modding-docs/
+
+## WBML-0003 — party persistence and lifecycle
+Runtime evidence for exact stack:
+- WorldBox 0.51.2 build 719
+- NeoModLoader 1.2.0.1
+- PoliticalWorldAPI 1.14.0
+- WorldBox Modding Lab 0.0.3-fix1
+
+Final matrix:
+- PASS=119
+- FAIL=0
+- SKIP=1
+- A/B/C/D gates PASS
+- suite PARTIAL PASS
+
+Executed runtime-verified branches:
+- party int/string/bool/float returned after full WorldBox process restart;
+- missing-party getters returned supplied fallbacks;
+- missing-party setters returned false;
+- tested party data remained readable while the safe non-ruling party was inactive;
+- reactivation restored active state;
+- kingdom restart values/tags and cross-object marker uniqueness also passed.
+
+Unverified WBML-0003 branch:
+- same-kingdom party-to-party isolation was skipped because the required second party was unavailable.
+
+AI rule:
+PARTIAL PASS promotes executed PASS assertions only. Never promote a SKIP branch.
+
+## WBML-0004 — Event Bus runtime
+Exact tested runtime: PoliticalWorldAPI 1.14.0.
+
+Final matrix:
+- PASS=68
+- FAIL=0
+- SKIP=0
+- suite PASS
+
+Runtime facts:
+- GetEventIds returned 23 IDs;
+- returned event collection passed defensive-copy test;
+- unique custom/unknown event subscription used by WBML was accepted and removable;
+- null handler was rejected;
+- duplicate exact subscription was rejected/ignored;
+- exact and wildcard subscribers received the tested rename event;
+- tested party.renamed old/new names were carried by OldValue/NewValue, while OldName/NewName were empty;
+- mutation of one subscriber's payload object did not affect the next subscriber payload;
+- a throwing callback did not stop a healthy callback;
+- diagnostics CallbackErrors incremented for the intentional exception;
+- self-unsubscribe during dispatch worked;
+- UnsubscribeAll cleanup worked;
+- recursive test dispatch requested 64 and stopped at 16; tail subscriber also received 16;
+- 100 accepted test dispatches produced exactly 100 callbacks;
+- 33 ms timing is an observation, not a performance guarantee;
+- final subscriptions reached zero.
+
+Source/runtime drift rule:
+The inspected API 1.9 source snapshot is older. Do not force its unknown-event rejection assumption onto runtime 1.14.0.
+
+## WBML-0005 — Actions / Conditions / Effects runtime
+Exact tested runtime: PoliticalWorldAPI 1.14.0.
+
+Final matrix:
+- PASS=90
+- FAIL=0
+- SKIP=3
+- A/B/C/D gates PASS
+- suite PARTIAL PASS
+
+Runtime-verified executed behavior:
+- action ID ownership validation PW303;
+- missing handler validation PW304;
+- missing display text warning PW305 while otherwise valid;
+- same-ID RegisterAction was accepted and replaced the prior definition;
+- canonical definition could be re-registered after the replacement probe;
+- GetAction/GetActionsByAddon/GetActionsByCategory/addon summary integration passed;
+- ActionInfo.Enabled changed with condition state;
+- All/Any/Not combinators passed, including Any(empty)=true and Not(null)=true in the tested runtime;
+- government/ideology/current/system/stability condition helpers passed for current target state;
+- addon int/bool/private-tag conditions passed;
+- tested party conditions passed with live party re-query;
+- disabled ExecuteAction did not call the handler;
+- TryExecuteAction codes observed: action-condition-failed, ok, action-not-found, invalid-kingdom;
+- Effects.Sequence integration passed;
+- SetAddonInt, ChangeAddonInt, SetAddonBool, AddAddonTag, RemoveAddonTag passed;
+- temporary stability mutation/restoration passed;
+- temporary party radicalism mutation/restoration passed;
+- unregister paths passed and live GetActionsByAddon reached zero.
+
+Party support boundary:
+- exact support mutation/restoration was skipped in final fix4 because target had one active party;
+- earlier runtime observation on the single-active-party path normalized the lone party to 100 when a lower value was requested;
+- exact multi-party support mutation/restoration remains unverified.
+
+Diagnostics caveat:
+- after live GetActionsByAddon returned count=0, diagnostics reported Registered actions: 2 following repeated same-ID replacement history;
+- treat this as Observed bookkeeping mismatch, not proof of two live actions.
+
+## WBML methodology rules learned through 0005
+- A final verdict must depend on every required phase, not only the last step.
+- If a restart is part of the experiment, persist proof state/gates/counters needed after restart.
+- Source assumptions must become observations when newer runtime disagrees.
+- Raw payload logging should precede conclusions about an event contract.
+- Re-query live DTO/info state when the simulation may have changed it.
+- Setup and cleanup/finalizer code are part of the experiment and can invalidate evidence.
+- One causal harness mistake can create several downstream FAIL lines; fix the earliest causal error.
+- SKIP is an evidence boundary, never an implicit PASS.

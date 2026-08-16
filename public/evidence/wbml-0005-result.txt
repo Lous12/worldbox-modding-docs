@@ -1,0 +1,71 @@
+WBML-0005 — Actions / Conditions / Effects Suite
+Sanitized runtime evidence excerpt
+
+Environment
+WorldBox: 0.51.2
+Build: 719
+Git: build-719@5dec
+NeoModLoader: 1.2.0.1
+PoliticalWorldAPI: 1.14.0
+Probe: 0.0.5-fix4
+
+Action registration / validation
+Unowned action ID: invalid (PW303)
+Missing handler: invalid (PW304)
+Missing display text: warning, still valid (PW305)
+Same-ID RegisterAction: ACCEPTED / REPLACED
+Replacement visible through GetAction: PASS
+Canonical definition restored: PASS
+Owned action query count: 3
+Category query count: 3
+
+Conditions
+All / Any / Not combinators: PASS
+Any(empty): true in this runtime
+Not(null): true in this runtime
+Government / ideology / current / political-system checks: PASS
+Stability boundary checks: PASS
+Addon int / bool / private-tag conditions: PASS
+Party support live-boundary checks: PASS
+Dynamic ActionInfo.Enabled update: PASS
+
+Execution
+Disabled action ExecuteAction: false
+Disabled handler call count: 0
+TryExecuteAction disabled code: action-condition-failed
+Enabled ExecuteAction: true
+TryExecuteAction success code: ok
+Missing action code: action-not-found
+Null kingdom code: invalid-kingdom
+Effects.Sequence integration: PASS
+
+Effects / unregister
+SetAddonInt / ChangeAddonInt / SetAddonBool: PASS
+AddAddonTag / RemoveAddonTag: PASS
+Stability temporary mutation + restoration: PASS
+Party radicalism temporary mutation + restoration: PASS
+Dynamic condition disable: PASS
+UnregisterAction paths: PASS
+GetAction after unregister: null
+CanExecute/Execute after unregister: false
+TryExecuteAction after unregister: action-not-found
+
+Party support safety boundary
+The selected world had only one active party in the target kingdom.
+Exact party support mutation: SKIP
+Exact party support restoration: SKIP
+Final support restoration: SKIP
+No support setter was called in the finalizer.
+
+Observed from an earlier WBML-0005 run
+On the tested single-active-party path, requesting a support value below 100 normalized the lone active party to 100. Re-requesting the old lower value also resulted in 100.
+This is Observed for the single-active-party path only; exact multi-party mutation remains unverified.
+
+Final matrix
+PASS=90 FAIL=0 SKIP=3
+FINAL GATES: A=PASS B=PASS C=PASS D=PASS
+SUITE RESULT: PARTIAL PASS
+Live GetActionsByAddon after cleanup: count=0
+
+Diagnostics caveat
+After cleanup, the live action query returned count=0 while diagnostics reported Registered actions: 2 after repeated same-ID replacement history. Treat that counter mismatch as Observed bookkeeping behavior, not as proof that two live actions remained.

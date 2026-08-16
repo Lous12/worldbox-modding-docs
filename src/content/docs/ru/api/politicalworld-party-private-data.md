@@ -1,33 +1,132 @@
 ---
-title: Party-private addon data через PoliticalWorldAPI
-description: Проверенный source API для typed addon state, связанного с конкретной Political World party.
+title: Party-private данные аддона в PoliticalWorldAPI
+description: Типизированное состояние аддона для конкретной партии с runtime-проверкой persistence и lifecycle в WBML-0003.
 ---
 
-<span class="doc-status">✅ Source verified API surface</span>
-<span class="doc-status">🧪 Persistence round trip отдельно ещё не перепроверен</span>
-<span class="doc-status">API source generation 1.9.0</span>
+<span class="doc-status">✅ Runtime verified — выполненные ветки</span>
+<span class="doc-status">WBML-0003</span>
+<span class="doc-status">API runtime 1.14.0</span>
 
-Political World API 1.9 предоставляет addon-private values для конкретной party:
+Party-private data позволяет аддону хранить собственные значения у **стабильного ID партии Political World** и не превращать их в общий межмодовый протокол.
 
-```csharp
-GetPartyInt(...)
-SetPartyInt(...)
+Для новичка схема такая:
 
-GetPartyString(...)
-SetPartyString(...)
-
-GetPartyBool(...)
-SetPartyBool(...)
-
-GetPartyFloat(...)
-SetPartyFloat(...)
+```text
+королевство
+└─ party ID
+   └─ ID твоего аддона
+      └─ локальный ключ → значение
 ```
 
-## Как это построено
+## Типизированный public API
 
-Проверенный creator source не создаёт отдельную party save database.
+В изученном creator-source API 1.9 есть:
 
-Он формирует party-local data key и отправляет значение через тот же addon-private **kingdom data** API.
+```csharp
+GetPartyInt(...)    / SetPartyInt(...)
+GetPartyString(...) / SetPartyString(...)
+GetPartyBool(...)   / SetPartyBool(...)
+GetPartyFloat(...)  / SetPartyFloat(...)
+```
+
+В каждом вызове участвуют:
+
+```text
+Kingdom
+addonId
+partyId
+key
+value или fallback
+```
+
+Runtime, который проверял WBML, был новее — API **1.14.0**. Версию изученных исходников и версию runtime нельзя смешивать.
+
+## Минимальный пример
+
+```csharp
+const string AddonId = "Example.PartyAddon";
+const string Key = "conference_count";
+
+bool written = PoliticalWorldAPI.SetPartyInt(
+    kingdom,
+    AddonId,
+    party.Id,
+    Key,
+    3
+);
+
+int count = PoliticalWorldAPI.GetPartyInt(
+    kingdom,
+    AddonId,
+    party.Id,
+    Key,
+    0
+);
+```
+
+Для сохранений используй стабильный `party.Id`, а не позицию партии в списке.
+
+## Если партии с таким ID нет
+
+WBML-0003 специально проверил несуществующий party ID.
+
+Runtime API 1.14.0 дал:
+
+```text
+GetPartyInt    → переданный fallback
+GetPartyString → переданный fallback
+GetPartyBool   → переданный fallback
+GetPartyFloat  → переданный fallback
+
+SetPartyInt    → false
+SetPartyString → false
+SetPartyBool   → false
+SetPartyFloat  → false
+```
+
+То есть несуществующая партия не получает «фантомные» данные через setter.
+
+## Persistence после полного перезапуска WorldBox
+
+WBML-0003 полностью закрыл процесс WorldBox, запустил игру заново, загрузил сейв и снова нашёл ту же партию.
+
+Без повторной записи вернулись:
+
+```text
+party int
+party Unicode string
+party bool
+party float
+```
+
+Именно поэтому для протестированного стека эта ветка теперь имеет статус runtime Verified, а не просто «так выглядит по исходникам».
+
+## Что происходит с данными деактивированной партии
+
+В creator API есть lifecycle-операции для получения партий, включая неактивные, деактивации и реактивации.
+
+WBML-0003 выбрал **активную, не правящую партию**, затем выполнил:
+
+```text
+запись int/string/bool/float
+→ deactivate
+→ партия видна как active=False
+→ чтение всех четырёх значений
+→ reactivate
+→ active=True восстановлен
+```
+
+Все выполненные assertions прошли.
+
+Практический вывод:
+
+> Деактивация не стерла протестированные party-private данные.
+
+Поэтому inactive-партию нельзя автоматически считать удалённой.
+
+## Как это устроено в изученном source
+
+Исходник составляет party-local ключ из party ID и локального ключа, а затем использует addon-private kingdom storage.
 
 Концептуально:
 
@@ -39,68 +138,49 @@ party ID + local key
 kingdom addon-private storage
 ```
 
-## Validation setter
+Это описание реализации, а не инструкция вручную собирать внутренние save-ключи. Для обычного аддона граница совместимости — публичные методы API.
 
-Setter сначала проверяет, что указанная Political World party реально существует/resolve'ится в этом kingdom.
+## Непроверенная ветка: изоляция party A от party B
 
-Только затем пишет scoped data.
-
-Так не создаётся «валидное» party state для несуществующего party ID.
-
-## Example
-
-```csharp
-PoliticalWorldAPI.SetPartyInt(
-    kingdom,
-    AddonId,
-    party.Id,
-    "conference_count",
-    3
-);
-```
-
-Read:
-
-```csharp
-int count = PoliticalWorldAPI.GetPartyInt(
-    kingdom,
-    AddonId,
-    party.Id,
-    "conference_count",
-    0
-);
-```
-
-## Зачем party ID участвует в key
-
-Один local key:
+Финал WBML-0003:
 
 ```text
-conference_count
+PASS=119
+FAIL=0
+SKIP=1
+SUITE RESULT: PARTIAL PASS
 ```
 
-может существовать у нескольких партий без collision, потому что в composed key входит party identity.
+Единственный SKIP относится к same-kingdom party-to-party isolation: в нужной фазе тестового мира не было второй подходящей партии.
 
-## Party lifecycle caution
-
-Political World использует soft deactivation вместо обычного hard delete.
-
-Party IDs могут участвовать в history и других политических данных.
-
-Поэтому addon-private party state привязывайте к **stable party ID**, а не к «второму элементу списка партий».
-
-## Persistence status
-
-Source подтверждает API layering и typed helpers.
-
-Отдельный runtime probe всё ещё должен проверить:
+Поэтому статус точный:
 
 ```text
-write party values
-→ save
-→ reload
-→ resolve same stable party ID
-→ read values
+✅ party typed persistence после restart — verified
+✅ данные во время inactive — verified
+✅ fallback/rejection для missing party — verified
+🧪 изоляция party A от party B в одном kingdom — пока не доказана WBML-0003
 ```
 
-включая active и inactive parties.
+## Частые ошибки новичка
+
+### Использовать отображаемое имя вместо ID
+
+Имя может измениться. Для persistence нужен стабильный party ID.
+
+### Считать inactive равным deleted
+
+В WBML-0003 неактивная партия оставалась доступной и сохраняла протестированные данные.
+
+### Игнорировать `bool` от setter
+
+Если запись важна, проверяй возвращаемое значение.
+
+### Самому собирать внутренние storage keys
+
+Не надо. Реализация может измениться, public API и существует как граница совместимости.
+
+## Доказательства
+
+- [Исследование WBML-0003](../research/persistence-lifecycle-suite/)
+- [Санитизированный результат WBML-0003](/worldbox-modding-docs/evidence/wbml-0003-result.txt)

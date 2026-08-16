@@ -15,13 +15,13 @@ Political World сейчас является одним из крупнейши
 ### Рекурсия при инициализации правительства
 Реальный `StackOverflow` из-за цикла getter/setter во время первой инициализации.
 
-- [Разбор](../../case-studies/political-world-government-recursion/)
-- [Troubleshooting-паттерн](../../troubleshooting/stack-overflow-recursive-initialization/)
+- [Разбор](../case-studies/political-world-government-recursion/)
+- [Troubleshooting-паттерн](../troubleshooting/stack-overflow-recursive-initialization/)
 
 ### Ограничение спама событий
 Quiet Feed разделил внутренние события симуляции и уведомления, показываемые игроку.
 
-- [Разбор](../../case-studies/political-world-quiet-feed/)
+- [Разбор](../case-studies/political-world-quiet-feed/)
 
 ## Самые ценные области для следующего разбора
 

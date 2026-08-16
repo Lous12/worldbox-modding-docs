@@ -1,33 +1,171 @@
 ---
 title: PoliticalWorldAPI party-private addon data
-description: Source-backed typed addon state associated with one Political World party.
+description: Typed addon state scoped to a Political World party, with WBML-0003 runtime persistence and lifecycle evidence.
 ---
 
-<span class="doc-status">✅ Source verified API surface</span>
-<span class="doc-status">🧪 Persistence round trip not independently re-tested here</span>
-<span class="doc-status">API source generation 1.9.0</span>
+<span class="doc-status">✅ Runtime verified — executed branches</span>
+<span class="doc-status">WBML-0003</span>
+<span class="doc-status">API runtime 1.14.0</span>
 
-Political World API 1.9 exposes addon-private values scoped to a party:
+Party-private data lets an addon attach its own values to a **stable Political World party ID** without exposing those values as shared cross-mod tags.
 
-```csharp
-GetPartyInt(...)
-SetPartyInt(...)
+For a beginner, the mental model is:
 
-GetPartyString(...)
-SetPartyString(...)
-
-GetPartyBool(...)
-SetPartyBool(...)
-
-GetPartyFloat(...)
-SetPartyFloat(...)
+```text
+kingdom
+└─ party ID
+   └─ your addon ID
+      └─ your local key → value
 ```
 
-## How it is layered
+## Typed public API
 
-The inspected creator source does not introduce a separate party save database.
+The inspected API 1.9 creator source exposes:
 
-Instead it composes a party-local data key and routes the value through the same addon-private **kingdom data** API.
+```csharp
+public static int GetPartyInt(
+    Kingdom kingdom,
+    string addonId,
+    string partyId,
+    string key,
+    int fallback)
+
+public static bool SetPartyInt(
+    Kingdom kingdom,
+    string addonId,
+    string partyId,
+    string key,
+    int value)
+
+public static string GetPartyString(
+    Kingdom kingdom,
+    string addonId,
+    string partyId,
+    string key,
+    string fallback)
+
+public static bool SetPartyString(
+    Kingdom kingdom,
+    string addonId,
+    string partyId,
+    string key,
+    string value)
+
+public static bool GetPartyBool(...)
+public static bool SetPartyBool(...)
+public static float GetPartyFloat(...)
+public static bool SetPartyFloat(...)
+```
+
+The exact runtime package tested by WBML was newer: API **1.14.0**. Do not confuse the source snapshot version with the runtime version.
+
+## Minimal example
+
+```csharp
+const string AddonId = "Example.PartyAddon";
+const string Key = "conference_count";
+
+bool written = PoliticalWorldAPI.SetPartyInt(
+    kingdom,
+    AddonId,
+    party.Id,
+    Key,
+    3
+);
+
+int count = PoliticalWorldAPI.GetPartyInt(
+    kingdom,
+    AddonId,
+    party.Id,
+    Key,
+    0
+);
+```
+
+Always use the party's stable ID. Do not use a list index such as "party number 2" as persistent identity.
+
+## Missing party behavior
+
+WBML-0003 tested a party ID that did not exist in the target kingdom.
+
+Runtime API 1.14.0 behaved as follows:
+
+```text
+GetPartyInt    → supplied fallback
+GetPartyString → supplied fallback
+GetPartyBool   → supplied fallback
+GetPartyFloat  → supplied fallback
+
+SetPartyInt    → false
+SetPartyString → false
+SetPartyBool   → false
+SetPartyFloat  → false
+```
+
+This is useful because a missing party does not silently create apparently valid party-scoped state.
+
+## Persistence after a full WorldBox restart
+
+WBML-0003 performed a full process restart and then resolved the same party again.
+
+The following values returned correctly:
+
+```text
+party int
+party Unicode string
+party bool
+party float
+```
+
+The probe did not rewrite those values before the restart verification.
+
+Result:
+
+```text
+C.PARTY.RESTART.int    PASS
+C.PARTY.RESTART.string PASS
+C.PARTY.RESTART.bool   PASS
+C.PARTY.RESTART.float  PASS
+```
+
+This promotes the executed party typed-data persistence path from source expectation to runtime Verified for the tested stack.
+
+## What happens while a party is inactive?
+
+Political World exposes soft party lifecycle helpers in the inspected creator API, including concepts equivalent to:
+
+```csharp
+GetKingdomParties(..., includeInactive)
+GetKingdomParty(..., includeInactive: true)
+DeactivateKingdomParty(...)
+ReactivateKingdomParty(...)
+SetKingdomPartyActive(...)
+```
+
+WBML-0003 intentionally selected an **active, non-ruling party** so the lifecycle test would not disturb the ruling party.
+
+The sequence was:
+
+```text
+seed int/string/bool/float
+→ deactivate party
+→ resolve inactive party
+→ read all four values while inactive
+→ reactivate party
+→ confirm active state restored
+```
+
+Every executed step passed.
+
+Important practical consequence:
+
+> Deactivation did not erase the tested party-private values.
+
+That is exactly why addons should treat a stable party ID as long-lived identity rather than assuming an inactive party has disappeared.
+
+## Source layering
+
+The inspected source composes party identity into a local data key and routes it through addon-private kingdom data rather than exposing a separate public party save database.
 
 Conceptually:
 
@@ -39,68 +177,51 @@ party ID + local key
 kingdom addon-private storage
 ```
 
-## Setter validation
+This describes the inspected implementation. It does **not** authorize addons to reconstruct internal storage keys manually. Use the public methods.
 
-The inspected setters first verify that the requested Political World party can be resolved for the kingdom.
+## Evidence gap: party-to-party isolation
 
-Only then do they write the scoped data.
-
-This avoids creating apparently valid party state for a party ID that does not exist in that kingdom.
-
-## Example concept
-
-```csharp
-PoliticalWorldAPI.SetPartyInt(
-    kingdom,
-    AddonId,
-    party.Id,
-    "conference_count",
-    3
-);
-```
-
-Later:
-
-```csharp
-int count = PoliticalWorldAPI.GetPartyInt(
-    kingdom,
-    AddonId,
-    party.Id,
-    "conference_count",
-    0
-);
-```
-
-## Why scope through party ID
-
-The same local key:
+WBML-0003 ended with:
 
 ```text
-conference_count
+PASS=119
+FAIL=0
+SKIP=1
+SUITE RESULT: PARTIAL PASS
 ```
 
-can exist for multiple parties without collision because the party identity participates in the composed key.
+The skipped environmental branch was same-kingdom **party-to-party isolation**: the chosen world did not provide the required second party in the original isolation phase.
 
-## Party lifecycle caution
-
-Political World supports soft party deactivation rather than exposing hard deletion as the normal lifecycle.
-
-Party IDs may be referenced by history and other political state.
-
-Addon-private party data should therefore be treated as attached to a **stable party ID**, not to "whatever party currently occupies list index 2".
-
-## Persistence status
-
-The source verifies the API layering and typed helpers.
-
-A dedicated runtime probe should still test:
+Therefore we can say:
 
 ```text
-write party values
-→ save
-→ reload
-→ resolve same stable party ID
-→ read values
+✅ party typed persistence after restart — verified
+✅ data while inactive — verified
+✅ invalid-party fallback/rejection behavior — verified
+🧪 same-kingdom party A vs party B isolation — not yet verified by WBML-0003
 ```
 
-including active and inactive parties.
+Do not promote the skipped branch just because the rest of the suite passed.
+
+## Beginner mistakes to avoid
+
+### Using a display name as identity
+
+Names can change. Use the stable party ID for persistence.
+
+### Treating inactive as deleted
+
+WBML-0003 verified that the tested inactive party remained resolvable and retained its addon data.
+
+### Ignoring setter return values
+
+A party setter can return `false`, for example when the target party cannot be resolved. Check the result when the write matters.
+
+### Rebuilding internal data keys yourself
+
+The implementation can evolve. Public API methods are the compatibility boundary.
+
+## Evidence
+
+- [WBML-0003 research page](../research/persistence-lifecycle-suite/)
+- [Sanitized WBML-0003 result](/worldbox-modding-docs/evidence/wbml-0003-result.txt)

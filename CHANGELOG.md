@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.10 — Lab Baseline Through WBML-0005
+- Documented the accumulated WorldBox Modding Lab runtime baseline through WBML-0005 in beginner-friendly English and Russian pages.
+- Promoted WBML-0003 executed party-private persistence and party lifecycle branches to runtime Verified for the exact tested stack; preserved the one party-to-party isolation SKIP as an explicit evidence gap.
+- Reworked the PoliticalWorldAPI Event Bus reference around WBML-0004 runtime evidence, including 23 discovered event IDs, runtime acceptance of custom/unknown event IDs, `OldValue`/`NewValue` rename mapping, per-subscriber payload isolation, callback exception isolation, recursion depth 16, and 100-dispatch stress completion.
+- Added a PoliticalWorldAPI Actions / Conditions / Effects reference based on WBML-0005 runtime evidence.
+- Documented same-ID action registration as runtime replacement/upsert behavior for API 1.14.0.
+- Documented the single-active-party support normalization trap as Observed, while keeping exact multi-party support mutation unverified.
+- Documented the diagnostics bookkeeping mismatch observed after repeated same-ID action replacement: live action query count 0 while diagnostics reported 2 registered actions.
+- Added sanitized evidence excerpts for WBML-0003, WBML-0004 and WBML-0005.
+- Added a beginner-oriented PoliticalWorldAPI runtime baseline guide, detailed research pages, case studies, AI boundary rules and updated landing pages.
+- Added methodology rules learned from failed harness assumptions: persist proof state across restart, re-query live DTO/state, treat cleanup as part of the experiment, and never promote SKIP branches.
+
 ## 0.1.9 — World Isolation Verified
 - Promoted WBML-0002 from Experimental to runtime Verified for the exact WorldBox 0.51.2 build 719 / NML 1.2.0.1 / PoliticalWorldAPI 1.14.0 stack.
 - Added a dedicated World Isolation Probe research page and WBML-0002 case study in English and Russian.

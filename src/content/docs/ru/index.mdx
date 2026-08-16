@@ -98,6 +98,21 @@ WorldBox Modding Docs превращает реальную разработку
     <strong>World save сохраняют current-run addon state изолированным</strong>
     <span>WBML-0002 подтвердил A → B → A → B isolation с уникальными signatures и строгим all-steps final gate.</span>
   </a>
+  <a class="finding" href="./case-studies/wbml-0003-persistence-lifecycle/">
+    <span class="finding-kicker">🧪 LAB VERIFIED</span>
+    <strong>Party data переживает restart и inactive lifecycle</strong>
+    <span>WBML-0003 проверил typed party data после полного restart и чтение во время deactivate/reactivate.</span>
+  </a>
+  <a class="finding" href="./case-studies/wbml-0004-event-bus-runtime/">
+    <span class="finding-kicker">🧪 LAB VERIFIED</span>
+    <strong>Event Bus проверен в runtime 1.14.0</strong>
+    <span>23 event ID, payload isolation, exception isolation, recursion guard 16 и 100/100 dispatch.</span>
+  </a>
+  <a class="finding" href="./case-studies/wbml-0005-actions-runtime/">
+    <span class="finding-kicker">🧪 LAB VERIFIED</span>
+    <strong>Actions / Conditions / Effects прошли единый runtime-suite</strong>
+    <span>WBML-0005 зафиксировал replacement same-ID action и безопасную границу single-party support.</span>
+  </a>
 </div>
 
 ## Основано на реальных проектах

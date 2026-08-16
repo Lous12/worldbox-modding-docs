@@ -1,23 +1,27 @@
 ---
 title: PoliticalWorldAPI Event Bus
-description: Source-backed reference for Political World's addon event subscriptions and callback safety.
+description: Beginner-oriented Political World event subscriptions with WBML-0004 runtime evidence and source/runtime drift boundaries.
 ---
 
-<span class="doc-status">✅ Source verified</span>
-<span class="doc-status">Political World GitHub snapshot ce0c917</span>
-<span class="doc-status">API source generation 1.9.0</span>
+<span class="doc-status">✅ Runtime verified — API 1.14.0</span>
+<span class="doc-status">WBML-0004</span>
+<span class="doc-status">⚠️ Older inspected source: API 1.9.0</span>
 
-Political World exposes an event-driven extension surface through:
+The PoliticalWorldAPI Event Bus lets your addon react to political changes **when they happen** instead of scanning every kingdom every frame.
 
-```csharp
-Lous12.PoliticalWorld.PoliticalWorldAPI
+For a beginner, think of it as:
+
+```text
+Political World changes something
+        ↓
+publishes event ID + payload
+        ↓
+your subscribed callback runs
 ```
 
-The Event Bus exists so an addon can react to political transitions without maintaining its own permanent world scan.
+## Public surface
 
-## Public subscription surface
-
-The relevant public methods are:
+The inspected creator API exposes the following event-facing methods:
 
 ```csharp
 PoliticalWorldAPI.GetEventIds()
@@ -26,192 +30,245 @@ PoliticalWorldAPI.Unsubscribe(addonId, eventId, handler)
 PoliticalWorldAPI.UnsubscribeAll(addonId)
 ```
 
-The addon must already be registered with `RegisterAddon(...)`.
-
-A wildcard event ID is available through:
+and a wildcard event selector:
 
 ```csharp
 PoliticalWorldAPI.Events.All
 ```
 
-Use the wildcard when you intentionally want every Political World event. Do not use it by default when only one or two event types are relevant.
+Your addon must be registered before subscribing.
 
-## Event IDs verified in the inspected source
-
-The Event Bus defines IDs for these transition families:
-
-```text
-kingdom.ideology.changed
-kingdom.current.changed
-kingdom.government.changed
-
-party.created
-party.activated
-party.deactivated
-party.renamed
-party.ideology.changed
-party.leader.changed
-party.radicalism.changed
-party.support.changed
-
-kingdom.ruling-party.changed
-kingdom.ruler.changed
-kingdom.election.finished
-
-kingdom.crisis.started
-kingdom.crisis.ended
-kingdom.leadership-crisis.started
-kingdom.leadership-crisis.resolved
-
-kingdom.rare-political-event.fired
-political.event.published
-```
-
-Call `GetEventIds()` instead of copying this list into compatibility-sensitive code.
-
-## Event payload
-
-`PoliticalEventData` can carry:
-
-- event ID;
-- `Kingdom` reference and display name;
-- old/new string values;
-- old/new integer values;
-- party ID;
-- actor reference, identity and name;
-- old/new names;
-- source addon ID;
-- category;
-- year;
-- text and event key.
-
-Not every event fills every field.
-
-Treat unused fields as optional.
-
-## Subscription validation
-
-The inspected source rejects a subscription when:
-
-- the addon is not registered;
-- the handler is null;
-- the event ID is unknown and is not the wildcard;
-- the exact same addon + handler subscription already exists.
-
-Unknown event IDs and duplicate subscriptions are recorded through diagnostics.
-
-## Callback isolation
-
-Each subscriber callback is invoked inside its own `try/catch`.
-
-If addon A throws an exception:
-
-```text
-addon A callback → exception
-```
-
-Political World records a callback error and continues dispatching other subscribers.
-
-A broken addon callback should therefore not prevent addon B from receiving the same event.
-
-## Snapshot before dispatch
-
-Before iterating subscribers, the Event Bus copies the current subscription list.
-
-This is important because a callback may subscribe or unsubscribe while an event is being dispatched.
-
-Iterating a snapshot avoids mutating the active collection during the loop.
-
-## Payload cloning
-
-Each callback receives a new `PoliticalEventData` object.
-
-The object contains the same referenced `Kingdom`/`Actor` objects, but scalar/string event fields are copied into a fresh payload object.
-
-This prevents one subscriber from changing the payload object seen by later subscribers.
-
-It does **not** make the referenced WorldBox objects immutable.
-
-## Recursive dispatch protection
-
-The Event Bus tracks nested dispatch depth.
-
-The inspected source caps nested dispatch at:
-
-```text
-16
-```
-
-If a callback causes events that cause more events recursively beyond that limit, dispatch is stopped and an error is logged.
-
-This protects the API from an event recursion loop similar in shape to ordinary recursive call bugs.
-
-## Fast no-subscriber exit
-
-Core event emission first checks whether anyone subscribes to:
-
-- that exact event; or
-- the wildcard.
-
-If nobody is listening, the Event Bus returns before constructing and dispatching the full event payload.
-
-## Minimal addon example
+## Minimal example
 
 ```csharp
-using NeoModLoader.api;
-using Lous12.PoliticalWorld;
+private const string AddonId = "Example.EventAddon";
 
-public class Main : BasicMod<Main>
+protected override void OnModLoad()
 {
-    private const string AddonId = "Example.EventAddon";
+    // Register the addon first.
 
-    protected override void OnModLoad()
-    {
-        if (!PoliticalWorldAPI.IsCompatible(1, 6))
-            return;
+    PoliticalWorldAPI.Subscribe(
+        AddonId,
+        "party.renamed",
+        OnPartyRenamed
+    );
+}
 
-        if (!PoliticalWorldAPI.RegisterAddon(
-            new PoliticalWorldAPI.AddonDefinition
-            {
-                Id = AddonId,
-                Name = "Event Addon",
-                Version = "1.0.0",
-                Author = "Example"
-            }))
-            return;
+private static void OnPartyRenamed(
+    PoliticalWorldAPI.PoliticalEventData data)
+{
+    if (data == null)
+        return;
 
-        PoliticalWorldAPI.Subscribe(
-            AddonId,
-            PoliticalWorldAPI.Events.GovernmentChanged,
-            OnGovernmentChanged
-        );
-    }
-
-    private static void OnGovernmentChanged(
-        PoliticalWorldAPI.PoliticalEventData data)
-    {
-        if (data == null)
-            return;
-
-        // React only to the transition.
-    }
+    // For the tested API 1.14.0 rename payload,
+    // old/new party names were in OldValue/NewValue.
+    string oldName = data.OldValue;
+    string newName = data.NewValue;
 }
 ```
 
-The `IsCompatible(1, 6)` value above mirrors the repository's current example and therefore represents a **minimum compatibility requirement**, not the source's current API version.
+Do not assume every event uses the same fields. Inspect or document the payload contract for the specific event you consume.
 
-See [Source of truth and version drift for AI](../ai/source-of-truth-and-version-drift/).
+## Runtime discovery: 23 event IDs
 
-## General design lesson
+The older inspected API 1.9 source snapshot contained a known-event list of 20 IDs.
 
-An event API is more than a delegate list.
+WBML-0004 called `GetEventIds()` on the installed API 1.14.0 runtime and received:
 
-A robust public bus should define:
+```text
+23 event IDs
+```
 
-1. stable event IDs;
-2. ownership/registration rules;
-3. callback isolation;
-4. mutation-safe dispatch;
-5. recursion protection;
-6. diagnostics;
-7. a way to discover supported events.
+It also verified that the returned array/list was defensive: mutating one retrieved collection did not corrupt a subsequent result.
+
+Practical lesson:
+
+> When runtime discovery exists, prefer it over hard-coding an old source snapshot's event count.
+
+## Source/runtime drift: custom or unknown event ID
+
+The inspected API 1.9 source suggested an unknown event subscription should be rejected.
+
+The tested API 1.14.0 runtime instead accepted a unique WBML custom/unknown event ID. The Lab then removed that subscription successfully.
+
+Status:
+
+```text
+✅ Verified for runtime 1.14.0: unique custom/unknown subscription was accepted and removable
+⚠️ Source 1.9 behavior differs
+```
+
+This is exactly why this documentation keeps source version and runtime version separate.
+
+## Null handlers and duplicate subscriptions
+
+WBML-0004 verified:
+
+```text
+Subscribe(..., null) → rejected
+same addon + same event + same handler subscribed twice → duplicate rejected/ignored
+```
+
+The duplicate path was also reflected in diagnostics.
+
+## Exact and wildcard subscribers
+
+The Lab subscribed both:
+
+```text
+party.renamed
+*
+```
+
+and verified that both received the tested rename event exactly once in the basic dispatch phase.
+
+Use wildcard subscriptions only when you really need a broad stream. An exact event ID is easier to reason about and produces less addon-side filtering work.
+
+## `party.renamed` payload mapping on API 1.14.0
+
+This was one of the most useful runtime discoveries.
+
+The first harness expected:
+
+```text
+OldName / NewName
+```
+
+but runtime API 1.14.0 produced the tested party rename values in:
+
+```text
+OldValue / NewValue
+```
+
+while `OldName` and `NewName` were empty.
+
+The corrected probe treated the actual runtime mapping as evidence rather than forcing the older assumption.
+
+Do not generalize this mapping to unrelated event IDs without testing them.
+
+## Payload isolation between subscribers
+
+WBML-0004 installed a mutating subscriber before an observing subscriber.
+
+The first callback changed fields in **its own** `PoliticalEventData` payload. The observer did not see the mutation.
+
+Result:
+
+```text
+subscriber A payload mutation
+≠ subscriber B payload object
+```
+
+This verifies per-subscriber payload-object isolation for the tested dispatch path.
+
+Important limit:
+
+> `PoliticalEventData` may still contain references to live WorldBox objects such as a `Kingdom`. Payload cloning does not make those referenced game objects immutable.
+
+## Callback exception isolation
+
+A Lab subscriber intentionally threw:
+
+```text
+WBML_INTENTIONAL_CALLBACK_EXCEPTION
+```
+
+The Event Bus recorded the callback error, but the healthy subscriber still ran for the same event.
+
+WBML also verified that the addon diagnostics `CallbackErrors` count increased.
+
+Practical rule:
+
+> One broken callback should not be relied upon to stop the rest of the Event Bus. Handle your own errors and do not use exceptions as control flow.
+
+## Unsubscribe while dispatching
+
+WBML-0004 tested a callback that unsubscribed itself during dispatch.
+
+The peer observer still received the current dispatch, and later dispatches reflected the removal.
+
+This matches snapshot-style dispatch behavior and avoids collection-modified iteration failures.
+
+The suite also verified `UnsubscribeAll(addonId)` cleanup.
+
+## Recursive dispatch guard
+
+The Lab asked a callback to recursively cause up to 64 rename events.
+
+Runtime result:
+
+```text
+requested: 64
+recursive callbacks observed: 16
+tail subscriber callbacks: 16
+```
+
+The guard stopped recursion before 64, and the independent tail subscriber still received the accepted dispatches.
+
+For this exact runtime, the observed limit matches the older inspected source constant of 16.
+
+Do not write addon logic that depends on reaching the guard. Avoid recursion in the first place.
+
+## 100-dispatch stress probe
+
+WBML-0004 then performed 100 sequential test writes that generated the targeted event.
+
+Result:
+
+```text
+writes accepted: 100/100
+callbacks:       100
+observed time:   33 ms
+```
+
+The callback count is part of the verified behavior of that run.
+
+The 33 ms number is **not** a benchmark guarantee. Hardware, world state, other mods, logging and future versions can all change it.
+
+## What WBML-0004 proved
+
+For the tested stack:
+
+```text
+✅ runtime event discovery works
+✅ returned event-ID collection is defensively copied
+✅ tested custom/unknown subscription accepted
+✅ null handler rejected
+✅ duplicate exact subscription rejected/ignored
+✅ exact + wildcard delivery works
+✅ party.renamed tested mapping is OldValue/NewValue
+✅ subscriber payload-object mutations are isolated
+✅ callback exception does not stop later healthy callback
+✅ diagnostics records callback failure
+✅ self-unsubscribe during dispatch works
+✅ UnsubscribeAll removes the tested subscriptions
+✅ recursive dispatch is bounded; observed depth 16
+✅ 100 accepted test dispatches produced 100 callbacks
+✅ final subscription cleanup reached zero
+```
+
+## What it did not prove
+
+WBML-0004 did not exhaustively verify the payload schema of every one of the 23 runtime event IDs.
+
+It also did not establish a stable performance budget from the one 33 ms observation.
+
+## Harness mistakes worth preserving
+
+The first Event Bus harness made two important mistakes:
+
+1. it treated unknown-event rejection from the older source as a required runtime assertion;
+2. after learning that rename values lived in `NewValue`, one fix still filtered recursive/stress events using only `NewName`.
+
+That second mistake produced zero callbacks in Phase C. The result was rejected as a **harness bug**, not misreported as an Event Bus failure.
+
+The final fix used runtime-aware rename value resolution and passed 68/68 assertions.
+
+```text
+PASS=68 FAIL=0 SKIP=0
+```
+
+## Evidence
+
+- [WBML-0004 Event Bus Runtime Suite](../research/event-bus-runtime-suite/)
+- [Sanitized WBML-0004 result](/worldbox-modding-docs/evidence/wbml-0004-result.txt)

@@ -1,8 +1,16 @@
 ---
 title: Для ИИ
-description: Машиночитаемая документация и правила надёжности для ИИ-помощников.
+description: Машиночитаемые правила reliability, provenance и evidence scope для coding assistants.
 ---
 
-Машиночитаемая документация и правила надёжности для ИИ-помощников.
+Этот раздел объясняет ИИ, **что разрешено считать фактом**, а где нужен новый probe.
 
-Раздел создан как часть первоначального каркаса сайта и будет заполняться проверенными материалами из наших исследований.
+Начать с:
+
+- [Правила verification](./verification-rules/)
+- [Source of truth и version drift](./source-of-truth-and-version-drift/)
+- [Runtime-правила Political World](./politicalworld-runtime-rules/)
+- [Persistence и migration rules](./persistence-and-migration-rules/)
+- [Public API boundary rules](./public-api-boundary-rules/)
+
+Главное правило: нельзя заполнять пробел в документации правдоподобно выдуманным API. Нужно назвать границу evidence и предложить probe.

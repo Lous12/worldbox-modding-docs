@@ -1,215 +1,196 @@
 ---
 title: PoliticalWorldAPI Event Bus
-description: Проверенный по исходнику справочник по подпискам Political World и защите callbacks.
+description: Понятная новичку документация подписок Political World с runtime-доказательствами WBML-0004 и явной границей source/runtime.
 ---
 
-<span class="doc-status">✅ Source verified</span>
-<span class="doc-status">Political World GitHub snapshot ce0c917</span>
-<span class="doc-status">API source generation 1.9.0</span>
+<span class="doc-status">✅ Runtime verified — API 1.14.0</span>
+<span class="doc-status">WBML-0004</span>
+<span class="doc-status">⚠️ Изученный старый source: API 1.9.0</span>
 
-Political World предоставляет event-driven интерфейс через:
+Event Bus нужен, чтобы аддон реагировал на политические изменения **в момент события**, а не сканировал все государства каждый кадр.
 
-```csharp
-Lous12.PoliticalWorld.PoliticalWorldAPI
+Для новичка схема простая:
+
+```text
+Political World меняет состояние
+        ↓
+публикует event ID + payload
+        ↓
+вызывается callback твоего аддона
 ```
 
-Event Bus нужен, чтобы аддон реагировал на политические изменения без собственного постоянного world scan.
+## Public surface
 
-## Публичный интерфейс подписок
-
-Основные методы:
+В creator API есть:
 
 ```csharp
 PoliticalWorldAPI.GetEventIds()
 PoliticalWorldAPI.Subscribe(addonId, eventId, handler)
 PoliticalWorldAPI.Unsubscribe(addonId, eventId, handler)
 PoliticalWorldAPI.UnsubscribeAll(addonId)
+PoliticalWorldAPI.Events.All // wildcard "*"
 ```
 
-Перед подпиской аддон должен быть зарегистрирован через `RegisterAddon(...)`.
-
-Wildcard:
-
-```csharp
-PoliticalWorldAPI.Events.All
-```
-
-Используйте его только когда действительно нужны все события.
-
-## Event IDs, подтверждённые исходником
-
-В проверенном исходнике есть такие семейства:
-
-```text
-kingdom.ideology.changed
-kingdom.current.changed
-kingdom.government.changed
-
-party.created
-party.activated
-party.deactivated
-party.renamed
-party.ideology.changed
-party.leader.changed
-party.radicalism.changed
-party.support.changed
-
-kingdom.ruling-party.changed
-kingdom.ruler.changed
-kingdom.election.finished
-
-kingdom.crisis.started
-kingdom.crisis.ended
-kingdom.leadership-crisis.started
-kingdom.leadership-crisis.resolved
-
-kingdom.rare-political-event.fired
-political.event.published
-```
-
-В compatibility-sensitive коде лучше вызывать `GetEventIds()`, а не хранить собственную копию списка.
-
-## Payload события
-
-`PoliticalEventData` может содержать:
-
-- event ID;
-- ссылку на `Kingdom` и его display name;
-- old/new string;
-- old/new integer;
-- party ID;
-- ссылку на actor, identity и name;
-- old/new name;
-- source addon ID;
-- category;
-- year;
-- text и event key.
-
-Не каждое событие заполняет все поля.
-
-Неиспользуемые поля считайте optional.
-
-## Проверка подписки
-
-Исходник отклоняет подписку, если:
-
-- addon не зарегистрирован;
-- handler равен null;
-- event ID неизвестен и это не wildcard;
-- точно такая же пара addon + handler уже подписана на событие.
-
-Unknown event ID и duplicate subscription попадают в diagnostics.
-
-## Изоляция callbacks
-
-Каждый callback вызывается внутри отдельного `try/catch`.
-
-Если addon A падает:
-
-```text
-addon A callback → exception
-```
-
-Political World записывает callback error и продолжает dispatch остальным subscribers.
-
-Ошибка одного аддона не должна лишить другой аддон того же события.
-
-## Snapshot перед dispatch
-
-Перед обходом subscribers Event Bus создаёт копию текущего списка.
-
-Callback может подписаться или отписаться прямо во время события.
-
-Snapshot не даёт такой мутации сломать активный цикл обхода.
-
-## Clone payload
-
-Каждый callback получает новый объект `PoliticalEventData`.
-
-Ссылки на `Kingdom`/`Actor` остаются ссылками на те же WorldBox objects, но scalar/string поля копируются в отдельный payload.
-
-Один subscriber не может поменять сам payload-object, который затем увидит другой subscriber.
-
-Но это **не** делает `Kingdom` или `Actor` immutable.
-
-## Защита от рекурсивного dispatch
-
-Event Bus считает глубину вложенных событий.
-
-В проверенном исходнике limit:
-
-```text
-16
-```
-
-Если callback создаёт событие, которое создаёт событие, и так далее сверх limit, dispatch останавливается и пишет ошибку в лог.
-
-## Быстрый выход без subscribers
-
-Перед созданием полного payload core проверяет, подписан ли кто-нибудь:
-
-- на конкретное событие;
-- или на wildcard.
-
-Если слушателей нет, работа прекращается раньше.
+Перед подпиской аддон должен быть зарегистрирован.
 
 ## Минимальный пример
 
 ```csharp
-using NeoModLoader.api;
-using Lous12.PoliticalWorld;
+private const string AddonId = "Example.EventAddon";
 
-public class Main : BasicMod<Main>
+PoliticalWorldAPI.Subscribe(
+    AddonId,
+    "party.renamed",
+    OnPartyRenamed
+);
+
+private static void OnPartyRenamed(
+    PoliticalWorldAPI.PoliticalEventData data)
 {
-    private const string AddonId = "Example.EventAddon";
+    if (data == null)
+        return;
 
-    protected override void OnModLoad()
-    {
-        if (!PoliticalWorldAPI.IsCompatible(1, 6))
-            return;
-
-        if (!PoliticalWorldAPI.RegisterAddon(
-            new PoliticalWorldAPI.AddonDefinition
-            {
-                Id = AddonId,
-                Name = "Event Addon",
-                Version = "1.0.0",
-                Author = "Example"
-            }))
-            return;
-
-        PoliticalWorldAPI.Subscribe(
-            AddonId,
-            PoliticalWorldAPI.Events.GovernmentChanged,
-            OnGovernmentChanged
-        );
-    }
-
-    private static void OnGovernmentChanged(
-        PoliticalWorldAPI.PoliticalEventData data)
-    {
-        if (data == null)
-            return;
-
-        // Реагируем только на переход.
-    }
+    // Для проверенного runtime 1.14.0:
+    string oldName = data.OldValue;
+    string newName = data.NewValue;
 }
 ```
 
-`IsCompatible(1, 6)` здесь повторяет текущий repository example и является **minimum compatibility requirement**, а не номером текущего source API.
+Не считай, что все события используют одинаковые поля payload. Конкретный event ID должен иметь собственный документированный контракт.
 
-См. [Источник истины и расхождение версий](../ai/source-of-truth-and-version-drift/).
+## Runtime discovery: 23 event ID
 
-## Общий вывод
+В более старом изученном source API 1.9 список известных событий содержал 20 ID.
 
-Хороший Event Bus — это не просто список delegates.
+WBML-0004 вызвал `GetEventIds()` на установленном API 1.14.0 и получил:
 
-Публичный bus должен иметь:
+```text
+23 event ID
+```
 
-1. стабильные event IDs;
-2. ownership/registration rules;
-3. callback isolation;
-4. mutation-safe dispatch;
-5. recursion protection;
-6. diagnostics;
-7. способ узнать поддерживаемые события.
+Также проверено, что возвращаемая коллекция защищена от внешней порчи: изменение первого результата не испортило следующий вызов.
+
+## Source/runtime drift: неизвестный event ID
+
+Старый source подсказывал, что unknown event должен отклоняться.
+
+Runtime API 1.14.0 принял уникальный custom/unknown event ID WBML. После этого подписка нормально удалилась.
+
+Поэтому нельзя писать в документации просто «unknown events запрещены» без версии.
+
+## Null handler и duplicate subscription
+
+WBML-0004 подтвердил:
+
+```text
+Subscribe(..., null) → rejected
+повтор той же addon + event + handler подписки → duplicate rejected/ignored
+```
+
+Duplicate также появился в diagnostics.
+
+## Exact и wildcard подписчики
+
+Lab одновременно подписался на:
+
+```text
+party.renamed
+*
+```
+
+Оба подписчика получили базовое тестовое rename-событие.
+
+Если тебе нужен один тип событий, используй точный ID, а не wildcard без необходимости.
+
+## Где лежат имена в `party.renamed` на runtime 1.14.0
+
+Первый harness ожидал:
+
+```text
+OldName / NewName
+```
+
+Но протестированный runtime положил старое и новое имя в:
+
+```text
+OldValue / NewValue
+```
+
+а `OldName` / `NewName` были пустыми.
+
+Это важный пример, почему runtime-доказательство сильнее старого предположения harness.
+
+Не переноси это правило автоматически на другие event ID.
+
+## Изоляция payload между callback
+
+Первый callback специально изменял поля своего `PoliticalEventData`. Следующий callback эти изменения не увидел.
+
+То есть для протестированной ветки каждый подписчик получил отдельный payload-объект.
+
+Но если payload содержит ссылку на живой `Kingdom` или другой объект WorldBox, клонирование payload не делает сам объект игры immutable.
+
+## Ошибка одного callback не ломает остальных
+
+Один тестовый callback намеренно бросил исключение `WBML_INTENTIONAL_CALLBACK_EXCEPTION`.
+
+Event Bus записал ошибку, но здоровый callback всё равно получил то же событие. Счётчик `CallbackErrors` в diagnostics увеличился.
+
+Не используй исключения как способ остановить общий dispatch.
+
+## Self-unsubscribe во время dispatch
+
+WBML проверил callback, который отписывает сам себя во время обработки события.
+
+Другой подписчик всё равно получил текущий dispatch, а дальнейшие события уже учитывали удаление. Также прошёл `UnsubscribeAll`.
+
+## Защита от рекурсивного dispatch
+
+Lab запросил цепочку до 64 рекурсивных rename-событий.
+
+Получилось:
+
+```text
+requested: 64
+recursive callbacks: 16
+tail subscriber:     16
+```
+
+Runtime остановил рекурсию на 16. Это совпало с константой старого изученного source.
+
+Но нормальный аддон не должен специально рассчитывать на эту границу — рекурсивный event-loop лучше не создавать вообще.
+
+## Stress: 100 dispatch
+
+Результат одного теста:
+
+```text
+writes:    100/100
+callbacks: 100
+time:      33 ms
+```
+
+100 callback — часть проверенного результата. 33 ms — только наблюдение одного окружения, а не обещание производительности.
+
+## Что реально доказано WBML-0004
+
+Для точного протестированного стека подтверждены discovery, exact/wildcard delivery, tested rename payload mapping, payload isolation, callback isolation, self-unsubscribe, `UnsubscribeAll`, recursion guard, 100-dispatch completion и финальная очистка подписок.
+
+Не доказана полная схема payload всех 23 event ID и не установлен универсальный performance budget.
+
+## Ошибки harness, которые нельзя забывать
+
+Первый suite ошибочно сделал source-предположение «unknown event должен быть rejected» обязательным runtime-тестом.
+
+Затем fix1 уже обнаружил `NewValue`, но recursive/stress handlers всё ещё фильтровали только `NewName`, поэтому сами отбрасывали все события. Этот прогон был признан ошибкой harness, а не «поломкой Event Bus».
+
+`fix2` исправил фильтр и завершился 68 PASS / 0 FAIL / 0 SKIP.
+
+```text
+PASS=68 FAIL=0 SKIP=0
+```
+
+## Доказательства
+
+- [WBML-0004 Event Bus Runtime Suite](../research/event-bus-runtime-suite/)
+- [Санитизированный результат WBML-0004](/worldbox-modding-docs/evidence/wbml-0004-result.txt)

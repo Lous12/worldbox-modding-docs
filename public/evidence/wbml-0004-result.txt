@@ -1,0 +1,48 @@
+WBML-0004 — PoliticalWorldAPI Event Bus Suite
+Sanitized runtime evidence excerpt
+
+Environment
+WorldBox: 0.51.2
+Build: 719
+Git: build-719@5dec
+NeoModLoader: 1.2.0.1
+PoliticalWorldAPI: 1.14.0
+Probe: 0.0.4-fix2
+
+Discovery
+GetEventIds count: 23
+Defensive clone check: PASS
+Custom/unknown event subscription: ACCEPTED by runtime 1.14.0
+Custom subscription cleanup: PASS
+Null handler rejection: PASS
+Duplicate exact subscription rejection: PASS
+
+party.renamed payload
+Runtime mapping: OldValue / NewValue
+OldName / NewName were empty in the tested runtime payload.
+Payload clone isolation between subscribers: PASS
+
+Callback isolation
+Intentional callback exception was recorded.
+Healthy subscriber still received the same dispatch: PASS
+Diagnostics CallbackErrors incremented: PASS
+Self-unsubscribe during dispatch: PASS
+UnsubscribeAll cleanup: PASS
+
+Recursive dispatch
+Requested recursive chain: 64
+Observed recursive callbacks: 16
+Tail subscriber callbacks: 16
+Recursion guard stopped before 64: PASS
+
+Stress
+Writes accepted: 100/100
+Callbacks received: 100
+Observed elapsed time: 33 ms
+The timing is an observation, not a performance guarantee.
+
+Final matrix
+PASS=68 FAIL=0 SKIP=0
+FINAL GATES: A=PASS B=PASS C=PASS
+SUITE RESULT: PASS
+Final event subscriptions: 0

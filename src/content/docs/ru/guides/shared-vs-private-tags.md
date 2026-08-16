@@ -132,7 +132,7 @@ Shared/global tag key специально сохраняет legacy `ukiol_*` I
 
 Persistent key нельзя переименовывать только ради нового branding.
 
-См. [Stable IDs — это данные, а не branding](../stable-ids-and-migrations/).
+См. [Stable IDs — это данные, а не branding](./stable-ids-and-migrations/).
 
 
 ## Runtime persistence — WBML-0001
