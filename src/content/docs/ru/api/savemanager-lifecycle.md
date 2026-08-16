@@ -1,6 +1,6 @@
 ---
-title: SaveManager lifecycle — tested signatures
-description: Русская версия: Version-bound save/load signatures and safe reload proof from WBML-0029/0030.
+title: "SaveManager lifecycle — tested signatures"
+description: "Русская версия: Version-bound save/load signatures and safe reload proof from WBML-0029/0030."
 ---
 
 <span class="doc-status">✅ Runtime verified on 0.51.2</span>

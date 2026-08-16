@@ -1,6 +1,6 @@
 ---
-title: WBML-0030 — Full Integration Torture
-description: Русская версия: Combined save/reload, stale-reference, repeated worldgen, mass map reads and cross-mod integrity test.
+title: "WBML-0030 — Full Integration Torture"
+description: "Русская версия: Combined save/reload, stale-reference, repeated worldgen, mass map reads and cross-mod integrity test."
 ---
 
 <span class="doc-status">✅ Verified</span>

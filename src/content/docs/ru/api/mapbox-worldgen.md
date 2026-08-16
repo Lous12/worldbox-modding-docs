@@ -1,6 +1,6 @@
 ---
-title: MapBox world-generation lifecycle
-description: Русская версия: Verified generateNewMap and completion behavior on WorldBox 0.51.2.
+title: "MapBox world-generation lifecycle"
+description: "Русская версия: Verified generateNewMap and completion behavior on WorldBox 0.51.2."
 ---
 
 <span class="doc-status">✅ Verified</span>

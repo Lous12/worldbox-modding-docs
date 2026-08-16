@@ -1,6 +1,6 @@
 ---
-title: WBML runtime tooling baseline — 0.0.6 to 0.0.15
-description: Русская версия: Lifecycle, reflection, localization, UI, diagnostics, Unity object ownership, transactions and fake-null findings.
+title: "WBML runtime tooling baseline — 0.0.6 to 0.0.15"
+description: "Русская версия: Lifecycle, reflection, localization, UI, diagnostics, Unity object ownership, transactions and fake-null findings."
 ---
 
 <span class="doc-status">✅ Verified — выполненные ветки</span>

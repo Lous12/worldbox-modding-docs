@@ -1,6 +1,6 @@
 ---
-title: Save/reload lifecycle and stale-reference torture
-description: Русская версия: WBML 0.0.29 evidence for safe SaveManager discovery, real reload proof, Height normalization and reference reuse.
+title: "Save/reload lifecycle and stale-reference torture"
+description: "Русская версия: WBML 0.0.29 evidence for safe SaveManager discovery, real reload proof, Height normalization and reference reuse."
 ---
 
 <span class="doc-status">✅ Verified — 0.0.29-fix1: 26 / 0 / 0</span>

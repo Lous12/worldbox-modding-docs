@@ -1,6 +1,6 @@
 ---
-title: Live entities baseline — Kingdom, City, Actor and destruction
-description: Русская версия: WBML 0.0.16–0.0.20 runtime findings for live political entities, relationships, liveness and destruction.
+title: "Live entities baseline — Kingdom, City, Actor and destruction"
+description: "Русская версия: WBML 0.0.16–0.0.20 runtime findings for live political entities, relationships, liveness and destruction."
 ---
 
 <span class="doc-status">✅ Verified — WorldBox 0.51.2 build 719</span>

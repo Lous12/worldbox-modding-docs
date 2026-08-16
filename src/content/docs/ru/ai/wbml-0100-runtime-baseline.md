@@ -1,6 +1,6 @@
 ---
-title: WBML 0.1.0: правила для ИИ
-description: Machine-oriented runtime boundaries и safe reasoning rules первого WBML baseline.
+title: "WBML 0.1.0: правила для ИИ"
+description: "Machine-oriented runtime boundaries и safe reasoning rules первого WBML baseline."
 ---
 
 

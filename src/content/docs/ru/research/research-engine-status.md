@@ -1,6 +1,6 @@
 ---
-title: Research Engine v2.1.1 status
-description: Русская версия: What the WBML Research Engine can automate today and what remains for later versions.
+title: "Research Engine v2.1.1 status"
+description: "Русская версия: What the WBML Research Engine can automate today and what remains for later versions."
 ---
 
 <span class="doc-status">✅ Validated infrastructure</span>

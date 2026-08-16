@@ -1,6 +1,6 @@
 ---
-title: World generation lifecycle — completion signals, reuse and repeated generation
-description: Русская версия: WBML 0.0.24–0.0.25 evidence for generateNewMap, finishMakingWorld, persistent runners and reference reuse.
+title: "World generation lifecycle — completion signals, reuse and repeated generation"
+description: "Русская версия: WBML 0.0.24–0.0.25 evidence for generateNewMap, finishMakingWorld, persistent runners and reference reuse."
 ---
 
 <span class="doc-status">✅ Verified — принятые fix6/fix1</span>

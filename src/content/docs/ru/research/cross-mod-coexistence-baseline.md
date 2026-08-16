@@ -1,6 +1,6 @@
 ---
-title: Cross-mod coexistence — Political World, Custom Worldsize and Scenario Tools
-description: Русская версия: WBML 0.0.28 evidence for assembly discovery, Harmony patch ownership and cross-mod runtime stability.
+title: "Cross-mod coexistence — Political World, Custom Worldsize and Scenario Tools"
+description: "Русская версия: WBML 0.0.28 evidence for assembly discovery, Harmony patch ownership and cross-mod runtime stability."
 ---
 
 <span class="doc-status">✅ Verified — 0.0.28-fix1: 45 / 0 / 0</span>

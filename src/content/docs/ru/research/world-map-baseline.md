@@ -1,6 +1,6 @@
 ---
-title: World map baseline — WorldTile, terrain, biome and map services
-description: Русская версия: WBML 0.0.21–0.0.23 findings for WorldTile, terrain/biome routing, coordinates, zones, chunks, regions and map services.
+title: "World map baseline — WorldTile, terrain, biome and map services"
+description: "Русская версия: WBML 0.0.21–0.0.23 findings for WorldTile, terrain/biome routing, coordinates, zones, chunks, regions and map services."
 ---
 
 <span class="doc-status">✅ Verified — current baseline</span>

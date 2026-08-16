@@ -1,6 +1,6 @@
 ---
-title: Performance and mass stress baseline
-description: Русская версия: WBML 0.0.26–0.0.27 measured read paths and high-volume map/registry stress without state mutation.
+title: "Performance and mass stress baseline"
+description: "Русская версия: WBML 0.0.26–0.0.27 measured read paths and high-volume map/registry stress without state mutation."
 ---
 
 <span class="doc-status">✅ Functional result Verified</span>

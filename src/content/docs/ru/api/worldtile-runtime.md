@@ -1,6 +1,6 @@
 ---
-title: WorldTile runtime map
-description: Русская версия: Verified WorldTile fields, relationships and lifecycle lessons from WBML 0.0.21–0.0.30.
+title: "WorldTile runtime map"
+description: "Русская версия: Verified WorldTile fields, relationships and lifecycle lessons from WBML 0.0.21–0.0.30."
 ---
 
 <span class="doc-status">✅ Verified baseline map</span>

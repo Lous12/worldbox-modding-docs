@@ -1,6 +1,6 @@
 ---
-title: WBML: ошибочные предположения — negative knowledge
-description: Правдоподобные lifecycle/worldgen/reload/compatibility assumptions, которые runtime evidence опроверг.
+title: "WBML: ошибочные предположения — negative knowledge"
+description: "Правдоподобные lifecycle/worldgen/reload/compatibility assumptions, которые runtime evidence опроверг."
 ---
 
 <span class="doc-status">❌ Failed assumptions</span>
