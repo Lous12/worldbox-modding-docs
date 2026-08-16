@@ -4,6 +4,8 @@ Community-driven documentation, research, examples, and troubleshooting for Worl
 
 The project is built with Astro + Starlight as a multilingual modding workbench: beginner routes, practical browser tools, searchable reference, troubleshooting, and evidence-backed research for humans and AI assistants.
 
+**Current public workbench release: v0.2.0.**
+
 ## Current foundation
 
 - English root documentation
@@ -56,7 +58,9 @@ There is no paid documentation tier.
 
 ## Project status
 
-Active research and documentation project. The knowledge base is being expanded through source archaeology, reproducible failures, runtime probes, compatibility testing, and the WorldBox Modding Lab.
+v0.2.0 is the first stable Workbench baseline. The site itself is usable as a beginner/practical entry point, while the knowledge base remains an active research project expanded through source archaeology, reproducible failures, runtime probes, compatibility testing, and the WorldBox Modding Lab.
+
+A stable website release does **not** mean every WorldBox or NeoModLoader behavior is known. Unverified runtime behavior stays explicitly marked until a reproducible probe closes it.
 
 ## Documentation audit
 

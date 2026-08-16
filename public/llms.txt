@@ -2,6 +2,10 @@
 
 > Evidence-first WorldBox and NeoModLoader documentation built from real mods, source inspection, runtime probes, logs, reproducible failures and verified research.
 
+## Site/workbench release
+- WorldBox Modding Docs Workbench: 0.2.0
+- Website release stability does not widen runtime evidence. Runtime/API claims remain bound to the evidence scopes below.
+
 ## Research baseline
 - WorldBox 0.51.2 build 719
 - NeoModLoader 1.2.0.1

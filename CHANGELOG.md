@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0 — Workbench Release
+- Promoted the v0.2 Workbench redesign from release candidate to the first stable practical-site release.
+- Ships the task-first EN/RU home pages, beginner first-mod route, Recipe Library 2.0, Player.log Analyzer 2.0, Starter Mod Generator, API Explorer, Compatibility Matrix and symptom-first Troubleshooter as one coherent public baseline.
+- Keeps the beginner-facing flow deliberately layered: goal → recipe/tool → reference → research/evidence, so a new modder does not need to understand internal API terminology before starting.
+- Keeps browser tools local-first: Player.log analysis and beginner progress state remain in the browser and are not uploaded by the site.
+- Preserves the evidence model and all current WBML boundaries through WBML-0005; v0.2.0 adds no new runtime claims beyond the research already documented.
+- Preserves full EN/RU page parity, the temporary replaceable icon system, optional DonationAlerts/DALink support links and the `Какова цена свободы?` epigraph.
+- Release audit currently covers 170 documentation files / 85 EN + 85 RU pages, internal routes, required frontmatter, code fences, referenced artwork, sanitized evidence and package/changelog version agreement.
+- Future runtime discoveries now return to the normal loop: WBML experiment → evidence → beginner explanation → API/reference update → AI-facing rules.
+
 ## 0.2.0-beta.1 — Cleanup & Release Candidate
 - Fixed internal cross-section links that were valid-looking in source but resolved to nested non-existent browser routes from leaf documentation pages.
 - Added a dependency-free documentation audit that checks frontmatter, balanced code fences, internal routes, homepage artwork assets, EN/RU file parity, sanitized evidence and package/changelog version agreement.

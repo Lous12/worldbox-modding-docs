@@ -1,38 +1,32 @@
 # v0.2.0 release checklist
 
-Use this before promoting the Workbench redesign from beta to v0.2.0.
+This checklist is intentionally split between checks that can be proved from the source tree and checks that require the deployed GitHub Pages build.
 
-## Automated
+## Automated/source checks
 
-- [ ] `npm run audit` passes.
-- [ ] `npm run build` passes on GitHub Actions.
-- [ ] GitHub Pages deploy succeeds.
+- [x] `package.json` version is `0.2.0`.
+- [x] Top changelog entry is `0.2.0`.
+- [x] `npm run audit` passes.
+- [x] EN/RU documentation parity passes.
+- [x] Internal documentation routes pass the audit.
+- [x] Required `title` / `description` frontmatter passes.
+- [x] Markdown code fences are balanced.
+- [x] Referenced homepage artwork exists.
+- [x] Public evidence passes the privacy-pattern scan.
+- [x] No new npm dependency was added for the final promotion.
+- [x] No runtime/WBML evidence boundary was widened for the website release.
 
-## Beginner route
+## After pushing to `main`
 
-- [ ] English and Russian home pages open without missing artwork.
-- [ ] Start Here → First-mod checklist → Starter Mod Generator → first-mod recipe is navigable in both languages.
-- [ ] Troubleshooter → Player.log Analyzer → relevant troubleshooting guide works in both languages.
-- [ ] Recipe Finder and API Explorer filters/reset controls work on desktop and mobile.
-- [ ] Player.log drag-and-drop works and does not upload the selected file.
+- [ ] GitHub Actions completes the Astro production build.
+- [ ] GitHub Pages deployment completes successfully.
+- [ ] Open the English home page and test Start / Recipes / Tools / Troubleshooting.
+- [ ] Open `/ru/` and test the same four routes.
+- [ ] Drop a real `Player.log` into the Analyzer and confirm local analysis still runs.
+- [ ] Open the Starter Mod Generator and confirm generation/copy actions still work.
+- [ ] Test at least one narrow/mobile viewport.
+- [ ] Confirm DonationAlerts and DALink buttons point to the intended destinations.
 
-## Documentation quality
+## Release rule
 
-- [ ] EN/RU page parity is intentional.
-- [ ] Every technical claim has an evidence status and version boundary where needed.
-- [ ] No skipped WBML branch is presented as Verified.
-- [ ] No old source snapshot is described as PoliticalWorldAPI 1.14 runtime behavior without runtime evidence.
-- [ ] Public evidence contains no local user paths, Steam IDs or other personal identifiers.
-
-## UX & accessibility
-
-- [ ] Keyboard focus is visible on major interactive controls.
-- [ ] Light and dark themes are readable.
-- [ ] Main flows fit narrow/mobile screens without horizontal page overflow.
-- [ ] Temporary PNG concepts can be replaced via stable filenames without changing page code.
-
-## Release
-
-- [ ] Update `package.json` to `0.2.0`.
-- [ ] Add the final `0.2.0` changelog entry.
-- [ ] Re-run audit/build after the version bump.
+If the deployed build exposes a regression, keep the `0.2.0` evidence claims unchanged and ship a website-only `0.2.0.x` hotfix. Do not rewrite runtime conclusions to compensate for a frontend bug.
