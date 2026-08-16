@@ -9,7 +9,8 @@ The project is built with Astro + Starlight as a multilingual modding workbench:
 - English root documentation
 - Russian localization
 - Built-in full-text search
-- Practical Workbench: local Player.log Analyzer, Starter Mod Generator, API Explorer and Compatibility Matrix
+- Practical Workbench: local Player.log Analyzer 2.0, Starter Mod Generator, API Explorer and Compatibility Matrix
+- Task-first Recipe Library with dedicated beginner-friendly step-by-step pages
 - Goal-oriented beginner home page and first-mod route
 - GitHub Pages deployment workflow
 - Dark/light theme support

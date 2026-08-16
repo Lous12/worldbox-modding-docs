@@ -1,0 +1,56 @@
+---
+title: Subscribe to a Political World event
+description: Minimal Event Bus subscription with payload, cleanup and runtime-field boundaries.
+---
+
+# Subscribe to a Political World event
+
+<span class="doc-status">✅ Runtime verified</span>
+<span class="doc-status">WBML-0004</span>
+<span class="doc-status">PoliticalWorldAPI 1.14.0</span>
+
+## Goal
+
+React when Political World publishes an event instead of scanning kingdoms every update.
+
+This assumes your addon is already registered.
+
+## Minimal subscription
+
+```csharp
+private const string AddonId = "Example.EventAddon";
+
+PoliticalWorldAPI.Subscribe(
+    AddonId,
+    "party.renamed",
+    OnPartyRenamed
+);
+
+private static void OnPartyRenamed(
+    PoliticalWorldAPI.PoliticalEventData data)
+{
+    if (data == null)
+        return;
+
+    string oldName = data.OldValue;
+    string newName = data.NewValue;
+}
+```
+
+For the tested API 1.14.0 `party.renamed` path, the old/new names appeared in `OldValue` / `NewValue` rather than `OldName` / `NewName`.
+
+## Cleanup
+
+When your code no longer needs the callback, remove the exact subscription or all subscriptions owned by the addon:
+
+```csharp
+PoliticalWorldAPI.Unsubscribe(AddonId, "party.renamed", OnPartyRenamed);
+```
+
+## Common mistakes
+
+- Do not assume every event uses the same payload fields.
+- Do not use a wildcard when one exact event ID is enough.
+- Do not rely on one callback exception to stop other subscribers. WBML verified callback isolation.
+
+Open the [Event Bus reference](../../api/politicalworld-event-bus/) for wildcard, recursion, unknown-event and diagnostics behavior.

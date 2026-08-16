@@ -8,7 +8,7 @@ const t = ru ? {
   pw: 'Сделать addon для Political World', generate: 'Сгенерировать', reset: 'Сбросить',
   modjson: 'mod.json', main: 'Main.cs', copy: 'Копировать', download: 'Скачать файл', copied: 'Скопировано',
   warning: 'GUID лучше выбрать один раз и не менять после публикации. Для Political World шаблон добавляет dependency и регистрацию addon.',
-  placeholderName: 'My First Mod', placeholderAuthor: 'YourName', placeholderGuid: 'YourName.MyFirstMod'
+  placeholderName: 'My First Mod', placeholderAuthor: 'YourName', placeholderGuid: 'YourName.MyFirstMod', next: 'Дальше: проверить первый запуск по рецепту →'
 } : {
   title: 'Starter Mod Generator',
   intro: 'Creates a minimal template based on the structure of WBML mods that have actually loaded in NeoModLoader.',
@@ -16,7 +16,7 @@ const t = ru ? {
   pw: 'Make this a Political World addon', generate: 'Generate', reset: 'Reset',
   modjson: 'mod.json', main: 'Main.cs', copy: 'Copy', download: 'Download file', copied: 'Copied',
   warning: 'Choose a GUID once and keep it stable after release. The Political World template adds the dependency and addon registration.',
-  placeholderName: 'My First Mod', placeholderAuthor: 'YourName', placeholderGuid: 'YourName.MyFirstMod'
+  placeholderName: 'My First Mod', placeholderAuthor: 'YourName', placeholderGuid: 'YourName.MyFirstMod', next: 'Next: verify the first launch with the recipe →'
 };
 ---
 
@@ -52,6 +52,7 @@ const t = ru ? {
       <pre><code data-code="cs"></code></pre>
     </section>
   </div>
+  <div class="generator-next"><a href="../../recipes/first-nml-mod/">{t.next}</a></div>
 </div>
 
 <script define:vars={{ t }}>

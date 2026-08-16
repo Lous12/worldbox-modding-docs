@@ -1,17 +1,17 @@
 ---
 title: Инструменты
-description: Практичные браузерные инструменты для разработки и отладки модов WorldBox.
+description: Практичные браузерные инструменты для создания, диагностики и проверки модов WorldBox.
 ---
 
 # Инструменты
 
-Этот раздел нужен, чтобы **делать и проверять**, а не только читать. Начни с нужного действия — каждый инструмент старается показать границы того, что он действительно знает.
+Этот раздел нужен, чтобы **делать и проверять**, а не только читать. Теперь результаты инструментов напрямую ведут в рецепты, troubleshooting и evidence-aware API reference.
 
 <div class="workbench-launch-grid tools-landing-grid">
-  <a class="launch-card" href="./log-analyzer/"><span class="tool-symbol">LOG</span><strong>Анализатор Player.log</strong><p>Перетащи лог и получи версии игры/NML/API, список модов и подозрительные сигнатуры ошибок. Файл остаётся в браузере.</p><span class="launch-meta">Лучше всего для: «что сломалось?»</span></a>
-  <a class="launch-card" href="./mod-generator/"><span class="tool-symbol">MOD</span><strong>Генератор стартового мода</strong><p>Создай минимальные `mod.json` и `Main.cs`, в том числе шаблон addon для Political World.</p><span class="launch-meta">Лучше всего для: первого каркаса</span></a>
-  <a class="launch-card" href="./api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Ищи подтверждённые API по задаче: данные, партии, события, actions и другое.</p><span class="launch-meta">Лучше всего для: «какой метод нужен?»</span></a>
-  <a class="launch-card" href="./compatibility/"><span class="tool-symbol">VER</span><strong>Матрица совместимости</strong><p>Посмотри, к какому именно стеку относятся runtime-доказательства и где остаются пробелы.</p><span class="launch-meta">Лучше всего для: границ доказательства</span></a>
+  <a class="launch-card primary" href="./log-analyzer/"><span class="tool-symbol">LOG</span><strong>Анализатор Player.log 2.0</strong><p>Перетащи лог, получи группы сигналов по серьёзности, compiler codes и прямой переход к нужному troubleshooting.</p><span class="launch-meta">Лучше всего для: «что сломалось и куда идти дальше?»</span></a>
+  <a class="launch-card" href="./mod-generator/"><span class="tool-symbol">MOD</span><strong>Генератор стартового мода</strong><p>Создай минимальные `mod.json` и `Main.cs`, затем пройди рецепт первого мода и докажи загрузку каркаса.</p><span class="launch-meta">Лучше всего для: первого рабочего каркаса</span></a>
+  <a class="launch-card" href="./api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Ищи WBML-проверенный PoliticalWorldAPI по задаче, а не по названию метода из памяти.</p><span class="launch-meta">Лучше всего для: «какой метод и какой статус?»</span></a>
+  <a class="launch-card" href="./compatibility/"><span class="tool-symbol">VER</span><strong>Матрица совместимости</strong><p>Посмотри точный runtime-стек доказательств и оставшиеся evidence gaps.</p><span class="launch-meta">Лучше всего для: границ доказательства</span></a>
 </div>
 
-<div class="friendly-callout friendly-callout-good"><strong>Принцип инструментов</strong><span>Если доказательств не хватает, сайт должен сказать об этом прямо. Инструмент не должен превращать неизвестность в уверенный ответ.</span></div>
+<div class="friendly-callout friendly-callout-good"><strong>Принцип инструментов</strong><span>Инструмент может распознать сигнатуру или проверенное поведение, но не должен превращать нехватку evidence в уверенный root-cause.</span></div>

@@ -1,0 +1,36 @@
+---
+title: Разобрать мод через Player.log
+description: Короткий порядок диагностики от факта загрузки до конкретного troubleshooting-гайда.
+---
+
+# Разобрать мод через Player.log
+
+Сначала ответь на три вопроса:
+
+```text
+1. NML вообще увидел / скомпилировал / загрузил мод?
+2. Какая точная сигнатура ошибки есть в логе?
+3. Какую подсистему проверять дальше?
+```
+
+## Быстрый путь
+
+1. Открой [Анализатор Player.log](../../workbench/log-analyzer/).
+2. Перетащи `Player.log` в браузерный инструмент.
+3. Сначала проверь версии WorldBox / NML / PoliticalWorldAPI.
+4. Посмотри самый серьёзный найденный сигнал.
+5. Перейди по предложенному troubleshooting-гайду.
+
+Примеры:
+
+```text
+error CSxxxx                 → C# compile error
+StackOverflowException      → recursion / initialization loop
+NullReferenceException      → null object / lifecycle assumption
+PWDIAG040 / callback failed → Event Bus callback
+Failed to construct listener → NML listener construction
+```
+
+Сетевые/TLS и fallback-library строки могут быть шумом и не обязаны быть причиной поломки мода.
+
+Важно: распознавание сигнатуры не равно доказанному root cause.

@@ -1,0 +1,40 @@
+---
+title: Diagnose a mod with Player.log
+description: A short diagnosis order that starts from evidence instead of guessing which subsystem broke.
+---
+
+# Diagnose a mod with Player.log
+
+## Goal
+
+Answer three questions in this order:
+
+```text
+1. Did NeoModLoader see/compile/load the mod?
+2. What exact error or warning signature appears?
+3. Which subsystem should you inspect next?
+```
+
+## Fast route
+
+1. Open the [Player.log Analyzer](../../workbench/log-analyzer/).
+2. Drop `Player.log` into the local browser tool.
+3. Check WorldBox / NML / PoliticalWorldAPI versions first.
+4. Look at the highest-severity detected signature.
+5. Follow the linked troubleshooting page instead of changing unrelated code.
+
+## Typical signals
+
+```text
+error CSxxxx                 → compilation problem
+StackOverflowException      → recursive call/init problem
+NullReferenceException      → missing/null object or unsafe lifecycle assumption
+PWDIAG040 / callback failed → Event Bus callback failed
+Failed to construct listener → NML listener construction issue
+```
+
+Network/TLS and fallback-library lines can be noisy and are not automatically the reason your mod failed. The analyzer marks them as informational.
+
+## Important limit
+
+Pattern recognition is not root-cause proof. If a log only shows `NullReferenceException`, the analyzer can route you to a better investigation path, but it cannot honestly claim which object was null without the relevant stack/context.

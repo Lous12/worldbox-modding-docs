@@ -1,0 +1,51 @@
+---
+title: Хранить данные партии
+description: Typed party data через стабильный party ID, fallback и inactive/reactivate lifecycle.
+---
+
+# Хранить данные конкретной партии
+
+<span class="doc-status">✅ Runtime verified — executed branches</span>
+<span class="doc-status">WBML-0003</span>
+
+```csharp
+const string AddonId = "Example.PartyAddon";
+const string Key = "conference_count";
+
+bool written = PoliticalWorldAPI.SetPartyInt(
+    kingdom,
+    AddonId,
+    party.Id,
+    Key,
+    3
+);
+
+int count = PoliticalWorldAPI.GetPartyInt(
+    kingdom,
+    AddonId,
+    party.Id,
+    Key,
+    0
+);
+```
+
+Используй стабильный `party.Id`, а не индекс партии в списке.
+
+## Missing party
+
+WBML-0003 подтвердил:
+
+```text
+GetPartyInt/String/Bool/Float → переданный fallback
+SetPartyInt/String/Bool/Float → false
+```
+
+## Inactive lifecycle
+
+Для протестированной не-правящей партии данные читались во время inactive и сохранились после reactivate.
+
+## Граница доказательства
+
+Party-to-party isolation внутри одного kingdom в том save была пропущена из-за отсутствия подходящей второй активной партии. Этот SKIP нельзя выдавать за Verified.
+
+Полная справка: [party-private addon data](../../api/politicalworld-party-private-data/).

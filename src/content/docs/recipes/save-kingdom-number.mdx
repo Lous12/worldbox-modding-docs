@@ -1,0 +1,67 @@
+---
+title: Save a number on a kingdom
+description: Minimal PoliticalWorldAPI int persistence recipe with verified save/load and restart boundaries.
+---
+
+# Save a number on a kingdom
+
+<span class="doc-status">✅ Runtime verified</span>
+<span class="doc-status">WBML-0001 / WBML-0003</span>
+<span class="doc-status">PoliticalWorldAPI 1.14.0</span>
+
+## Goal
+
+Store an integer owned by your addon on a `Kingdom`, then read it back later.
+
+This recipe assumes your Political World addon is already registered.
+
+## Minimal code
+
+```csharp
+const string AddonId = "Example.MyAddon";
+const string Key = "reputation";
+
+int current = PoliticalWorldAPI.GetKingdomInt(
+    kingdom,
+    AddonId,
+    Key,
+    0
+);
+
+bool written = PoliticalWorldAPI.SetKingdomInt(
+    kingdom,
+    AddonId,
+    Key,
+    current + 1
+);
+```
+
+`0` is the fallback returned when the value does not exist yet.
+
+## Expected result
+
+On the tested stack, kingdom addon `int` data survived:
+
+```text
+immediate read
+same-save reload
+full WorldBox process restart
+```
+
+WBML also verified tested cross-world isolation for kingdom addon state.
+
+## Common mistake
+
+Do not invent Political World's internal save key yourself. Use the public `GetKingdom*` / `SetKingdom*` methods so addon ID and local key remain namespaced correctly.
+
+## Need another type?
+
+The same public family exists for:
+
+```text
+string
+bool
+float
+```
+
+Open the [full addon-private kingdom data reference](../../api/politicalworld-addon-private-data/) for exact behavior, storage notes and limits.

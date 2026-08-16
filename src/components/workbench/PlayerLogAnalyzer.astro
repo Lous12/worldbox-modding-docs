@@ -2,29 +2,37 @@
 const { lang = 'en' } = Astro.props;
 const ru = lang === 'ru';
 const t = ru ? {
-  title: 'Анализатор Player.log',
+  title: 'Анализатор Player.log 2.0',
   privacy: 'Файл обрабатывается только в браузере. Никуда не загружается.',
   choose: 'Выбрать Player.log', drop: 'или перетащи файл сюда', ready: 'Файл готов к анализу',
   paste: 'Или вставь лог сюда', analyze: 'Разобрать лог', clear: 'Очистить',
-  summary: 'Сводка окружения', problems: 'Что выглядит подозрительно', mods: 'Загруженные моды',
-  noProblems: 'Явных сигнатур ошибок из известных нам шаблонов не найдено.', noMods: 'Не удалось извлечь список загруженных модов.',
+  summary: 'Сводка окружения', problems: 'Найденные сигналы', mods: 'Загруженные моды', next: 'Что делать дальше',
+  noProblems: 'Явных сигнатур из известных этому инструменту шаблонов не найдено.', noMods: 'Не удалось извлечь список загруженных модов.',
   copy: 'Скопировать сводку', copied: 'Скопировано', empty: 'Сначала выбери файл или вставь текст лога.',
   version: 'WorldBox', build: 'Build', git: 'Git', nml: 'NeoModLoader', pw: 'PoliticalWorldAPI',
-  compile: 'Ошибка компиляции C#', exception: 'Исключение', stack: 'StackOverflow', callback: 'Ошибка callback',
-  listener: 'Проблема NML listener', network: 'Сетевая ошибка', library: 'Fallback library', nullref: 'NullReference',
-  lines: 'совпадений', groups: 'групп сигналов', modsFound: 'модов найдено', clean: 'явных сигналов не найдено'
+  compile: 'Ошибка компиляции C#', stack: 'StackOverflow', nullref: 'NullReference', callback: 'Ошибка callback',
+  listener: 'Проблема NML listener', pwdiag: 'Political World diagnostic', localization: 'Missing localization',
+  harmony: 'Harmony / patching signal', exception: 'Другое исключение', network: 'Сетевой/TLS шум', library: 'Fallback library',
+  lines: 'совпадений', groups: 'групп сигналов', modsFound: 'модов найдено', clean: 'явных сигналов не найдено',
+  errors: 'ошибок', warnings: 'предупреждений', info: 'инфо', codes: 'Коды', help: 'Как разбирать →',
+  informational: 'Информационно', warning: 'Проверить', fatal: 'Важно',
+  rootCause: 'Analyzer распознаёт сигнатуры и маршрутизирует к документации. Он не объявляет root cause без достаточного контекста.'
 } : {
-  title: 'Player.log Analyzer',
+  title: 'Player.log Analyzer 2.0',
   privacy: 'The file is processed locally in your browser. It is not uploaded anywhere.',
   choose: 'Choose Player.log', drop: 'or drop the file here', ready: 'File ready to analyze',
   paste: 'Or paste a log here', analyze: 'Analyze log', clear: 'Clear',
-  summary: 'Environment summary', problems: 'Suspicious patterns', mods: 'Loaded mods',
-  noProblems: 'No obvious error signatures from the patterns currently known to this tool.', noMods: 'Could not extract a loaded-mod list.',
+  summary: 'Environment summary', problems: 'Detected signals', mods: 'Loaded mods', next: 'What to do next',
+  noProblems: 'No obvious signatures from the patterns currently known to this tool.', noMods: 'Could not extract a loaded-mod list.',
   copy: 'Copy summary', copied: 'Copied', empty: 'Choose a file or paste log text first.',
   version: 'WorldBox', build: 'Build', git: 'Git', nml: 'NeoModLoader', pw: 'PoliticalWorldAPI',
-  compile: 'C# compile error', exception: 'Exception', stack: 'StackOverflow', callback: 'Callback failure',
-  listener: 'NML listener problem', network: 'Network error', library: 'Fallback library', nullref: 'NullReference',
-  lines: 'matches', groups: 'signal groups', modsFound: 'mods found', clean: 'no obvious signals found'
+  compile: 'C# compile error', stack: 'StackOverflow', nullref: 'NullReference', callback: 'Callback failure',
+  listener: 'NML listener problem', pwdiag: 'Political World diagnostic', localization: 'Missing localization',
+  harmony: 'Harmony / patching signal', exception: 'Other exception', network: 'Network/TLS noise', library: 'Fallback library',
+  lines: 'matches', groups: 'signal groups', modsFound: 'mods found', clean: 'no obvious signals found',
+  errors: 'errors', warnings: 'warnings', info: 'info', codes: 'Codes', help: 'How to investigate →',
+  informational: 'Informational', warning: 'Check', fatal: 'Important',
+  rootCause: 'The analyzer recognizes signatures and routes you to documentation. It does not claim a root cause without enough context.'
 };
 ---
 
@@ -36,17 +44,10 @@ const t = ru ? {
 
   <div class="tool-input-grid">
     <label class="file-drop" data-drop-zone>
-      <span class="file-code">LOG</span>
-      <strong>{t.choose}</strong>
-      <span class="drop-hint">{t.drop}</span>
-      <input type="file" accept=".log,.txt,text/plain" data-file-input />
-      <small data-file-name>Player.log</small>
+      <span class="file-code">LOG</span><strong>{t.choose}</strong><span class="drop-hint">{t.drop}</span>
+      <input type="file" accept=".log,.txt,text/plain" data-file-input /><small data-file-name>Player.log</small>
     </label>
-
-    <label class="paste-box">
-      <span>{t.paste}</span>
-      <textarea rows="9" data-log-text placeholder="[NML]: ..."></textarea>
-    </label>
+    <label class="paste-box"><span>{t.paste}</span><textarea rows="9" data-log-text placeholder="[NML]: ..."></textarea></label>
   </div>
 
   <div class="tool-actions">
@@ -55,22 +56,15 @@ const t = ru ? {
     <button class="wb-button wb-button-quiet" type="button" data-copy hidden>{t.copy}</button>
   </div>
 
+  <div class="tool-note analyzer-boundary"><span class="inline-code-badge">RULE</span><span>{t.rootCause}</span></div>
   <p class="tool-message" data-message hidden></p>
 
   <div class="analysis-results" data-results hidden>
     <div class="analysis-overview" data-overview></div>
-    <section class="result-panel">
-      <h3>{t.summary}</h3>
-      <div class="env-grid" data-env></div>
-    </section>
-    <section class="result-panel">
-      <h3>{t.problems}</h3>
-      <div class="problem-list" data-problems></div>
-    </section>
-    <section class="result-panel">
-      <h3>{t.mods}</h3>
-      <div class="mod-chip-list" data-mods></div>
-    </section>
+    <section class="result-panel"><h3>{t.summary}</h3><div class="env-grid" data-env></div></section>
+    <section class="result-panel"><h3>{t.problems}</h3><div class="problem-list" data-problems></div></section>
+    <section class="result-panel" data-next-panel><h3>{t.next}</h3><div class="next-step-list" data-next></div></section>
+    <section class="result-panel"><h3>{t.mods}</h3><div class="mod-chip-list" data-mods></div></section>
   </div>
 </div>
 
@@ -93,13 +87,15 @@ const t = ru ? {
     const env = root.querySelector('[data-env]');
     const problems = root.querySelector('[data-problems]');
     const mods = root.querySelector('[data-mods]');
+    const next = root.querySelector('[data-next]');
+    const nextPanel = root.querySelector('[data-next-panel]');
     let fileText = '';
     let lastSummary = '';
 
     const sanitize = (value) => String(value || '')
       .replace(/[A-Z]:[\\/]+Users[\\/]+[^\\/\s]+/gi, '<user>')
       .replace(/[A-Z]:[\\/][^\r\n]+?steamapps[\\/]common[\\/]worldbox/gi, '<WorldBox>')
-      .replace(/\b\d{15,20}\b/g, '<id>')
+      .replace(/(?:steam(?:id)?\s*[:=]?\s*)?\b\d{15,20}\b/gi, '<id>')
       .trim();
 
     const first = (text, regex) => {
@@ -108,43 +104,38 @@ const t = ru ? {
     };
 
     const addEnv = (label, value) => {
-      const card = document.createElement('div');
-      card.className = 'env-card';
-      const l = document.createElement('span');
-      l.textContent = label;
-      const v = document.createElement('strong');
-      v.textContent = value || '—';
-      card.append(l, v);
-      env.append(card);
+      const card = document.createElement('div'); card.className = 'env-card';
+      const l = document.createElement('span'); l.textContent = label;
+      const v = document.createElement('strong'); v.textContent = value || '—';
+      card.append(l, v); env.append(card);
     };
 
-    const collectLines = (text, regex, max = 5) => {
+    const collectLines = (text, regex, max = 6) => {
       const out = [];
       for (const line of text.split(/\r?\n/)) {
-        if (regex.test(line)) out.push(sanitize(line));
         regex.lastIndex = 0;
+        if (regex.test(line)) out.push(sanitize(line));
         if (out.length >= max) break;
       }
       return out;
     };
 
     const patterns = [
-      { key: 'compile', icon: 'CS', regex: /\berror\s+CS\d{4}\b|\bCS\d{4}\s*:/i, severity: 'error' },
-      { key: 'stack', icon: 'LOOP', regex: /StackOverflowException/i, severity: 'error' },
-      { key: 'nullref', icon: 'NULL', regex: /NullReferenceException/i, severity: 'error' },
-      { key: 'callback', icon: 'EVT', regex: /callback failed|PWDIAG040/i, severity: 'warn' },
-      { key: 'listener', icon: 'NML', regex: /Failed to construct listener instance/i, severity: 'warn' },
-      { key: 'network', icon: 'NET', regex: /Curl error|UnityTls error/i, severity: 'info' },
-      { key: 'library', icon: 'DLL', regex: /Fallback handler could not load library/i, severity: 'info' },
-      { key: 'exception', icon: 'EXC', regex: /\b[A-Za-z0-9_.]+Exception\b/i, severity: 'warn', skipIf: /StackOverflowException|NullReferenceException/ }
+      { key:'compile', icon:'CS', severity:'error', regex:/\berror\s+CS\d{4}\b|\bCS\d{4}\s*:/i, href:'../../troubleshooting/csharp-compile-errors/', codeRegex:/\bCS\d{4}\b/g },
+      { key:'stack', icon:'LOOP', severity:'error', regex:/StackOverflowException/i, href:'../../troubleshooting/stack-overflow-recursive-initialization/' },
+      { key:'nullref', icon:'NULL', severity:'error', regex:/NullReferenceException/i, href:'../../troubleshooting/nullreferenceexception/' },
+      { key:'callback', icon:'EVT', severity:'warn', regex:/callback failed|PWDIAG040/i, href:'../../api/politicalworld-event-bus/' },
+      { key:'listener', icon:'NML', severity:'warn', regex:/Failed to construct listener instance/i, href:'../../troubleshooting/nml-listener-errors/' },
+      { key:'pwdiag', icon:'PW', severity:'warn', regex:/\b(?:ERROR|WARN)\s+(?:PW\d{3}|PWDIAG\d{3})\b/i, skipIf:/PWDIAG040|callback failed|\[WBML\].*\bPASS\b.*(?:ERROR|WARN)\s+(?:PW\d{3}|PWDIAG\d{3})/i, href:'../../guides/addon-diagnostics/' },
+      { key:'harmony', icon:'HARM', severity:'warn', regex:/HarmonyException|HarmonyLib[^\r\n]*Exception|patch(?:ing)?\s+(?:failed|error)/i, href:'../../guides/version-resilient-harmony-patching/' },
+      { key:'localization', icon:'LOC', severity:'info', regex:/Missing translation for|\[PT\]\s+Not found/i, href:'../../guides/addon-localization-fallback/' },
+      { key:'network', icon:'NET', severity:'info', regex:/Curl error|UnityTls error/i, href:'../../troubleshooting/common-player-log-noise/' },
+      { key:'library', icon:'DLL', severity:'info', regex:/Fallback handler could not load library/i, href:'../../troubleshooting/common-player-log-noise/' },
+      { key:'exception', icon:'EXC', severity:'warn', regex:/\b[A-Za-z0-9_.]+Exception\b/i, skipIf:/StackOverflowException|NullReferenceException|HarmonyException/, href:'../../troubleshooting/' }
     ];
 
     const parse = (text) => {
-      env.textContent = '';
-      problems.textContent = '';
-      mods.textContent = '';
-      overview.textContent = '';
-
+      env.textContent = ''; problems.textContent = ''; mods.textContent = ''; overview.textContent = ''; next.textContent = '';
       const data = {
         worldbox: first(text, /WorldBox Application\.version:\s*([^\r\n]+)/i),
         build: first(text, /WorldBox build code:\s*([^\r\n]+)/i),
@@ -152,140 +143,101 @@ const t = ru ? {
         nml: first(text, /NML assembly version:\s*([^\r\n]+)/i),
         pw: first(text, /PoliticalWorldAPI:\s*([^\s\r\n]+)/i)
       };
+      addEnv(t.version, data.worldbox); addEnv(t.build, data.build); addEnv(t.git, data.git); addEnv(t.nml, data.nml); addEnv(t.pw, data.pw);
 
-      addEnv(t.version, data.worldbox);
-      addEnv(t.build, data.build);
-      addEnv(t.git, data.git);
-      addEnv(t.nml, data.nml);
-      addEnv(t.pw, data.pw);
+      let issueGroups = 0; let errorGroups = 0; let warnGroups = 0; let infoGroups = 0;
+      const summaryProblems = []; const usedHelp = new Set();
 
-      let issueCount = 0;
-      let issueGroups = 0;
-      const summaryProblems = [];
       for (const p of patterns) {
-        let lines = collectLines(text, p.regex, 5);
+        let lines = collectLines(text, p.regex, 6);
         if (p.skipIf) lines = lines.filter((line) => !p.skipIf.test(line));
         if (!lines.length) continue;
-        issueCount += lines.length;
         issueGroups++;
-        const item = document.createElement('details');
-        item.className = `problem-item problem-${p.severity}`;
+        if (p.severity === 'error') errorGroups++; else if (p.severity === 'warn') warnGroups++; else infoGroups++;
+
+        const item = document.createElement('details'); item.className = `problem-item problem-${p.severity}`;
+        if (p.severity === 'error') item.open = true;
         const head = document.createElement('summary');
-        head.textContent = `${p.icon} ${t[p.key]} · ${lines.length} ${t.lines}`;
-        const pre = document.createElement('pre');
-        pre.textContent = lines.join('\n');
-        item.append(head, pre);
+        const severityLabel = p.severity === 'error' ? t.fatal : p.severity === 'warn' ? t.warning : t.informational;
+        head.textContent = `${p.icon} ${t[p.key]} · ${severityLabel} · ${lines.length} ${t.lines}`;
+        item.append(head);
+
+        if (p.codeRegex) {
+          const codes = new Set();
+          for (const line of lines) {
+            p.codeRegex.lastIndex = 0;
+            for (const code of line.matchAll(p.codeRegex)) codes.add(code[0]);
+          }
+          if (codes.size) {
+            const codeRow = document.createElement('div'); codeRow.className = 'detected-code-row';
+            const label = document.createElement('span'); label.textContent = `${t.codes}:`;
+            codeRow.append(label);
+            for (const code of codes) { const chip = document.createElement('code'); chip.textContent = code; codeRow.append(chip); }
+            item.append(codeRow);
+          }
+        }
+
+        const pre = document.createElement('pre'); pre.textContent = lines.join('\n'); item.append(pre);
+        const help = document.createElement('a'); help.className = 'problem-help-link'; help.href = p.href; help.textContent = t.help; item.append(help);
         problems.append(item);
         summaryProblems.push(`${t[p.key]}: ${lines.length}`);
+
+        if (!usedHelp.has(p.href)) {
+          usedHelp.add(p.href);
+          const step = document.createElement('a'); step.className = `next-step next-${p.severity}`; step.href = p.href;
+          const code = document.createElement('span'); code.textContent = p.icon;
+          const body = document.createElement('div'); const strong = document.createElement('strong'); strong.textContent = t[p.key];
+          const small = document.createElement('small'); small.textContent = t.help.replace('→','').trim(); body.append(strong, small); step.append(code, body); next.append(step);
+        }
       }
-      if (!issueCount) {
-        const ok = document.createElement('div');
-        ok.className = 'empty-good';
-        ok.textContent = `OK · ${t.noProblems}`;
-        problems.append(ok);
-      }
+
+      if (!issueGroups) {
+        const ok = document.createElement('div'); ok.className = 'empty-good'; ok.textContent = `OK · ${t.noProblems}`; problems.append(ok);
+        nextPanel.hidden = true;
+      } else nextPanel.hidden = false;
 
       const modNames = new Set();
       const re = /\[NML\]:\s*\[([^\]\r\n]+)\]:\s*Loaded\b/g;
-      let m;
-      while ((m = re.exec(text)) !== null) modNames.add(sanitize(m[1]));
+      let m; while ((m = re.exec(text)) !== null) modNames.add(sanitize(m[1]));
       if (modNames.size) {
-        for (const name of modNames) {
-          const chip = document.createElement('span');
-          chip.className = 'mod-chip';
-          chip.textContent = `✓ ${name}`;
-          mods.append(chip);
-        }
-      } else {
-        const none = document.createElement('span');
-        none.className = 'muted';
-        none.textContent = t.noMods;
-        mods.append(none);
-      }
+        for (const name of modNames) { const chip = document.createElement('span'); chip.className = 'mod-chip'; chip.textContent = `OK · ${name}`; mods.append(chip); }
+      } else { const none = document.createElement('span'); none.className = 'muted'; none.textContent = t.noMods; mods.append(none); }
 
-      const signal = document.createElement('span');
-      signal.className = issueGroups ? 'overview-chip overview-warn' : 'overview-chip overview-good';
-      signal.textContent = issueGroups ? `${issueGroups} ${t.groups}` : `OK · ${t.clean}`;
-      const modCount = document.createElement('span');
-      modCount.className = 'overview-chip';
-      modCount.textContent = `${modNames.size} ${t.modsFound}`;
-      overview.append(signal, modCount);
+      const signal = document.createElement('span'); signal.className = issueGroups ? 'overview-chip overview-warn' : 'overview-chip overview-good'; signal.textContent = issueGroups ? `${issueGroups} ${t.groups}` : `OK · ${t.clean}`;
+      const err = document.createElement('span'); err.className = 'overview-chip overview-error'; err.textContent = `${errorGroups} ${t.errors}`;
+      const warn = document.createElement('span'); warn.className = 'overview-chip'; warn.textContent = `${warnGroups} ${t.warnings}`;
+      const info = document.createElement('span'); info.className = 'overview-chip overview-info'; info.textContent = `${infoGroups} ${t.info}`;
+      const modCount = document.createElement('span'); modCount.className = 'overview-chip'; modCount.textContent = `${modNames.size} ${t.modsFound}`;
+      overview.append(signal, err, warn, info, modCount);
 
       lastSummary = [
-        `${t.version}: ${data.worldbox}`,
-        `${t.build}: ${data.build}`,
-        `${t.git}: ${data.git}`,
-        `${t.nml}: ${data.nml}`,
-        `${t.pw}: ${data.pw}`,
+        `${t.version}: ${data.worldbox}`, `${t.build}: ${data.build}`, `${t.git}: ${data.git}`, `${t.nml}: ${data.nml}`, `${t.pw}: ${data.pw}`,
         summaryProblems.length ? summaryProblems.join(' | ') : `OK · ${t.noProblems}`,
         modNames.size ? `${t.mods}: ${Array.from(modNames).join(', ')}` : `${t.mods}: —`
       ].join('\n');
-
-      results.hidden = false;
-      copyButton.hidden = false;
-      message.hidden = true;
+      results.hidden = false; copyButton.hidden = false; message.hidden = true;
     };
 
-    const loadFile = async (file) => {
-      if (!file) return;
-      fileName.textContent = `${file.name} · ${t.ready}`;
-      fileText = await file.text();
-      dropZone?.classList.add('has-file');
-    };
-
+    const loadFile = async (file) => { if (!file) return; fileName.textContent = `${file.name} · ${t.ready}`; fileText = await file.text(); dropZone?.classList.add('has-file'); };
     fileInput?.addEventListener('change', async () => loadFile(fileInput.files?.[0]));
-
-    for (const eventName of ['dragenter', 'dragover']) {
-      dropZone?.addEventListener(eventName, (event) => {
-        event.preventDefault();
-        dropZone.classList.add('is-dragging');
-      });
-    }
-    for (const eventName of ['dragleave', 'drop']) {
-      dropZone?.addEventListener(eventName, (event) => {
-        event.preventDefault();
-        dropZone.classList.remove('is-dragging');
-      });
-    }
-    dropZone?.addEventListener('drop', async (event) => {
-      const file = event.dataTransfer?.files?.[0];
-      if (file) await loadFile(file);
-    });
+    for (const eventName of ['dragenter','dragover']) dropZone?.addEventListener(eventName, (event) => { event.preventDefault(); dropZone.classList.add('is-dragging'); });
+    for (const eventName of ['dragleave','drop']) dropZone?.addEventListener(eventName, (event) => { event.preventDefault(); dropZone.classList.remove('is-dragging'); });
+    dropZone?.addEventListener('drop', async (event) => { const file = event.dataTransfer?.files?.[0]; if (file) await loadFile(file); });
 
     analyzeButton?.addEventListener('click', () => {
       const text = (textArea?.value || '').trim() || fileText;
-      if (!text) {
-        message.textContent = t.empty;
-        message.hidden = false;
-        results.hidden = true;
-        copyButton.hidden = true;
-        return;
-      }
+      if (!text) { message.textContent = t.empty; message.hidden = false; results.hidden = true; copyButton.hidden = true; return; }
       parse(text);
     });
 
     clearButton?.addEventListener('click', () => {
-      fileText = '';
-      lastSummary = '';
-      if (fileInput) fileInput.value = '';
-      if (textArea) textArea.value = '';
-      fileName.textContent = 'Player.log';
-      dropZone?.classList.remove('has-file', 'is-dragging');
-      results.hidden = true;
-      message.hidden = true;
-      copyButton.hidden = true;
-      env.textContent = '';
-      problems.textContent = '';
-      mods.textContent = '';
-      overview.textContent = '';
+      fileText = ''; lastSummary = ''; if (fileInput) fileInput.value = ''; if (textArea) textArea.value = '';
+      fileName.textContent = 'Player.log'; dropZone?.classList.remove('has-file','is-dragging'); results.hidden = true; message.hidden = true; copyButton.hidden = true;
+      env.textContent = ''; problems.textContent = ''; mods.textContent = ''; overview.textContent = ''; next.textContent = '';
     });
 
     copyButton?.addEventListener('click', async () => {
-      if (!lastSummary) return;
-      await navigator.clipboard.writeText(lastSummary);
-      const before = copyButton.textContent;
-      copyButton.textContent = t.copied;
-      setTimeout(() => { copyButton.textContent = before; }, 1200);
+      if (!lastSummary) return; await navigator.clipboard.writeText(lastSummary); const before = copyButton.textContent; copyButton.textContent = t.copied; setTimeout(() => { copyButton.textContent = before; }, 1200);
     });
   }
 </script>

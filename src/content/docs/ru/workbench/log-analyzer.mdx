@@ -1,17 +1,30 @@
 ---
 title: Анализатор Player.log
-description: Локальный разбор WorldBox Player.log прямо в браузере.
+description: Локальная браузерная диагностика WorldBox Player.log с переходами к конкретным гайдам.
 ---
 import PlayerLogAnalyzer from '../../../../components/workbench/PlayerLogAnalyzer.astro';
 
 # Анализатор Player.log
 
-Не нужно заранее понимать каждую строку лога. Выбери `Player.log` или вставь его текст ниже.
+Не нужно заранее понимать каждую строку. Перетащи `Player.log` ниже или вставь его текст.
 
 <PlayerLogAnalyzer lang="ru" />
 
-## Что он уже умеет
+## Что умеет версия 2.0
 
-Первая версия извлекает build WorldBox, версию NeoModLoader, PoliticalWorldAPI и загруженные моды. Она также отмечает распространённые C# compiler errors, `StackOverflowException`, `NullReferenceException`, ошибки callback, проблемы создания NML listener и несколько менее критичных сетевых/library сообщений.
+Она вытаскивает build WorldBox, версию NeoModLoader, PoliticalWorldAPI и загруженные моды, а затем группирует узнаваемые сигналы:
 
-Это **первичная диагностика**, а не замена полного чтения лога. Если инструмент не узнал ошибку, это не означает, что ошибки нет.
+- C# compiler errors `CSxxxx`;
+- `StackOverflowException` и `NullReferenceException`;
+- Event Bus callback failures;
+- ошибки создания NML listener;
+- Political World `WARN` / `ERROR` diagnostics;
+- Harmony/patching сигналы;
+- missing localization;
+- частый network/TLS и fallback-library шум.
+
+Для каждой распознанной группы Analyzer предлагает ближайший подходящий гайд или reference.
+
+## Важная граница
+
+Это **первичная диагностика**, а не автоматический root-cause oracle. Сигнатура доказывает наличие конкретной ошибки/исключения, но обычно не доказывает причину без контекста и воспроизведения.

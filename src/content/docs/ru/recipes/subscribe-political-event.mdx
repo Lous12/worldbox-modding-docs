@@ -1,0 +1,41 @@
+---
+title: Подписаться на политическое событие
+description: Минимальная Event Bus подписка с payload, cleanup и проверенными runtime-границами.
+---
+
+# Подписаться на политическое событие
+
+<span class="doc-status">✅ Runtime verified</span>
+<span class="doc-status">WBML-0004</span>
+
+Рецепт предполагает, что addon уже зарегистрирован.
+
+```csharp
+private const string AddonId = "Example.EventAddon";
+
+PoliticalWorldAPI.Subscribe(
+    AddonId,
+    "party.renamed",
+    OnPartyRenamed
+);
+
+private static void OnPartyRenamed(
+    PoliticalWorldAPI.PoliticalEventData data)
+{
+    if (data == null)
+        return;
+
+    string oldName = data.OldValue;
+    string newName = data.NewValue;
+}
+```
+
+Для протестированного `party.renamed` на API 1.14.0 старое/новое имя пришли через `OldValue` / `NewValue`, а не `OldName` / `NewName`.
+
+Cleanup:
+
+```csharp
+PoliticalWorldAPI.Unsubscribe(AddonId, "party.renamed", OnPartyRenamed);
+```
+
+Не угадывай payload поля для других event ID. Подробности: [Event Bus](../../api/politicalworld-event-bus/).

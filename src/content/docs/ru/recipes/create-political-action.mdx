@@ -1,0 +1,46 @@
+---
+title: Создать Political World action с condition
+description: Минимальная регистрация и выполнение action с важным same-ID replacement edge case.
+---
+
+# Создать action с condition
+
+<span class="doc-status">✅ Runtime verified — executed branches</span>
+<span class="doc-status">WBML-0005</span>
+
+```csharp
+private const string AddonId = "Example.Actions";
+private const string ActionId = AddonId + ".increase_counter";
+
+PoliticalWorldAPI.RegisterAction(
+    AddonId,
+    new PoliticalWorldAPI.ActionDefinition
+    {
+        Id = ActionId,
+        Category = "example",
+        DisplayName = "Increase counter",
+        Condition = kingdom => kingdom != null,
+        Handler = kingdom =>
+        {
+            int current = PoliticalWorldAPI.GetKingdomInt(
+                kingdom, AddonId, "counter", 0
+            );
+            PoliticalWorldAPI.SetKingdomInt(
+                kingdom, AddonId, "counter", current + 1
+            );
+        }
+    }
+);
+```
+
+Перед выполнением можно проверить:
+
+```csharp
+bool allowed = PoliticalWorldAPI.CanExecuteAction(ActionId, kingdom);
+```
+
+## Важная ловушка
+
+На runtime API 1.14.0 повторный `RegisterAction` с тем же ID **заменил** существующее определение. Это не duplicate rejection.
+
+Полная справка: [Actions / Conditions / Effects](../../api/politicalworld-actions-conditions-effects/).

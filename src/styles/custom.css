@@ -1407,3 +1407,178 @@ textarea:focus-visible {
     min-width: 2.7rem;
   }
 }
+
+/* v0.2.0-alpha.5 — practical tools 2.0 */
+.recipe-card-v2 {
+  position: relative;
+}
+
+.recipe-meta-v2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.recipe-proof {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.45rem;
+  padding: 0.16rem 0.42rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 760;
+  letter-spacing: 0.01em;
+}
+
+.recipe-proof.verified {
+  border-color: color-mix(in srgb, var(--wb-good) 48%, var(--docs-border));
+  background: color-mix(in srgb, var(--wb-good) 7%, transparent);
+}
+
+.recipe-proof.observed {
+  border-color: color-mix(in srgb, var(--wb-warn) 48%, var(--docs-border));
+  background: color-mix(in srgb, var(--wb-warn) 7%, transparent);
+}
+
+.recipe-proof.case {
+  border-color: color-mix(in srgb, var(--sl-color-accent) 40%, var(--docs-border));
+  background: color-mix(in srgb, var(--sl-color-accent) 6%, transparent);
+}
+
+.analyzer-boundary {
+  margin-top: 0.7rem;
+}
+
+.problem-help-link {
+  display: inline-flex;
+  margin-top: 0.45rem;
+  font-size: 0.76rem;
+  font-weight: 720;
+}
+
+.detected-code-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.45rem 0 0;
+  font-size: 0.72rem;
+  color: var(--sl-color-gray-3);
+}
+
+.detected-code-row code {
+  padding: 0.13rem 0.35rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 0.42rem;
+  background: color-mix(in srgb, var(--docs-panel) 88%, transparent);
+  color: var(--sl-color-text);
+}
+
+.next-step-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.next-step {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 0.78rem;
+  background: color-mix(in srgb, var(--docs-panel) 90%, transparent);
+  text-decoration: none;
+}
+
+.next-step > span {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 2.65rem;
+  min-height: 2.2rem;
+  padding: 0 0.4rem;
+  border-radius: 0.58rem;
+  background: color-mix(in srgb, var(--sl-color-accent) 10%, var(--sl-color-bg));
+  font-size: 0.68rem;
+  font-weight: 820;
+}
+
+.next-step div {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.next-step strong {
+  font-size: 0.82rem;
+}
+
+.next-step small {
+  color: var(--sl-color-gray-3);
+  font-size: 0.68rem;
+}
+
+.next-step.next-error {
+  border-color: color-mix(in srgb, #ef6b6b 45%, var(--docs-border));
+}
+
+.next-step.next-warn {
+  border-color: color-mix(in srgb, var(--wb-warn) 45%, var(--docs-border));
+}
+
+.next-step.next-info {
+  opacity: 0.88;
+}
+
+.overview-error {
+  border-color: color-mix(in srgb, #ef6b6b 50%, var(--docs-border));
+}
+
+.overview-info {
+  opacity: 0.78;
+}
+
+.api-item-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.api-recipe-link {
+  color: var(--sl-color-accent-high);
+}
+
+.generator-next {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--docs-border);
+  font-size: 0.78rem;
+  font-weight: 720;
+}
+
+.trouble-entry-grid-v2 .trouble-entry > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.8rem;
+  min-height: 2.3rem;
+  padding: 0 0.42rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 0.58rem;
+  background: color-mix(in srgb, var(--sl-color-accent) 7%, var(--docs-panel));
+  font-size: 0.68rem;
+  font-weight: 820;
+}
+
+@media (max-width: 40rem) {
+  .next-step-list {
+    grid-template-columns: 1fr;
+  }
+
+  .api-item-links {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,47 @@
+---
+title: Сохранить число за королевством
+description: Минимальный рецепт persistence через PoliticalWorldAPI с проверенными save/load и restart границами.
+---
+
+# Сохранить число за королевством
+
+<span class="doc-status">✅ Runtime verified</span>
+<span class="doc-status">WBML-0001 / WBML-0003</span>
+<span class="doc-status">PoliticalWorldAPI 1.14.0</span>
+
+## Цель
+
+Сохранить целое число, принадлежащее твоему addon, за конкретным `Kingdom`, а потом прочитать его снова.
+
+Рецепт предполагает, что addon Political World уже зарегистрирован.
+
+```csharp
+const string AddonId = "Example.MyAddon";
+const string Key = "reputation";
+
+int current = PoliticalWorldAPI.GetKingdomInt(
+    kingdom,
+    AddonId,
+    Key,
+    0
+);
+
+bool written = PoliticalWorldAPI.SetKingdomInt(
+    kingdom,
+    AddonId,
+    Key,
+    current + 1
+);
+```
+
+`0` — fallback, если значения ещё нет.
+
+## Что подтверждено
+
+На протестированном стеке kingdom `int` пережил immediate read, reload того же save и полный restart WorldBox. Отдельным WBML-прогоном проверена изоляция протестированного kingdom state между мирами.
+
+## Частая ошибка
+
+Не конструируй внутренний save-key Political World вручную. Используй публичные `GetKingdom*` / `SetKingdom*`.
+
+Для `string`, `bool` и `float` есть аналогичные методы. Подробности: [addon-private kingdom data](../../api/politicalworld-addon-private-data/).

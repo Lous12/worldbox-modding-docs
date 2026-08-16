@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0-alpha.5 — Practical Tools 2.0
+- Expanded the task-first Recipe Library into dedicated beginner-friendly recipe pages instead of routing every card directly into low-level reference pages.
+- Added dedicated EN/RU recipes for a first NML mod, kingdom data, party data, Political World events, Political World actions, Player.log diagnosis, safer UI cloning and WorldTile height.
+- Reworked Recipe Finder cards to show evidence/status context and send users to the practical recipe first, then to deep reference/evidence from there.
+- Upgraded Player.log Analyzer with actionable next-step links for compiler errors, StackOverflow, NullReference, Event Bus callback failures, NML listener failures, Political World diagnostics, localization gaps and common non-fatal log noise.
+- Added severity-aware analyzer output so informational network/library noise is not presented like a fatal crash.
+- Added compiler-code extraction, Political World diagnostic grouping, missing-localization detection and clearer summary counts.
+- Added new EN/RU troubleshooting pages for C# compile errors, NullReferenceException, NML listener construction failures and common Player.log noise.
+- Updated Tools and Player.log landing pages to explain the new diagnosis → explanation → documentation flow.
+- Kept all runtime-evidence boundaries explicit: the analyzer recognizes signatures and routes to documentation, but does not claim a root cause when the log does not prove one.
+
 ## 0.2.0-alpha.4 — Practical UX Polish
 - Polished the English and Russian home-page trust/status blocks so practical navigation no longer depends on newer emoji glyphs.
 - Made the beginner entry route slightly more visually dominant on wide screens while keeping the other two entry paths obvious.

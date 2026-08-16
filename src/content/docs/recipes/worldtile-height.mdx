@@ -1,0 +1,45 @@
+---
+title: Change WorldTile terrain height
+description: Write terrain height through the storage path verified by the TerraForge height probe.
+---
+
+# Change WorldTile terrain height
+
+<span class="doc-status">✅ Runtime verified</span>
+<span class="doc-status">WorldBox 0.51.2 build 719</span>
+<span class="doc-status">TerraForge height probe</span>
+
+## Goal
+
+Write your generated terrain value to the member that actually represents WorldBox tile height.
+
+Verified access paths on the tested build:
+
+```csharp
+tile.Height
+tile.data.height
+```
+
+For TerraForge, `tile.Height` became the preferred access path.
+
+## Do not use `health`
+
+An early experiment mistakenly treated:
+
+```csharp
+tile.health
+```
+
+as terrain height. It was wrong.
+
+This is a useful debugging split for generators:
+
+```text
+Is the continent/noise math correct?
+        vs
+Are we writing to the actual terrain-height storage?
+```
+
+If the world stays ocean even though your math looks right, verify the write path before rewriting the entire generator.
+
+Open the [WorldTile.Height reference](../../api/worldtile-height/) for the exact evidence and compatibility boundary.

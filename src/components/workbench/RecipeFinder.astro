@@ -2,35 +2,38 @@
 const { lang = 'en' } = Astro.props;
 const ru = lang === 'ru';
 const t = ru ? {
-  title: 'Быстрые рецепты',
-  intro: 'Не знаешь название метода? Ищи по задаче: «сохранить число», «событие», «ошибка», «UI».',
+  title: 'Практические рецепты',
+  intro: 'Начни с результата. Рецепт покажет минимальный путь, ожидаемый результат, частую ошибку и только потом отправит в полный API.',
   search: 'Что ты хочешь сделать?',
   all: 'Все', start: 'Старт', data: 'Данные', events: 'События', actions: 'Actions', world: 'Мир', ui: 'UI', debug: 'Отладка',
-  beginner: 'Новичок', intermediate: 'Средний',
-  open: 'Открыть рецепт →',
-  empty: 'Ничего не нашлось. Попробуй короче: data, event, UI, crash…',
+  beginner: 'Новичок', intermediate: 'Средний', verified: 'Verified', observed: 'Observed', caseStudy: 'Case study',
+  open: 'Открыть пошаговый рецепт →',
+  empty: 'Ничего не нашлось. Попробуй короче: save, event, UI, log, party…',
   shown: 'Показано', of: 'из', clear: 'Сбросить'
 } : {
-  title: 'Quick recipes',
-  intro: 'Do not know the method name? Search by task: “save number”, “event”, “error”, “UI”.',
+  title: 'Practical recipes',
+  intro: 'Start from the result. A recipe gives the smallest path, expected result, common failure, and only then sends you into full API reference.',
   search: 'What do you want to do?',
   all: 'All', start: 'Start', data: 'Data', events: 'Events', actions: 'Actions', world: 'World', ui: 'UI', debug: 'Debug',
-  beginner: 'Beginner', intermediate: 'Intermediate',
-  open: 'Open recipe →',
-  empty: 'Nothing found. Try a shorter word: data, event, UI, crash…',
+  beginner: 'Beginner', intermediate: 'Intermediate', verified: 'Verified', observed: 'Observed', caseStudy: 'Case study',
+  open: 'Open step-by-step recipe →',
+  empty: 'Nothing found. Try a shorter word: save, event, UI, log, party…',
   shown: 'Showing', of: 'of', clear: 'Reset'
 };
 
 const items = [
-  {cat:'start', icon:'MOD', level:'beginner', title:ru?'Создать самый маленький мод':'Create the smallest mod', desc:ru?'Сгенерировать `mod.json` и `Main.cs`, запустить игру и проверить загрузку.':'Generate `mod.json` and `Main.cs`, run the game, and verify it loaded.', terms:'first mod start create generate mod json main cs load', href:'../workbench/mod-generator/'},
-  {cat:'data', icon:'SAVE', level:'beginner', title:ru?'Сохранить число за королевством':'Save a number on a kingdom', desc:ru?'Минимальный путь к `SetKingdomInt` / `GetKingdomInt` и границам persistence.':'Minimal route to `SetKingdomInt` / `GetKingdomInt` and persistence boundaries.', terms:'save data kingdom int number persistence', href:'../guides/kingdom-custom-data/'},
-  {cat:'data', icon:'PARTY', level:'intermediate', title:ru?'Хранить данные партии':'Store data on a party', desc:ru?'Typed party data, fallback для missing party и lifecycle inactive/reactivate.':'Typed party data, missing-party fallback, and inactive/reactivate lifecycle.', terms:'party data save string bool float int inactive', href:'../api/politicalworld-party-private-data/'},
-  {cat:'events', icon:'EVENT', level:'intermediate', title:ru?'Подписаться на политическое событие':'Subscribe to a political event', desc:ru?'Подписка, unsubscribe, wildcard, callback isolation и payload behavior.':'Subscribe, unsubscribe, wildcard, callback isolation, and payload behavior.', terms:'event subscribe callback political event bus wildcard', href:'../api/politicalworld-event-bus/'},
-  {cat:'actions', icon:'ACT', level:'intermediate', title:ru?'Создать action с condition':'Create an action with a condition', desc:ru?'RegisterAction, CanExecute, Execute, TryExecute и Effects.Sequence.':'RegisterAction, CanExecute, Execute, TryExecute, and Effects.Sequence.', terms:'action condition effect register execute sequence', href:'../api/politicalworld-actions-conditions-effects/'},
-  {cat:'world', icon:'WORLD', level:'intermediate', title:ru?'Изменить высоту тайла':'Change tile height', desc:ru?'Проверенное отличие `WorldTile.Height` / `data.height` от ложного `health`.':'Verified `WorldTile.Height` / `data.height` behavior and why `health` was wrong.', terms:'world tile height terrain generation map', href:'../api/worldtile-height/'},
-  {cat:'ui', icon:'UI', level:'intermediate', title:ru?'Безопаснее клонировать UI':'Clone UI more safely', desc:ru?'Реальный кейс TerraForge: почему native clone падал и какой порядок оказался безопаснее.':'Real TerraForge case: why a native clone crashed and the safer order that worked.', terms:'ui button window clone null reference terraforge', href:'../case-studies/terraforge-safe-ui-cloning/'},
-  {cat:'debug', icon:'LOG', level:'beginner', title:ru?'Разобрать Player.log':'Read Player.log', desc:ru?'Вытащить версии, загруженные моды и известные сигнатуры ошибок прямо в браузере.':'Extract versions, loaded mods, and known error signatures directly in the browser.', terms:'log error player log debug diagnose crash compile', href:'../workbench/log-analyzer/'},
-  {cat:'debug', icon:'LOOP', level:'intermediate', title:ru?'Найти рекурсивный StackOverflow':'Find a recursive StackOverflow', desc:ru?'Как отличить recursive initialization от случайного краша и где разрывать цикл.':'How to recognize recursive initialization and where to break the cycle.', terms:'stack overflow recursion crash government init', href:'../troubleshooting/stack-overflow-recursive-initialization/'},
+  {cat:'start', icon:'MOD', level:'beginner', status:'verified', proof:'WBML structure', title:ru?'Сделать первый минимальный NML-мод':'Build a first minimal NML mod', desc:ru?'`mod.json` + `Main.cs` + одна строка в Player.log. Без механик, пока каркас не доказал загрузку.':'`mod.json` + `Main.cs` + one Player.log line. No game mechanics until the skeleton proves it loaded.', terms:'first mod start create generate mod json main cs load basicmod onmodload', href:'./first-nml-mod/'},
+  {cat:'data', icon:'SAVE', level:'beginner', status:'verified', proof:'WBML-0001/0003', title:ru?'Сохранить число за королевством':'Save a number on a kingdom', desc:ru?'Записать `int`, прочитать fallback и понять, что именно пережило save/load и restart.':'Write an `int`, read a fallback, and understand exactly what survived save/load and restart.', terms:'save data kingdom int number persistence fallback restart', href:'./save-kingdom-number/'},
+  {cat:'data', icon:'PARTY', level:'intermediate', status:'verified', proof:'WBML-0003', title:ru?'Хранить данные конкретной партии':'Store data on a specific party', desc:ru?'Typed party data, stable party ID, missing-party fallback и inactive/reactivate lifecycle.':'Typed party data, stable party ID, missing-party fallback, and inactive/reactivate lifecycle.', terms:'party data save string bool float int inactive stable id fallback', href:'./store-party-data/'},
+  {cat:'events', icon:'EVENT', level:'intermediate', status:'verified', proof:'WBML-0004', title:ru?'Подписаться на политическое событие':'Subscribe to a political event', desc:ru?'Минимальная подписка, payload, unsubscribe и правило: не угадывай поля события.':'Minimal subscription, payload, unsubscribe, and the rule: do not guess event fields.', terms:'event subscribe callback political event bus wildcard unsubscribe payload', href:'./subscribe-political-event/'},
+  {cat:'actions', icon:'ACT', level:'intermediate', status:'verified', proof:'WBML-0005', title:ru?'Создать action с condition':'Create an action with a condition', desc:ru?'Зарегистрировать action, проверить `CanExecute`, выполнить handler и не попасться на same-ID replacement.':'Register an action, check `CanExecute`, run the handler, and avoid the same-ID replacement trap.', terms:'action condition effect register execute sequence canexecute same id', href:'./create-political-action/'},
+  {cat:'debug', icon:'LOG', level:'beginner', status:'verified', proof:'browser-local', title:ru?'Разобрать Player.log':'Read Player.log', desc:ru?'Сначала версии и сигнатура ошибки, потом конкретный troubleshooting-гайд — без отправки файла на сервер.':'Start with versions and the error signature, then jump to the relevant troubleshooting guide — without uploading the file.', terms:'log error player log debug diagnose crash compile nullreference stackoverflow', href:'./read-player-log/'},
+  {cat:'ui', icon:'UI', level:'intermediate', status:'case', proof:'TerraForge', title:ru?'Безопаснее клонировать vanilla UI':'Clone vanilla UI more safely', desc:ru?'Почему активный clone падал в `Awake()` и как отделить визуальную структуру от опасных MonoBehaviour.':'Why an active clone crashed in `Awake()` and how to separate visual structure from unsafe MonoBehaviours.', terms:'ui button window clone null reference awake eventtrigger terraforge', href:'./safe-ui-clone/'},
+  {cat:'world', icon:'WORLD', level:'intermediate', status:'verified', proof:'TerraForge probe', title:ru?'Изменить высоту WorldTile':'Change WorldTile height', desc:ru?'Писать в проверенное terrain-height storage и не повторять старую ошибку с `health`.':'Write to verified terrain-height storage and avoid the old `health` mistake.', terms:'world tile height terrain generation map data health', href:'./worldtile-height/'},
+  {cat:'data', icon:'TAG', level:'beginner', status:'verified', proof:'WBML-0001/0003', title:ru?'Выбрать shared или private tag':'Choose shared vs private tags', desc:ru?'Понять, когда тег должен быть виден другим модам, а когда принадлежать только вашему addon.':'Decide when a tag should be visible to other mods and when it should belong only to your addon.', terms:'tag private shared addon kingdom', href:'../guides/shared-vs-private-tags/'},
+  {cat:'debug', icon:'LOOP', level:'intermediate', status:'verified', proof:'Political World case', title:ru?'Разорвать recursive initialization':'Break recursive initialization', desc:ru?'Реальный StackOverflow-кейс: getter и setter вызывают друг друга во время первой инициализации.':'A real StackOverflow case: getter and setter call each other during first initialization.', terms:'stack overflow recursion crash government init recursive', href:'../troubleshooting/stack-overflow-recursive-initialization/'},
+  {cat:'events', icon:'POLL', level:'intermediate', status:'case', proof:'architecture guide', title:ru?'Уйти от polling к событиям':'Move from polling to events', desc:ru?'Когда событие лучше постоянного обхода kingdoms и как это упрощает addon.':'When an event is better than continuously scanning kingdoms and how that simplifies an addon.', terms:'event polling performance update loop callback', href:'../guides/event-driven-addons-vs-polling/'},
+  {cat:'debug', icon:'DIAG', level:'intermediate', status:'observed', proof:'PW diagnostics', title:ru?'Читать диагностику Political World':'Read Political World diagnostics', desc:ru?'Отличать validation, callback errors, warnings и наблюдаемое расхождение diagnostics bookkeeping.':'Separate validation, callback errors, warnings, and the observed diagnostics-bookkeeping mismatch.', terms:'diagnostics pwdiag warning error callback addon', href:'../guides/addon-diagnostics/'}
 ];
 ---
 
@@ -38,13 +41,9 @@ const items = [
   <div class="tool-head tool-head-polished">
     <div class="tool-identity">
       <span class="tool-symbol tool-symbol-large">HOW</span>
-      <div>
-        <span class="tool-kicker">{ru ? 'Практика' : 'Practical'}</span>
-        <h2>{t.title}</h2>
-        <p>{t.intro}</p>
-      </div>
+      <div><span class="tool-kicker">{ru ? 'Практика' : 'Practical'}</span><h2>{t.title}</h2><p>{t.intro}</p></div>
     </div>
-    <span class="verified-pill">WBML-backed</span>
+    <span class="verified-pill">task → recipe → evidence</span>
   </div>
 
   <div class="api-search-row finder-search-row">
@@ -61,20 +60,18 @@ const items = [
     </div>
   </div>
 
-  <div class="finder-summary">
-    <span data-recipe-count>{t.shown} {items.length} {t.of} {items.length}</span>
-    <button type="button" class="mini-button" data-recipe-clear>{t.clear}</button>
-  </div>
+  <div class="finder-summary"><span data-recipe-count>{t.shown} {items.length} {t.of} {items.length}</span><button type="button" class="mini-button" data-recipe-clear>{t.clear}</button></div>
 
   <div class="recipe-grid" data-recipe-results>
     {items.map((item) => (
-      <a class="recipe-card" href={item.href} data-cat={item.cat} data-search={`${item.title} ${item.desc} ${item.terms}`.toLowerCase()}>
+      <a class="recipe-card recipe-card-v2" href={item.href} data-cat={item.cat} data-search={`${item.title} ${item.desc} ${item.terms}`.toLowerCase()}>
         <span class="recipe-icon">{item.icon}</span>
         <div class="recipe-body">
-          <div class="recipe-meta"><span>{item.level === 'beginner' ? `NEW · ${t.beginner}` : `MID · ${t.intermediate}`}</span></div>
-          <strong>{item.title}</strong>
-          <p>{item.desc}</p>
-          <span class="recipe-open">{t.open}</span>
+          <div class="recipe-meta recipe-meta-v2">
+            <span>{item.level === 'beginner' ? `NEW · ${t.beginner}` : `MID · ${t.intermediate}`}</span>
+            <span class={`recipe-proof ${item.status}`}>{item.status === 'verified' ? t.verified : item.status === 'observed' ? t.observed : t.caseStudy} · {item.proof}</span>
+          </div>
+          <strong>{item.title}</strong><p>{item.desc}</p><span class="recipe-open">{t.open}</span>
         </div>
       </a>
     ))}
@@ -92,7 +89,6 @@ const items = [
     const count = root.querySelector('[data-recipe-count]');
     const clear = root.querySelector('[data-recipe-clear]');
     let filter = 'all';
-
     const update = () => {
       const q = (input?.value || '').trim().toLowerCase();
       let visible = 0;
@@ -105,21 +101,17 @@ const items = [
       empty.hidden = visible !== 0;
       if (count) count.textContent = `${t.shown} ${visible} ${t.of} ${total}`;
     };
-
     input?.addEventListener('input', update);
-    for (const button of root.querySelectorAll('[data-filter]')) {
-      button.addEventListener('click', () => {
-        filter = button.dataset.filter || 'all';
-        for (const b of root.querySelectorAll('[data-filter]')) b.classList.toggle('active', b === button);
-        update();
-      });
-    }
+    for (const button of root.querySelectorAll('[data-filter]')) button.addEventListener('click', () => {
+      filter = button.dataset.filter || 'all';
+      for (const b of root.querySelectorAll('[data-filter]')) b.classList.toggle('active', b === button);
+      update();
+    });
     clear?.addEventListener('click', () => {
       if (input) input.value = '';
       filter = 'all';
       for (const b of root.querySelectorAll('[data-filter]')) b.classList.toggle('active', b.dataset.filter === 'all');
-      update();
-      input?.focus();
+      update(); input?.focus();
     });
     update();
   }

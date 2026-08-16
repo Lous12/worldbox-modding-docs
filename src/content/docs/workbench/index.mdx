@@ -1,17 +1,17 @@
 ---
 title: Tools
-description: Practical browser tools for building and debugging WorldBox mods.
+description: Practical browser tools for building, diagnosing and verifying WorldBox mods.
 ---
 
 # Tools
 
-This section is for **doing and checking**, not only reading. Start from the action you need — each tool tries to keep the boundary between verified knowledge and unknown behavior visible.
+This section is for **doing and checking**, not only reading. The tools now link their findings back into recipes, troubleshooting and evidence-aware API reference.
 
 <div class="workbench-launch-grid tools-landing-grid">
-  <a class="launch-card" href="./log-analyzer/"><span class="tool-symbol">LOG</span><strong>Player.log Analyzer</strong><p>Drop a log to extract game/NML/API versions, loaded mods and suspicious error signatures. The file stays in your browser.</p><span class="launch-meta">Best for: “what broke?”</span></a>
-  <a class="launch-card" href="./mod-generator/"><span class="tool-symbol">MOD</span><strong>Starter Mod Generator</strong><p>Create minimal `mod.json` and `Main.cs` files, including a Political World addon template.</p><span class="launch-meta">Best for: a first skeleton</span></a>
-  <a class="launch-card" href="./api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Search verified API behavior by task: data, parties, events, actions and more.</p><span class="launch-meta">Best for: “which method do I need?”</span></a>
-  <a class="launch-card" href="./compatibility/"><span class="tool-symbol">VER</span><strong>Compatibility Matrix</strong><p>See exactly which runtime stack the evidence covers and where gaps remain.</p><span class="launch-meta">Best for: evidence boundaries</span></a>
+  <a class="launch-card primary" href="./log-analyzer/"><span class="tool-symbol">LOG</span><strong>Player.log Analyzer 2.0</strong><p>Drop a log, group known signatures by severity, extract compiler codes and jump directly to the relevant troubleshooting page.</p><span class="launch-meta">Best for: “what broke, and where do I go next?”</span></a>
+  <a class="launch-card" href="./mod-generator/"><span class="tool-symbol">MOD</span><strong>Starter Mod Generator</strong><p>Create minimal `mod.json` and `Main.cs`, then follow the first-mod recipe to prove the skeleton loaded.</p><span class="launch-meta">Best for: a first working skeleton</span></a>
+  <a class="launch-card" href="./api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Search the WBML-verified PoliticalWorldAPI baseline by task instead of memorizing method names.</p><span class="launch-meta">Best for: “which method and what status?”</span></a>
+  <a class="launch-card" href="./compatibility/"><span class="tool-symbol">VER</span><strong>Compatibility Matrix</strong><p>See exactly which runtime stack the evidence covers and which branches remain gaps.</p><span class="launch-meta">Best for: evidence boundaries</span></a>
 </div>
 
-<div class="friendly-callout friendly-callout-good"><strong>Tool principle</strong><span>If evidence is missing, the site should say so. A tool should not turn an unknown into a confident answer.</span></div>
+<div class="friendly-callout friendly-callout-good"><strong>Tool principle</strong><span>A tool may recognize a signature or verified behavior. It must not turn missing evidence into a confident root-cause claim.</span></div>

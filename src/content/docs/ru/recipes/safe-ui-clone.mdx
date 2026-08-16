@@ -1,0 +1,28 @@
+---
+title: Безопаснее клонировать vanilla UI
+description: Практический TerraForge-паттерн отделения визуальной структуры от опасных скопированных MonoBehaviour.
+---
+
+# Безопаснее клонировать vanilla UI
+
+<span class="doc-status">🧪 Reproduced case study</span>
+<span class="doc-status">TerraForge</span>
+
+TerraForge клонировал **активную** vanilla preset-cell. Скопированный `ButtonClickMaptemplate` запустил `Awake()` во время `Instantiate` и получил `NullReferenceException`; скопированный `EventTrigger` также тащил unsafe tooltip behavior.
+
+Рабочий порядок в этом кейсе:
+
+```text
+1. временно выключить source vanilla cell
+2. клонировать её в inactive состоянии
+3. удалить скопированный ButtonClickMaptemplate
+4. удалить EventTrigger
+5. оставить визуальные Button / Image / layout components
+6. поставить свой click handler
+7. где нужно — использовать уже инициализированный vanilla flow
+8. активировать очищенный clone
+```
+
+Главное правило: **визуальная структура ≠ безопасный для повторного lifecycle MonoBehaviour**.
+
+Точная hierarchy/version-specific. Подробности: [TerraForge safe UI cloning](../../case-studies/terraforge-safe-ui-cloning/).

@@ -1,0 +1,37 @@
+---
+title: Изменить высоту WorldTile
+description: Запись terrain height через storage path, подтверждённый TerraForge height probe.
+---
+
+# Изменить высоту WorldTile
+
+<span class="doc-status">✅ Runtime verified</span>
+<span class="doc-status">WorldBox 0.51.2 build 719</span>
+
+Проверенные access path:
+
+```csharp
+tile.Height
+tile.data.height
+```
+
+Для TerraForge предпочтительным стал `tile.Height`.
+
+## Не использовать `health`
+
+Ранняя гипотеза:
+
+```csharp
+tile.health
+```
+
+как terrain height оказалась неправильной.
+
+Если генератор даёт океан при нормальной математике, раздели проблему на две:
+
+```text
+правильная ли математика карты?
+правильно ли мы записываем terrain height?
+```
+
+Справка: [WorldTile.Height](../../api/worldtile-height/).

@@ -1,0 +1,66 @@
+---
+title: Create a Political World action with a condition
+description: Register, query and execute a small PoliticalWorldAPI action without falling into same-ID replacement.
+---
+
+# Create a Political World action with a condition
+
+<span class="doc-status">✅ Runtime verified — executed branches</span>
+<span class="doc-status">WBML-0005</span>
+<span class="doc-status">PoliticalWorldAPI 1.14.0</span>
+
+## Goal
+
+Register one reusable action that can only run for a valid kingdom and increments addon state.
+
+```csharp
+private const string AddonId = "Example.Actions";
+private const string ActionId = AddonId + ".increase_counter";
+
+PoliticalWorldAPI.RegisterAction(
+    AddonId,
+    new PoliticalWorldAPI.ActionDefinition
+    {
+        Id = ActionId,
+        Category = "example",
+        DisplayName = "Increase counter",
+        Condition = kingdom => kingdom != null,
+        Handler = kingdom =>
+        {
+            int current = PoliticalWorldAPI.GetKingdomInt(
+                kingdom,
+                AddonId,
+                "counter",
+                0
+            );
+
+            PoliticalWorldAPI.SetKingdomInt(
+                kingdom,
+                AddonId,
+                "counter",
+                current + 1
+            );
+        }
+    }
+);
+```
+
+## Check before execution
+
+```csharp
+bool allowed = PoliticalWorldAPI.CanExecuteAction(ActionId, kingdom);
+```
+
+Then execute only when your flow actually wants the action to happen.
+
+## Important trap: same ID is replacement
+
+On runtime API 1.14.0, a second `RegisterAction` with the same ID replaced the previous definition instead of being rejected as a duplicate.
+
+That means an accidental repeated ID can replace metadata, condition or handler.
+
+## Cleanup
+
+If the action is temporary, unregister it when appropriate. WBML-0005 verified unregister and post-unregister lookup/execution behavior.
+
+Open [Actions / Conditions / Effects](../../api/politicalworld-actions-conditions-effects/) for validation codes, combinators, `TryExecuteAction`, `Effects.Sequence` and the party-support edge case.

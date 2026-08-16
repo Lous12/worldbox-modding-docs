@@ -1,0 +1,41 @@
+---
+title: Clone vanilla UI more safely
+description: TerraForge-derived recipe for separating visual hierarchy from unsafe copied behavior.
+---
+
+# Clone vanilla UI more safely
+
+<span class="doc-status">🧪 Reproduced case study</span>
+<span class="doc-status">TerraForge</span>
+<span class="doc-status">WorldBox 0.51.2</span>
+
+## Problem
+
+A vanilla UI object may look like a reusable visual prefab while carrying `MonoBehaviour` components that assume a very specific vanilla initialization context.
+
+TerraForge cloned an **active** vanilla New World preset cell. The copied `ButtonClickMaptemplate` ran `Awake()` during `Instantiate` and threw `NullReferenceException`. A copied `EventTrigger` also retained unsafe vanilla tooltip behavior.
+
+## Safer pattern that worked in the case study
+
+```text
+1. temporarily deactivate the source vanilla cell
+2. instantiate the clone while the source is inactive
+3. remove copied ButtonClickMaptemplate
+4. remove copied EventTrigger
+5. keep visual Button / Image / layout components
+6. attach your own click handler
+7. use an already initialized vanilla path where needed
+8. activate the cleaned clone
+```
+
+## General rule
+
+Treat **visual structure** and **behavioral components** as separate things.
+
+Do not assume copying a working GameObject means every copied component is safe to initialize again.
+
+## Version boundary
+
+The reusable lesson is the lifecycle pattern. The exact hierarchy, component names and “16 vanilla buttons in Grid” observation are version-specific to the tested WorldBox build.
+
+Open the [full TerraForge case study](../../case-studies/terraforge-safe-ui-cloning/) for the discovery sequence.

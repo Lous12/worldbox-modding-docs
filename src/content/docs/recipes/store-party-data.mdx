@@ -1,0 +1,58 @@
+---
+title: Store data on a Political World party
+description: Typed party addon data using stable party IDs, fallbacks and inactive/reactivate behavior.
+---
+
+# Store data on a Political World party
+
+<span class="doc-status">✅ Runtime verified — executed branches</span>
+<span class="doc-status">WBML-0003</span>
+<span class="doc-status">PoliticalWorldAPI 1.14.0</span>
+
+## Goal
+
+Attach addon-owned state to one specific Political World party.
+
+## Minimal code
+
+```csharp
+const string AddonId = "Example.PartyAddon";
+const string Key = "conference_count";
+
+bool written = PoliticalWorldAPI.SetPartyInt(
+    kingdom,
+    AddonId,
+    party.Id,
+    Key,
+    3
+);
+
+int count = PoliticalWorldAPI.GetPartyInt(
+    kingdom,
+    AddonId,
+    party.Id,
+    Key,
+    0
+);
+```
+
+Use the stable `party.Id`. Do not persist a list index such as “second party”.
+
+## Missing party behavior
+
+WBML-0003 verified that a missing party ID behaves safely:
+
+```text
+GetPartyInt/String/Bool/Float → supplied fallback
+SetPartyInt/String/Bool/Float → false
+```
+
+## Inactive party behavior
+
+For the tested non-ruling party, typed data remained readable while the party was inactive and was still there after reactivation.
+
+## Evidence gap
+
+Same-kingdom party-to-party isolation was skipped in the tested save because the original target kingdom did not contain two suitable active parties. Do not silently promote that skipped branch to Verified.
+
+Open the [full party-private data reference](../../api/politicalworld-party-private-data/) for the exact scope.
