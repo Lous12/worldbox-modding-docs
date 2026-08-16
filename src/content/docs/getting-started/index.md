@@ -1,21 +1,25 @@
 ---
-title: Getting Started
-description: A beginner route from “I want to make a mod” to a mod that actually loads.
+title: Start here
+description: A beginner route from “I want to make a mod” to a mod that really loads.
 ---
 
-# Getting Started
+# Start here
 
-You do **not** need to learn the whole WorldBox API first. The safest beginner route is small: make the loader see your mod, confirm it in `Player.log`, then add one feature.
+You do **not** need to learn the whole WorldBox API first. Your first goal is much smaller: make NeoModLoader see your mod, prove that it loaded, then add exactly one feature.
 
-## 1. Make sure NeoModLoader is running
+<div class="friendly-callout friendly-callout-good"><strong>Goal of this page</strong><span>Reach a clean point where you can say: “the loader sees my mod and my code runs.”</span></div>
 
-Launch WorldBox with NeoModLoader installed. If you already have a `Player.log`, open the [Player.log Analyzer](../workbench/log-analyzer/). A healthy NML session normally gives us enough information to extract the NeoModLoader version and loaded-mod lines.
+## Step 1 — Make sure NeoModLoader is running
 
-If NML itself is not present, do not start copying API code yet. Installation documentation is a separate step and will be expanded with version-specific instructions as we verify them.
+Launch WorldBox with NeoModLoader installed. If you already have a `Player.log`, open the [Player.log Analyzer](../workbench/log-analyzer/). In a normal NML session, the log should contain NeoModLoader activity and mod-loading lines.
 
-## 2. Create the smallest possible mod
+<div class="done-when"><strong>Done when:</strong> you can find NML activity in the log.</div>
 
-Use the [Starter Mod Generator](../workbench/mod-generator/). For the current research stack, our working WBML probes use a mod folder containing at least:
+If NML is not present at all, stop here. Do not copy PoliticalWorldAPI or Harmony code yet — the problem is earlier than your mod logic.
+
+## Step 2 — Create the smallest possible mod
+
+Open the [Starter Mod Generator](../workbench/mod-generator/). The current WBML probes use a tiny structure like:
 
 ```text
 MyMod/
@@ -23,25 +27,26 @@ MyMod/
 └── Main.cs
 ```
 
-The generated starter uses `BasicMod<Main>` and `OnModLoad()` because that structure has actually compiled and loaded in our current WBML experiments.
+The generator uses `BasicMod<Main>` and `OnModLoad()` because that shape compiled and loaded in our current runtime experiments.
 
-## 3. Run the game before adding features
+<div class="done-when"><strong>Done when:</strong> you have a tiny mod folder with no extra systems yet.</div>
 
-Do not add UI, Harmony patches, persistence, events and ten systems at once. First launch the game and verify a simple `Loaded` / `OnLoad` message in `Player.log`.
+## Step 3 — Run it before adding features
 
-If it fails, the smaller the mod is, the easier the log is to understand.
+Launch the game. Check `Player.log` for your mod name and a simple `OnLoad` / `Loaded` message.
 
-## 4. Add one feature
+If the mod does not load, use the [Troubleshooter](../troubleshooting/wizard/) instead of adding more code.
 
-Good first choices:
+<div class="done-when"><strong>Done when:</strong> the log proves that your own code ran.</div>
 
-- [save custom kingdom data](../guides/kingdom-custom-data/)
-- [build a Political World addon](../guides/politicalworldapi-runtime-baseline/)
-- [browse the verified API by task](../workbench/api-explorer/)
-- [open troubleshooting](../troubleshooting/) when something breaks
+## Step 4 — Add one feature
 
-## 5. Check the evidence boundary
+Pick **one** small goal from [Recipes](../recipes/): save a value, subscribe to an event, create an action, inspect the world, or debug a specific problem.
 
-A snippet can be correct for one WorldBox/NML/API stack and wrong later. Before relying on research-sensitive behavior, check the [Compatibility Matrix](../workbench/compatibility/).
+Do not add UI + Harmony + persistence + events at the same time. If one thing breaks, a tiny test is dramatically easier to understand.
 
-**Beginner rule:** first make it load, then make one thing work, then make it clever.
+## Step 5 — Check the evidence boundary
+
+A snippet may be correct for one WorldBox / NML / API combination and change later. Before depending on version-sensitive behavior, open the [Compatibility Matrix](../workbench/compatibility/).
+
+<div class="friendly-callout"><strong>Beginner rule</strong><span>First make it load. Then make one thing work. Only then make it clever.</span></div>

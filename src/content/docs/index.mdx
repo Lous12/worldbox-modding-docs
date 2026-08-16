@@ -1,16 +1,16 @@
 ---
 title: WorldBox Modding
-description: Practical, beginner-friendly WorldBox modding documentation, tools, research and troubleshooting.
+description: Practical, beginner-friendly WorldBox modding documentation, tools, recipes, research and troubleshooting.
 template: splash
 hero:
   title: WorldBox Modding
-  tagline: Build it. Test it. Fix it.
+  tagline: Build mods without guessing.
   actions:
-    - text: Build my first mod
-      link: ./workbench/mod-generator/
+    - text: I'm new — start here
+      link: ./getting-started/
       icon: right-arrow
-    - text: I have an error
-      link: ./workbench/log-analyzer/
+    - text: Something is broken
+      link: ./troubleshooting/wizard/
       icon: open-book
       variant: minimal
 ---
@@ -18,57 +18,52 @@ hero:
 <div class="project-epigraph">Какова цена свободы?</div>
 
 <p class="friendly-lead">
-You do not need to know the WorldBox internals before using this site. Pick what you want to do and we will lead you to the smallest useful example first — then to the deeper API and research when you need it.
+You do not need to understand WorldBox internals first. Tell the site what you are trying to do, start with the smallest useful step, and open the deeper API or research only when you actually need it.
 </p>
 
 <div class="trust-strip">
-  <span>✅ Runtime-tested knowledge</span><span>🧪 Unknowns are marked</span><span>🇬🇧 English + 🇷🇺 Русский</span>
+  <span>✅ Runtime-tested where possible</span><span>🧪 Unknowns stay marked</span><span>🔒 Browser tools can work locally</span><span>🇬🇧 English + 🇷🇺 Русский</span>
 </div>
 
-<div class="support-block">
-  <div>
-    <strong>❤️ Support the creator & project</strong>
-    <p>If the docs or tools save you time, you can support continued research, testing and site development. Everything here stays free and open.</p>
-  </div>
-  <div class="support-links">
-    <a class="support-button" href="https://www.donationalerts.com/r/lous12" target="_blank" rel="noopener noreferrer">DonationAlerts ↗</a>
-    <a class="support-button support-button-secondary" href="https://dalink.to/lous12" target="_blank" rel="noopener noreferrer">DALink ↗</a>
-    <a class="support-text-link" href="./support/">About support →</a>
-  </div>
+## Pick your route
+
+<div class="entry-grid">
+  <a class="entry-card entry-new" href="./getting-started/"><span class="entry-icon">🌱</span><div><span class="entry-label">NEW TO MODDING</span><strong>I want to make my first mod</strong><p>One short route: loader → minimal mod → Player.log → first feature.</p></div><span class="entry-arrow">→</span></a>
+  <a class="entry-card" href="./recipes/"><span class="entry-icon">🧰</span><div><span class="entry-label">I KNOW THE GOAL</span><strong>I want to build something</strong><p>Choose a task like save data, listen to an event, work with UI, or change the world.</p></div><span class="entry-arrow">→</span></a>
+  <a class="entry-card entry-broken" href="./troubleshooting/wizard/"><span class="entry-icon">💥</span><div><span class="entry-label">SOMETHING BROKE</span><strong>I need help debugging</strong><p>Start from the symptom, then use the log analyzer or the relevant troubleshooting guide.</p></div><span class="entry-arrow">→</span></a>
 </div>
 
-## What do you want to do?
+## Common tasks
 
-<div class="goal-grid">
-  <a class="goal-card primary" href="./workbench/mod-generator/"><span class="goal-icon">🧱</span><div><strong>Create my first mod</strong><p>Generate a starter `mod.json` and `Main.cs`, then learn what each part does.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./guides/kingdom-custom-data/"><span class="goal-icon">💾</span><div><strong>Save custom data</strong><p>Store values on kingdoms and understand what survives save/load/restart.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon">🗳️</span><div><strong>Build a Political World addon</strong><p>Start from the API surface we have actually verified at runtime.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./case-studies/terraforge-safe-ui-cloning/"><span class="goal-icon">🪟</span><div><strong>Add or modify UI</strong><p>See a real UI-cloning failure, why it crashed, and the safer pattern that worked.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./api/worldtile-height/"><span class="goal-icon">🌍</span><div><strong>Work with the world</strong><p>Start with terrain height and the first verified world-generation findings.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card danger" href="./workbench/log-analyzer/"><span class="goal-icon">💥</span><div><strong>Something is broken</strong><p>Drop in `Player.log` and get a quick local diagnostic before digging deeper.</p></div><span class="goal-arrow">→</span></a>
+<div class="goal-grid friendly-goals">
+  <a class="goal-card primary" href="./workbench/mod-generator/"><span class="goal-icon">🧱</span><div><strong>Create a starter mod</strong><p>Generate the two-file skeleton and see what each part does.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./guides/kingdom-custom-data/"><span class="goal-icon">💾</span><div><strong>Save custom data</strong><p>Store values on kingdoms and understand save/load/restart scope.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon">🗳️</span><div><strong>Build a Political World addon</strong><p>Start from the API surface already tested by WBML.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./api/politicalworld-event-bus/"><span class="goal-icon">📡</span><div><strong>React to events</strong><p>Subscribe, unsubscribe and understand callback safety.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./case-studies/terraforge-safe-ui-cloning/"><span class="goal-icon">🪟</span><div><strong>Work with UI</strong><p>Start from a real failure and the safer cloning pattern that worked.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./api/worldtile-height/"><span class="goal-icon">🌍</span><div><strong>Work with the world</strong><p>Use the first verified terrain-height findings instead of old guesses.</p></div><span class="goal-arrow">→</span></a>
 </div>
 
-<div class="not-sure-card"><div><span>👋</span><strong>Not sure where to start?</strong><p>Follow the beginner path. You can ignore Harmony, reflection, lifecycle and other advanced terms until you actually need them.</p></div><a class="wb-button" href="./getting-started/">Start from zero →</a></div>
+<div class="not-sure-card"><div><span>🧭</span><strong>Know the result, but not the method name?</strong><p>Use Recipes. They are organized around tasks instead of API names.</p></div><a class="wb-button" href="./recipes/">Open Recipes →</a></div>
 
 ## Workbench
 
-<p class="section-lead">The documentation now has tools you can use while developing, not only pages to read.</p>
+<p class="section-lead">Tools for the moment when reading a page is slower than doing the check directly.</p>
 
 <div class="workbench-launch-grid compact">
-  <a class="launch-card" href="./workbench/log-analyzer/"><span>📄</span><strong>Player.log Analyzer</strong><p>Versions, loaded mods and known error signatures. Local-only.</p></a>
+  <a class="launch-card" href="./workbench/log-analyzer/"><span>📄</span><strong>Player.log Analyzer</strong><p>Extract versions, loaded mods and known error signatures locally.</p></a>
   <a class="launch-card" href="./workbench/mod-generator/"><span>🧱</span><strong>Mod Generator</strong><p>Generate a minimal NML or Political World addon skeleton.</p></a>
-  <a class="launch-card" href="./workbench/api-explorer/"><span>🔎</span><strong>API Explorer</strong><p>Search by task instead of memorizing method names.</p></a>
-  <a class="launch-card" href="./workbench/compatibility/"><span>🧪</span><strong>Compatibility</strong><p>See exactly what versions and branches our evidence covers.</p></a>
+  <a class="launch-card" href="./workbench/api-explorer/"><span>🔎</span><strong>API Explorer</strong><p>Search verified API behavior by task or keyword.</p></a>
+  <a class="launch-card" href="./workbench/compatibility/"><span>🧪</span><strong>Compatibility</strong><p>See exactly which versions and branches the evidence covers.</p></a>
 </div>
 
-## Your first route
+## Your first successful mod
 
-<div class="beginner-route">
-  <a href="./getting-started/"><span>1</span><div><strong>Install & understand NML</strong><p>Get the loader and know where a mod lives.</p></div></a>
-  <a href="./workbench/mod-generator/"><span>2</span><div><strong>Create the smallest mod</strong><p>Start with two files instead of a giant template.</p></div></a>
-  <a href="./workbench/log-analyzer/"><span>3</span><div><strong>Run it and read the log</strong><p>Confirm the mod actually loaded before adding systems.</p></div></a>
-  <a href="./guides/"><span>4</span><div><strong>Add one feature</strong><p>Pick data, events, UI, kingdoms, Harmony or another guide.</p></div></a>
-  <a href="./workbench/api-explorer/"><span>5</span><div><strong>Use verified APIs</strong><p>Check the runtime evidence and known boundaries before relying on a method.</p></div></a>
+<div class="beginner-route route-four">
+  <a href="./getting-started/"><span>1</span><div><strong>Make the loader see the mod</strong><p>Do not add systems until the basic mod actually appears in the log.</p></div></a>
+  <a href="./workbench/mod-generator/"><span>2</span><div><strong>Start tiny</strong><p>Use a minimal `mod.json` + `Main.cs` skeleton.</p></div></a>
+  <a href="./workbench/log-analyzer/"><span>3</span><div><strong>Prove it loaded</strong><p>Check `Player.log` before debugging any game mechanic.</p></div></a>
+  <a href="./recipes/"><span>4</span><div><strong>Add one feature</strong><p>Pick one recipe and only then grow the mod.</p></div></a>
 </div>
 
 ## What can I trust?
@@ -79,14 +74,18 @@ You do not need to know the WorldBox internals before using this site. Pick what
   <span class="friendly-status experimental">🧪 <strong>Experimental</strong> — still being tested</span>
 </div>
 
-<p class="small-center">Current main research baseline: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</strong>. <a href="./workbench/compatibility/">See the full matrix →</a></p>
+<p class="small-center">Current main research baseline: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</strong>. <a href="./workbench/compatibility/">See the compatibility matrix →</a></p>
 
-## Latest verified research
+<div class="research-door"><div><span>🔬</span><div><strong>Need proof, not just an example?</strong><p>Open the WBML research, failed hypotheses, case studies and sanitized runtime evidence behind the beginner-facing conclusions.</p></div></div><a href="./research/">Open Research →</a></div>
 
-<div class="featured-findings friendly-findings">
-  <a class="finding" href="./case-studies/wbml-0003-persistence-lifecycle/"><span class="finding-kicker">✅ WBML-0003</span><strong>Party data survives restart and inactive lifecycle</strong><span>Typed party data was re-read after a full process restart and while a safe party was inactive.</span></a>
-  <a class="finding" href="./case-studies/wbml-0004-event-bus-runtime/"><span class="finding-kicker">✅ WBML-0004</span><strong>Event Bus runtime behavior</strong><span>Payload isolation, callback containment, recursion guard and 100/100 stress dispatch.</span></a>
-  <a class="finding" href="./case-studies/wbml-0005-actions-runtime/"><span class="finding-kicker">✅ WBML-0005</span><strong>Actions / Conditions / Effects</strong><span>Registration, execution, condition helpers, effects and important single-party support boundaries.</span></a>
+<div class="support-block support-late">
+  <div>
+    <strong>❤️ Support the creator & project</strong>
+    <p>If the docs or tools save you time, you can support continued research, testing and site development. Everything here stays free and open.</p>
+  </div>
+  <div class="support-links">
+    <a class="support-button" href="https://www.donationalerts.com/r/lous12" target="_blank" rel="noopener noreferrer">DonationAlerts ↗</a>
+    <a class="support-button support-button-secondary" href="https://dalink.to/lous12" target="_blank" rel="noopener noreferrer">DALink ↗</a>
+    <a class="support-text-link" href="./support/">About support →</a>
+  </div>
 </div>
-
-<div class="research-door"><div><span>🔬</span><div><strong>Want the deep technical evidence?</strong><p>Every beginner-facing conclusion can lead down into research methodology, failed hypotheses and reproducible WBML evidence.</p></div></div><a href="./research/">Open Research →</a></div>

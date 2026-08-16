@@ -1,0 +1,16 @@
+---
+title: Troubleshooter
+sidebar:
+  order: 1
+description: Pick the symptom first and get the shortest useful debugging route.
+---
+
+import TroubleshooterWizard from '../../../components/workbench/TroubleshooterWizard.astro';
+
+# Troubleshooter
+
+When something breaks, start with the **symptom**, not a theory about the cause. This helper deliberately avoids pretending it can diagnose every mod automatically.
+
+<TroubleshooterWizard lang="en" />
+
+If the helper cannot narrow it down, use the [Player.log Analyzer](../../workbench/log-analyzer/) and keep the smallest reproducible test you can.

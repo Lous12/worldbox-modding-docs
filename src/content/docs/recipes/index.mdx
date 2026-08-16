@@ -1,0 +1,21 @@
+---
+title: Recipes
+description: Task-first WorldBox modding recipes for people who know what they want to do, but not the exact API name.
+---
+
+import RecipeFinder from '../../../components/workbench/RecipeFinder.astro';
+
+# Recipes
+
+You should not need to memorize class and method names before solving a small modding task. Start with the result you want, open the shortest relevant route, and only then move into the full API reference.
+
+<RecipeFinder lang="en" />
+
+## How to use recipes
+
+1. Pick the closest task, even if the wording is not exact.
+2. Make the smallest version work first.
+3. Check the **Verified / Observed / Experimental** status before depending on version-sensitive behavior.
+4. If the result differs from the page, capture `Player.log` and treat it as a new compatibility question rather than silently guessing.
+
+> Recipes are shortcuts into the documentation. The detailed reference and WBML evidence remain the source for exact scope and limitations.

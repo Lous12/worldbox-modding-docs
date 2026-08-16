@@ -1,0 +1,98 @@
+---
+const { lang = 'en' } = Astro.props;
+const ru = lang === 'ru';
+const t = ru ? {
+  title: 'Что именно сломалось?',
+  intro: 'Выбери симптом. Сайт не будет угадывать причину — он сначала даст короткие проверки и отправит в нужный инструмент.',
+  reset: 'Выбрать другой симптом',
+  symptoms: [
+    ['not-load','🚫','Мод не появляется / не загружается'],
+    ['compile','🧩','Ошибка компиляции C#'],
+    ['crash','💥','Игра вылетает или зависает'],
+    ['nothing','👻','Мод загрузился, но ничего не происходит'],
+    ['data','💾','Данные пропадают после загрузки'],
+    ['ui','🪟','Кнопка / окно / UI не появляется']
+  ]
+} : {
+  title: 'What exactly is broken?',
+  intro: 'Pick the symptom. The site will not guess the cause — it gives short checks first, then sends you to the right tool.',
+  reset: 'Choose another symptom',
+  symptoms: [
+    ['not-load','🚫','Mod does not appear / load'],
+    ['compile','🧩','C# compilation error'],
+    ['crash','💥','Game crashes or freezes'],
+    ['nothing','👻','Mod loaded, but nothing happens'],
+    ['data','💾','Data disappears after loading'],
+    ['ui','🪟','Button / window / UI does not appear']
+  ]
+};
+
+const paths = ru ? {
+  'not-load': {title:'Сначала докажи, что loader вообще видит мод', steps:['Открой `Player.log` и найди строки NeoModLoader.','Проверь, есть ли строки `Compile Mod ...`, `OnLoad` или `Loaded` для твоего мода.','Если их нет — не отлаживай API-код: проблема раньше lifecycle мода.'], links:[['Разобрать Player.log','../../workbench/log-analyzer/'],['Сверить минимальный мод','../../workbench/mod-generator/'],['Начать с нуля','../../getting-started/']]},
+  'compile': {title:'Начни с первой ошибки `CSxxxx`', steps:['Не исправляй десять ошибок сразу: поздние часто являются следствием первой.','Найди первую строку `error CS####` и несколько строк вокруг неё.','После исправления снова запусти игру и получи новый лог.'], links:[['Разобрать Player.log','../../workbench/log-analyzer/'],['Сгенерировать чистый каркас','../../workbench/mod-generator/']]},
+  'crash': {title:'Сначала классифицируй исключение', steps:['Ищи `StackOverflowException`, `NullReferenceException` или первый повторяющийся stack trace.','Если стек повторяет одни и те же методы — подозревай recursion.','Проверяй на тестовом save, если код меняет состояние мира.'], links:[['Разобрать Player.log','../../workbench/log-analyzer/'],['StackOverflow / recursion','../stack-overflow-recursive-initialization/']]},
+  'nothing': {title:'Раздели «мод загрузился» и «механика сработала»', steps:['Подтверди `OnLoad` / `Loaded` в логе.','Добавь один простой диагностический лог прямо перед проблемным вызовом.','Тестируй одну механику, а не весь мод одновременно.'], links:[['Player.log Analyzer','../../workbench/log-analyzer/'],['API Explorer','../../workbench/api-explorer/'],['Практические рецепты','../../recipes/']]},
+  'data': {title:'Уточни, когда именно данные исчезают', steps:['Проверь: сразу после записи, после reload save, после полного restart или после смены мира.','Не расширяй результат одного сценария на другой.','Для PoliticalWorldAPI используй типизированные addon-data методы и проверяй точный scope evidence.'], links:[['Kingdom custom data','../../guides/kingdom-custom-data/'],['Party private data','../../api/politicalworld-party-private-data/'],['Compatibility','../../workbench/compatibility/']]},
+  'ui': {title:'UI часто ломается из-за lifecycle и unsafe clone', steps:['Сначала подтверди, что код создания UI вообще вызывается.','Проверь `NullReferenceException` и компоненты, которые запускают `Awake` при clone.','Не считай активный vanilla template безопасным для прямого cloning.'], links:[['Player.log Analyzer','../../workbench/log-analyzer/'],['TerraForge UI case study','../../case-studies/terraforge-safe-ui-cloning/']]}
+} : {
+  'not-load': {title:'First prove that the loader can see the mod', steps:['Open `Player.log` and find NeoModLoader lines.','Check for `Compile Mod ...`, `OnLoad`, or `Loaded` lines for your mod.','If they are absent, do not debug API code yet: the problem is earlier in the mod lifecycle.'], links:[['Analyze Player.log','../../workbench/log-analyzer/'],['Compare a minimal mod','../../workbench/mod-generator/'],['Start from zero','../../getting-started/']]},
+  'compile': {title:'Start with the first `CSxxxx` error', steps:['Do not fix ten errors at once: later errors are often consequences of the first one.','Find the first `error CS####` line and a few surrounding lines.','After fixing it, run the game again and get a fresh log.'], links:[['Analyze Player.log','../../workbench/log-analyzer/'],['Generate a clean skeleton','../../workbench/mod-generator/']]},
+  'crash': {title:'Classify the exception first', steps:['Look for `StackOverflowException`, `NullReferenceException`, or the first repeating stack trace.','If the same methods repeat, suspect recursion.','Use a disposable save when code mutates world state.'], links:[['Analyze Player.log','../../workbench/log-analyzer/'],['StackOverflow / recursion','../stack-overflow-recursive-initialization/']]},
+  'nothing': {title:'Separate “the mod loaded” from “the feature ran”', steps:['Confirm `OnLoad` / `Loaded` in the log.','Add one diagnostic log immediately before the failing call.','Test one mechanic at a time, not the entire mod.'], links:[['Player.log Analyzer','../../workbench/log-analyzer/'],['API Explorer','../../workbench/api-explorer/'],['Practical recipes','../../recipes/']]},
+  'data': {title:'Identify exactly when the data disappears', steps:['Check immediate read, save reload, full process restart, and world switch separately.','Do not widen one scenario into a universal persistence claim.','For PoliticalWorldAPI, use typed addon-data methods and check the exact evidence scope.'], links:[['Kingdom custom data','../../guides/kingdom-custom-data/'],['Party private data','../../api/politicalworld-party-private-data/'],['Compatibility','../../workbench/compatibility/']]},
+  'ui': {title:'UI often fails because of lifecycle or unsafe cloning', steps:['First prove the UI creation code is actually called.','Check for `NullReferenceException` and components that execute `Awake` during clone.','Do not assume an active vanilla template is safe to clone directly.'], links:[['Player.log Analyzer','../../workbench/log-analyzer/'],['TerraForge UI case study','../../case-studies/terraforge-safe-ui-cloning/']]}
+};
+---
+
+<div class="workbench-tool trouble-wizard" data-trouble-wizard>
+  <div class="tool-head">
+    <div><span class="tool-kicker">{ru ? 'Помощник' : 'Helper'}</span><h2>{t.title}</h2><p>{t.intro}</p></div>
+    <span class="privacy-pill">No upload</span>
+  </div>
+
+  <div class="symptom-grid" data-symptoms>
+    {t.symptoms.map(([id, icon, label]) => <button type="button" class="symptom-card" data-symptom={id}><span>{icon}</span><strong>{label}</strong><small>→</small></button>)}
+  </div>
+
+  <div class="trouble-result" data-trouble-result hidden>
+    <div class="trouble-result-head"><div><span class="tool-kicker">{ru ? 'Следующие шаги' : 'Next steps'}</span><h3 data-result-title></h3></div><button type="button" class="mini-button" data-reset>{t.reset}</button></div>
+    <ol data-result-steps></ol>
+    <div class="tool-actions" data-result-links></div>
+  </div>
+</div>
+
+<script define:vars={{ paths }}>
+  for (const root of document.querySelectorAll('[data-trouble-wizard]')) {
+    if (root.dataset.ready === '1') continue;
+    root.dataset.ready = '1';
+    const symptoms = root.querySelector('[data-symptoms]');
+    const result = root.querySelector('[data-trouble-result]');
+    const title = root.querySelector('[data-result-title]');
+    const steps = root.querySelector('[data-result-steps]');
+    const links = root.querySelector('[data-result-links]');
+    const show = (id) => {
+      const data = paths[id];
+      if (!data) return;
+      title.textContent = data.title;
+      steps.textContent = '';
+      links.textContent = '';
+      for (const text of data.steps) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        steps.append(li);
+      }
+      for (const [label, href] of data.links) {
+        const a = document.createElement('a');
+        a.className = 'wb-button wb-button-secondary';
+        a.href = href;
+        a.textContent = `${label} →`;
+        links.append(a);
+      }
+      symptoms.hidden = true;
+      result.hidden = false;
+      result.scrollIntoView({behavior:'smooth', block:'nearest'});
+    };
+    for (const button of root.querySelectorAll('[data-symptom]')) button.addEventListener('click', () => show(button.dataset.symptom));
+    root.querySelector('[data-reset]')?.addEventListener('click', () => { result.hidden = true; symptoms.hidden = false; });
+  }
+</script>

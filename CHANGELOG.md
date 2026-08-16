@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0-alpha.2 — Friendly Task-First UX
+- Reworked both home pages around three obvious entry routes: new modder, known task, or broken mod.
+- Reduced beginner-facing technical density and moved research/support detail lower on the home page without removing it.
+- Added a bilingual task-first Recipe Library with local search and category filters.
+- Added a bilingual symptom-first Troubleshooter that routes users to concrete checks, Player.log analysis, and relevant guides instead of guessing a cause.
+- Reworked Getting Started into five explicit steps with “Done when” checkpoints.
+- Reworked Troubleshooting landing pages around observable symptoms and a practical debugging order.
+- Added a dedicated Recipes sidebar group and renamed the old broad “Build something” group to the clearer “Guides”.
+- Preserved DonationAlerts / DALink support links, the `Какова цена свободы?` epigraph, WBML evidence statuses, and the browser-local tool model.
+- Added responsive styles for entry cards, recipes, checkpoints, and the troubleshooter.
+
 ## 0.2.0-alpha.1.1 — Homepage Support Hotfix
 - Restored prominent DonationAlerts and DALink support links on both English and Russian home pages after the v0.2 homepage redesign.
 - Kept support optional and the documentation explicitly free/open.

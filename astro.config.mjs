@@ -39,8 +39,13 @@ export default defineConfig({
           items: [{ slug: 'getting-started' }],
         },
         {
-          label: 'Build something',
-          translations: { ru: 'Сделать что-то' },
+          label: 'Recipes',
+          translations: { ru: 'Рецепты' },
+          items: [{ slug: 'recipes' }],
+        },
+        {
+          label: 'Guides',
+          translations: { ru: 'Гайды' },
           items: [{ autogenerate: { directory: 'guides' } }],
         },
         {
