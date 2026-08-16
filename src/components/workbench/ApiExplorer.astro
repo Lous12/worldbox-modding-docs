@@ -1,0 +1,83 @@
+---
+const { lang = 'en' } = Astro.props;
+const ru = lang === 'ru';
+const t = ru ? {
+  title: 'API Explorer', intro: 'Ищи не по названию метода, а по тому, что хочешь сделать.',
+  search: 'Например: сохранить число, событие, action, party…', all: 'Все', persistence: 'Данные', party: 'Партии', events: 'События', actions: 'Actions',
+  no: 'Ничего не найдено. Попробуй более простые слова.', verified: 'Verified', observed: 'Observed', scope: 'Проверено на', open: 'Открыть подробную страницу →'
+} : {
+  title: 'API Explorer', intro: 'Search by what you want to do, not only by exact method names.',
+  search: 'Try: save number, event, action, party…', all: 'All', persistence: 'Data', party: 'Parties', events: 'Events', actions: 'Actions',
+  no: 'Nothing found. Try simpler words.', verified: 'Verified', observed: 'Observed', scope: 'Verified on', open: 'Open full reference →'
+};
+
+const items = [
+  {cat:'persistence', name:'SetKingdomInt / GetKingdomInt', status:'verified', desc: ru?'Сохранить целое число за королевством. Пережило save/load и полный restart.':'Store an integer on a kingdom. Survived save/load and a full process restart.', terms:'save data integer number kingdom persistence', href: ru?'../../api/politicalworld-addon-private-data/':'../../api/politicalworld-addon-private-data/'},
+  {cat:'persistence', name:'SetKingdomString / GetKingdomString', status:'verified', desc: ru?'Строковые addon-данные королевства, включая Unicode.':'Kingdom addon string data, including Unicode.', terms:'save text string unicode kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
+  {cat:'persistence', name:'SetKingdomBool / GetKingdomBool', status:'verified', desc: ru?'Булевы addon-данные королевства.':'Boolean addon data on a kingdom.', terms:'save bool flag kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
+  {cat:'persistence', name:'SetKingdomFloat / GetKingdomFloat', status:'verified', desc: ru?'Float addon-данные королевства, подтверждённые после restart.':'Float addon data verified after restart.', terms:'save float decimal kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
+  {cat:'party', name:'SetPartyInt / GetPartyInt', status:'verified', desc: ru?'Хранить число за конкретной партией. Данные читались после restart и во время inactive.':'Store an integer for a party. Data was readable after restart and while inactive.', terms:'party save int data inactive restart', href:'../../api/politicalworld-party-private-data/'},
+  {cat:'party', name:'SetPartyString / GetPartyString', status:'verified', desc: ru?'Строковые данные партии. Missing-party getter возвращает fallback.':'Party string data. Missing-party getter returns the supplied fallback.', terms:'party save string fallback missing', href:'../../api/politicalworld-party-private-data/'},
+  {cat:'party', name:'SetPartyBool / GetPartyBool', status:'verified', desc: ru?'Булевы данные партии. Missing-party setter возвращает false.':'Party boolean data. Missing-party setter returns false.', terms:'party bool fallback missing', href:'../../api/politicalworld-party-private-data/'},
+  {cat:'party', name:'SetPartyFloat / GetPartyFloat', status:'verified', desc: ru?'Float-данные партии с проверкой restart/inactive lifecycle.':'Party float data verified across restart/inactive lifecycle.', terms:'party float restart inactive', href:'../../api/politicalworld-party-private-data/'},
+  {cat:'events', name:'Subscribe / Unsubscribe', status:'verified', desc: ru?'Подписка на Political World Event Bus. Проверены exact/wildcard, cleanup и exception isolation.':'Political World Event Bus subscription. Exact/wildcard, cleanup and callback isolation were tested.', terms:'event subscribe callback unsubscribe wildcard', href:'../../api/politicalworld-event-bus/'},
+  {cat:'events', name:'GetEventIds', status:'verified', desc: ru?'Возвращает список event ID; runtime 1.14.0 показал 23 ID и defensive clone.':'Returns event IDs; runtime 1.14.0 exposed 23 IDs and a defensive clone.', terms:'events list ids discovery', href:'../../api/politicalworld-event-bus/'},
+  {cat:'events', name:'Custom / unknown event subscription', status:'observed', desc: ru?'Runtime 1.14.0 принял подписку на ID, отсутствующий в GetEventIds().':'Runtime 1.14.0 accepted a subscription to an ID absent from GetEventIds().', terms:'event unknown custom id subscribe', href:'../../api/politicalworld-event-bus/'},
+  {cat:'actions', name:'RegisterAction', status:'verified', desc: ru?'Регистрирует action. Same-ID на runtime 1.14.0 заменяет существующее определение.':'Registers an action. Same-ID registration replaces the existing definition on runtime 1.14.0.', terms:'action register duplicate same id replace upsert', href:'../../api/politicalworld-actions-conditions-effects/'},
+  {cat:'actions', name:'CanExecuteAction / ExecuteAction', status:'verified', desc: ru?'Проверка condition и выполнение handler для kingdom.':'Condition check and handler execution for a kingdom.', terms:'action execute condition handler can execute', href:'../../api/politicalworld-actions-conditions-effects/'},
+  {cat:'actions', name:'TryExecuteAction', status:'verified', desc: ru?'Выполнение с operation result/code вместо простого bool.':'Execution with an operation result/code rather than only a bool.', terms:'action execute result code try', href:'../../api/politicalworld-actions-conditions-effects/'},
+  {cat:'actions', name:'Conditions.All / Any / Not', status:'verified', desc: ru?'Комбинаторы условий, проверенные WBML-0005.':'Condition combinators verified by WBML-0005.', terms:'conditions all any not combinator', href:'../../api/politicalworld-actions-conditions-effects/'},
+  {cat:'actions', name:'Effects.Sequence', status:'verified', desc: ru?'Последовательность effects, проверенная как единый runtime-путь.':'A sequence of effects verified as one runtime path.', terms:'effects sequence action', href:'../../api/politicalworld-actions-conditions-effects/'},
+  {cat:'party', name:'PartySupportAtLeast', status:'verified', desc: ru?'Порог поддержки проверен на свежем live PartyInfo. Старый snapshot может устареть.':'Support threshold verified against freshly re-read PartyInfo. Old snapshots may become stale.', terms:'party support condition threshold snapshot', href:'../../api/politicalworld-actions-conditions-effects/'},
+  {cat:'party', name:'SetPartySupport', status:'observed', desc: ru?'Для единственной активной партии runtime нормализовал поддержку до 100. Multi-party exact mutation ещё не проверена.':'With one active party, runtime normalized support to 100. Exact multi-party mutation is still unverified.', terms:'party support setter single party 100 normalize', href:'../../api/politicalworld-actions-conditions-effects/'}
+];
+---
+
+<div class="workbench-tool api-explorer" data-api-explorer>
+  <div class="tool-head"><div><span class="tool-kicker">Workbench</span><h2>{t.title}</h2><p>{t.intro}</p></div><span class="verified-pill">WBML-0001 → 0005</span></div>
+  <div class="api-search-row"><input type="search" data-api-search placeholder={t.search} /><div class="filter-pills" data-filters>
+    <button type="button" class="filter-pill active" data-filter="all">{t.all}</button>
+    <button type="button" class="filter-pill" data-filter="persistence">{t.persistence}</button>
+    <button type="button" class="filter-pill" data-filter="party">{t.party}</button>
+    <button type="button" class="filter-pill" data-filter="events">{t.events}</button>
+    <button type="button" class="filter-pill" data-filter="actions">{t.actions}</button>
+  </div></div>
+  <div class="api-results" data-api-results>
+    {items.map((item) => <article class="api-item" data-cat={item.cat} data-search={`${item.name} ${item.desc} ${item.terms}`.toLowerCase()}>
+      <div class="api-item-top"><strong>{item.name}</strong><span class={`api-status ${item.status}`}>{item.status === 'verified' ? '✅' : '👁'} {item.status === 'verified' ? t.verified : t.observed}</span></div>
+      <p>{item.desc}</p>
+      <div class="api-item-foot"><span>{t.scope}: WB 0.51.2 / NML 1.2.0.1 / PW API 1.14.0</span><a href={item.href}>{t.open}</a></div>
+    </article>)}
+    <div class="empty-good" data-api-empty hidden>{t.no}</div>
+  </div>
+</div>
+
+<script>
+  for (const root of document.querySelectorAll('[data-api-explorer]')) {
+    if (root.dataset.ready === '1') continue;
+    root.dataset.ready = '1';
+    const input = root.querySelector('[data-api-search]');
+    const items = Array.from(root.querySelectorAll('.api-item'));
+    const empty = root.querySelector('[data-api-empty]');
+    let filter = 'all';
+    const update = () => {
+      const q = (input?.value || '').trim().toLowerCase();
+      let visible = 0;
+      for (const item of items) {
+        const okFilter = filter === 'all' || item.dataset.cat === filter;
+        const okQuery = !q || item.dataset.search.includes(q);
+        item.hidden = !(okFilter && okQuery);
+        if (!item.hidden) visible++;
+      }
+      empty.hidden = visible !== 0;
+    };
+    input?.addEventListener('input', update);
+    for (const button of root.querySelectorAll('[data-filter]')) {
+      button.addEventListener('click', () => {
+        filter = button.dataset.filter;
+        for (const b of root.querySelectorAll('[data-filter]')) b.classList.toggle('active', b === button);
+        update();
+      });
+    }
+  }
+</script>

@@ -1,136 +1,80 @@
 ---
-title: WorldBox Modding Docs
-description: Community-driven documentation, research, examples and troubleshooting for WorldBox modding and NeoModLoader.
+title: WorldBox Modding
+description: Practical, beginner-friendly WorldBox modding documentation, tools, research and troubleshooting.
 template: splash
 hero:
-  title: WorldBox Modding Docs
-  tagline: Real experiments. Reproducible results. Fewer invented APIs.
+  title: WorldBox Modding
+  tagline: Build it. Test it. Fix it.
   actions:
-    - text: Start modding
-      link: ./getting-started/
+    - text: Build my first mod
+      link: ./workbench/mod-generator/
       icon: right-arrow
-    - text: Research methodology
-      link: ./guides/documentation-statuses/
+    - text: I have an error
+      link: ./workbench/log-analyzer/
       icon: open-book
       variant: minimal
 ---
 
-import { CardGrid, LinkCard } from '@astrojs/starlight/components';
-
 <div class="project-epigraph">Какова цена свободы?</div>
-<p class="project-epigraph-note">Intentionally preserved in Russian across all translations.</p>
 
-<p class="project-intro">
-WorldBox Modding Docs turns real mod development, runtime probes, logs, crashes,
-failed approaches, and verified discoveries into reusable documentation for humans
-and AI coding assistants.
+<p class="friendly-lead">
+You do not need to know the WorldBox internals before using this site. Pick what you want to do and we will lead you to the smallest useful example first — then to the deeper API and research when you need it.
 </p>
 
-<div class="home-facts">
-  <div class="home-fact">
-    <span class="home-fact-label">Research baseline</span>
-    <strong>WorldBox 0.51.2 build 719</strong>
-    <span>NeoModLoader 1.2.0.1</span>
-  </div>
-  <div class="home-fact">
-    <span class="home-fact-label">Evidence first</span>
-    <strong>Probe → log → result</strong>
-    <span>No invented APIs presented as facts.</span>
-  </div>
-  <div class="home-fact">
-    <span class="home-fact-label">Languages</span>
-    <strong>English + Русский</strong>
-    <span>More translations will be added later.</span>
-  </div>
+<div class="trust-strip">
+  <span>✅ Runtime-tested knowledge</span><span>🧪 Unknowns are marked</span><span>🇬🇧 English + 🇷🇺 Русский</span>
 </div>
 
-## Choose your path
+## What do you want to do?
 
-<CardGrid stagger>
-  <LinkCard title="Getting Started" href="./getting-started/" description="From an empty project to a working NeoModLoader mod." />
-  <LinkCard title="Guides" href="./guides/" description="UI, Harmony, world generation, saves, actors, kingdoms and more." />
-  <LinkCard title="API Reference" href="./api/" description="Version-aware classes, methods, fields and verified behavior." />
-  <LinkCard title="Troubleshooting" href="./troubleshooting/" description="Symptoms, log signatures, causes and fixes." />
-  <LinkCard title="Research" href="./research/" description="Runtime probes, hypotheses, experiments and evidence." />
-  <LinkCard title="Case Studies" href="./case-studies/" description="Lessons extracted from real WorldBox mod projects." />
-  <LinkCard title="For AI" href="./ai/" description="Strict context rules for coding assistants and agents." />
-  <LinkCard title="Graveyard of Bad Ideas" href="./graveyard/" description="Tested mistakes preserved so they do not have to be rediscovered." />
-</CardGrid>
-
-## How reliable is a page?
-
-<div class="status-grid">
-  <div class="status-card status-verified"><strong>✅ Verified</strong><span>Reproduced and confirmed.</span></div>
-  <div class="status-card status-observed"><strong>👁 Observed</strong><span>Seen at runtime, not fully explained yet.</span></div>
-  <div class="status-card status-experimental"><strong>🧪 Experimental</strong><span>Works in tests, still under research.</span></div>
-  <div class="status-card status-inferred"><strong>⚠️ Inferred</strong><span>Evidence-backed conclusion, not directly verified.</span></div>
-  <div class="status-card status-failed"><strong>❌ Failed</strong><span>A tested approach that broke or produced the wrong result.</span></div>
-  <div class="status-card status-outdated"><strong>🕒 Outdated</strong><span>Verified on an older build and waiting for re-test.</span></div>
+<div class="goal-grid">
+  <a class="goal-card primary" href="./workbench/mod-generator/"><span class="goal-icon">🧱</span><div><strong>Create my first mod</strong><p>Generate a starter `mod.json` and `Main.cs`, then learn what each part does.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./guides/kingdom-custom-data/"><span class="goal-icon">💾</span><div><strong>Save custom data</strong><p>Store values on kingdoms and understand what survives save/load/restart.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon">🗳️</span><div><strong>Build a Political World addon</strong><p>Start from the API surface we have actually verified at runtime.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./case-studies/terraforge-safe-ui-cloning/"><span class="goal-icon">🪟</span><div><strong>Add or modify UI</strong><p>See a real UI-cloning failure, why it crashed, and the safer pattern that worked.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./api/worldtile-height/"><span class="goal-icon">🌍</span><div><strong>Work with the world</strong><p>Start with terrain height and the first verified world-generation findings.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card danger" href="./workbench/log-analyzer/"><span class="goal-icon">💥</span><div><strong>Something is broken</strong><p>Drop in `Player.log` and get a quick local diagnostic before digging deeper.</p></div><span class="goal-arrow">→</span></a>
 </div>
 
-[Read the full verification policy →](./guides/documentation-statuses/)
+<div class="not-sure-card"><div><span>👋</span><strong>Not sure where to start?</strong><p>Follow the beginner path. You can ignore Harmony, reflection, lifecycle and other advanced terms until you actually need them.</p></div><a class="wb-button" href="./getting-started/">Start from zero →</a></div>
 
-## First documented findings
+## Workbench
 
-<div class="featured-findings">
-  <a class="finding" href="./api/worldtile-height/">
-    <span class="finding-kicker">✅ VERIFIED API</span>
-    <strong>WorldTile.Height</strong>
-    <span>The terrain-height storage confirmed by a TerraForge runtime probe.</span>
-  </a>
-  <a class="finding" href="./case-studies/terraforge-safe-ui-cloning/">
-    <span class="finding-kicker">🧪 CASE STUDY</span>
-    <strong>Safe cloning of the New World preset UI</strong>
-    <span>Why cloning an active vanilla preset crashed, and what finally worked.</span>
-  </a>
-  <a class="finding" href="./troubleshooting/custom-world-all-ocean/">
-    <span class="finding-kicker">💥 TROUBLESHOOTING</span>
-    <strong>Custom world becomes only ocean</strong>
-    <span>A real generation failure caused by assuming a Perlin callback would always run.</span>
-  </a>
-  <a class="finding" href="./case-studies/wbml-0001-addon-data-persistence/">
-    <span class="finding-kicker">🧪 LAB VERIFIED</span>
-    <strong>Addon data survives a full WorldBox restart</strong>
-    <span>WBML-0001 promoted int/string/bool/float and kingdom tags from source expectation to runtime evidence.</span>
-  </a>
-  <a class="finding" href="./case-studies/wbml-0002-world-isolation/">
-    <span class="finding-kicker">🧪 LAB VERIFIED</span>
-    <strong>World saves keep current-run addon state isolated</strong>
-    <span>WBML-0002 verified A → B → A → B isolation with unique signatures and a strict all-steps final gate.</span>
-  </a>
-  <a class="finding" href="./case-studies/wbml-0003-persistence-lifecycle/">
-    <span class="finding-kicker">🧪 LAB VERIFIED</span>
-    <strong>Party data survives restart and inactive lifecycle</strong>
-    <span>WBML-0003 verified party typed data after full restart and while a safe party was inactive/reactivated.</span>
-  </a>
-  <a class="finding" href="./case-studies/wbml-0004-event-bus-runtime/">
-    <span class="finding-kicker">🧪 LAB VERIFIED</span>
-    <strong>Event Bus behavior is runtime-tested</strong>
-    <span>23 event IDs, payload isolation, callback containment, recursion guard 16 and 100/100 stress callbacks.</span>
-  </a>
-  <a class="finding" href="./case-studies/wbml-0005-actions-runtime/">
-    <span class="finding-kicker">🧪 LAB VERIFIED</span>
-    <strong>Actions / Conditions / Effects work as one stack</strong>
-    <span>WBML-0005 captured same-ID replacement behavior and the single-party support safety boundary.</span>
-  </a>
+<p class="section-lead">The documentation now has tools you can use while developing, not only pages to read.</p>
+
+<div class="workbench-launch-grid compact">
+  <a class="launch-card" href="./workbench/log-analyzer/"><span>📄</span><strong>Player.log Analyzer</strong><p>Versions, loaded mods and known error signatures. Local-only.</p></a>
+  <a class="launch-card" href="./workbench/mod-generator/"><span>🧱</span><strong>Mod Generator</strong><p>Generate a minimal NML or Political World addon skeleton.</p></a>
+  <a class="launch-card" href="./workbench/api-explorer/"><span>🔎</span><strong>API Explorer</strong><p>Search by task instead of memorizing method names.</p></a>
+  <a class="launch-card" href="./workbench/compatibility/"><span>🧪</span><strong>Compatibility</strong><p>See exactly what versions and branches our evidence covers.</p></a>
 </div>
 
-## Built from real projects
+## Your first route
 
-The first knowledge base is being extracted from **Political World**, **TerraForge**,
-**Scenario Tools**, **Grand Strategy**, and focused Modding Lab experiments.
-Unfinished and failed projects are kept as research material when they reveal useful engine behavior.
-
-## Support the project
-
-<div class="support-block">
-  <div>
-    <strong>WorldBox Modding Docs is free and open.</strong>
-    <p>If this research saves you time, you can optionally support further experiments, documentation and maintenance.</p>
-  </div>
-  <div class="support-links">
-    <a class="support-button" href="https://www.donationalerts.com/r/lous12" target="_blank" rel="noopener noreferrer">DonationAlerts ↗</a>
-    <a class="support-button support-button-secondary" href="https://dalink.to/lous12" target="_blank" rel="noopener noreferrer">DALink ↗</a>
-    <a class="support-text-link" href="./support/">About supporting the project →</a>
-  </div>
+<div class="beginner-route">
+  <a href="./getting-started/"><span>1</span><div><strong>Install & understand NML</strong><p>Get the loader and know where a mod lives.</p></div></a>
+  <a href="./workbench/mod-generator/"><span>2</span><div><strong>Create the smallest mod</strong><p>Start with two files instead of a giant template.</p></div></a>
+  <a href="./workbench/log-analyzer/"><span>3</span><div><strong>Run it and read the log</strong><p>Confirm the mod actually loaded before adding systems.</p></div></a>
+  <a href="./guides/"><span>4</span><div><strong>Add one feature</strong><p>Pick data, events, UI, kingdoms, Harmony or another guide.</p></div></a>
+  <a href="./workbench/api-explorer/"><span>5</span><div><strong>Use verified APIs</strong><p>Check the runtime evidence and known boundaries before relying on a method.</p></div></a>
 </div>
+
+## What can I trust?
+
+<div class="friendly-status-row">
+  <span class="friendly-status verified">✅ <strong>Verified</strong> — reproduced at runtime</span>
+  <span class="friendly-status observed">👁 <strong>Observed</strong> — seen, not fully explained</span>
+  <span class="friendly-status experimental">🧪 <strong>Experimental</strong> — still being tested</span>
+</div>
+
+<p class="small-center">Current main research baseline: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</strong>. <a href="./workbench/compatibility/">See the full matrix →</a></p>
+
+## Latest verified research
+
+<div class="featured-findings friendly-findings">
+  <a class="finding" href="./case-studies/wbml-0003-persistence-lifecycle/"><span class="finding-kicker">✅ WBML-0003</span><strong>Party data survives restart and inactive lifecycle</strong><span>Typed party data was re-read after a full process restart and while a safe party was inactive.</span></a>
+  <a class="finding" href="./case-studies/wbml-0004-event-bus-runtime/"><span class="finding-kicker">✅ WBML-0004</span><strong>Event Bus runtime behavior</strong><span>Payload isolation, callback containment, recursion guard and 100/100 stress dispatch.</span></a>
+  <a class="finding" href="./case-studies/wbml-0005-actions-runtime/"><span class="finding-kicker">✅ WBML-0005</span><strong>Actions / Conditions / Effects</strong><span>Registration, execution, condition helpers, effects and important single-party support boundaries.</span></a>
+</div>
+
+<div class="research-door"><div><span>🔬</span><div><strong>Want the deep technical evidence?</strong><p>Every beginner-facing conclusion can lead down into research methodology, failed hypotheses and reproducible WBML evidence.</p></div></div><a href="./research/">Open Research →</a></div>

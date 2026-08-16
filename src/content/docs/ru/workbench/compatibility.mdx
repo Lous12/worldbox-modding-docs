@@ -1,0 +1,21 @@
+---
+title: Матрица совместимости
+description: Текущая подтверждённая runtime-база WorldBox Modding Lab.
+---
+
+# Матрица совместимости
+
+<div class="compat-hero"><strong>Текущая runtime-база</strong><span>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</span></div>
+
+| Область | Статус | Доказательство |
+|---|---|---|
+| Kingdom typed addon data | ✅ Verified | WBML-0001 / 0002 / 0003 |
+| Cross-world isolation в A → B → A → B в одном процессе | ✅ Verified | WBML-0002 |
+| Party typed data после полного restart | ✅ Verified | WBML-0003 |
+| Party deactivate → чтение данных → reactivate | ✅ Verified | WBML-0003 |
+| Event Bus dispatch / isolation / recursion guard | ✅ Verified | WBML-0004 |
+| Actions / Conditions / Effects, выполненные ветки | ✅ Verified | WBML-0005 |
+| Exact party-support mutation при 2+ активных партиях | 🧪 Не проверено | В тестовом мире не было безопасной цели |
+| Будущие версии WorldBox / NML / PW API | 🧪 Не проверено | Нужен повторный прогон |
+
+Зелёная строка означает **ровно проверенный scope**, а не «будет работать всегда на любой версии».

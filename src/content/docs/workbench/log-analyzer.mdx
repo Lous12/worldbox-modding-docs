@@ -1,0 +1,17 @@
+---
+title: Player.log Analyzer
+description: Inspect a WorldBox Player.log locally in your browser.
+---
+import PlayerLogAnalyzer from '../../../components/workbench/PlayerLogAnalyzer.astro';
+
+# Player.log Analyzer
+
+You do not need to know where every error comes from before using this page. Choose your `Player.log` or paste its text below.
+
+<PlayerLogAnalyzer lang="en" />
+
+## What it currently recognizes
+
+The first version extracts the WorldBox build, NeoModLoader version, PoliticalWorldAPI version and loaded mods. It also flags common C# compiler errors, `StackOverflowException`, `NullReferenceException`, callback failures, NML listener-construction problems and a few lower-severity network/library messages.
+
+It is a **triage tool**, not a replacement for reading the full log. Unknown errors are not automatically safe.

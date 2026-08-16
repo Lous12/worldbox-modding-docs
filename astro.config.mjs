@@ -35,38 +35,36 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Start here',
-          translations: { ru: 'Начало' },
+          translations: { ru: 'Начать здесь' },
           items: [{ slug: 'getting-started' }],
         },
         {
-          label: 'Guides',
-          translations: { ru: 'Руководства' },
+          label: 'Build something',
+          translations: { ru: 'Сделать что-то' },
           items: [{ autogenerate: { directory: 'guides' } }],
         },
         {
-          label: 'API Reference',
-          translations: { ru: 'Справочник API' },
-          items: [{ autogenerate: { directory: 'api' } }],
+          label: 'Workbench',
+          translations: { ru: 'Инструменты' },
+          items: [{ autogenerate: { directory: 'workbench' } }],
         },
         {
-          label: 'Troubleshooting',
-          translations: { ru: 'Решение проблем' },
+          label: 'Fix a problem',
+          translations: { ru: 'Починить проблему' },
           items: [{ autogenerate: { directory: 'troubleshooting' } }],
         },
         {
-          label: 'Research',
-          translations: { ru: 'Исследования' },
-          items: [{ autogenerate: { directory: 'research' } }],
+          label: 'Reference',
+          translations: { ru: 'Справочник' },
+          items: [{ autogenerate: { directory: 'api' } }],
         },
         {
-          label: 'Case Studies',
-          translations: { ru: 'Разборы проектов' },
-          items: [{ autogenerate: { directory: 'case-studies' } }],
-        },
-        {
-          label: 'FAQ',
-          translations: { ru: 'FAQ' },
-          items: [{ autogenerate: { directory: 'faq' } }],
+          label: 'Research & evidence',
+          translations: { ru: 'Исследования и доказательства' },
+          items: [
+            { autogenerate: { directory: 'research' } },
+            { autogenerate: { directory: 'case-studies' } },
+          ],
         },
         {
           label: 'For AI',
@@ -74,14 +72,13 @@ export default defineConfig({
           items: [{ autogenerate: { directory: 'ai' } }],
         },
         {
-          label: 'Graveyard of Bad Ideas',
-          translations: { ru: 'Кладбище плохих идей' },
-          items: [{ autogenerate: { directory: 'graveyard' } }],
-        },
-        {
-          label: 'Project',
-          translations: { ru: 'Проект' },
-          items: [{ slug: 'support' }],
+          label: 'More',
+          translations: { ru: 'Ещё' },
+          items: [
+            { autogenerate: { directory: 'faq' } },
+            { autogenerate: { directory: 'graveyard' } },
+            { slug: 'support' },
+          ],
         },
       ],
     }),

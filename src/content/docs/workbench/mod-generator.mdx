@@ -1,0 +1,17 @@
+---
+title: Starter Mod Generator
+description: Generate a minimal NeoModLoader mod skeleton in the browser.
+---
+import ModStarterGenerator from '../../../components/workbench/ModStarterGenerator.astro';
+
+# Starter Mod Generator
+
+Fill in a few fields and the site will generate the two files a beginner most often needs first.
+
+<ModStarterGenerator lang="en" />
+
+## Why this template looks like this
+
+The manifest shape and `BasicMod<Main>` / `OnModLoad()` structure are based on WorldBox Modding Lab probes that actually compiled and loaded on the current research stack. The Political World option also uses the addon registration pattern exercised by WBML.
+
+The generator does **not** claim that every future NeoModLoader or WorldBox version will use the same contract. Check the compatibility note before publishing a mod.

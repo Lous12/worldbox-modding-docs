@@ -1,0 +1,151 @@
+---
+const { lang = 'en' } = Astro.props;
+const ru = lang === 'ru';
+const t = ru ? {
+  title: 'Генератор стартового мода',
+  intro: 'Создаёт минимальный шаблон на основе структуры реально загружавшихся WBML-модов.',
+  name: 'Название мода', author: 'Автор', guid: 'GUID', version: 'Версия', build: 'WorldBox build',
+  pw: 'Сделать addon для Political World', generate: 'Сгенерировать', reset: 'Сбросить',
+  modjson: 'mod.json', main: 'Main.cs', copy: 'Копировать', download: 'Скачать файл', copied: 'Скопировано',
+  warning: 'GUID лучше выбрать один раз и не менять после публикации. Для Political World шаблон добавляет dependency и регистрацию addon.',
+  placeholderName: 'My First Mod', placeholderAuthor: 'YourName', placeholderGuid: 'YourName.MyFirstMod'
+} : {
+  title: 'Starter Mod Generator',
+  intro: 'Creates a minimal template based on the structure of WBML mods that have actually loaded in NeoModLoader.',
+  name: 'Mod name', author: 'Author', guid: 'GUID', version: 'Version', build: 'WorldBox build',
+  pw: 'Make this a Political World addon', generate: 'Generate', reset: 'Reset',
+  modjson: 'mod.json', main: 'Main.cs', copy: 'Copy', download: 'Download file', copied: 'Copied',
+  warning: 'Choose a GUID once and keep it stable after release. The Political World template adds the dependency and addon registration.',
+  placeholderName: 'My First Mod', placeholderAuthor: 'YourName', placeholderGuid: 'YourName.MyFirstMod'
+};
+---
+
+<div class="workbench-tool mod-generator" data-mod-generator>
+  <div class="tool-head">
+    <div>
+      <span class="tool-kicker">Workbench</span>
+      <h2>{t.title}</h2>
+      <p>{t.intro}</p>
+    </div>
+    <span class="verified-pill">✅ Based on working WBML structure</span>
+  </div>
+
+  <div class="generator-form">
+    <label>{t.name}<input data-field="name" value={t.placeholderName} /></label>
+    <label>{t.author}<input data-field="author" value={t.placeholderAuthor} /></label>
+    <label>{t.guid}<input data-field="guid" value={t.placeholderGuid} /></label>
+    <label>{t.version}<input data-field="version" value="0.1.0" /></label>
+    <label>{t.build}<input data-field="build" type="number" min="1" value="719" /></label>
+    <label class="check-row"><input data-field="pw" type="checkbox" /><span>{t.pw}</span></label>
+  </div>
+
+  <div class="tool-note">⚠️ {t.warning}</div>
+
+  <div class="tool-actions">
+    <button class="wb-button" type="button" data-generate>{t.generate}</button>
+    <button class="wb-button wb-button-secondary" type="button" data-reset>{t.reset}</button>
+  </div>
+
+  <div class="generator-output" data-output hidden>
+    <section class="code-result">
+      <div class="code-result-head"><strong>{t.modjson}</strong><div><button class="mini-button" data-copy="json">{t.copy}</button><button class="mini-button" data-download="json">{t.download}</button></div></div>
+      <pre><code data-code="json"></code></pre>
+    </section>
+    <section class="code-result">
+      <div class="code-result-head"><strong>{t.main}</strong><div><button class="mini-button" data-copy="cs">{t.copy}</button><button class="mini-button" data-download="cs">{t.download}</button></div></div>
+      <pre><code data-code="cs"></code></pre>
+    </section>
+  </div>
+</div>
+
+<script define:vars={{ t }}>
+  for (const root of document.querySelectorAll('[data-mod-generator]')) {
+    if (root.dataset.ready === '1') continue;
+    root.dataset.ready = '1';
+    const get = (name) => root.querySelector(`[data-field="${name}"]`);
+    const output = root.querySelector('[data-output]');
+    const jsonCode = root.querySelector('[data-code="json"]');
+    const csCode = root.querySelector('[data-code="cs"]');
+    let generated = { json: '', cs: '' };
+
+    const csString = (value) => String(value || '')
+      .replace(/\\/g, '\\\\')
+      .replace(/"/g, '\\"')
+      .replace(/\r?\n/g, ' ');
+
+    const safeNamespace = (guid) => {
+      const parts = String(guid || 'MyMod').split('.').map((p) => p.replace(/[^A-Za-z0-9_]/g, '_')).filter(Boolean);
+      return parts.length ? parts.map((p) => /^\d/.test(p) ? `_${p}` : p).join('.') : 'MyMod';
+    };
+
+    const generate = () => {
+      const name = (get('name')?.value || 'My First Mod').trim();
+      const author = (get('author')?.value || 'YourName').trim();
+      const guid = (get('guid')?.value || 'YourName.MyFirstMod').trim();
+      const version = (get('version')?.value || '0.1.0').trim();
+      const build = Number(get('build')?.value || 719);
+      const pw = Boolean(get('pw')?.checked);
+      const ns = safeNamespace(guid);
+      const csName = csString(name);
+      const csAuthor = csString(author);
+      const csGuid = csString(guid);
+      const csVersion = csString(version);
+
+      const manifest = {
+        name,
+        GUID: guid,
+        author,
+        version,
+        description: `${name} — generated starter mod.`,
+        targetGameBuild: build,
+        Dependencies: pw ? ['Lous12.PoliticalWorld'] : [],
+        OptionalDependencies: [],
+        IncompatibleWith: []
+      };
+      generated.json = JSON.stringify(manifest, null, 2);
+
+      generated.cs = pw ? `using NeoModLoader.api;\nusing Lous12.PoliticalWorld;\n\nnamespace ${ns}\n{\n    public class Main : BasicMod<Main>\n    {\n        private const string AddonId = "${csGuid}";\n\n        protected override void OnModLoad()\n        {\n            LogInfo("[${csName}] OnLoad");\n\n            if (!PoliticalWorldAPI.IsCompatible(1, 9))\n            {\n                LogError("[${csName}] PoliticalWorldAPI 1.9+ is required. Detected: " + PoliticalWorldAPI.ApiVersion);\n                return;\n            }\n\n            bool registered = PoliticalWorldAPI.RegisterAddon(\n                new PoliticalWorldAPI.AddonDefinition\n                {\n                    Id = AddonId,\n                    Name = "${csName}",\n                    Version = "${csVersion}",\n                    Author = "${csAuthor}",\n                    Description = "${csName}"\n                }\n            );\n\n            if (!registered && !PoliticalWorldAPI.IsAddonRegistered(AddonId))\n            {\n                LogError("[${csName}] RegisterAddon failed.");\n                return;\n            }\n\n            LogInfo("[${csName}] Loaded with PoliticalWorldAPI " + PoliticalWorldAPI.ApiVersion);\n        }\n    }\n}\n` : `using NeoModLoader.api;\n\nnamespace ${ns}\n{\n    public class Main : BasicMod<Main>\n    {\n        protected override void OnModLoad()\n        {\n            LogInfo("[${csName}] Loaded");\n        }\n    }\n}\n`;
+
+      jsonCode.textContent = generated.json;
+      csCode.textContent = generated.cs;
+      output.hidden = false;
+    };
+
+    const download = (kind) => {
+      const text = generated[kind];
+      if (!text) return;
+      const blob = new Blob([text], { type: kind === 'json' ? 'application/json' : 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = kind === 'json' ? 'mod.json' : 'Main.cs';
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+    root.querySelector('[data-generate]')?.addEventListener('click', generate);
+    root.querySelector('[data-reset]')?.addEventListener('click', () => {
+      get('name').value = t.placeholderName;
+      get('author').value = t.placeholderAuthor;
+      get('guid').value = t.placeholderGuid;
+      get('version').value = '0.1.0';
+      get('build').value = '719';
+      get('pw').checked = false;
+      output.hidden = true;
+    });
+    for (const button of root.querySelectorAll('[data-copy]')) {
+      button.addEventListener('click', async () => {
+        const kind = button.dataset.copy;
+        if (!generated[kind]) return;
+        await navigator.clipboard.writeText(generated[kind]);
+        const before = button.textContent;
+        button.textContent = t.copied;
+        setTimeout(() => { button.textContent = before; }, 1000);
+      });
+    }
+    for (const button of root.querySelectorAll('[data-download]')) {
+      button.addEventListener('click', () => download(button.dataset.download));
+    }
+    generate();
+  }
+</script>

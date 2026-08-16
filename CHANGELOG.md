@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0-alpha.1 — Practical Workbench UX
+- Reworked the English and Russian home pages around beginner goals instead of documentation categories.
+- Preserved the project epigraph `Какова цена свободы?` while moving technical detail below the first-use path.
+- Added a Workbench section with a browser-local Player.log Analyzer, Starter Mod Generator, searchable API Explorer and Compatibility Matrix.
+- Added a beginner route that prioritizes: make the mod load → verify the log → add one feature → check evidence boundaries.
+- Reorganized the Starlight sidebar into Start here, Build something, Workbench, Fix a problem, Reference, Research & evidence, For AI and More.
+- Added responsive, task-oriented cards and practical tool UI styles for desktop and mobile.
+- The Player.log Analyzer performs no network upload and sanitizes local paths / long numeric IDs in displayed excerpts.
+- The Starter Mod Generator is based on the manifest and `BasicMod<Main>` / `OnModLoad()` structure used by working WBML probes on the current research stack.
+- The API Explorer includes only the WBML-0001 through WBML-0005 PoliticalWorldAPI baseline and keeps Observed behavior visually separate from Verified behavior.
+- Expanded Getting Started into a usable beginner workflow without inventing unverified version-specific NML installation steps.
+
 ## 0.1.10 — Lab Baseline Through WBML-0005
 - Documented the accumulated WorldBox Modding Lab runtime baseline through WBML-0005 in beginner-friendly English and Russian pages.
 - Promoted WBML-0003 executed party-private persistence and party lifecycle branches to runtime Verified for the exact tested stack; preserved the one party-to-party isolation SKIP as an explicit evidence gap.

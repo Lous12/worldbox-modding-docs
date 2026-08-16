@@ -1,0 +1,273 @@
+---
+const { lang = 'en' } = Astro.props;
+const ru = lang === 'ru';
+const t = ru ? {
+  title: 'Анализатор Player.log',
+  privacy: 'Файл обрабатывается только в браузере. Никуда не загружается.',
+  choose: 'Выбрать Player.log',
+  paste: 'Или вставь лог сюда',
+  analyze: 'Разобрать лог',
+  clear: 'Очистить',
+  summary: 'Сводка окружения',
+  problems: 'Что выглядит подозрительно',
+  mods: 'Загруженные моды',
+  noProblems: 'Явных сигнатур ошибок из известных нам шаблонов не найдено.',
+  noMods: 'Не удалось извлечь список загруженных модов.',
+  copy: 'Скопировать сводку',
+  copied: 'Скопировано',
+  empty: 'Сначала выбери файл или вставь текст лога.',
+  version: 'WorldBox', build: 'Build', git: 'Git', nml: 'NeoModLoader', pw: 'PoliticalWorldAPI',
+  compile: 'Ошибка компиляции C#', exception: 'Исключение', stack: 'StackOverflow', callback: 'Ошибка callback',
+  listener: 'Проблема NML listener', network: 'Сетевая ошибка', library: 'Fallback library', nullref: 'NullReference',
+  lines: 'совпадений'
+} : {
+  title: 'Player.log Analyzer',
+  privacy: 'The file is processed locally in your browser. It is not uploaded anywhere.',
+  choose: 'Choose Player.log',
+  paste: 'Or paste a log here',
+  analyze: 'Analyze log',
+  clear: 'Clear',
+  summary: 'Environment summary',
+  problems: 'Suspicious patterns',
+  mods: 'Loaded mods',
+  noProblems: 'No obvious error signatures from the patterns currently known to this tool.',
+  noMods: 'Could not extract a loaded-mod list.',
+  copy: 'Copy summary',
+  copied: 'Copied',
+  empty: 'Choose a file or paste log text first.',
+  version: 'WorldBox', build: 'Build', git: 'Git', nml: 'NeoModLoader', pw: 'PoliticalWorldAPI',
+  compile: 'C# compile error', exception: 'Exception', stack: 'StackOverflow', callback: 'Callback failure',
+  listener: 'NML listener problem', network: 'Network error', library: 'Fallback library', nullref: 'NullReference',
+  lines: 'matches'
+};
+---
+
+<div class="workbench-tool log-analyzer" data-log-analyzer data-lang={lang}>
+  <div class="tool-head">
+    <div>
+      <span class="tool-kicker">Workbench</span>
+      <h2>{t.title}</h2>
+      <p>{t.privacy}</p>
+    </div>
+    <span class="privacy-pill">🔒 Local-only</span>
+  </div>
+
+  <div class="tool-input-grid">
+    <label class="file-drop">
+      <span>📄</span>
+      <strong>{t.choose}</strong>
+      <input type="file" accept=".log,.txt,text/plain" data-file-input />
+      <small data-file-name>Player.log</small>
+    </label>
+
+    <label class="paste-box">
+      <span>{t.paste}</span>
+      <textarea rows="9" data-log-text placeholder="[NML]: ..."></textarea>
+    </label>
+  </div>
+
+  <div class="tool-actions">
+    <button class="wb-button" type="button" data-analyze>{t.analyze}</button>
+    <button class="wb-button wb-button-secondary" type="button" data-clear>{t.clear}</button>
+    <button class="wb-button wb-button-quiet" type="button" data-copy hidden>{t.copy}</button>
+  </div>
+
+  <p class="tool-message" data-message hidden></p>
+
+  <div class="analysis-results" data-results hidden>
+    <section class="result-panel">
+      <h3>{t.summary}</h3>
+      <div class="env-grid" data-env></div>
+    </section>
+    <section class="result-panel">
+      <h3>{t.problems}</h3>
+      <div class="problem-list" data-problems></div>
+    </section>
+    <section class="result-panel">
+      <h3>{t.mods}</h3>
+      <div class="mod-chip-list" data-mods></div>
+    </section>
+  </div>
+</div>
+
+<script define:vars={{ t }}>
+  const roots = document.querySelectorAll('[data-log-analyzer]');
+  for (const root of roots) {
+    if (root.dataset.ready === '1') continue;
+    root.dataset.ready = '1';
+
+    const fileInput = root.querySelector('[data-file-input]');
+    const fileName = root.querySelector('[data-file-name]');
+    const textArea = root.querySelector('[data-log-text]');
+    const analyzeButton = root.querySelector('[data-analyze]');
+    const clearButton = root.querySelector('[data-clear]');
+    const copyButton = root.querySelector('[data-copy]');
+    const message = root.querySelector('[data-message]');
+    const results = root.querySelector('[data-results]');
+    const env = root.querySelector('[data-env]');
+    const problems = root.querySelector('[data-problems]');
+    const mods = root.querySelector('[data-mods]');
+    let fileText = '';
+    let lastSummary = '';
+
+    const sanitize = (value) => String(value || '')
+      .replace(/[A-Z]:[\\/]+Users[\\/]+[^\\/\s]+/gi, '<user>')
+      .replace(/[A-Z]:[\\/][^\r\n]+?steamapps[\\/]common[\\/]worldbox/gi, '<WorldBox>')
+      .replace(/\b\d{15,20}\b/g, '<id>')
+      .trim();
+
+    const first = (text, regex) => {
+      const m = text.match(regex);
+      return m ? sanitize(m[1]) : '—';
+    };
+
+    const addEnv = (label, value) => {
+      const card = document.createElement('div');
+      card.className = 'env-card';
+      const l = document.createElement('span');
+      l.textContent = label;
+      const v = document.createElement('strong');
+      v.textContent = value || '—';
+      card.append(l, v);
+      env.append(card);
+    };
+
+    const collectLines = (text, regex, max = 5) => {
+      const out = [];
+      for (const line of text.split(/\r?\n/)) {
+        if (regex.test(line)) out.push(sanitize(line));
+        regex.lastIndex = 0;
+        if (out.length >= max) break;
+      }
+      return out;
+    };
+
+    const patterns = [
+      { key: 'compile', icon: '🧩', regex: /\berror\s+CS\d{4}\b|\bCS\d{4}\s*:/i, severity: 'error' },
+      { key: 'stack', icon: '♻️', regex: /StackOverflowException/i, severity: 'error' },
+      { key: 'nullref', icon: '💥', regex: /NullReferenceException/i, severity: 'error' },
+      { key: 'callback', icon: '📡', regex: /callback failed|PWDIAG040/i, severity: 'warn' },
+      { key: 'listener', icon: '🧷', regex: /Failed to construct listener instance/i, severity: 'warn' },
+      { key: 'network', icon: '🌐', regex: /Curl error|UnityTls error/i, severity: 'info' },
+      { key: 'library', icon: '📦', regex: /Fallback handler could not load library/i, severity: 'info' },
+      { key: 'exception', icon: '⚠️', regex: /\b[A-Za-z0-9_.]+Exception\b/i, severity: 'warn', skipIf: /StackOverflowException|NullReferenceException/ }
+    ];
+
+    const parse = (text) => {
+      env.textContent = '';
+      problems.textContent = '';
+      mods.textContent = '';
+
+      const data = {
+        worldbox: first(text, /WorldBox Application\.version:\s*([^\r\n]+)/i),
+        build: first(text, /WorldBox build code:\s*([^\r\n]+)/i),
+        git: first(text, /WorldBox git code:\s*([^\r\n]+)/i),
+        nml: first(text, /NML assembly version:\s*([^\r\n]+)/i),
+        pw: first(text, /PoliticalWorldAPI:\s*([^\s\r\n]+)/i)
+      };
+
+      addEnv(t.version, data.worldbox);
+      addEnv(t.build, data.build);
+      addEnv(t.git, data.git);
+      addEnv(t.nml, data.nml);
+      addEnv(t.pw, data.pw);
+
+      let issueCount = 0;
+      const summaryProblems = [];
+      for (const p of patterns) {
+        let lines = collectLines(text, p.regex, 5);
+        if (p.skipIf) lines = lines.filter((line) => !p.skipIf.test(line));
+        if (!lines.length) continue;
+        issueCount += lines.length;
+        const item = document.createElement('details');
+        item.className = `problem-item problem-${p.severity}`;
+        const head = document.createElement('summary');
+        head.textContent = `${p.icon} ${t[p.key]} · ${lines.length} ${t.lines}`;
+        const pre = document.createElement('pre');
+        pre.textContent = lines.join('\n');
+        item.append(head, pre);
+        problems.append(item);
+        summaryProblems.push(`${t[p.key]}: ${lines.length}`);
+      }
+      if (!issueCount) {
+        const ok = document.createElement('div');
+        ok.className = 'empty-good';
+        ok.textContent = `✅ ${t.noProblems}`;
+        problems.append(ok);
+      }
+
+      const modNames = new Set();
+      const re = /\[NML\]:\s*\[([^\]\r\n]+)\]:\s*Loaded\b/g;
+      let m;
+      while ((m = re.exec(text)) !== null) modNames.add(sanitize(m[1]));
+      if (modNames.size) {
+        for (const name of modNames) {
+          const chip = document.createElement('span');
+          chip.className = 'mod-chip';
+          chip.textContent = `✓ ${name}`;
+          mods.append(chip);
+        }
+      } else {
+        const none = document.createElement('span');
+        none.className = 'muted';
+        none.textContent = t.noMods;
+        mods.append(none);
+      }
+
+      lastSummary = [
+        `${t.version}: ${data.worldbox}`,
+        `${t.build}: ${data.build}`,
+        `${t.git}: ${data.git}`,
+        `${t.nml}: ${data.nml}`,
+        `${t.pw}: ${data.pw}`,
+        summaryProblems.length ? summaryProblems.join(' | ') : `✅ ${t.noProblems}`,
+        modNames.size ? `${t.mods}: ${Array.from(modNames).join(', ')}` : `${t.mods}: —`
+      ].join('\n');
+
+      results.hidden = false;
+      copyButton.hidden = false;
+      message.hidden = true;
+    };
+
+    fileInput?.addEventListener('change', async () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+      fileName.textContent = file.name;
+      fileText = await file.text();
+    });
+
+    analyzeButton?.addEventListener('click', () => {
+      const text = (textArea?.value || '').trim() || fileText;
+      if (!text) {
+        message.textContent = t.empty;
+        message.hidden = false;
+        results.hidden = true;
+        copyButton.hidden = true;
+        return;
+      }
+      parse(text);
+    });
+
+    clearButton?.addEventListener('click', () => {
+      fileText = '';
+      lastSummary = '';
+      if (fileInput) fileInput.value = '';
+      if (textArea) textArea.value = '';
+      fileName.textContent = 'Player.log';
+      results.hidden = true;
+      message.hidden = true;
+      copyButton.hidden = true;
+      env.textContent = '';
+      problems.textContent = '';
+      mods.textContent = '';
+    });
+
+    copyButton?.addEventListener('click', async () => {
+      if (!lastSummary) return;
+      await navigator.clipboard.writeText(lastSummary);
+      const before = copyButton.textContent;
+      copyButton.textContent = t.copied;
+      setTimeout(() => { copyButton.textContent = before; }, 1200);
+    });
+  }
+</script>

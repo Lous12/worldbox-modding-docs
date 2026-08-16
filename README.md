@@ -2,13 +2,15 @@
 
 Community-driven documentation, research, examples, and troubleshooting for WorldBox modding and NeoModLoader.
 
-The project is built with Astro + Starlight and is designed to become a multilingual, searchable knowledge base for both human modders and AI assistants.
+The project is built with Astro + Starlight as a multilingual modding workbench: beginner routes, practical browser tools, searchable reference, troubleshooting, and evidence-backed research for humans and AI assistants.
 
 ## Current foundation
 
 - English root documentation
 - Russian localization
 - Built-in full-text search
+- Practical Workbench: local Player.log Analyzer, Starter Mod Generator, API Explorer and Compatibility Matrix
+- Goal-oriented beginner home page and first-mod route
 - GitHub Pages deployment workflow
 - Dark/light theme support
 - GitHub edit links

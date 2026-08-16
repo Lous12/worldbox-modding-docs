@@ -1,0 +1,21 @@
+---
+title: Compatibility Matrix
+description: Current tested WorldBox Modding Lab runtime baseline.
+---
+
+# Compatibility Matrix
+
+<div class="compat-hero"><strong>Current runtime baseline</strong><span>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</span></div>
+
+| Area | Status | Evidence |
+|---|---|---|
+| Kingdom typed addon data | ✅ Verified | WBML-0001 / 0002 / 0003 |
+| Cross-world isolation in A → B → A → B same-process flow | ✅ Verified | WBML-0002 |
+| Party typed data restart persistence | ✅ Verified | WBML-0003 |
+| Party deactivate → read data → reactivate | ✅ Verified | WBML-0003 |
+| Event Bus dispatch / isolation / recursion guard | ✅ Verified | WBML-0004 |
+| Actions / Conditions / Effects executed branches | ✅ Verified | WBML-0005 |
+| Exact party-support mutation with 2+ active parties | 🧪 Not verified | Environment did not provide a safe target |
+| Future WorldBox / NML / PW API versions | 🧪 Not verified | Must be re-tested |
+
+A green cell means **that exact tested scope**, not “works forever on every version.”
