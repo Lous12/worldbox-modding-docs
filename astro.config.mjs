@@ -49,7 +49,7 @@ export default defineConfig({
           items: [{ autogenerate: { directory: 'guides' } }],
         },
         {
-          label: 'Workbench',
+          label: 'Tools',
           translations: { ru: 'Инструменты' },
           items: [{ autogenerate: { directory: 'workbench' } }],
         },
@@ -59,13 +59,13 @@ export default defineConfig({
           items: [{ autogenerate: { directory: 'troubleshooting' } }],
         },
         {
-          label: 'Reference',
-          translations: { ru: 'Справочник' },
+          label: 'API & reference',
+          translations: { ru: 'API и справочник' },
           items: [{ autogenerate: { directory: 'api' } }],
         },
         {
-          label: 'Research & evidence',
-          translations: { ru: 'Исследования и доказательства' },
+          label: 'Research',
+          translations: { ru: 'Исследования' },
           items: [
             { autogenerate: { directory: 'research' } },
             { autogenerate: { directory: 'case-studies' } },

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0-alpha.3 — Visual & Navigation Polish
+- Reworked the English and Russian home pages around clearer illustrated entry routes and practical task cards.
+- Added eight temporary transparent PNG concept icons for Start, Recipes, UI, Persistence, Political World, World Generation, Tools, and Troubleshooting.
+- Added a base-aware `HomeIllustration` component so public assets work under the GitHub Pages `/worldbox-modding-docs/` base path and local Astro builds.
+- Replaced the missing/newer UI emoji on the main practical route with an actual image asset.
+- Added quick links for Event Bus, Player.log, API Explorer and compatibility without requiring the user to know sidebar categories.
+- Replaced emoji-dependent Workbench/Recipe/Troubleshooter utility glyphs with short text badges such as `LOG`, `API`, `UI`, `SAVE`, and `C#` where practical.
+- Renamed the English sidebar `Workbench` group to the clearer `Tools`, and simplified `Reference` / `Research & evidence` labels.
+- Added `ARTWORK-NOTES.md` so the temporary concepts can later be redrawn by hand by replacing stable filenames only.
+- Kept the epigraph `Какова цена свободы?`, DonationAlerts / DALink support, bilingual structure, and evidence-status model intact.
+- Added responsive rules for illustrated cards and small-screen quick links.
+
 ## 0.2.0-alpha.2 — Friendly Task-First UX
 - Reworked both home pages around three obvious entry routes: new modder, known task, or broken mod.
 - Reduced beginner-facing technical density and moved research/support detail lower on the home page without removing it.

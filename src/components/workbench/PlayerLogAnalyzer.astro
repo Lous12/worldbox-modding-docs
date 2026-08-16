@@ -49,12 +49,12 @@ const t = ru ? {
       <h2>{t.title}</h2>
       <p>{t.privacy}</p>
     </div>
-    <span class="privacy-pill">🔒 Local-only</span>
+    <span class="privacy-pill">LOCAL-ONLY</span>
   </div>
 
   <div class="tool-input-grid">
     <label class="file-drop">
-      <span>📄</span>
+      <span class="file-code">LOG</span>
       <strong>{t.choose}</strong>
       <input type="file" accept=".log,.txt,text/plain" data-file-input />
       <small data-file-name>Player.log</small>
@@ -143,14 +143,14 @@ const t = ru ? {
     };
 
     const patterns = [
-      { key: 'compile', icon: '🧩', regex: /\berror\s+CS\d{4}\b|\bCS\d{4}\s*:/i, severity: 'error' },
-      { key: 'stack', icon: '♻️', regex: /StackOverflowException/i, severity: 'error' },
-      { key: 'nullref', icon: '💥', regex: /NullReferenceException/i, severity: 'error' },
-      { key: 'callback', icon: '📡', regex: /callback failed|PWDIAG040/i, severity: 'warn' },
-      { key: 'listener', icon: '🧷', regex: /Failed to construct listener instance/i, severity: 'warn' },
-      { key: 'network', icon: '🌐', regex: /Curl error|UnityTls error/i, severity: 'info' },
-      { key: 'library', icon: '📦', regex: /Fallback handler could not load library/i, severity: 'info' },
-      { key: 'exception', icon: '⚠️', regex: /\b[A-Za-z0-9_.]+Exception\b/i, severity: 'warn', skipIf: /StackOverflowException|NullReferenceException/ }
+      { key: 'compile', icon: 'CS', regex: /\berror\s+CS\d{4}\b|\bCS\d{4}\s*:/i, severity: 'error' },
+      { key: 'stack', icon: 'LOOP', regex: /StackOverflowException/i, severity: 'error' },
+      { key: 'nullref', icon: 'NULL', regex: /NullReferenceException/i, severity: 'error' },
+      { key: 'callback', icon: 'EVT', regex: /callback failed|PWDIAG040/i, severity: 'warn' },
+      { key: 'listener', icon: 'NML', regex: /Failed to construct listener instance/i, severity: 'warn' },
+      { key: 'network', icon: 'NET', regex: /Curl error|UnityTls error/i, severity: 'info' },
+      { key: 'library', icon: 'DLL', regex: /Fallback handler could not load library/i, severity: 'info' },
+      { key: 'exception', icon: 'EXC', regex: /\b[A-Za-z0-9_.]+Exception\b/i, severity: 'warn', skipIf: /StackOverflowException|NullReferenceException/ }
     ];
 
     const parse = (text) => {
@@ -192,7 +192,7 @@ const t = ru ? {
       if (!issueCount) {
         const ok = document.createElement('div');
         ok.className = 'empty-good';
-        ok.textContent = `✅ ${t.noProblems}`;
+        ok.textContent = `OK · ${t.noProblems}`;
         problems.append(ok);
       }
 
@@ -220,7 +220,7 @@ const t = ru ? {
         `${t.git}: ${data.git}`,
         `${t.nml}: ${data.nml}`,
         `${t.pw}: ${data.pw}`,
-        summaryProblems.length ? summaryProblems.join(' | ') : `✅ ${t.noProblems}`,
+        summaryProblems.length ? summaryProblems.join(' | ') : `OK · ${t.noProblems}`,
         modNames.size ? `${t.mods}: ${Array.from(modNames).join(', ')}` : `${t.mods}: —`
       ].join('\n');
 

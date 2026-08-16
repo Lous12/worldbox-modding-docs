@@ -15,52 +15,73 @@ hero:
       variant: minimal
 ---
 
+import HomeIllustration from '../../components/HomeIllustration.astro';
+
 <div class="project-epigraph">Какова цена свободы?</div>
 
 <p class="friendly-lead">
-You do not need to understand WorldBox internals first. Tell the site what you are trying to do, start with the smallest useful step, and open the deeper API or research only when you actually need it.
+You do not need to know WorldBox internals before you begin. Pick what you want to do, follow the shortest useful route, and only open deeper API or research when you actually need it.
 </p>
 
 <div class="trust-strip">
   <span>✅ Runtime-tested where possible</span><span>🧪 Unknowns stay marked</span><span>🔒 Browser tools can work locally</span><span>🇬🇧 English + 🇷🇺 Русский</span>
 </div>
 
-## Pick your route
+## Where do you want to start?
 
-<div class="entry-grid">
-  <a class="entry-card entry-new" href="./getting-started/"><span class="entry-icon">🌱</span><div><span class="entry-label">NEW TO MODDING</span><strong>I want to make my first mod</strong><p>One short route: loader → minimal mod → Player.log → first feature.</p></div><span class="entry-arrow">→</span></a>
-  <a class="entry-card" href="./recipes/"><span class="entry-icon">🧰</span><div><span class="entry-label">I KNOW THE GOAL</span><strong>I want to build something</strong><p>Choose a task like save data, listen to an event, work with UI, or change the world.</p></div><span class="entry-arrow">→</span></a>
-  <a class="entry-card entry-broken" href="./troubleshooting/wizard/"><span class="entry-icon">💥</span><div><span class="entry-label">SOMETHING BROKE</span><strong>I need help debugging</strong><p>Start from the symptom, then use the log analyzer or the relevant troubleshooting guide.</p></div><span class="entry-arrow">→</span></a>
+<div class="entry-grid illustrated-entry-grid">
+  <a class="entry-card entry-new" href="./getting-started/">
+    <span class="entry-icon entry-art"><HomeIllustration src="icons/home/start.png" eager /></span>
+    <div><span class="entry-label">I'M NEW</span><strong>Make my first mod</strong><p>NeoModLoader → minimal mod → Player.log → first feature. No giant architecture first.</p><span class="entry-meta">Best first route</span></div>
+    <span class="entry-arrow">→</span>
+  </a>
+  <a class="entry-card" href="./recipes/">
+    <span class="entry-icon entry-art"><HomeIllustration src="icons/home/recipes.png" eager /></span>
+    <div><span class="entry-label">I KNOW THE GOAL</span><strong>Build a specific thing</strong><p>Start from a task such as save data, UI, events, Political World or world generation.</p><span class="entry-meta">Task → recipe → reference</span></div>
+    <span class="entry-arrow">→</span>
+  </a>
+  <a class="entry-card entry-broken" href="./troubleshooting/wizard/">
+    <span class="entry-icon entry-art"><HomeIllustration src="icons/home/troubleshoot.png" eager /></span>
+    <div><span class="entry-label">SOMETHING BROKE</span><strong>Fix an error</strong><p>Start from the symptom. Do the short checks first, then inspect the log or relevant guide.</p><span class="entry-meta">Symptom → check → evidence</span></div>
+    <span class="entry-arrow">→</span>
+  </a>
 </div>
 
 ## Common tasks
 
-<div class="goal-grid friendly-goals">
-  <a class="goal-card primary" href="./workbench/mod-generator/"><span class="goal-icon">🧱</span><div><strong>Create a starter mod</strong><p>Generate the two-file skeleton and see what each part does.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./guides/kingdom-custom-data/"><span class="goal-icon">💾</span><div><strong>Save custom data</strong><p>Store values on kingdoms and understand save/load/restart scope.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon">🗳️</span><div><strong>Build a Political World addon</strong><p>Start from the API surface already tested by WBML.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./api/politicalworld-event-bus/"><span class="goal-icon">📡</span><div><strong>React to events</strong><p>Subscribe, unsubscribe and understand callback safety.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./case-studies/terraforge-safe-ui-cloning/"><span class="goal-icon">🪟</span><div><strong>Work with UI</strong><p>Start from a real failure and the safer cloning pattern that worked.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./api/worldtile-height/"><span class="goal-icon">🌍</span><div><strong>Work with the world</strong><p>Use the first verified terrain-height findings instead of old guesses.</p></div><span class="goal-arrow">→</span></a>
+<div class="goal-grid friendly-goals illustrated-goals">
+  <a class="goal-card primary" href="./workbench/mod-generator/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/tools.png" /></span><div><strong>Create a starter mod</strong><p>Generate the smallest useful skeleton and understand what every file is for.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./guides/kingdom-custom-data/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/persistence.png" /></span><div><strong>Save custom data</strong><p>Store values on kingdoms and understand save, reload and restart boundaries.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/political-world.png" /></span><div><strong>Build a Political World addon</strong><p>Use the API surface already tested by WorldBox Modding Lab instead of guessing from stale source.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./case-studies/terraforge-safe-ui-cloning/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/ui.png" /></span><div><strong>Work with UI</strong><p>Start from a real crash and the safer cloning order that actually worked.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./api/worldtile-height/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/worldgen.png" /></span><div><strong>Work with the world</strong><p>Use verified terrain-height findings and follow world-generation research as it expands.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./recipes/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/recipes.png" /></span><div><strong>Find a practical recipe</strong><p>Search by what you want to achieve, not by a method name you do not know yet.</p></div><span class="goal-arrow">→</span></a>
 </div>
 
-<div class="not-sure-card"><div><span>🧭</span><strong>Know the result, but not the method name?</strong><p>Use Recipes. They are organized around tasks instead of API names.</p></div><a class="wb-button" href="./recipes/">Open Recipes →</a></div>
+<div class="quick-link-row" aria-label="Quick links">
+  <a href="./api/politicalworld-event-bus/"><span>EVENT</span>Political events</a>
+  <a href="./workbench/log-analyzer/"><span>LOG</span>Read Player.log</a>
+  <a href="./workbench/api-explorer/"><span>API</span>Search API behavior</a>
+  <a href="./workbench/compatibility/"><span>VER</span>Check compatibility</a>
+</div>
 
-## Workbench
+<div class="not-sure-card illustrated-callout"><div><span class="callout-art"><HomeIllustration src="icons/home/recipes.png" /></span><strong>Know the result, but not the method name?</strong><p>Use Recipes. They are organized around tasks instead of API names.</p></div><a class="wb-button" href="./recipes/">Open Recipes →</a></div>
 
-<p class="section-lead">Tools for the moment when reading a page is slower than doing the check directly.</p>
+## Tools
 
-<div class="workbench-launch-grid compact">
-  <a class="launch-card" href="./workbench/log-analyzer/"><span>📄</span><strong>Player.log Analyzer</strong><p>Extract versions, loaded mods and known error signatures locally.</p></a>
-  <a class="launch-card" href="./workbench/mod-generator/"><span>🧱</span><strong>Mod Generator</strong><p>Generate a minimal NML or Political World addon skeleton.</p></a>
-  <a class="launch-card" href="./workbench/api-explorer/"><span>🔎</span><strong>API Explorer</strong><p>Search verified API behavior by task or keyword.</p></a>
-  <a class="launch-card" href="./workbench/compatibility/"><span>🧪</span><strong>Compatibility</strong><p>See exactly which versions and branches the evidence covers.</p></a>
+<p class="section-lead">Use these when checking something directly is faster than reading three more pages.</p>
+
+<div class="workbench-launch-grid compact text-tool-grid">
+  <a class="launch-card" href="./workbench/log-analyzer/"><span class="tool-symbol">LOG</span><strong>Player.log Analyzer</strong><p>Extract versions, loaded mods and known error signatures locally in the browser.</p></a>
+  <a class="launch-card" href="./workbench/mod-generator/"><span class="tool-symbol">MOD</span><strong>Mod Generator</strong><p>Generate a minimal NeoModLoader or Political World addon skeleton.</p></a>
+  <a class="launch-card" href="./workbench/api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Search verified behavior by task, keyword or subsystem.</p></a>
+  <a class="launch-card" href="./workbench/compatibility/"><span class="tool-symbol">VER</span><strong>Compatibility</strong><p>See exactly which versions and branches the evidence covers.</p></a>
 </div>
 
 ## Your first successful mod
 
 <div class="beginner-route route-four">
-  <a href="./getting-started/"><span>1</span><div><strong>Make the loader see the mod</strong><p>Do not add systems until the basic mod actually appears in the log.</p></div></a>
+  <a href="./getting-started/"><span>1</span><div><strong>Make NeoModLoader see the mod</strong><p>Do not add systems until the basic mod actually appears in the log.</p></div></a>
   <a href="./workbench/mod-generator/"><span>2</span><div><strong>Start tiny</strong><p>Use a minimal `mod.json` + `Main.cs` skeleton.</p></div></a>
   <a href="./workbench/log-analyzer/"><span>3</span><div><strong>Prove it loaded</strong><p>Check `Player.log` before debugging any game mechanic.</p></div></a>
   <a href="./recipes/"><span>4</span><div><strong>Add one feature</strong><p>Pick one recipe and only then grow the mod.</p></div></a>
@@ -76,7 +97,7 @@ You do not need to understand WorldBox internals first. Tell the site what you a
 
 <p class="small-center">Current main research baseline: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</strong>. <a href="./workbench/compatibility/">See the compatibility matrix →</a></p>
 
-<div class="research-door"><div><span>🔬</span><div><strong>Need proof, not just an example?</strong><p>Open the WBML research, failed hypotheses, case studies and sanitized runtime evidence behind the beginner-facing conclusions.</p></div></div><a href="./research/">Open Research →</a></div>
+<div class="research-door"><div><span class="research-code">WBML</span><div><strong>Need proof, not just an example?</strong><p>Open the experiments, failed hypotheses, case studies and sanitized runtime evidence behind the beginner-facing conclusions.</p></div></div><a href="./research/">Open Research →</a></div>
 
 <div class="support-block support-late">
   <div>

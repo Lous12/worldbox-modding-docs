@@ -15,52 +15,73 @@ hero:
       variant: minimal
 ---
 
+import HomeIllustration from '../../../components/HomeIllustration.astro';
+
 <div class="project-epigraph">Какова цена свободы?</div>
 
 <p class="friendly-lead">
-Тебе не нужно сначала понимать внутренности WorldBox. Скажи сайту, что ты хочешь сделать, начни с самого маленького полезного шага, а в глубокий API и исследования уходи только тогда, когда они реально понадобятся.
+Тебе не нужно сначала разбираться во внутренностях WorldBox. Выбери, что хочешь сделать, пройди самый короткий полезный маршрут, а в глубокий API и исследования уходи только когда они реально понадобятся.
 </p>
 
 <div class="trust-strip">
   <span>✅ Где можно — проверяем в runtime</span><span>🧪 Неизвестное остаётся отмеченным</span><span>🔒 Браузерные инструменты могут работать локально</span><span>🇷🇺 Русский + 🇬🇧 English</span>
 </div>
 
-## Выбери свой путь
+## С чего ты хочешь начать?
 
-<div class="entry-grid">
-  <a class="entry-card entry-new" href="./getting-started/"><span class="entry-icon">🌱</span><div><span class="entry-label">Я НОВИЧОК</span><strong>Хочу сделать первый мод</strong><p>Один короткий маршрут: loader → минимальный мод → Player.log → первая механика.</p></div><span class="entry-arrow">→</span></a>
-  <a class="entry-card" href="./recipes/"><span class="entry-icon">🧰</span><div><span class="entry-label">Я ЗНАЮ ЦЕЛЬ</span><strong>Хочу сделать конкретную вещь</strong><p>Выбери задачу: сохранить данные, поймать событие, работать с UI или изменить мир.</p></div><span class="entry-arrow">→</span></a>
-  <a class="entry-card entry-broken" href="./troubleshooting/wizard/"><span class="entry-icon">💥</span><div><span class="entry-label">ВСЁ СЛОМАЛОСЬ</span><strong>Мне нужна помощь с ошибкой</strong><p>Начни с симптома, потом используй анализатор лога или подходящий troubleshooting-гайд.</p></div><span class="entry-arrow">→</span></a>
+<div class="entry-grid illustrated-entry-grid">
+  <a class="entry-card entry-new" href="./getting-started/">
+    <span class="entry-icon entry-art"><HomeIllustration src="icons/home/start.png" eager /></span>
+    <div><span class="entry-label">Я НОВИЧОК</span><strong>Хочу сделать первый мод</strong><p>NeoModLoader → минимальный мод → Player.log → первая механика. Без огромной архитектуры в самом начале.</p><span class="entry-meta">Лучший первый маршрут</span></div>
+    <span class="entry-arrow">→</span>
+  </a>
+  <a class="entry-card" href="./recipes/">
+    <span class="entry-icon entry-art"><HomeIllustration src="icons/home/recipes.png" eager /></span>
+    <div><span class="entry-label">Я ЗНАЮ ЦЕЛЬ</span><strong>Хочу сделать конкретную вещь</strong><p>Начни с задачи: данные, UI, события, Political World или генерация мира.</p><span class="entry-meta">Задача → рецепт → справочник</span></div>
+    <span class="entry-arrow">→</span>
+  </a>
+  <a class="entry-card entry-broken" href="./troubleshooting/wizard/">
+    <span class="entry-icon entry-art"><HomeIllustration src="icons/home/troubleshoot.png" eager /></span>
+    <div><span class="entry-label">ВСЁ СЛОМАЛОСЬ</span><strong>Хочу разобраться с ошибкой</strong><p>Начни с симптома. Сначала короткие проверки, потом лог или нужный troubleshooting-гайд.</p><span class="entry-meta">Симптом → проверка → доказательство</span></div>
+    <span class="entry-arrow">→</span>
+  </a>
 </div>
 
 ## Частые задачи
 
-<div class="goal-grid friendly-goals">
-  <a class="goal-card primary" href="./workbench/mod-generator/"><span class="goal-icon">🧱</span><div><strong>Создать стартовый мод</strong><p>Сгенерируй каркас из двух файлов и посмотри, зачем нужна каждая часть.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./guides/kingdom-custom-data/"><span class="goal-icon">💾</span><div><strong>Сохранять свои данные</strong><p>Храни значения за kingdom и понимай границы save/load/restart.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon">🗳️</span><div><strong>Сделать addon для Political World</strong><p>Начни с поверхности API, которую WBML уже проверил в runtime.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./api/politicalworld-event-bus/"><span class="goal-icon">📡</span><div><strong>Реагировать на события</strong><p>Subscribe, unsubscribe и поведение callback без гаданий.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./case-studies/terraforge-safe-ui-cloning/"><span class="goal-icon">🪟</span><div><strong>Работать с UI</strong><p>Начни с реального падения и более безопасного паттерна клонирования.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./api/worldtile-height/"><span class="goal-icon">🌍</span><div><strong>Работать с миром</strong><p>Используй первые проверенные данные о terrain height вместо старых догадок.</p></div><span class="goal-arrow">→</span></a>
+<div class="goal-grid friendly-goals illustrated-goals">
+  <a class="goal-card primary" href="./workbench/mod-generator/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/tools.png" /></span><div><strong>Создать стартовый мод</strong><p>Сгенерируй самый маленький полезный каркас и пойми, зачем нужен каждый файл.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./guides/kingdom-custom-data/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/persistence.png" /></span><div><strong>Сохранять свои данные</strong><p>Храни значения за kingdom и понимай границы save, reload и полного restart.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/political-world.png" /></span><div><strong>Сделать addon для Political World</strong><p>Используй поверхность API, которую WorldBox Modding Lab уже проверил, а не старые догадки.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./case-studies/terraforge-safe-ui-cloning/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/ui.png" /></span><div><strong>Работать с UI</strong><p>Начни с реального падения TerraForge и более безопасного порядка клонирования.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./api/worldtile-height/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/worldgen.png" /></span><div><strong>Работать с миром</strong><p>Используй проверенные данные о высоте terrain и следи за расширением исследований генерации.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./recipes/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/recipes.png" /></span><div><strong>Найти практический рецепт</strong><p>Ищи по тому, что хочешь получить, а не по названию метода, которого ещё не знаешь.</p></div><span class="goal-arrow">→</span></a>
 </div>
 
-<div class="not-sure-card"><div><span>🧭</span><strong>Знаешь результат, но не название метода?</strong><p>Открой Рецепты. Они построены вокруг задач, а не названий API.</p></div><a class="wb-button" href="./recipes/">Открыть рецепты →</a></div>
+<div class="quick-link-row" aria-label="Быстрые ссылки">
+  <a href="./api/politicalworld-event-bus/"><span>EVENT</span>Политические события</a>
+  <a href="./workbench/log-analyzer/"><span>LOG</span>Разобрать Player.log</a>
+  <a href="./workbench/api-explorer/"><span>API</span>Найти поведение API</a>
+  <a href="./workbench/compatibility/"><span>VER</span>Проверить совместимость</a>
+</div>
+
+<div class="not-sure-card illustrated-callout"><div><span class="callout-art"><HomeIllustration src="icons/home/recipes.png" /></span><strong>Знаешь результат, но не название метода?</strong><p>Открой Рецепты. Они построены вокруг задач, а не названий API.</p></div><a class="wb-button" href="./recipes/">Открыть рецепты →</a></div>
 
 ## Инструменты
 
 <p class="section-lead">Когда проверить прямо сейчас быстрее, чем читать ещё три страницы.</p>
 
-<div class="workbench-launch-grid compact">
-  <a class="launch-card" href="./workbench/log-analyzer/"><span>📄</span><strong>Анализатор Player.log</strong><p>Версии, загруженные моды и известные сигнатуры ошибок — локально.</p></a>
-  <a class="launch-card" href="./workbench/mod-generator/"><span>🧱</span><strong>Генератор мода</strong><p>Минимальный каркас NML или addon для Political World.</p></a>
-  <a class="launch-card" href="./workbench/api-explorer/"><span>🔎</span><strong>API Explorer</strong><p>Ищи проверенное поведение API по задаче или ключевому слову.</p></a>
-  <a class="launch-card" href="./workbench/compatibility/"><span>🧪</span><strong>Совместимость</strong><p>Посмотри, какие версии и ветки реально покрыты доказательствами.</p></a>
+<div class="workbench-launch-grid compact text-tool-grid">
+  <a class="launch-card" href="./workbench/log-analyzer/"><span class="tool-symbol">LOG</span><strong>Анализатор Player.log</strong><p>Версии, загруженные моды и известные сигнатуры ошибок — локально в браузере.</p></a>
+  <a class="launch-card" href="./workbench/mod-generator/"><span class="tool-symbol">MOD</span><strong>Генератор мода</strong><p>Минимальный каркас NeoModLoader или addon для Political World.</p></a>
+  <a class="launch-card" href="./workbench/api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Ищи проверенное поведение по задаче, слову или подсистеме.</p></a>
+  <a class="launch-card" href="./workbench/compatibility/"><span class="tool-symbol">VER</span><strong>Совместимость</strong><p>Посмотри, какие версии и ветки реально покрыты доказательствами.</p></a>
 </div>
 
 ## Первый успешный мод
 
 <div class="beginner-route route-four">
-  <a href="./getting-started/"><span>1</span><div><strong>Заставь loader увидеть мод</strong><p>Не добавляй системы, пока базовый мод не появился в логе.</p></div></a>
+  <a href="./getting-started/"><span>1</span><div><strong>Заставь NeoModLoader увидеть мод</strong><p>Не добавляй системы, пока базовый мод не появился в логе.</p></div></a>
   <a href="./workbench/mod-generator/"><span>2</span><div><strong>Начни с малого</strong><p>Используй минимальные `mod.json` + `Main.cs`.</p></div></a>
   <a href="./workbench/log-analyzer/"><span>3</span><div><strong>Докажи, что он загрузился</strong><p>Проверь `Player.log` до отладки игровой механики.</p></div></a>
   <a href="./recipes/"><span>4</span><div><strong>Добавь одну механику</strong><p>Выбери один рецепт и только потом раздувай мод.</p></div></a>
@@ -76,7 +97,7 @@ hero:
 
 <p class="small-center">Текущий основной исследовательский стек: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</strong>. <a href="./workbench/compatibility/">Открыть матрицу совместимости →</a></p>
 
-<div class="research-door"><div><span>🔬</span><div><strong>Нужны доказательства, а не только пример?</strong><p>Открой WBML research, неудачные гипотезы, case studies и санитизированный runtime evidence, на котором стоят выводы для новичков.</p></div></div><a href="./research/">Открыть исследования →</a></div>
+<div class="research-door"><div><span class="research-code">WBML</span><div><strong>Нужны доказательства, а не только пример?</strong><p>Открой эксперименты, неудачные гипотезы, case studies и санитизированный runtime evidence, на котором стоят выводы для новичков.</p></div></div><a href="./research/">Открыть исследования →</a></div>
 
 <div class="support-block support-late">
   <div>

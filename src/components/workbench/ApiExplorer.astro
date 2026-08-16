@@ -44,7 +44,7 @@ const items = [
   </div></div>
   <div class="api-results" data-api-results>
     {items.map((item) => <article class="api-item" data-cat={item.cat} data-search={`${item.name} ${item.desc} ${item.terms}`.toLowerCase()}>
-      <div class="api-item-top"><strong>{item.name}</strong><span class={`api-status ${item.status}`}>{item.status === 'verified' ? '✅' : '👁'} {item.status === 'verified' ? t.verified : t.observed}</span></div>
+      <div class="api-item-top"><strong>{item.name}</strong><span class={`api-status ${item.status}`}>{item.status === 'verified' ? t.verified : t.observed}</span></div>
       <p>{item.desc}</p>
       <div class="api-item-foot"><span>{t.scope}: WB 0.51.2 / NML 1.2.0.1 / PW API 1.14.0</span><a href={item.href}>{t.open}</a></div>
     </article>)}
