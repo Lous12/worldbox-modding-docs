@@ -241,12 +241,49 @@ Float также вернулся с тем же numeric value.
 
 См. [WBML-0001 — addon data переживает полный restart](../../case-studies/wbml-0001-addon-data-persistence/).
 
-## Что WBML-0001 пока НЕ доказывает
 
-Этот результат ещё не проверяет:
+## Runtime world-isolation result — WBML-0002
+
+WorldBox Modding Lab `0.0.2-fix1` проверил два разных world save с уникальным current-run token.
+
+Проверенная среда:
+
+```text
+WorldBox:          0.51.2
+build:             719
+NeoModLoader:      1.2.0.1
+PoliticalWorldAPI: 1.14.0
+probe:             WBML 0.0.2-fix1
+```
+
+Sequence:
+
+```text
+A write/save
+→ B подтверждает отсутствие A, затем write/save B
+→ A подтверждает отсутствие B и возвращает values A
+→ B подтверждает отсутствие A и возвращает values B
+```
+
+Final gate требовал:
+
+```text
+A=PASS B=PASS C=PASS D=PASS
+```
+
+и выдал:
+
+```text
+FINAL RESULT: WORLD ISOLATION VERIFIED FOR THIS RUN.
+```
+
+См. [WBML-0002 — addon state изолирован между world save](../../case-studies/wbml-0002-world-isolation/).
+
+## Что текущие Lab results пока НЕ доказывают
+
+Совместный evidence WBML-0001 и WBML-0002 ещё не проверяет:
 
 - party-private addon data;
-- isolation между разными мирами;
 - round trip после смены языка;
 - runtime migration API 1.1 → v2;
 - будущие версии WorldBox/NML/Political World.

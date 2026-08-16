@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.9 — World Isolation Verified
+- Promoted WBML-0002 from Experimental to runtime Verified for the exact WorldBox 0.51.2 build 719 / NML 1.2.0.1 / PoliticalWorldAPI 1.14.0 stack.
+- Added a dedicated World Isolation Probe research page and WBML-0002 case study in English and Russian.
+- Recorded the corrected `0.0.2-fix1` strict A → B → A → B state machine and unique-run-token methodology.
+- Documented the rejected false-positive harness run as a testing-methodology lesson rather than evidence.
+- Added sanitized WBML-0002 runtime evidence.
+- Updated addon-private data docs, persistence AI rules and `llms.txt` so cross-world isolation is no longer listed as wholly unverified.
+- Kept party-private persistence/isolation, full-restart isolation, language-switch float behavior, runtime legacy migration and future versions explicitly outside the verified scope.
+- Updated Research and Case Studies landing pages and added WBML-0002 to both home pages.
+
 ## 0.1.8 — First Lab-Verified Result
 - Promoted PoliticalWorldAPI kingdom typed-data persistence from Experimental to runtime Verified for WorldBox 0.51.2 build 719 / NML 1.2.0.1 / API 1.14.0.
 - Added WBML-0001 case study.

@@ -1,0 +1,77 @@
+WBML-0002 — Sanitized Runtime Evidence
+=========================================
+
+Environment reported by the probe:
+WorldBox Application.version: 0.51.2
+WorldBox build code: 719
+WorldBox git code: build-719@5dec
+NML assembly version: 1.2.0.1
+PoliticalWorldAPI: 1.14.0 (major=1, minor=14)
+Probe version: 0.0.2-fix1
+
+Harness:
+STRICT STATE MACHINE ENABLED: A -> B -> C -> D
+RUN TOKEN: af599151c6da
+
+STEP A — WORLD A:
+A-IMMEDIATE marker       PASS
+A-IMMEDIATE int          PASS
+A-IMMEDIATE string       PASS
+A-IMMEDIATE bool         PASS
+A-IMMEDIATE float        PASS
+A-IMMEDIATE private-tag  PASS
+A-IMMEDIATE shared-tag   PASS
+A-IMMEDIATE RESULT: 6/6 DATA PASS | marker=PASS => PASS
+STEP A RESULT: PASS
+HARNESS ADVANCE: AwaitWorldA -> AwaitWorldB
+
+STEP B — WORLD B:
+Kingdom discovery member: list | count=21
+WORLD B CLEAN CHECK: PASS | no current-run WORLD A signature found across 21 kingdoms.
+B-IMMEDIATE marker       PASS
+B-IMMEDIATE int          PASS
+B-IMMEDIATE string       PASS
+B-IMMEDIATE bool         PASS
+B-IMMEDIATE float        PASS
+B-IMMEDIATE private-tag  PASS
+B-IMMEDIATE shared-tag   PASS
+B-IMMEDIATE RESULT: 6/6 DATA PASS | marker=PASS => PASS
+STEP B RESULT: PASS
+HARNESS ADVANCE: AwaitWorldB -> AwaitReturnA
+
+STEP C — RETURN TO WORLD A:
+Kingdom discovery member: list | count=7
+RETURN A: current-run WORLD B signature absent => PASS
+A-RETURN marker       PASS
+A-RETURN int          PASS
+A-RETURN string       PASS
+A-RETURN bool         PASS
+A-RETURN float        PASS
+A-RETURN private-tag  PASS
+A-RETURN shared-tag   PASS
+A-RETURN RESULT: 6/6 DATA PASS | marker=PASS => PASS
+STEP C RESULT: PASS
+HARNESS ADVANCE: AwaitReturnA -> AwaitReturnB
+
+STEP D — RETURN TO WORLD B:
+Kingdom discovery member: list | count=21
+RETURN B: current-run WORLD A signature absent => PASS
+B-RETURN marker       PASS
+B-RETURN int          PASS
+B-RETURN string       PASS
+B-RETURN bool         PASS
+B-RETURN float        PASS
+B-RETURN private-tag  PASS
+B-RETURN shared-tag   PASS
+B-RETURN RESULT: 6/6 DATA PASS | marker=PASS => PASS
+STEP D RESULT: PASS
+FINAL GATE: A=PASS B=PASS C=PASS D=PASS
+FINAL RESULT: WORLD ISOLATION VERIFIED FOR THIS RUN.
+A->B->A->B completed with independent current-run signatures.
+
+Source log:
+Player(20260816-055935).log
+
+Privacy note:
+This excerpt intentionally omits local file paths, Steam identifiers, unrelated
+mod output and unrelated network/authentication messages.

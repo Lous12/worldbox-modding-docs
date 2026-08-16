@@ -5,6 +5,7 @@ description: Source-backed reference for collision-safe int, string, bool and fl
 
 <span class="doc-status">✅ Source verified</span>
 <span class="doc-status">✅ Runtime persistence verified for kingdom int/string/bool/float</span>
+<span class="doc-status">✅ Runtime world isolation verified for tested kingdom state</span>
 <span class="doc-status">API source generation 1.9.0</span>
 
 Political World exposes addon-owned state associated with a `Kingdom`.
@@ -241,12 +242,49 @@ The float also returned the same numeric value after restart.
 
 See [WBML-0001 — addon data survives a full restart](../../case-studies/wbml-0001-addon-data-persistence/).
 
-## What is still not proven by WBML-0001
 
-This result does **not** yet verify:
+## Runtime world-isolation result — WBML-0002
+
+WorldBox Modding Lab `0.0.2-fix1` tested two different world saves with a unique current-run token.
+
+Verified environment:
+
+```text
+WorldBox:          0.51.2
+build:             719
+NeoModLoader:      1.2.0.1
+PoliticalWorldAPI: 1.14.0
+probe:             WBML 0.0.2-fix1
+```
+
+Sequence:
+
+```text
+A write/save
+→ B confirms A absent, then write/save B
+→ A confirms B absent and A values return
+→ B confirms A absent and B values return
+```
+
+The final gate required:
+
+```text
+A=PASS B=PASS C=PASS D=PASS
+```
+
+and reported:
+
+```text
+FINAL RESULT: WORLD ISOLATION VERIFIED FOR THIS RUN.
+```
+
+See [WBML-0002 — addon state stays isolated between world saves](../../case-studies/wbml-0002-world-isolation/).
+
+## What is still not proven by the current Lab results
+
+The combined WBML-0001 and WBML-0002 evidence does **not** yet verify:
 
 - party-private addon data;
-- world-to-world isolation;
 - language-switch round trips;
 - legacy API 1.1 → v2 migration at runtime;
 - every future WorldBox/NML/Political World version.

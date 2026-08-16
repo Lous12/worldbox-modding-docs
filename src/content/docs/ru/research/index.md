@@ -1,8 +1,19 @@
 ---
 title: Исследования
-description: Probe-инструменты, гипотезы, эксперименты и доказательства.
+description: Runtime-probe, гипотезы, эксперименты и evidence с явными version/reliability boundaries.
 ---
 
-Probe-инструменты, гипотезы, эксперименты и доказательства.
+Здесь находятся эксперименты для claims, которые нельзя безопасно вывести только из названий методов или структуры source.
 
-Раздел создан как часть первоначального каркаса сайта и будет заполняться проверенными материалами из наших исследований.
+Обычный путь:
+
+```text
+question → minimal probe → Player.log → result → version-bound documentation
+```
+
+Завершённые исследования WorldBox Modding Lab:
+
+- [WBML-0001 — Addon Data Save/Load Probe](./addon-data-save-load-probe/)
+- [WBML-0002 — World Isolation Probe](./world-isolation-probe/)
+
+Failed/partial runs не повышаются до Verified, но могут сохраняться, если улучшают методологию тестов.

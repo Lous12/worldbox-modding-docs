@@ -151,15 +151,14 @@ It does not by itself identify the exact physical file/database that stores each
 It also does not yet prove:
 
 - party-private data persistence;
-- world-to-world isolation;
 - language-switch float behavior;
 - legacy API 1.1 → v2 migration in runtime.
 
 Those are separate probes.
 
-## Next experiment
+## Related isolation experiment
 
-WBML-0002 tests:
+WBML-0002 has now separately verified the two-save sequence:
 
 ```text
 World A
@@ -168,4 +167,6 @@ World A
 → World B
 ```
 
-to verify that addon state belongs to the correct world rather than leaking through static/runtime state.
+with independent current-run signatures and a strict final gate.
+
+See [World Isolation Probe](./world-isolation-probe/) and [WBML-0002 case study](../case-studies/wbml-0002-world-isolation/).

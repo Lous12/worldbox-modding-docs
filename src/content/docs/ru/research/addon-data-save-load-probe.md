@@ -157,9 +157,9 @@ same save + new process → values return
 
 Для этого будут отдельные probes.
 
-## Следующий эксперимент
+## Связанный isolation experiment
 
-WBML-0002 проверяет:
+WBML-0002 теперь отдельно подтвердил two-save sequence:
 
 ```text
 World A
@@ -168,4 +168,6 @@ World A
 → World B
 ```
 
-чтобы понять, действительно ли addon state принадлежит конкретному world и не протекает через static/runtime state.
+с independent current-run signatures и строгим final gate.
+
+См. [World Isolation Probe](./world-isolation-probe/) и [case study WBML-0002](../case-studies/wbml-0002-world-isolation/).

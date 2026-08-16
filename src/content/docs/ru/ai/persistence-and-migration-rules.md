@@ -159,7 +159,13 @@ probe version
 Save behavior слишком важен для versionless claims.
 
 
-## Текущий Verified persistence record
+## Rule 11 — не расширять probe за пределы проверенного transition
+
+Two-save same-process isolation result не доказывает автоматически full-restart isolation, party storage или будущие versions.
+
+Независимые claims должны оставаться независимыми, пока отдельный probe явно их не объединит.
+
+## Текущие Verified Lab records
 
 WBML-0001 повысил один claim до runtime Verified:
 
@@ -180,4 +186,14 @@ addon-private kingdom tag
 shared kingdom tag
 ```
 
-Нельзя автоматически распространять этот result на party-private data, cross-world isolation, другие versions или legacy migration без отдельного evidence.
+Нельзя автоматически распространять WBML-0001 на party-private data, другие versions или legacy migration без отдельного evidence.
+
+WBML-0002 отдельно подтвердил на том же WorldBox/NML/API stack two-save same-process sequence:
+
+```text
+A → B → A → B
+```
+
+для marker + kingdom int/string/bool/float + addon-private/shared kingdom tags. Каждый мир отверг current-run signature другого мира и вернул свои values.
+
+Нельзя переписывать это как full-process-restart isolation или party-private isolation — это более широкие claims.

@@ -33,6 +33,8 @@
 16. Shared tags are cross-mod protocol and require intentional documented meaning.
 17. Do not remove legacy migration reads merely because newer storage exists.
 18. Prefer copy-forward migration before destructive cleanup.
+19. Treat a Lab final verdict as valid only if every required step passed; do not infer whole-experiment success from the last step.
+20. Do not widen same-process world-isolation evidence into full-restart isolation or party-private isolation.
 
 ## Political World inspected source snapshot
 GitHub tree:
@@ -129,9 +131,9 @@ PASS:
 - addon-private kingdom tag
 - shared kingdom tag
 
-Not yet verified by WBML-0001:
+Not verified by WBML-0001 itself:
 - party-private data
-- cross-world isolation
+- cross-world isolation (tested separately by WBML-0002)
 - language-switch round trip
 - runtime legacy-v1 → v2 migration
 - other WorldBox/NML/API versions
@@ -146,13 +148,32 @@ Lous12.PoliticalWorld
 Historical ukiol_* gameplay/save IDs were intentionally retained to protect existing saves.
 New addon IDs should use modern globally unique addon namespaces; legacy IDs should not be renamed merely for branding.
 
+## World isolation verification status — WBML-0002
+Runtime Verified for the exact environment:
+- WorldBox 0.51.2 build 719
+- NeoModLoader 1.2.0.1
+- PoliticalWorldAPI 1.14.0
+- WorldBox Modding Lab 0.0.2-fix1
+
+Sequence:
+World A → World B → World A → World B
+
+Verified in the same WorldBox process:
+- World B had no current-run World A signature before B write
+- World A had no current-run World B signature on return
+- World B had no current-run World A signature on return
+- each world's marker + kingdom int/string/bool/float + addon-private/shared kingdom tags returned
+- final gate required A=PASS B=PASS C=PASS D=PASS
+
+Evidence excerpt:
+public/evidence/wbml-0002-result.txt
+
+Scope limit:
+Do not convert this into a claim about party-private isolation, full-process-restart isolation, exact physical storage, or future versions.
+
 ## WorldBox Modding Lab status
 WBML-0001 — Addon Data Save/Load Probe: VERIFIED for kingdom typed data + private/shared tags after full process restart.
-
-Next:
-WBML-0002 — World Isolation Probe:
-World A → World B → World A → World B
-Verify no addon state leaks between world saves and each world's state returns when reloaded.
+WBML-0002 — World Isolation Probe: VERIFIED for the tested kingdom state across two saves in an A → B → A → B same-process sequence.
 
 Still planned:
 - party-private typed persistence
