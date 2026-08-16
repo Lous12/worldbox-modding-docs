@@ -8,6 +8,10 @@ description: Практический TerraForge-паттерн отделени
 <span class="doc-status">🧪 Reproduced case study</span>
 <span class="doc-status">TerraForge</span>
 
+## До использования этого паттерна
+
+Это **не** рецепт для первого мода и не универсальный API клонирования prefab. Он нужен, когда ты уже нашёл конкретный vanilla UI object и хочешь переиспользовать его визуальную hierarchy, не перезапуская вслепую скопированные behavior components.
+
 TerraForge клонировал **активную** vanilla preset-cell. Скопированный `ButtonClickMaptemplate` запустил `Awake()` во время `Instantiate` и получил `NullReferenceException`; скопированный `EventTrigger` также тащил unsafe tooltip behavior.
 
 Рабочий порядок в этом кейсе:

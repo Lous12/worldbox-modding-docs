@@ -15,6 +15,10 @@ React when Political World publishes an event instead of scanning kingdoms every
 
 This assumes your addon is already registered.
 
+## Where this code goes
+
+Register the subscription from your addon initialization path **after** Political World addon registration has succeeded. Keep `OnPartyRenamed` as a method your mod can call back into. Do not subscribe repeatedly every update/frame.
+
 ## Minimal subscription
 
 ```csharp

@@ -1,0 +1,123 @@
+---
+const { lang = 'en' } = Astro.props;
+const ru = lang === 'ru';
+const base = import.meta.env.BASE_URL;
+const prefix = `${base}${ru ? 'ru/' : ''}`;
+const t = ru ? {
+  kicker: 'ПЕРВЫЙ МОД',
+  title: 'Маршрут новичка',
+  intro: 'Отметки сохраняются только в твоём браузере. Это не тест и не обязательный порядок — просто безопасный короткий маршрут.',
+  done: 'Готово',
+  mark: 'Отметить',
+  reset: 'Сбросить прогресс',
+  progress: 'Прогресс',
+  complete: 'Каркас готов. Теперь добавляй одну механику за раз.',
+  steps: [
+    ['NML виден в логе', 'Сначала докажи, что NeoModLoader вообще работает в этой сессии.', `${prefix}workbench/log-analyzer/`, 'Проверить Player.log'],
+    ['Понимаю, что за что отвечает', 'WorldBox, NML, mod.json, Main.cs и Player.log больше не выглядят как пять случайных слов.', `${prefix}getting-started/mental-model/`, 'Открыть схему'],
+    ['Создал минимальный каркас', 'Сгенерируй только mod.json и Main.cs. Без UI, Harmony и большой архитектуры.', `${prefix}workbench/mod-generator/`, 'Открыть генератор'],
+    ['Увидел свой marker', 'Запусти игру и найди точную строку своего мода в Player.log.', `${prefix}recipes/first-nml-mod/`, 'Проверить первый запуск'],
+    ['Если сломалось — знаю первый шаг', 'Не переписывай всё подряд: начни с compile/load/runtime сигнала.', `${prefix}getting-started/debugging-first-steps/`, 'Открыть первые проверки'],
+    ['Добавил одну механику', 'Выбери один рецепт и только после него расширяй мод.', `${prefix}recipes/`, 'Выбрать рецепт']
+  ]
+} : {
+  kicker: 'FIRST MOD',
+  title: 'Beginner journey',
+  intro: 'Progress is stored only in your browser. This is not a test or mandatory order — just a short, low-risk route.',
+  done: 'Done',
+  mark: 'Mark done',
+  reset: 'Reset progress',
+  progress: 'Progress',
+  complete: 'The skeleton is proven. Now add one feature at a time.',
+  steps: [
+    ['NML is visible in the log', 'First prove that NeoModLoader is actually running in this session.', `${prefix}workbench/log-analyzer/`, 'Check Player.log'],
+    ['I know what each piece is', 'WorldBox, NML, mod.json, Main.cs and Player.log no longer look like five random terms.', `${prefix}getting-started/mental-model/`, 'Open the mental model'],
+    ['I created a minimal skeleton', 'Generate only mod.json and Main.cs. No UI, Harmony or giant architecture yet.', `${prefix}workbench/mod-generator/`, 'Open generator'],
+    ['I found my own marker', 'Launch the game and find the exact line emitted by your mod in Player.log.', `${prefix}recipes/first-nml-mod/`, 'Verify first launch'],
+    ['If it breaks, I know the first check', 'Do not rewrite everything: start from compile/load/runtime evidence.', `${prefix}getting-started/debugging-first-steps/`, 'Open first checks'],
+    ['I added one feature', 'Pick one recipe and expand only after that one path works.', `${prefix}recipes/`, 'Choose a recipe']
+  ]
+};
+const storageKey = `wbdocs.beginner-journey.v1.${ru ? 'ru' : 'en'}`;
+---
+
+<div class="beginner-journey" data-beginner-journey>
+  <div class="beginner-journey-head">
+    <div>
+      <span class="tool-kicker">{t.kicker}</span>
+      <h2>{t.title}</h2>
+      <p>{t.intro}</p>
+    </div>
+    <div class="journey-progress" aria-live="polite">
+      <strong data-progress-count>0 / {t.steps.length}</strong>
+      <span>{t.progress}</span>
+    </div>
+  </div>
+
+  <div class="journey-progress-track" aria-hidden="true"><span data-progress-bar></span></div>
+
+  <div class="journey-steps">
+    {t.steps.map((step, index) => (
+      <article class="journey-step" data-step={index}>
+        <button class="journey-check" type="button" data-step-toggle={index} aria-label={`${t.mark}: ${step[0]}`}>
+          <span data-step-number>{index + 1}</span>
+          <span class="journey-checkmark">✓</span>
+        </button>
+        <div class="journey-copy">
+          <strong>{step[0]}</strong>
+          <p>{step[1]}</p>
+          <a href={step[2]}>{step[3]} →</a>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="journey-footer">
+    <span data-complete-message hidden>{t.complete}</span>
+    <button class="mini-button" type="button" data-progress-reset>{t.reset}</button>
+  </div>
+</div>
+
+<script define:vars={{ storageKey, stepCount: t.steps.length }}>
+  for (const root of document.querySelectorAll('[data-beginner-journey]')) {
+    if (root.dataset.ready === '1') continue;
+    root.dataset.ready = '1';
+    let state = [];
+    try {
+      const stored = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      if (Array.isArray(stored)) state = stored.map(Boolean).slice(0, stepCount);
+    } catch {}
+    while (state.length < stepCount) state.push(false);
+
+    const render = () => {
+      let count = 0;
+      root.querySelectorAll('[data-step]').forEach((node) => {
+        const index = Number(node.dataset.step);
+        const done = Boolean(state[index]);
+        node.classList.toggle('is-done', done);
+        node.querySelector('[data-step-toggle]')?.setAttribute('aria-pressed', String(done));
+        if (done) count += 1;
+      });
+      const counter = root.querySelector('[data-progress-count]');
+      if (counter) counter.textContent = `${count} / ${stepCount}`;
+      const bar = root.querySelector('[data-progress-bar]');
+      if (bar) bar.style.width = `${(count / stepCount) * 100}%`;
+      const complete = root.querySelector('[data-complete-message]');
+      if (complete) complete.hidden = count !== stepCount;
+      try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch {}
+    };
+
+    root.querySelectorAll('[data-step-toggle]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const index = Number(button.dataset.stepToggle);
+        state[index] = !state[index];
+        render();
+      });
+    });
+    root.querySelector('[data-progress-reset]')?.addEventListener('click', () => {
+      state = Array(stepCount).fill(false);
+      render();
+    });
+    render();
+  }
+</script>

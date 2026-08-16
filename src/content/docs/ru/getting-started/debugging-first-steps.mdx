@@ -1,0 +1,38 @@
+---
+title: Отладка — первые проверки
+description: Путь новичка по loader, compile, load и runtime проблемам до глубокой отладки.
+---
+
+# Отладка — первые проверки
+
+Не начинай с случайного переписывания кода. Сначала определи, **что именно ты наблюдаешь**.
+
+<div class="debug-stage-grid">
+  <div><span>0</span><strong>NML не видно</strong><p>Оставайся на уровне loader/setup. Игровой API не починит loader, который вообще не запустился.</p><a href="../../workbench/log-analyzer/">Проверить Player.log →</a></div>
+  <div><span>1</span><strong>C# compile error</strong><p>Используй точный код <code>CSxxxx</code> и сообщение. Сначала компиляция, потом runtime.</p><a href="../../troubleshooting/csharp-compile-errors/">Ошибки компиляции →</a></div>
+  <div><span>2</span><strong>Мод загружен, marker нет</strong><p>Сравни каркас с минимальным рабочим рецептом и посмотри соседние строки loader.</p><a href="../../recipes/first-nml-mod/">Минимальный мод →</a></div>
+  <div><span>3</span><strong>Marker есть, механика не работает</strong><p>Entry path уже запускался. Уменьши тест до одной механики и её состояния/объектов.</p><a href="../../troubleshooting/wizard/">Выбрать симптом →</a></div>
+  <div><span>4</span><strong>Появился exception</strong><p>Начни с первого полезного exception и call chain, а не со всех красных строк файла.</p><a href="../../workbench/log-analyzer/">Разобрать сигнатуры →</a></div>
+  <div><span>5</span><strong>Работает до reload/restart</strong><p>Считай это persistence/lifecycle задачей, пока evidence не показал другое. In-memory state не обязан переживать загрузку.</p><a href="../../workbench/compatibility/">Проверить границы →</a></div>
+</div>
+
+## Сделай маленькое воспроизведение
+
+Хороший reproduction содержит:
+
+```text
+точные версии игры / NML / зависимостей
+минимальное нужное состояние мира/save
+точные шаги
+ожидаемый результат
+фактический результат
+релевантный кусок Player.log
+```
+
+По возможности убирай несвязанные системы. Если после удаления чего-то проблема исчезла — это тоже полезное evidence.
+
+## Не каждая страшная строка — причина
+
+Network/TLS и fallback-library сообщения могут встречаться рядом с проблемой и не быть её причиной. Анализатор отдельно помечает известный шум, но даже найденная сигнатура ещё не доказывает root cause.
+
+Дальше: [открыть Troubleshooter от симптома](../../troubleshooting/wizard/).

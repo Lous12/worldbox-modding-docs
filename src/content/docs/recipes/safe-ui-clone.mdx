@@ -9,6 +9,10 @@ description: TerraForge-derived recipe for separating visual hierarchy from unsa
 <span class="doc-status">TerraForge</span>
 <span class="doc-status">WorldBox 0.51.2</span>
 
+## Before you use this pattern
+
+This is **not** a beginner first-mod recipe and not a universal prefab-cloning API. Use it when you have already identified a specific vanilla UI object and need to reuse its visual hierarchy without blindly re-running copied behavior components.
+
 ## Problem
 
 A vanilla UI object may look like a reusable visual prefab while carrying `MonoBehaviour` components that assume a very specific vanilla initialization context.

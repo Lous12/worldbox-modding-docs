@@ -13,6 +13,10 @@ description: Write terrain height through the storage path verified by the Terra
 
 Write your generated terrain value to the member that actually represents WorldBox tile height.
 
+## Before you use it
+
+You must already have a real `WorldTile tile` from your world-generation or tile-processing flow. This recipe only answers **where height is stored on the tested build**; it does not define a universal way to enumerate or create tiles.
+
 Verified access paths on the tested build:
 
 ```csharp

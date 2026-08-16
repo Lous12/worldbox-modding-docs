@@ -8,6 +8,10 @@ description: Минимальная регистрация и выполнени
 <span class="doc-status">✅ Runtime verified — executed branches</span>
 <span class="doc-status">WBML-0005</span>
 
+## Куда вставлять код
+
+Регистрируй action один раз из initialization flow своего addon после доступной регистрации Political World addon. `Handler` получит настоящий `Kingdom` позже, когда action будет выполняться — создавать kingdom во время регистрации не нужно.
+
 ```csharp
 private const string AddonId = "Example.Actions";
 private const string ActionId = AddonId + ".increase_counter";

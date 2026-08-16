@@ -1,0 +1,38 @@
+---
+title: Debugging — first checks
+description: A beginner decision path for loader, compile, load and runtime failures before deeper debugging.
+---
+
+# Debugging — first checks
+
+Do not start by changing random code. First classify what you can actually observe.
+
+<div class="debug-stage-grid">
+  <div><span>0</span><strong>NML is not visible</strong><p>Stay at loader/setup level. A gameplay API cannot fix a loader that never started.</p><a href="../../workbench/log-analyzer/">Inspect Player.log →</a></div>
+  <div><span>1</span><strong>C# compile error</strong><p>Use the exact <code>CSxxxx</code> code and message. Fix compilation before runtime logic.</p><a href="../../troubleshooting/csharp-compile-errors/">Compile errors →</a></div>
+  <div><span>2</span><strong>Mod loads, marker missing</strong><p>Compare your skeleton with the minimal working recipe and inspect nearby loader messages.</p><a href="../../recipes/first-nml-mod/">Minimal mod recipe →</a></div>
+  <div><span>3</span><strong>Marker exists, feature fails</strong><p>Your entry path ran. Narrow the test to that one feature and its objects/state.</p><a href="../../troubleshooting/wizard/">Choose the symptom →</a></div>
+  <div><span>4</span><strong>Exception appears</strong><p>Start from the first useful exception and call chain, not every red-looking line in the file.</p><a href="../../workbench/log-analyzer/">Analyze signatures →</a></div>
+  <div><span>5</span><strong>Works until reload/restart</strong><p>Treat it as persistence/lifecycle until evidence says otherwise. Do not assume in-memory state survives.</p><a href="../../workbench/compatibility/">Check verified boundaries →</a></div>
+</div>
+
+## Make a tiny reproduction
+
+A useful reproduction contains:
+
+```text
+exact game / NML / dependency versions
+smallest save/world state needed
+exact steps
+expected result
+actual result
+relevant Player.log excerpt
+```
+
+Remove unrelated systems when possible. If the issue disappears after removing something, that is useful evidence too.
+
+## Do not treat every scary log line as the cause
+
+Network/TLS lines and fallback-library messages can exist without being the reason your feature failed. The analyzer labels known noise separately, but a signature match still does not prove root cause.
+
+Next: [open the symptom-first Troubleshooter](../../troubleshooting/wizard/).

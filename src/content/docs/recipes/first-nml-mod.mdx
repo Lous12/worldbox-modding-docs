@@ -15,6 +15,16 @@ Make NeoModLoader load one tiny mod and print one unmistakable line to `Player.l
 
 Do **not** add UI, Harmony patches, save data or game logic yet. First prove the skeleton loads.
 
+## Where the two files go
+
+Keep `mod.json` and `Main.cs` together inside one mod folder — the same kind of folder NML uses for other installed mods. This project has **not yet WBML-verified one universal NML install path across setups**, so this page intentionally does not invent a Windows path. If you already have a working NML mod, its location is the safest local reference until the NML lifecycle/setup suite is documented.
+
+```text
+MyFirstMod/
+├── mod.json
+└── Main.cs
+```
+
 ## 1. `mod.json`
 
 Use the [Starter Mod Generator](../../workbench/mod-generator/) if you do not want to write the manifest by hand.

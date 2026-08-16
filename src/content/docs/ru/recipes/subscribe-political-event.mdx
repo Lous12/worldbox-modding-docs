@@ -10,6 +10,10 @@ description: Минимальная Event Bus подписка с payload, clean
 
 Рецепт предполагает, что addon уже зарегистрирован.
 
+## Куда вставлять этот код
+
+Подписывайся из initialization path своего addon **после** успешной регистрации addon в Political World. `OnPartyRenamed` оставь методом, который API сможет вызвать. Не регистрируй одну и ту же подписку каждый update/frame.
+
 ```csharp
 private const string AddonId = "Example.EventAddon";
 

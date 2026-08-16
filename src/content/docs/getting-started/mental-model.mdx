@@ -1,0 +1,54 @@
+---
+title: The beginner mental model
+description: What WorldBox, NeoModLoader, mod.json, Main.cs, Player.log, APIs and Harmony each do.
+---
+
+# The beginner mental model
+
+You do not need to memorize architecture diagrams. You only need to know **which layer owns which problem**.
+
+## The stack in plain language
+
+<div class="mental-stack">
+  <div><span>GAME</span><strong>WorldBox</strong><p>The game and the objects your mod eventually interacts with.</p></div>
+  <div><span>NML</span><strong>NeoModLoader</strong><p>Finds mod metadata, compiles/loads mods and gives mod code a place to start.</p></div>
+  <div><span>JSON</span><strong>mod.json</strong><p>Metadata: identity, version, target build and dependencies. It is not your gameplay code.</p></div>
+  <div><span>CS</span><strong>Main.cs</strong><p>Your C# entry class. In the currently tested WBML skeleton it derives from <code>BasicMod&lt;Main&gt;</code> and uses <code>OnModLoad()</code>.</p></div>
+  <div><span>LOG</span><strong>Player.log</strong><p>Your first evidence source: compile errors, loading lines, your own markers and runtime exceptions appear here.</p></div>
+  <div><span>API</span><strong>Public APIs</strong><p>Supported surfaces exposed by NML or another mod such as PoliticalWorldAPI. Prefer these over private internals when they cover your task.</p></div>
+  <div><span>PATCH</span><strong>Harmony / reflection</strong><p>Tools for behavior or internals that public APIs do not expose. They are more version-sensitive, so they are not the first thing a beginner needs.</p></div>
+</div>
+
+## What happens when you launch
+
+For a tiny mod, think in this order:
+
+```text
+mod.json can be read
+        ↓
+C# can be compiled
+        ↓
+mod class can be loaded
+        ↓
+OnModLoad() runs
+        ↓
+your marker appears
+        ↓
+your feature code runs
+```
+
+If the chain breaks early, code that comes later cannot fix it.
+
+## Example: three very different failures
+
+**No NML activity in the log** means you should not debug your Political World action yet.
+
+**`error CSxxxx`** means the compiler could not produce the mod assembly. Start with the exact compiler message.
+
+**Your `[My Mod] Loaded` marker exists but a button does nothing** means the skeleton loaded successfully; now the problem is inside that feature or its runtime assumptions.
+
+## Source code is not automatically runtime truth
+
+This documentation separates inspected source from tested runtime behavior. WBML already found cases where an older source snapshot and PoliticalWorldAPI 1.14.0 behaved differently. That is why pages show statuses such as Verified, Observed and Testing instead of pretending every snippet is universal.
+
+Next: [verify your first minimal mod](../../recipes/first-nml-mod/).

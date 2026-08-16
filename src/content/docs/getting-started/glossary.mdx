@@ -1,0 +1,30 @@
+---
+title: Beginner glossary
+description: Plain-language meanings of common WorldBox modding terms used throughout the docs.
+---
+
+# Beginner glossary
+
+A short dictionary for reading the rest of the site.
+
+| Term | Plain meaning |
+|---|---|
+| **Mod** | Code/content loaded to change or extend the game. |
+| **NML / NeoModLoader** | The mod loader used by the current documentation and WBML experiments. |
+| **`mod.json`** | Mod metadata and dependency information. |
+| **`Main.cs`** | The C# entry file used by our minimal starter structure. |
+| **GUID / addon ID** | Stable identity string. Do not casually change an ID after published data/content depends on it. |
+| **API** | Public functions/types exposed for other code to use. |
+| **Runtime** | What the actually running game/mod version does, as opposed to what old source or docs suggest. |
+| **Lifecycle** | When objects/mods/worlds are created, loaded, reused, replaced or shut down. |
+| **Persistence** | Data that survives beyond the current in-memory moment, usually involving save/load. |
+| **Player.log** | Main text log used here to verify compilation, loading, versions, markers and exceptions. |
+| **Marker** | A unique log line you intentionally emit so you can prove a code path ran. |
+| **Exception** | Runtime failure such as `NullReferenceException` or `StackOverflowException`. |
+| **Harmony patch** | Runtime method patching technique. Powerful, but more version-sensitive than a supported API. |
+| **Reflection** | Inspecting/accessing types or members dynamically. Useful for discovery, also version-sensitive. |
+| **Verified** | Reproduced by the project within an explicitly stated tested scope. |
+| **Observed** | Seen in runtime, but not yet understood or bounded enough to call fully verified. |
+| **SKIP** | A branch the test did not execute; it is **not** evidence that the behavior works. |
+
+If a term is still unclear, open the page that uses it and look for the practical example before the deep reference section.

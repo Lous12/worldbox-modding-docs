@@ -1,52 +1,77 @@
 ---
 title: Start here
-description: A beginner route from “I want to make a mod” to a mod that really loads.
+description: A beginner route from “I want to make a mod” to a mod that really loads and has one proven feature.
 ---
 
 # Start here
 
-You do **not** need to learn the whole WorldBox API first. Your first goal is much smaller: make NeoModLoader see your mod, prove that it loaded, then add exactly one feature.
-
-<div class="friendly-callout friendly-callout-good"><strong>Goal of this page</strong><span>Reach a clean point where you can say: “the loader sees my mod and my code runs.”</span></div>
-
-## Step 1 — Make sure NeoModLoader is running
-
-Launch WorldBox with NeoModLoader installed. If you already have a `Player.log`, open the [Player.log Analyzer](../workbench/log-analyzer/). In a normal NML session, the log should contain NeoModLoader activity and mod-loading lines.
-
-<div class="done-when"><strong>Done when:</strong> you can find NML activity in the log.</div>
-
-If NML is not present at all, stop here. Do not copy PoliticalWorldAPI or Harmony code yet — the problem is earlier than your mod logic.
-
-## Step 2 — Create the smallest possible mod
-
-Open the [Starter Mod Generator](../workbench/mod-generator/). The current WBML probes use a tiny structure like:
+You do **not** need to understand the whole WorldBox API before you begin. Your first job is much smaller:
 
 ```text
-MyMod/
-├── mod.json
-└── Main.cs
+NeoModLoader is running
+        ↓
+your mod compiles and loads
+        ↓
+your own marker appears in Player.log
+        ↓
+one small feature works
+        ↓
+only then: bigger systems
 ```
 
-The generator uses `BasicMod<Main>` and `OnModLoad()` because that shape compiled and loaded in our current runtime experiments.
+<div class="friendly-callout friendly-callout-good"><strong>Finish line</strong><span>You can prove “the loader sees my mod, my code ran, and one feature works” without guessing.</span></div>
 
-<div class="done-when"><strong>Done when:</strong> you have a tiny mod folder with no extra systems yet.</div>
+<div class="beginner-launch-card"><div><span>START</span><div><strong>Use the interactive first-mod checklist</strong><p>Six small checkpoints. Progress is stored only in your browser and can be reset whenever you want.</p></div></div><a href="./journey/">Open beginner journey →</a></div>
 
-## Step 3 — Run it before adding features
+## Before you touch code
 
-Launch the game. Check `Player.log` for your mod name and a simple `OnLoad` / `Loaded` message.
+You only need a few things at the start:
 
-If the mod does not load, use the [Troubleshooter](../troubleshooting/wizard/) instead of adding more code.
+- a WorldBox installation where NeoModLoader already starts;
+- a text/code editor;
+- `Player.log`, because it is your evidence that compile/load/runtime stages actually happened;
+- a disposable test save whenever a recipe mutates world state.
 
-<div class="done-when"><strong>Done when:</strong> the log proves that your own code ran.</div>
+You do **not** need Harmony, custom UI, a framework, a database, or a giant folder tree for the first successful load.
 
-## Step 4 — Add one feature
+## The five things you keep seeing
 
-Pick **one** small goal from [Recipes](../recipes/): save a value, subscribe to an event, create an action, inspect the world, or debug a specific problem.
+If `mod.json`, `Main.cs`, NML and runtime all blur together, read [the beginner mental model](./mental-model/) first. It explains what each piece does and which problem belongs to which layer.
 
-Do not add UI + Harmony + persistence + events at the same time. If one thing breaks, a tiny test is dramatically easier to understand.
+<div class="beginner-link-grid">
+  <a href="./mental-model/"><span>MAP</span><strong>What is NML, mod.json, Main.cs and Player.log?</strong><small>Build a mental model before memorizing APIs.</small></a>
+  <a href="../workbench/mod-generator/"><span>MOD</span><strong>Generate the smallest skeleton</strong><small>Two files, one load marker, no unnecessary systems.</small></a>
+  <a href="../recipes/first-nml-mod/"><span>RUN</span><strong>Verify the first launch</strong><small>Know exactly what success should look like.</small></a>
+  <a href="./debugging-first-steps/"><span>FIX</span><strong>It did not work</strong><small>Choose the first check from what you actually observe.</small></a>
+  <a href="./glossary/"><span>ABC</span><strong>Plain-language glossary</strong><small>Short explanations for common modding terms.</small></a>
+  <a href="../recipes/"><span>HOW</span><strong>Add one feature</strong><small>Task-first recipes after the skeleton is proven.</small></a>
+</div>
 
-## Step 5 — Check the evidence boundary
+## A useful debugging habit
 
-A snippet may be correct for one WorldBox / NML / API combination and change later. Before depending on version-sensitive behavior, open the [Compatibility Matrix](../workbench/compatibility/).
+When something fails, describe the **stage**, not just “my mod is broken”:
 
-<div class="friendly-callout"><strong>Beginner rule</strong><span>First make it load. Then make one thing work. Only then make it clever.</span></div>
+```text
+NML not visible
+→ loader/setup stage
+
+C# error / mod compilation failed
+→ compile stage
+
+mod loads, but marker never appears
+→ load / entry-point assumption
+
+marker appears, feature fails
+→ feature/runtime stage
+
+works now, disappears after reload/restart
+→ persistence/lifecycle stage
+```
+
+That separation is more useful than changing several unrelated files at once.
+
+## After the first success
+
+Pick **one** goal from [Recipes](../recipes/). If the recipe depends on version-sensitive behavior, check the [Compatibility Matrix](../workbench/compatibility/) and its evidence status before treating it as universal.
+
+<div class="friendly-callout"><strong>Beginner rule</strong><span>First make it load. Then prove one thing works. Only then make it clever.</span></div>

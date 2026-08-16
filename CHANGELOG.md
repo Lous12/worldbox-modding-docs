@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0-alpha.6 — Beginner Experience
+- Rebuilt Getting Started as a real first-mod route instead of a short list of links.
+- Added a browser-local beginner progress checklist that persists only in localStorage and can be reset at any time.
+- Added EN/RU beginner mental-model pages explaining WorldBox, NeoModLoader, `mod.json`, `Main.cs`, `Player.log`, public APIs, Harmony/reflection and the compile/load/runtime chain in plain language.
+- Added EN/RU first-debugging-check pages that route beginners by observable stage: loader, compile, load marker, feature runtime, exception, or persistence/lifecycle.
+- Added EN/RU plain-language modding glossaries for common terms and evidence statuses.
+- Added explicit “where this code goes / before you paste it” context to the main practical recipes so snippets are not mistaken for complete standalone mods.
+- Kept unverified NML installation paths and lifecycle hooks out of the beginner guide instead of inventing version-specific instructions that WBML has not verified yet.
+- Preserved all WBML evidence boundaries, bilingual content, local browser tools, temporary artwork system, support links and the `Какова цена свободы?` epigraph.
+
 ## 0.2.0-alpha.5 — Practical Tools 2.0
 - Expanded the task-first Recipe Library into dedicated beginner-friendly recipe pages instead of routing every card directly into low-level reference pages.
 - Added dedicated EN/RU recipes for a first NML mod, kingdom data, party data, Political World events, Political World actions, Player.log diagnosis, safer UI cloning and WorldTile height.

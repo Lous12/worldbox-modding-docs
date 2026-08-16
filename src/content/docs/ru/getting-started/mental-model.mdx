@@ -1,0 +1,54 @@
+---
+title: Простая схема моддинга
+description: Что делают WorldBox, NeoModLoader, mod.json, Main.cs, Player.log, API и Harmony — человеческим языком.
+---
+
+# Простая схема моддинга
+
+Не нужно учить архитектурные диаграммы. Нужно понимать **какой слой отвечает за какую проблему**.
+
+## Стек человеческим языком
+
+<div class="mental-stack">
+  <div><span>GAME</span><strong>WorldBox</strong><p>Сама игра и объекты, с которыми в итоге взаимодействует мод.</p></div>
+  <div><span>NML</span><strong>NeoModLoader</strong><p>Находит метаданные модов, компилирует/загружает их и даёт коду точку старта.</p></div>
+  <div><span>JSON</span><strong>mod.json</strong><p>Метаданные: идентичность, версия, target build и зависимости. Это не игровая логика.</p></div>
+  <div><span>CS</span><strong>Main.cs</strong><p>Твой C# entry class. В текущем протестированном WBML-каркасе он наследуется от <code>BasicMod&lt;Main&gt;</code> и использует <code>OnModLoad()</code>.</p></div>
+  <div><span>LOG</span><strong>Player.log</strong><p>Первый источник evidence: compile errors, строки загрузки, твои marker и runtime exceptions появляются здесь.</p></div>
+  <div><span>API</span><strong>Публичные API</strong><p>Поддерживаемая поверхность NML или другого мода, например PoliticalWorldAPI. Если публичный API решает задачу — лучше начать с него.</p></div>
+  <div><span>PATCH</span><strong>Harmony / reflection</strong><p>Инструменты для поведения и внутренних частей, которых нет в публичном API. Они сильнее зависят от версии, поэтому новичку нужны не первыми.</p></div>
+</div>
+
+## Что происходит при запуске
+
+Для маленького мода думай в таком порядке:
+
+```text
+mod.json можно прочитать
+        ↓
+C# можно скомпилировать
+        ↓
+класс мода можно загрузить
+        ↓
+OnModLoad() запускается
+        ↓
+появляется твой marker
+        ↓
+работает код механики
+```
+
+Если цепочка сломалась сверху, код ниже её не починит.
+
+## Три совершенно разные поломки
+
+**В логе вообще нет активности NML** — пока бессмысленно чинить свой Political World action.
+
+**`error CSxxxx`** — compiler не смог собрать мод. Начинай с точного сообщения компилятора.
+
+**Marker `[My Mod] Loaded` есть, но кнопка ничего не делает** — каркас уже загрузился; теперь проблема внутри конкретной механики или её runtime assumptions.
+
+## Исходник не всегда равен runtime
+
+Документация отдельно помечает inspected source и реально протестированное runtime-поведение. WBML уже находил случаи, где старый source snapshot и PoliticalWorldAPI 1.14.0 вели себя по-разному. Поэтому у страниц есть Verified / Observed / Testing, а не видимость абсолютной истины.
+
+Дальше: [проверить первый минимальный мод](../../recipes/first-nml-mod/).

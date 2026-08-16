@@ -15,6 +15,10 @@ description: Минимальный рецепт persistence через Politica
 
 Рецепт предполагает, что addon Political World уже зарегистрирован.
 
+## Куда вставлять этот код
+
+Этот snippet **не является полным модом**. Вставляй его туда, где у твоего кода уже есть настоящий `Kingdom kingdom`: например, в event callback, action handler или метод конкретной механики. Если объекта kingdom у тебя ещё нет — сначала реши эту задачу, а не создавай случайный объект.
+
 ```csharp
 const string AddonId = "Example.MyAddon";
 const string Key = "reputation";

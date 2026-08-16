@@ -13,6 +13,10 @@ description: Register, query and execute a small PoliticalWorldAPI action withou
 
 Register one reusable action that can only run for a valid kingdom and increments addon state.
 
+## Where this code goes
+
+Register the action once from your addon initialization flow after your Political World addon registration is available. The action `Handler` receives the `Kingdom` later when the action is executed, so you do not need to fabricate a kingdom during registration.
+
 ```csharp
 private const string AddonId = "Example.Actions";
 private const string ActionId = AddonId + ".increase_counter";
