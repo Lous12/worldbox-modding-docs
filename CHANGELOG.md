@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0-alpha.4 — Practical UX Polish
+- Polished the English and Russian home-page trust/status blocks so practical navigation no longer depends on newer emoji glyphs.
+- Made the beginner entry route slightly more visually dominant on wide screens while keeping the other two entry paths obvious.
+- Unified Workbench headers around compact `LOG` / `MOD` / `API` / `HOW` / `FIX` identities and clearer evidence/privacy badges.
+- Added live result counts and one-click reset controls to Recipe Finder and API Explorer.
+- Added a visible three-step flow to the Troubleshooter so beginners can see where they are in the diagnosis path.
+- Added real drag-and-drop handling to Player.log Analyzer plus compact result overview chips for detected signal groups and loaded mods.
+- Reworked the Tools landing page around human goals (what broke, first skeleton, which API, evidence boundaries) and removed emoji-only tool glyphs.
+- Improved mobile behavior for filter pills, tool inputs, status cards, support buttons, environment summaries and trust badges.
+- Added focus-visible and reduced-motion rules for better keyboard/accessibility behavior.
+- Kept all existing WBML evidence boundaries, temporary artwork filenames, donation links, bilingual structure and the `Какова цена свободы?` epigraph intact.
+
 ## 0.2.0-alpha.3 — Visual & Navigation Polish
 - Reworked the English and Russian home pages around clearer illustrated entry routes and practical task cards.
 - Added eight temporary transparent PNG concept icons for Start, Recipes, UI, Persistence, Political World, World Generation, Tools, and Troubleshooting.

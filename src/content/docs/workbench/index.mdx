@@ -1,17 +1,17 @@
 ---
-title: Workbench
+title: Tools
 description: Practical browser tools for building and debugging WorldBox mods.
 ---
 
-# Workbench
+# Tools
 
-This section is for **doing**, not only reading.
+This section is for **doing and checking**, not only reading. Start from the action you need — each tool tries to keep the boundary between verified knowledge and unknown behavior visible.
 
-<div class="workbench-launch-grid">
-  <a class="launch-card" href="./log-analyzer/"><span>📄</span><strong>Player.log Analyzer</strong><p>Drop in a log and get the game/NML/API versions, loaded mods, and suspicious error signatures.</p></a>
-  <a class="launch-card" href="./mod-generator/"><span>🧱</span><strong>Starter Mod Generator</strong><p>Generate a minimal `mod.json` and `Main.cs`, including a Political World addon template.</p></a>
-  <a class="launch-card" href="./api-explorer/"><span>🔎</span><strong>API Explorer</strong><p>Search verified APIs by task: saving data, parties, events, actions, and more.</p></a>
-  <a class="launch-card" href="./compatibility/"><span>🧪</span><strong>Compatibility Matrix</strong><p>See exactly which stack our current runtime evidence applies to.</p></a>
+<div class="workbench-launch-grid tools-landing-grid">
+  <a class="launch-card" href="./log-analyzer/"><span class="tool-symbol">LOG</span><strong>Player.log Analyzer</strong><p>Drop a log to extract game/NML/API versions, loaded mods and suspicious error signatures. The file stays in your browser.</p><span class="launch-meta">Best for: “what broke?”</span></a>
+  <a class="launch-card" href="./mod-generator/"><span class="tool-symbol">MOD</span><strong>Starter Mod Generator</strong><p>Create minimal `mod.json` and `Main.cs` files, including a Political World addon template.</p><span class="launch-meta">Best for: a first skeleton</span></a>
+  <a class="launch-card" href="./api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Search verified API behavior by task: data, parties, events, actions and more.</p><span class="launch-meta">Best for: “which method do I need?”</span></a>
+  <a class="launch-card" href="./compatibility/"><span class="tool-symbol">VER</span><strong>Compatibility Matrix</strong><p>See exactly which runtime stack the evidence covers and where gaps remain.</p><span class="launch-meta">Best for: evidence boundaries</span></a>
 </div>
 
-> The tools are intentionally conservative. When the evidence is incomplete, they say so instead of pretending an API is verified.
+<div class="friendly-callout friendly-callout-good"><strong>Tool principle</strong><span>If evidence is missing, the site should say so. A tool should not turn an unknown into a confident answer.</span></div>

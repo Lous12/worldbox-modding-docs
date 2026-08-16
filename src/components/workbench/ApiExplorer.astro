@@ -4,15 +4,17 @@ const ru = lang === 'ru';
 const t = ru ? {
   title: 'API Explorer', intro: 'Ищи не по названию метода, а по тому, что хочешь сделать.',
   search: 'Например: сохранить число, событие, action, party…', all: 'Все', persistence: 'Данные', party: 'Партии', events: 'События', actions: 'Actions',
-  no: 'Ничего не найдено. Попробуй более простые слова.', verified: 'Verified', observed: 'Observed', scope: 'Проверено на', open: 'Открыть подробную страницу →'
+  no: 'Ничего не найдено. Попробуй более простые слова.', verified: 'Verified', observed: 'Observed', scope: 'Проверено на', open: 'Открыть подробную страницу →',
+  shown: 'Показано', of: 'из', clear: 'Сбросить'
 } : {
   title: 'API Explorer', intro: 'Search by what you want to do, not only by exact method names.',
   search: 'Try: save number, event, action, party…', all: 'All', persistence: 'Data', party: 'Parties', events: 'Events', actions: 'Actions',
-  no: 'Nothing found. Try simpler words.', verified: 'Verified', observed: 'Observed', scope: 'Verified on', open: 'Open full reference →'
+  no: 'Nothing found. Try simpler words.', verified: 'Verified', observed: 'Observed', scope: 'Verified on', open: 'Open full reference →',
+  shown: 'Showing', of: 'of', clear: 'Reset'
 };
 
 const items = [
-  {cat:'persistence', name:'SetKingdomInt / GetKingdomInt', status:'verified', desc: ru?'Сохранить целое число за королевством. Пережило save/load и полный restart.':'Store an integer on a kingdom. Survived save/load and a full process restart.', terms:'save data integer number kingdom persistence', href: ru?'../../api/politicalworld-addon-private-data/':'../../api/politicalworld-addon-private-data/'},
+  {cat:'persistence', name:'SetKingdomInt / GetKingdomInt', status:'verified', desc: ru?'Сохранить целое число за королевством. Пережило save/load и полный restart.':'Store an integer on a kingdom. Survived save/load and a full process restart.', terms:'save data integer number kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
   {cat:'persistence', name:'SetKingdomString / GetKingdomString', status:'verified', desc: ru?'Строковые addon-данные королевства, включая Unicode.':'Kingdom addon string data, including Unicode.', terms:'save text string unicode kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
   {cat:'persistence', name:'SetKingdomBool / GetKingdomBool', status:'verified', desc: ru?'Булевы addon-данные королевства.':'Boolean addon data on a kingdom.', terms:'save bool flag kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
   {cat:'persistence', name:'SetKingdomFloat / GetKingdomFloat', status:'verified', desc: ru?'Float addon-данные королевства, подтверждённые после restart.':'Float addon data verified after restart.', terms:'save float decimal kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
@@ -34,14 +36,18 @@ const items = [
 ---
 
 <div class="workbench-tool api-explorer" data-api-explorer>
-  <div class="tool-head"><div><span class="tool-kicker">Workbench</span><h2>{t.title}</h2><p>{t.intro}</p></div><span class="verified-pill">WBML-0001 → 0005</span></div>
-  <div class="api-search-row"><input type="search" data-api-search placeholder={t.search} /><div class="filter-pills" data-filters>
+  <div class="tool-head tool-head-polished">
+    <div class="tool-identity"><span class="tool-symbol tool-symbol-large">API</span><div><span class="tool-kicker">Workbench</span><h2>{t.title}</h2><p>{t.intro}</p></div></div>
+    <span class="verified-pill">WBML-0001 → 0005</span>
+  </div>
+  <div class="api-search-row finder-search-row"><input type="search" data-api-search placeholder={t.search} /><div class="filter-pills filter-pills-scroll" data-filters>
     <button type="button" class="filter-pill active" data-filter="all">{t.all}</button>
     <button type="button" class="filter-pill" data-filter="persistence">{t.persistence}</button>
     <button type="button" class="filter-pill" data-filter="party">{t.party}</button>
     <button type="button" class="filter-pill" data-filter="events">{t.events}</button>
     <button type="button" class="filter-pill" data-filter="actions">{t.actions}</button>
   </div></div>
+  <div class="finder-summary"><span data-api-count>{t.shown} {items.length} {t.of} {items.length}</span><button type="button" class="mini-button" data-api-clear>{t.clear}</button></div>
   <div class="api-results" data-api-results>
     {items.map((item) => <article class="api-item" data-cat={item.cat} data-search={`${item.name} ${item.desc} ${item.terms}`.toLowerCase()}>
       <div class="api-item-top"><strong>{item.name}</strong><span class={`api-status ${item.status}`}>{item.status === 'verified' ? t.verified : t.observed}</span></div>
@@ -52,13 +58,15 @@ const items = [
   </div>
 </div>
 
-<script>
+<script define:vars={{ t, total: items.length }}>
   for (const root of document.querySelectorAll('[data-api-explorer]')) {
     if (root.dataset.ready === '1') continue;
     root.dataset.ready = '1';
     const input = root.querySelector('[data-api-search]');
     const items = Array.from(root.querySelectorAll('.api-item'));
     const empty = root.querySelector('[data-api-empty]');
+    const count = root.querySelector('[data-api-count]');
+    const clear = root.querySelector('[data-api-clear]');
     let filter = 'all';
     const update = () => {
       const q = (input?.value || '').trim().toLowerCase();
@@ -70,14 +78,23 @@ const items = [
         if (!item.hidden) visible++;
       }
       empty.hidden = visible !== 0;
+      if (count) count.textContent = `${t.shown} ${visible} ${t.of} ${total}`;
     };
     input?.addEventListener('input', update);
     for (const button of root.querySelectorAll('[data-filter]')) {
       button.addEventListener('click', () => {
-        filter = button.dataset.filter;
+        filter = button.dataset.filter || 'all';
         for (const b of root.querySelectorAll('[data-filter]')) b.classList.toggle('active', b === button);
         update();
       });
     }
+    clear?.addEventListener('click', () => {
+      if (input) input.value = '';
+      filter = 'all';
+      for (const b of root.querySelectorAll('[data-filter]')) b.classList.toggle('active', b.dataset.filter === 'all');
+      update();
+      input?.focus();
+    });
+    update();
   }
 </script>

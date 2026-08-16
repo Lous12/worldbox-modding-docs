@@ -1043,3 +1043,367 @@ a.wb-button {
   .illustrated-goals .goal-card { grid-template-columns: 3.4rem 1fr; }
   .illustrated-goals .goal-arrow { display: none; }
 }
+
+/* v0.2.0-alpha.4 — practical UX polish */
+
+/* Clearer homepage trust/status language without depending on newer emoji glyphs. */
+.trust-strip-codes span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.trust-strip-codes b,
+.support-kicker,
+.inline-code-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  min-height: 1.45rem;
+  padding: 0.12rem 0.36rem;
+  border: 1px solid color-mix(in srgb, var(--sl-color-accent) 35%, var(--docs-border));
+  border-radius: 0.42rem;
+  background: color-mix(in srgb, var(--sl-color-accent) 7%, transparent);
+  color: var(--sl-color-accent-high);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.045em;
+}
+
+.friendly-status {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: min(100%, 15rem);
+}
+
+.friendly-status > b {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+}
+
+.friendly-status > strong {
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.support-kicker {
+  width: fit-content;
+  margin-bottom: 0.45rem;
+}
+
+.support-block strong {
+  display: block;
+  font-size: 1rem;
+}
+
+/* Make the main beginner route visually dominant without turning the page into a banner wall. */
+@media (min-width: 68.01rem) {
+  .illustrated-entry-grid {
+    grid-template-columns: 1.15fr 1fr 1fr;
+  }
+  .illustrated-entry-grid .entry-new {
+    box-shadow: 0 15px 40px rgb(0 0 0 / 0.12);
+  }
+}
+
+/* Shared Workbench header identity. */
+.tool-head-polished {
+  padding-bottom: 0.95rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--docs-border) 82%, transparent);
+}
+
+.tool-identity {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.tool-identity > div {
+  min-width: 0;
+}
+
+.tool-symbol-large {
+  flex: 0 0 auto;
+  min-width: 3.15rem;
+  min-height: 2.35rem;
+  margin-top: 0.05rem;
+  font-size: 0.68rem !important;
+}
+
+/* Search/filter tools: show feedback immediately and keep filters usable on narrow screens. */
+.finder-search-row {
+  gap: 0.65rem;
+}
+
+.finder-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0.7rem 0 0.25rem;
+  color: color-mix(in srgb, currentColor 68%, transparent);
+  font-size: 0.74rem;
+}
+
+.filter-pills-scroll {
+  max-width: 100%;
+}
+
+.launch-meta {
+  margin-top: auto;
+  padding-top: 0.3rem;
+  color: var(--sl-color-accent-high);
+  font-size: 0.69rem;
+  font-weight: 720;
+}
+
+.tools-landing-grid .launch-card {
+  min-height: 10.2rem;
+}
+
+/* Troubleshooter becomes an explicit 3-step flow. */
+.tool-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0 0 1rem;
+}
+
+.tool-flow span {
+  padding: 0.42rem 0.55rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--docs-panel) 86%, transparent);
+  opacity: 0.55;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 760;
+}
+
+.tool-flow span.active {
+  border-color: color-mix(in srgb, var(--sl-color-accent) 65%, var(--docs-border));
+  background: color-mix(in srgb, var(--sl-color-accent) 10%, var(--docs-panel));
+  opacity: 1;
+}
+
+.tool-flow span.done {
+  border-color: color-mix(in srgb, var(--wb-good) 50%, var(--docs-border));
+  opacity: 0.82;
+}
+
+/* Player.log: real drag-and-drop feedback plus a compact result overview. */
+.drop-hint {
+  opacity: 0.56;
+  font-size: 0.73rem;
+}
+
+.file-drop {
+  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+}
+
+.file-drop.is-dragging {
+  border-style: solid;
+  border-color: var(--sl-color-accent);
+  background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent);
+  transform: translateY(-1px);
+}
+
+.file-drop.has-file {
+  border-color: color-mix(in srgb, var(--wb-good) 58%, var(--docs-border));
+  background: color-mix(in srgb, var(--wb-good) 7%, transparent);
+}
+
+.analysis-overview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.overview-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.35rem 0.58rem;
+  border: 1px solid var(--docs-border);
+  border-radius: 999px;
+  background: var(--docs-panel);
+  font-size: 0.73rem;
+  font-weight: 760;
+}
+
+.overview-good {
+  border-color: color-mix(in srgb, var(--wb-good) 48%, var(--docs-border));
+}
+
+.overview-warn {
+  border-color: color-mix(in srgb, var(--wb-warn) 55%, var(--docs-border));
+}
+
+.tool-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+/* Keyboard and motion accessibility. */
+a.entry-card:focus-visible,
+a.goal-card:focus-visible,
+a.launch-card:focus-visible,
+.quick-link-row a:focus-visible,
+.wb-button:focus-visible,
+.mini-button:focus-visible,
+.filter-pill:focus-visible,
+.symptom-card:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--sl-color-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry-card,
+  .goal-card,
+  .launch-card,
+  .quick-link-row a,
+  .symptom-card,
+  .file-drop {
+    transition: none !important;
+  }
+  .entry-card:hover,
+  .goal-card:hover,
+  .launch-card:hover,
+  .quick-link-row a:hover,
+  .symptom-card:hover,
+  .file-drop.is-dragging {
+    transform: none !important;
+  }
+}
+
+/* Mobile: fewer stacked controls, larger taps, less accidental horizontal overflow. */
+@media (max-width: 56rem) {
+  .tool-input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .file-drop {
+    min-height: 8.5rem;
+  }
+
+  .paste-box textarea {
+    min-height: 9.5rem;
+  }
+
+  .env-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filter-pills-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+    padding-bottom: 0.25rem;
+  }
+
+  .filter-pills-scroll .filter-pill {
+    flex: 0 0 auto;
+  }
+
+  .tool-actions .wb-button {
+    min-height: 2.75rem;
+  }
+
+  .support-links {
+    width: 100%;
+  }
+}
+
+@media (max-width: 40rem) {
+  .trust-strip {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0.1rem 0 0.45rem;
+    scrollbar-width: thin;
+  }
+
+  .trust-strip span {
+    flex: 0 0 auto;
+  }
+
+  .tool-head-polished {
+    align-items: stretch;
+  }
+
+  .tool-identity {
+    width: 100%;
+  }
+
+  .tool-head .privacy-pill,
+  .tool-head .verified-pill {
+    align-self: flex-start;
+  }
+
+  .finder-summary {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 0.45rem 0;
+    background: color-mix(in srgb, var(--sl-color-bg) 94%, transparent);
+    backdrop-filter: blur(8px);
+  }
+
+  .tool-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-flow span {
+    text-align: left;
+  }
+
+  .friendly-status-row {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .friendly-status {
+    width: 100%;
+  }
+
+  .support-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .support-text-link {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 28rem) {
+  .support-links {
+    grid-template-columns: 1fr;
+  }
+
+  .support-text-link {
+    grid-column: auto;
+  }
+
+  .env-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-identity {
+    gap: 0.55rem;
+  }
+
+  .tool-symbol-large {
+    min-width: 2.7rem;
+  }
+}

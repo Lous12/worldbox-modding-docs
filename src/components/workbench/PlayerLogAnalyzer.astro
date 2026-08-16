@@ -4,58 +4,41 @@ const ru = lang === 'ru';
 const t = ru ? {
   title: 'Анализатор Player.log',
   privacy: 'Файл обрабатывается только в браузере. Никуда не загружается.',
-  choose: 'Выбрать Player.log',
-  paste: 'Или вставь лог сюда',
-  analyze: 'Разобрать лог',
-  clear: 'Очистить',
-  summary: 'Сводка окружения',
-  problems: 'Что выглядит подозрительно',
-  mods: 'Загруженные моды',
-  noProblems: 'Явных сигнатур ошибок из известных нам шаблонов не найдено.',
-  noMods: 'Не удалось извлечь список загруженных модов.',
-  copy: 'Скопировать сводку',
-  copied: 'Скопировано',
-  empty: 'Сначала выбери файл или вставь текст лога.',
+  choose: 'Выбрать Player.log', drop: 'или перетащи файл сюда', ready: 'Файл готов к анализу',
+  paste: 'Или вставь лог сюда', analyze: 'Разобрать лог', clear: 'Очистить',
+  summary: 'Сводка окружения', problems: 'Что выглядит подозрительно', mods: 'Загруженные моды',
+  noProblems: 'Явных сигнатур ошибок из известных нам шаблонов не найдено.', noMods: 'Не удалось извлечь список загруженных модов.',
+  copy: 'Скопировать сводку', copied: 'Скопировано', empty: 'Сначала выбери файл или вставь текст лога.',
   version: 'WorldBox', build: 'Build', git: 'Git', nml: 'NeoModLoader', pw: 'PoliticalWorldAPI',
   compile: 'Ошибка компиляции C#', exception: 'Исключение', stack: 'StackOverflow', callback: 'Ошибка callback',
   listener: 'Проблема NML listener', network: 'Сетевая ошибка', library: 'Fallback library', nullref: 'NullReference',
-  lines: 'совпадений'
+  lines: 'совпадений', groups: 'групп сигналов', modsFound: 'модов найдено', clean: 'явных сигналов не найдено'
 } : {
   title: 'Player.log Analyzer',
   privacy: 'The file is processed locally in your browser. It is not uploaded anywhere.',
-  choose: 'Choose Player.log',
-  paste: 'Or paste a log here',
-  analyze: 'Analyze log',
-  clear: 'Clear',
-  summary: 'Environment summary',
-  problems: 'Suspicious patterns',
-  mods: 'Loaded mods',
-  noProblems: 'No obvious error signatures from the patterns currently known to this tool.',
-  noMods: 'Could not extract a loaded-mod list.',
-  copy: 'Copy summary',
-  copied: 'Copied',
-  empty: 'Choose a file or paste log text first.',
+  choose: 'Choose Player.log', drop: 'or drop the file here', ready: 'File ready to analyze',
+  paste: 'Or paste a log here', analyze: 'Analyze log', clear: 'Clear',
+  summary: 'Environment summary', problems: 'Suspicious patterns', mods: 'Loaded mods',
+  noProblems: 'No obvious error signatures from the patterns currently known to this tool.', noMods: 'Could not extract a loaded-mod list.',
+  copy: 'Copy summary', copied: 'Copied', empty: 'Choose a file or paste log text first.',
   version: 'WorldBox', build: 'Build', git: 'Git', nml: 'NeoModLoader', pw: 'PoliticalWorldAPI',
   compile: 'C# compile error', exception: 'Exception', stack: 'StackOverflow', callback: 'Callback failure',
   listener: 'NML listener problem', network: 'Network error', library: 'Fallback library', nullref: 'NullReference',
-  lines: 'matches'
+  lines: 'matches', groups: 'signal groups', modsFound: 'mods found', clean: 'no obvious signals found'
 };
 ---
 
 <div class="workbench-tool log-analyzer" data-log-analyzer data-lang={lang}>
-  <div class="tool-head">
-    <div>
-      <span class="tool-kicker">Workbench</span>
-      <h2>{t.title}</h2>
-      <p>{t.privacy}</p>
-    </div>
+  <div class="tool-head tool-head-polished">
+    <div class="tool-identity"><span class="tool-symbol tool-symbol-large">LOG</span><div><span class="tool-kicker">Workbench</span><h2>{t.title}</h2><p>{t.privacy}</p></div></div>
     <span class="privacy-pill">LOCAL-ONLY</span>
   </div>
 
   <div class="tool-input-grid">
-    <label class="file-drop">
+    <label class="file-drop" data-drop-zone>
       <span class="file-code">LOG</span>
       <strong>{t.choose}</strong>
+      <span class="drop-hint">{t.drop}</span>
       <input type="file" accept=".log,.txt,text/plain" data-file-input />
       <small data-file-name>Player.log</small>
     </label>
@@ -75,6 +58,7 @@ const t = ru ? {
   <p class="tool-message" data-message hidden></p>
 
   <div class="analysis-results" data-results hidden>
+    <div class="analysis-overview" data-overview></div>
     <section class="result-panel">
       <h3>{t.summary}</h3>
       <div class="env-grid" data-env></div>
@@ -97,6 +81,7 @@ const t = ru ? {
     root.dataset.ready = '1';
 
     const fileInput = root.querySelector('[data-file-input]');
+    const dropZone = root.querySelector('[data-drop-zone]');
     const fileName = root.querySelector('[data-file-name]');
     const textArea = root.querySelector('[data-log-text]');
     const analyzeButton = root.querySelector('[data-analyze]');
@@ -104,6 +89,7 @@ const t = ru ? {
     const copyButton = root.querySelector('[data-copy]');
     const message = root.querySelector('[data-message]');
     const results = root.querySelector('[data-results]');
+    const overview = root.querySelector('[data-overview]');
     const env = root.querySelector('[data-env]');
     const problems = root.querySelector('[data-problems]');
     const mods = root.querySelector('[data-mods]');
@@ -157,6 +143,7 @@ const t = ru ? {
       env.textContent = '';
       problems.textContent = '';
       mods.textContent = '';
+      overview.textContent = '';
 
       const data = {
         worldbox: first(text, /WorldBox Application\.version:\s*([^\r\n]+)/i),
@@ -173,12 +160,14 @@ const t = ru ? {
       addEnv(t.pw, data.pw);
 
       let issueCount = 0;
+      let issueGroups = 0;
       const summaryProblems = [];
       for (const p of patterns) {
         let lines = collectLines(text, p.regex, 5);
         if (p.skipIf) lines = lines.filter((line) => !p.skipIf.test(line));
         if (!lines.length) continue;
         issueCount += lines.length;
+        issueGroups++;
         const item = document.createElement('details');
         item.className = `problem-item problem-${p.severity}`;
         const head = document.createElement('summary');
@@ -214,6 +203,14 @@ const t = ru ? {
         mods.append(none);
       }
 
+      const signal = document.createElement('span');
+      signal.className = issueGroups ? 'overview-chip overview-warn' : 'overview-chip overview-good';
+      signal.textContent = issueGroups ? `${issueGroups} ${t.groups}` : `OK · ${t.clean}`;
+      const modCount = document.createElement('span');
+      modCount.className = 'overview-chip';
+      modCount.textContent = `${modNames.size} ${t.modsFound}`;
+      overview.append(signal, modCount);
+
       lastSummary = [
         `${t.version}: ${data.worldbox}`,
         `${t.build}: ${data.build}`,
@@ -229,11 +226,30 @@ const t = ru ? {
       message.hidden = true;
     };
 
-    fileInput?.addEventListener('change', async () => {
-      const file = fileInput.files?.[0];
+    const loadFile = async (file) => {
       if (!file) return;
-      fileName.textContent = file.name;
+      fileName.textContent = `${file.name} · ${t.ready}`;
       fileText = await file.text();
+      dropZone?.classList.add('has-file');
+    };
+
+    fileInput?.addEventListener('change', async () => loadFile(fileInput.files?.[0]));
+
+    for (const eventName of ['dragenter', 'dragover']) {
+      dropZone?.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        dropZone.classList.add('is-dragging');
+      });
+    }
+    for (const eventName of ['dragleave', 'drop']) {
+      dropZone?.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        dropZone.classList.remove('is-dragging');
+      });
+    }
+    dropZone?.addEventListener('drop', async (event) => {
+      const file = event.dataTransfer?.files?.[0];
+      if (file) await loadFile(file);
     });
 
     analyzeButton?.addEventListener('click', () => {
@@ -254,12 +270,14 @@ const t = ru ? {
       if (fileInput) fileInput.value = '';
       if (textArea) textArea.value = '';
       fileName.textContent = 'Player.log';
+      dropZone?.classList.remove('has-file', 'is-dragging');
       results.hidden = true;
       message.hidden = true;
       copyButton.hidden = true;
       env.textContent = '';
       problems.textContent = '';
       mods.textContent = '';
+      overview.textContent = '';
     });
 
     copyButton?.addEventListener('click', async () => {

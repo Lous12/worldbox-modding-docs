@@ -21,13 +21,9 @@ const t = ru ? {
 ---
 
 <div class="workbench-tool mod-generator" data-mod-generator>
-  <div class="tool-head">
-    <div>
-      <span class="tool-kicker">Workbench</span>
-      <h2>{t.title}</h2>
-      <p>{t.intro}</p>
-    </div>
-    <span class="verified-pill">✅ Based on working WBML structure</span>
+  <div class="tool-head tool-head-polished">
+    <div class="tool-identity"><span class="tool-symbol tool-symbol-large">MOD</span><div><span class="tool-kicker">Workbench</span><h2>{t.title}</h2><p>{t.intro}</p></div></div>
+    <span class="verified-pill">WBML-backed structure</span>
   </div>
 
   <div class="generator-form">
@@ -39,7 +35,7 @@ const t = ru ? {
     <label class="check-row"><input data-field="pw" type="checkbox" /><span>{t.pw}</span></label>
   </div>
 
-  <div class="tool-note">⚠️ {t.warning}</div>
+  <div class="tool-note"><span class="inline-code-badge">NOTE</span><span>{t.warning}</span></div>
 
   <div class="tool-actions">
     <button class="wb-button" type="button" data-generate>{t.generate}</button>

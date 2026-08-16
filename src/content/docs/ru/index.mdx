@@ -23,8 +23,8 @@ import HomeIllustration from '../../../components/HomeIllustration.astro';
 Тебе не нужно сначала разбираться во внутренностях WorldBox. Выбери, что хочешь сделать, пройди самый короткий полезный маршрут, а в глубокий API и исследования уходи только когда они реально понадобятся.
 </p>
 
-<div class="trust-strip">
-  <span>✅ Где можно — проверяем в runtime</span><span>🧪 Неизвестное остаётся отмеченным</span><span>🔒 Браузерные инструменты могут работать локально</span><span>🇷🇺 Русский + 🇬🇧 English</span>
+<div class="trust-strip trust-strip-codes">
+  <span><b>RUN</b> Где можно — проверяем в runtime</span><span><b>?</b> Неизвестное остаётся отмеченным</span><span><b>LOCAL</b> Браузерные инструменты работают без загрузки файла</span><span><b>RU/EN</b> Две полноценные версии</span>
 </div>
 
 ## С чего ты хочешь начать?
@@ -90,9 +90,9 @@ import HomeIllustration from '../../../components/HomeIllustration.astro';
 ## Чему можно доверять?
 
 <div class="friendly-status-row">
-  <span class="friendly-status verified">✅ <strong>Verified</strong> — воспроизведено в runtime</span>
-  <span class="friendly-status observed">👁 <strong>Observed</strong> — увидели, но ещё не всё объяснили</span>
-  <span class="friendly-status experimental">🧪 <strong>Experimental</strong> — ещё тестируем</span>
+  <span class="friendly-status verified"><b>VERIFIED</b><strong>Воспроизведено в runtime</strong></span>
+  <span class="friendly-status observed"><b>OBSERVED</b><strong>Увидели, но ещё не всё объяснили</strong></span>
+  <span class="friendly-status experimental"><b>TESTING</b><strong>Ещё тестируем</strong></span>
 </div>
 
 <p class="small-center">Текущий основной исследовательский стек: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</strong>. <a href="./workbench/compatibility/">Открыть матрицу совместимости →</a></p>
@@ -101,7 +101,8 @@ import HomeIllustration from '../../../components/HomeIllustration.astro';
 
 <div class="support-block support-late">
   <div>
-    <strong>❤️ Поддержать автора и проект</strong>
+    <span class="support-kicker">SUPPORT · НЕОБЯЗАТЕЛЬНО</span>
+    <strong>Поддержать автора и проект</strong>
     <p>Если документация или инструменты сэкономили тебе время, можешь поддержать дальнейшие исследования, тесты и развитие сайта. Всё здесь остаётся бесплатным и открытым.</p>
   </div>
   <div class="support-links">

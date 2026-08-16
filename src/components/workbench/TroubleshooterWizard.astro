@@ -5,6 +5,7 @@ const t = ru ? {
   title: 'Что именно сломалось?',
   intro: 'Выбери симптом. Сайт не будет угадывать причину — он сначала даст короткие проверки и отправит в нужный инструмент.',
   reset: 'Выбрать другой симптом',
+  flow: ['1 · Симптом', '2 · Проверки', '3 · Инструмент'],
   symptoms: [
     ['not-load','LOAD','Мод не появляется / не загружается'],
     ['compile','C#','Ошибка компиляции C#'],
@@ -17,6 +18,7 @@ const t = ru ? {
   title: 'What exactly is broken?',
   intro: 'Pick the symptom. The site will not guess the cause — it gives short checks first, then sends you to the right tool.',
   reset: 'Choose another symptom',
+  flow: ['1 · Symptom', '2 · Checks', '3 · Tool'],
   symptoms: [
     ['not-load','LOAD','Mod does not appear / load'],
     ['compile','C#','C# compilation error'],
@@ -45,9 +47,13 @@ const paths = ru ? {
 ---
 
 <div class="workbench-tool trouble-wizard" data-trouble-wizard>
-  <div class="tool-head">
-    <div><span class="tool-kicker">{ru ? 'Помощник' : 'Helper'}</span><h2>{t.title}</h2><p>{t.intro}</p></div>
-    <span class="privacy-pill">No upload</span>
+  <div class="tool-head tool-head-polished">
+    <div class="tool-identity"><span class="tool-symbol tool-symbol-large">FIX</span><div><span class="tool-kicker">{ru ? 'Помощник' : 'Helper'}</span><h2>{t.title}</h2><p>{t.intro}</p></div></div>
+    <span class="privacy-pill">STEP-BY-STEP</span>
+  </div>
+
+  <div class="tool-flow" data-flow>
+    {t.flow.map((label, index) => <span class={index === 0 ? 'active' : ''} data-flow-step={index + 1}>{label}</span>)}
   </div>
 
   <div class="symptom-grid" data-symptoms>
@@ -70,6 +76,11 @@ const paths = ru ? {
     const title = root.querySelector('[data-result-title]');
     const steps = root.querySelector('[data-result-steps]');
     const links = root.querySelector('[data-result-links]');
+    const flow = Array.from(root.querySelectorAll('[data-flow-step]'));
+    const setFlow = (step) => flow.forEach((node, i) => {
+      node.classList.toggle('active', i + 1 === step);
+      node.classList.toggle('done', i + 1 < step);
+    });
     const show = (id) => {
       const data = paths[id];
       if (!data) return;
@@ -90,9 +101,15 @@ const paths = ru ? {
       }
       symptoms.hidden = true;
       result.hidden = false;
+      setFlow(2);
       result.scrollIntoView({behavior:'smooth', block:'nearest'});
     };
     for (const button of root.querySelectorAll('[data-symptom]')) button.addEventListener('click', () => show(button.dataset.symptom));
-    root.querySelector('[data-reset]')?.addEventListener('click', () => { result.hidden = true; symptoms.hidden = false; });
+    root.querySelector('[data-reset]')?.addEventListener('click', () => {
+      result.hidden = true;
+      symptoms.hidden = false;
+      setFlow(1);
+    });
+    setFlow(1);
   }
 </script>
