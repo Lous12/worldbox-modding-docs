@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0-alpha.1.1 — Homepage Support Hotfix
+- Restored prominent DonationAlerts and DALink support links on both English and Russian home pages after the v0.2 homepage redesign.
+- Kept support optional and the documentation explicitly free/open.
+- Reused the existing responsive support-card styles, so the block stacks cleanly on small screens.
+
 ## 0.2.0-alpha.1 — Practical Workbench UX
 - Reworked the English and Russian home pages around beginner goals instead of documentation categories.
 - Preserved the project epigraph `Какова цена свободы?` while moving technical detail below the first-use path.
