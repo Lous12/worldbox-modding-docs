@@ -10,6 +10,11 @@ const exts = new Set(['.md', '.mdx']);
 const errors = [];
 const notes = [];
 
+function canonicalTextBytes(bytes) {
+  const text = bytes.toString('utf8').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  return Buffer.from(text, 'utf8');
+}
+
 function walk(dir) {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -101,18 +106,20 @@ else {
       if (!fs.existsSync(evidencePath)) errors.push(`missing canonical evidence: ${suite.evidence}`);
       try {
         const dataBytes = fs.readFileSync(dataPath);
+        const canonicalDataBytes = canonicalTextBytes(dataBytes);
         const raw = JSON.parse(dataBytes.toString('utf8').replace(/^\uFEFF/, ''));
         for (const [field, expected] of [['suite', suite.suite], ['probe_version', suite.canonical_probe], ['run', suite.run], ['schema', suite.schema]]) {
           if (raw[field] !== expected) errors.push(`${suite.machine_data}: ${field}=${raw[field]} expected ${expected}`);
         }
-        if (suite.machine_data_bytes !== dataBytes.length) errors.push(`${suite.machine_data}: byte size ${dataBytes.length} expected ${suite.machine_data_bytes}`);
-        const dataHash = crypto.createHash('sha256').update(dataBytes).digest('hex');
-        if (suite.machine_data_sha256 !== dataHash) errors.push(`${suite.machine_data}: SHA-256 ${dataHash} expected ${suite.machine_data_sha256}`);
+        if (suite.machine_data_bytes !== canonicalDataBytes.length) errors.push(`${suite.machine_data}: canonical byte size ${canonicalDataBytes.length} expected ${suite.machine_data_bytes}`);
+        const dataHash = crypto.createHash('sha256').update(canonicalDataBytes).digest('hex');
+        if (suite.machine_data_sha256 !== dataHash) errors.push(`${suite.machine_data}: canonical SHA-256 ${dataHash} expected ${suite.machine_data_sha256}`);
         if (fs.existsSync(evidencePath)) {
           const evidenceBytes = fs.readFileSync(evidencePath);
-          if (suite.evidence_bytes !== evidenceBytes.length) errors.push(`${suite.evidence}: byte size ${evidenceBytes.length} expected ${suite.evidence_bytes}`);
-          const evidenceHash = crypto.createHash('sha256').update(evidenceBytes).digest('hex');
-          if (suite.evidence_sha256 !== evidenceHash) errors.push(`${suite.evidence}: SHA-256 ${evidenceHash} expected ${suite.evidence_sha256}`);
+          const canonicalEvidenceBytes = canonicalTextBytes(evidenceBytes);
+          if (suite.evidence_bytes !== canonicalEvidenceBytes.length) errors.push(`${suite.evidence}: canonical byte size ${canonicalEvidenceBytes.length} expected ${suite.evidence_bytes}`);
+          const evidenceHash = crypto.createHash('sha256').update(canonicalEvidenceBytes).digest('hex');
+          if (suite.evidence_sha256 !== evidenceHash) errors.push(`${suite.evidence}: canonical SHA-256 ${evidenceHash} expected ${suite.evidence_sha256}`);
         }
       } catch (error) {
         errors.push(`${suite.machine_data}: invalid JSON or integrity metadata (${error.message})`);
@@ -122,9 +129,10 @@ else {
       const derivedPath = path.join(publicRoot, derived.path || '');
       if (!fs.existsSync(derivedPath)) { errors.push(`missing derived machine/AI file: ${derived.path}`); continue; }
       const derivedBytes = fs.readFileSync(derivedPath);
-      if (derived.bytes !== derivedBytes.length) errors.push(`${derived.path}: byte size ${derivedBytes.length} expected ${derived.bytes}`);
-      const derivedHash = crypto.createHash('sha256').update(derivedBytes).digest('hex');
-      if (derived.sha256 !== derivedHash) errors.push(`${derived.path}: SHA-256 ${derivedHash} expected ${derived.sha256}`);
+      const canonicalDerivedBytes = canonicalTextBytes(derivedBytes);
+      if (derived.bytes !== canonicalDerivedBytes.length) errors.push(`${derived.path}: canonical byte size ${canonicalDerivedBytes.length} expected ${derived.bytes}`);
+      const derivedHash = crypto.createHash('sha256').update(canonicalDerivedBytes).digest('hex');
+      if (derived.sha256 !== derivedHash) errors.push(`${derived.path}: canonical SHA-256 ${derivedHash} expected ${derived.sha256}`);
     }
   } catch (error) {
     errors.push(`invalid WBML manifest JSON: ${error.message}`);
@@ -140,7 +148,7 @@ if (firstVersion && firstVersion !== pkg.version) errors.push(`package version $
 notes.push(`${docs.length} documentation files`);
 notes.push(`${en.size} EN + ${ru.size} RU pages`);
 notes.push(`${routes.size} routes checked`);
-notes.push('canonical WBML manifest checked');
+notes.push('canonical WBML manifest checked with LF-normalized integrity');
 
 if (errors.length) {
   console.error(`Docs audit FAILED with ${errors.length} issue(s):`);

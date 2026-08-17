@@ -15,7 +15,8 @@
     "quick_docs_must_not_widen_deep_docs": true,
     "rejected_methodology_is_not_public_capability_truth": true,
     "unknowns_must_remain_explicit": true,
-    "batch_cadence": "documentation may land in batches after 2–3 WBML research versions; this batch covers 0.2.0 through 0.6.0"
+    "batch_cadence": "documentation may land in batches after 2–3 WBML research versions; this batch covers 0.2.0 through 0.6.0",
+    "integrity_normalization": "For text artifacts, manifest byte counts and SHA-256 values are computed after normalizing CRLF/CR line endings to LF. This keeps integrity checks stable across Git and Windows/Linux checkouts."
   },
   "suites": [
     {
@@ -47,8 +48,8 @@
         "0.2.0-fix1",
         "0.2.0-fix2"
       ],
-      "machine_data_bytes": 19650915,
-      "machine_data_sha256": "700fced2ea1e7de280e4b175430aae73d54d41f30b812db86810960a91aa0108",
+      "machine_data_bytes": 19565989,
+      "machine_data_sha256": "e85b60c90a8f48a3e8d68940c57fce208bfb78adb8fdb55dd3188f802808d151",
       "evidence_bytes": 783,
       "evidence_sha256": "b09c4ac62f4b6b6602a96caa4de58250a4d7cd72bf6666336cf4c7b352a35444"
     },

@@ -1,0 +1,12 @@
+# Keep documentation and machine-readable evidence deterministic across Windows/Linux.
+* text=auto
+
+*.json  text eol=lf
+*.txt   text eol=lf
+*.md    text eol=lf
+*.mdx   text eol=lf
+*.mjs   text eol=lf
+*.astro text eol=lf
+*.css   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
