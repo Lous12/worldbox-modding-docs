@@ -1,0 +1,18 @@
+WBML-0900 — Coverage Closure & Full Architecture Torture
+Canonical probe: 0.9.0
+Run: dd7179d925a4
+Environment: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NML 1.2.0.1
+Result: CLOSED PASS — 40 PASS / 0 FAIL / 0 SKIP — P/A/B/C/D/E/F PASS
+
+Key evidence:
+- Closure census: 15/15 core types, 18,625 methods, 9,434 public methods.
+- Heuristic families: query-like 6,722; mutation-like 5,151; lifecycle-like 460; persistence-like 869; worldgen-like 279; UI/input-like 3,428; event/hook-like 307.
+- Atlas closure: 2,905 types, 38,553 members, 10,087 safe reads / 0 failures, 19,446 relations / 0 unresolved endpoints, 0 type collisions.
+- Live simulation stress: 656 frames / ~12 seconds, 12 passes, 19,200 reads / 0 failures.
+- Political World, Scenario Tools and Custom Worldsize remained loaded.
+- Harmony foreign-owner set was preserved 3 → 3 across the integrated reload.
+- One rollback-only save/reload proof completed: save=1, load=1, reloadProof=1, four entity identities classified, owner relationships preserved, temporary scalar markers cleared.
+- Post-reload UI: 44 canvases, 1 EventSystem.
+- WBML-captured engine/game exceptions: 0; no operational abort.
+
+Freeze rule: systematic WBML research is frozen for this current runtime until WorldBox/NML changes or a direct contradiction is discovered.

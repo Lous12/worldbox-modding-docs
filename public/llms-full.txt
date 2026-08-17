@@ -1,94 +1,37 @@
-# WorldBox Modding Docs — AI entry
+# WorldBox Modding Docs — full WBML AI guide
 
-Site release: 0.3.0
-Main tested stack: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NeoModLoader 1.2.0.1. PoliticalWorldAPI evidence also names API 1.14.0 where applicable.
+## Baseline
+WorldBox 0.51.2 build 719; Unity 2022.3.60f1; NeoModLoader 1.2.0.1; Political World 1.7.0 / PoliticalWorldAPI 1.14.0 where applicable.
 
-## Reliability contract
+## Retrieval hierarchy
+1. manifest.json
+2. canonical raw atlas for the exact suite
+3. Detailed Docs
+4. Research methodology/boundaries
+5. Quick Docs for concise human guidance
 
-1. Never invent a class, method, overload, field, hook, event, save key, path or lifecycle guarantee because it sounds plausible.
-2. Version labels are part of every runtime claim. Future WorldBox/NML/PW versions require re-test or a compatibility diff.
-3. Canonical WBML machine export and final matrix outrank prose summaries. Detailed Docs interpret them. Quick Docs only summarize and may not widen claims.
-4. `VERIFIED` = exact tested call/read success under exported proof/sample; not universal semantics.
-5. `OBSERVED-THREW` = exact owner + exact argument set threw the recorded exception; not “method is broken”.
-6. `VERIFIED-REVERSIBLE` applies only to the exact controlled scalar transaction exported by WBML 0.5.0.
-7. `VERIFIED-LIFECYCLE` = natural lifecycle path removed the entity from pinned manager/owner/registry evidence and stale checks passed.
-8. `VERIFIED-NONTERMINAL-WINDOW` and `VERIFIED-EMPTY-REGISTERED-WINDOW` are bounded windows, never permanent-persistence claims.
-9. Keep access/visibility and provenance. Reflection verification does not make an internal/private member a stable public API.
-10. Same CLR type is not enough for a parameter. Use semantic provenance from the canonical 0.4 atlas; unresolved arguments stay unresolved.
-11. SKIP/unexecuted branches never become Verified. Failed/superseded harnesses are negative knowledge only.
-12. If the docs/evidence do not answer the question, say `research-needed` and propose a focused WBML probe.
+## Canonical machine files
+0200-automatic-api-atlas.json — 0.2.0-fix3
+0300-capability-verification-atlas.json — 0.3.0-fix1
+0400-parameterized-query-atlas.json — 0.4.0-fix2
+0500-safe-mutation-atlas.json — 0.5.0
+0600-entity-lifecycle-atlas.json — 0.6.0-fix5
+0700-persistence-identity-atlas.json — 0.7.0
+0800-world-game-integration-atlas.json — 0.8.0-fix1
+0900-coverage-closure-atlas.json — 0.9.0
+1000-practical-modding-baseline.json — consolidation/freeze record, not a runtime suite
 
-## Knowledge layers
+## High-value rules
+- Reflection/public access and runtime success are separate dimensions.
+- Parameterized query evidence is tied to exact argument provenance.
+- OBSERVED-THREW is one argument-set result, not universal failure.
+- VERIFIED-REVERSIBLE is exact-scope mutation evidence.
+- Actor/Building may be replaced with the same logical ID after load; re-resolve.
+- Building kill and empty Kingdom evidence in 0.6 is bounded-window evidence, not forever.
+- Harmony ordering/owner observations are version-bound.
+- Discovery of NML reload/listener types is not evidence that arbitrary live reload/instantiation is safe.
+- The 0.9 family counts are closure census only; they are not safety classifications.
+- WBML 1.0 FROZEN means the current practical research campaign is closed. It does not mean every one of 18,625 methods was invoked.
 
-- Quick Docs: /quick/
-- Detailed API/reference: /api/
-- WBML Research Archive: /research/
-- Machine manifest: /data/wbml/manifest.json
-- Compact machine index: /data/wbml/quick-capabilities.json
-- Evidence vocabulary: /data/wbml/evidence-status-schema.json
-- Full AI guide: /llms-full.txt
-
-## Canonical WBML post-baseline
-
-- 0.2.0 Automatic API Atlas -> canonical 0.2.0-fix3, run 0fa6e20674fc, 26/0/0 CLOSED PASS. Full data: /data/wbml/0200-automatic-api-atlas.json
-- 0.3.0 Capability Verification Atlas -> canonical 0.3.0-fix1, run 82c23a7c8916, 28/0/0 CLOSED PASS. Full data: /data/wbml/0300-capability-verification-atlas.json
-- 0.4.0 Parameterized Query Atlas -> canonical 0.4.0-fix2, run 7d17ef55149e, 34/0/0 CLOSED PASS. Full data: /data/wbml/0400-parameterized-query-atlas.json
-- 0.5.0 Safe Mutation Atlas -> canonical 0.5.0, run 00d01039f05e, 34/0/0 CLOSED PASS. Full data: /data/wbml/0500-safe-mutation-atlas.json
-- 0.6.0 Entity Lifecycle Atlas -> canonical 0.6.0-fix5, run d3e2a6ed626f, 34/0/0 CLOSED PASS. Full data: /data/wbml/0600-entity-lifecycle-atlas.json
-
-## High-value current facts
-
-WBML 0.3: 18,625 methods scanned; 1,462 zero-arg queries VERIFIED; 1,116 public + 346 reflection; unsafe/stale invocations 0.
-WBML 0.4: 315 parameterized queries VERIFIED; semantic argument provenance required; 11 exact OBSERVED-THREW records; weak arbitrary strings/IDs are rejected or unresolved.
-WBML 0.5: 19/19 selected scalar transactions VERIFIED-REVERSIBLE; restoreFailed/collateral/residual all 0. The 7,049 mutation/lifecycle queue entries are NOT safe APIs.
-WBML 0.6: Actor.dieSimpleNone and City.destroyCity are VERIFIED-LIFECYCLE. Building.kill remained registered in pinned manager+owner for 30 frames. A Kingdom with all five remaining cities naturally destroyed reached zero cities but remained registered for 120 frames. Both latter results are bounded negative lifecycle evidence.
-
-## Planned WorldBox Modding API
-
-The shared WorldBox Modding API is a future dependency mod planned after WBML 1.0. It does not exist yet. Design sketches like `WBAPI.Actors.TryResolve(...)` are not current callable API. The intended pipeline is WorldBox internals -> WBML -> docs -> shared API -> Fog of War Overhaul / Political World / third-party mods.
-
-
-# Expanded retrieval notes
-
-## WBML 0.2 structural atlas
-
-Canonical metrics: types 2905; members 38553; type ID collisions 0; runtime concrete 697; runtime specialized 29; runtime records 676; unmapped 0; safe reads 8488/0 failures; relations 19150; unresolved endpoints 0; queue 15079; stability 4988 same / 12 changed / 0 failed. It is read-only discovery: discovered methods/properties/constructors were not auto-invoked.
-
-## WBML 0.3 zero-arg capability
-
-Canonical metrics: zeroArgNonVoid 4411; records 3021; IL-safe 1751; ownerResolved 1505; noOwner 246; invoked 1505; VERIFIED 1462; OBSERVED-THREW 43; public 1116; reflection 346; stability 1429 same / 33 changed / 0 failed. Initial 0.3 was rejected because dead/stale Actor samples and broad `attack` name heuristics distorted evidence.
-
-Representative exact records: Actor.getAge()->Int32 sample 76, Actor.countTraits()->Int32 sample 5, City.countBuildings()->Int32 sample 100, Kingdom.getPopulationTotal()->Int32 sample 14468, Building.getCity()->City reference, WorldTile.Height sample 210, SaveManager.getCurrentSlot()->Int32 sample 11. Samples are observations, not constants.
-
-## WBML 0.4 parameterized queries
-
-Canonical metrics: parameterizedNonVoid 4291; records 1803; IL-safe 473; ownerResolved 382; argumentSets 326; unresolved 56; observedArgs 284; syntheticArgs 187; weakObservedRejected 223; collectionKeysObserved 1280; collectionElementsObserved 586; VERIFIED 315; OBSERVED-THREW 11.
-
-Canonical examples: City.countBuildingsOfID("bonfire") -> 1 using City.buildings_dict_id dictionary key; City.getBuildingListOfType("type_bonfire") -> count=1 via City.buildings_dict_type key; City.getSubspeciesId("human") -> 2 via City._species key; ZoneCalculator.getZoneByID(0) -> TileZone reference via _zones_dict_id key; ArchitectureAsset.getBuildingID("order_docks_0") -> fishing_docks_civ_unicorn via styled_building_orders element; Actor.hasTrait(ActorTrait from Actor.traits[]) -> True.
-
-Never resurrect rejected early argument choices such as `plate_kingdom`, `#00FFFF`, `The Old`, unrelated `textureID`, or arbitrary `unit` species strings as canonical parameter evidence.
-
-## WBML 0.5 safe mutation
-
-Exact VERIFIED-REVERSIBLE fields:
-ActorData: money, experience, renown, kills, food_consumed, births, pollen, loot.
-CityData: total_food_consumed, total_leaders, renown, total_births, total_deaths, total_kills.
-KingdomData: total_kings, renown, total_births, total_deaths, total_kills.
-
-Contract: snapshot -> one controlled mutation -> exact delta -> exact restore -> residual fields 0. Unknown mutation methods are only catalogued.
-
-## WBML 0.6 lifecycle and rejected methodology
-
-Canonical pinned sources: ActorManager F:units_only_alive; CityManager F:dict; KingdomManager F:dict; BuildingManager F:dict; Kingdom.cities F:cities; City.units P:units; City.buildings F:buildings.
-
-Canonical outcomes: Building.kill -> VERIFIED-NONTERMINAL-WINDOW, still pinned manager+owner after 30 frames. Actor.dieSimpleNone -> VERIFIED-LIFECYCLE and 50/50 stale reads. City.destroyCity -> VERIFIED-LIFECYCLE and 50/50 stale reads. Destroy all remaining cities -> Kingdom city count 5->0 while Kingdom remained in manager for 120 frames -> VERIFIED-EMPTY-REGISTERED-WINDOW. Reintroduced=0, sameIdNewReference=0, engine/game exceptions=0.
-
-Rejected history matters: fix1 direct manager destroy/remove + Dispose corrupted runtime and caused repeated NullReferenceException/game-loop failures; fix3 mislabeled a non-final city as the last city; fix4 floated collection provenance and falsely reported City reintroduction. Do not quote those as current WorldBox behavior.
-
-## Existing PoliticalWorldAPI baseline
-
-The site also contains earlier verified PoliticalWorldAPI persistence, world isolation, party lifecycle, event bus and actions/conditions/effects documentation. Use those dedicated pages for exact public API signatures. Do not mix their public wrapper guarantees with raw WorldBox internal members.
-
-## Fog of War / Exploration future work
-
-Planned model: Unknown / Discovered / Visible per kingdom; vision from residents/scouts/armies/ships/cities/allies/merchants; contact-gated diplomacy; stale last-known information; kingdom-view UI. If WorldBox ships native kingdom exploration first, research and extend the native system instead of duplicating it. Current WBML evidence does not yet prove the needed rendering/visibility/input hooks; mark those `research-needed`.
+## Freeze trigger
+Re-open broad WBML research only if WorldBox/NML changes or a direct contradiction to the frozen baseline is found. Otherwise use the baseline to debug/build the real mod.

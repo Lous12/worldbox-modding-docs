@@ -1,27 +1,14 @@
 ---
-title: World и WorldTile — быстрый справочник
-description: Проверенные WorldTile reads и version-bound правила мира/карты из WBML baseline.
+title: World & WorldTile — Quick Docs
+description: Current WorldBox world/map evidence с frozen WBML boundaries.
 ---
 
-**Статус:** WorldTile read surface Verified на протестированном baseline; для worldgen/save lifecycle есть отдельный evidence в 0.1 baseline.
+**Статус:** VERIFIED/OBSERVED в зависимости от exact operation.
 
-WBML 0.3.0 проверил representative `WorldTile` reads из `MapBox.tiles_map[]`:
+Existing WorldTile/worldgen specialist suites остаются canonical для concrete terrain/world-generation behavior. WBML 0.8 добавил current runtime census без destructive regeneration: 50 manager types, 38 runtime manager samples, 410 worldgen-like methods и 40 primitive world/map reads / 0 failures.
 
-```csharp
-int height = tile.Height;
-TileTypeBase type = tile.Type;
-int id = tile.tile_id;
-City city = tile.zone_city;
-int units = tile.countUnits();
-BiomeAsset biome = tile.getBiome();
-bool hasBuilding = tile.hasBuilding();
-bool hasCity = tile.hasCity();
-```
+WBML 0.9 затем сделал live-simulation stress: 19 200 reads / 0 failures в bounded window.
 
-У tested sample были `Height=210`, `tile_id=0`, `hasCity=true`, `hasBuilding=false`; это не глобальные константы. `getColor()` успешно вызвался, но изменился в stability window — один snapshot цвета нельзя считать стабильным состоянием мира.
+Не делай вывод, что каждый worldgen-like method безопасно вызывать. Surface census = `OBSERVED`; dedicated invocation evidence главнее для concrete recipes.
 
-Сводный baseline 0.1 также подтвердил протестированный `MapBox.generateNewMap()` completion path через `finishMakingWorld` + live collections/stability, без требования смены object references.
-
-Для будущего Fog of War / exploration всё ещё нужны отдельные исследования map visibility, camera и rendering. Нельзя выдумывать per-kingdom fog API из текущего evidence.
-
-[Полные детали WorldTile](../../api/runtime-worldtile/) · [Capability atlas](../../api/runtime-capability-atlas/) · [World-map baseline](../../research/world-map-baseline/)
+[WorldTile details](../../api/runtime-worldtile/) · [Game integration](../../api/runtime-game-integration/) · [WBML 0.9 closure](../../research/wbml-0900-coverage-closure/)

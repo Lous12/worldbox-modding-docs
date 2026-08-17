@@ -1,18 +1,18 @@
-WorldBox Modding Lab canonical machine data — docs release 0.3.0
+WorldBox Modding Docs — WBML machine data
+Site release: 0.4.0
+Frozen runtime baseline: WorldBox 0.51.2 build 719 / NeoModLoader 1.2.0.1
 
-This directory intentionally publishes only canonical runs for WBML 0.2.0–0.6.0.
-Superseded/faulty harness runs are documented in Research as methodology history but are not copied here as capability truth.
+Canonical raw atlases:
+0200-automatic-api-atlas.json
+0300-capability-verification-atlas.json
+0400-parameterized-query-atlas.json
+0500-safe-mutation-atlas.json
+0600-entity-lifecycle-atlas.json
+0700-persistence-identity-atlas.json
+0800-world-game-integration-atlas.json
+0900-coverage-closure-atlas.json
 
-Files:
-- manifest.json — canonical suite/run/schema map
-- evidence-status-schema.json — shared status vocabulary
-- quick-capabilities.json — small curated index for lightweight consumers
-- 0200-automatic-api-atlas.json — full canonical WBML 0.2.0-fix3 export
-- 0300-capability-verification-atlas.json — full canonical WBML 0.3.0-fix1 export
-- 0400-parameterized-query-atlas.json — full canonical WBML 0.4.0-fix2 export
-- 0500-safe-mutation-atlas.json — full canonical WBML 0.5.0 export
-- 0600-entity-lifecycle-atlas.json — full canonical WBML 0.6.0-fix5 export
+Consolidation:
+1000-practical-modding-baseline.json
 
-Evidence scope:
-WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NeoModLoader 1.2.0.1.
-Do not widen results to future versions without a baseline diff/re-test.
+Start with manifest.json. `quick-capabilities.json` is a compact derived index for the 0.2–0.6 capability layers and is not exhaustive. The raw atlas plus Detailed/Research pages win on conflicts.

@@ -101,3 +101,8 @@ npm run audit
 ```
 
 The audit checks EN/RU page parity, internal routes, required frontmatter, code fences, referenced artwork, sanitized public evidence/machine data, package/changelog version agreement and canonical WBML manifest consistency.
+
+
+## WBML 1.0 frozen baseline
+
+Systematic research is frozen for WorldBox 0.51.2 build 719 / NeoModLoader 1.2.0.1. Re-open it only after a game/loader update or a direct contradiction to the baseline.

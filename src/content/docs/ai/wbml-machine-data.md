@@ -1,47 +1,38 @@
 ---
 title: WBML machine data
-description: Canonical WBML 0.2–0.6 JSON resources, retrieval order and AI interpretation rules.
+description: Canonical WBML 0.2–0.9 JSON resources plus the frozen 1.0 consolidation record.
 ---
 
-The v0.3.0 documentation release publishes the same canonical WBML results in a machine-facing layer instead of forcing an assistant to infer everything from prose.
+The machine layer mirrors the frozen current-runtime evidence instead of forcing an assistant to reconstruct facts from prose.
 
 ## Retrieval order
 
-When answering a WorldBox-internal question covered by these atlases:
-
-1. Read `/worldbox-modding-docs/data/wbml/manifest.json` to identify the canonical run and exact tested stack.
-2. Use `/worldbox-modding-docs/data/wbml/quick-capabilities.json` for lightweight discovery.
-3. For a concrete method/result, retrieve the matching full canonical atlas.
-4. Read Detailed Docs for human interpretation and caveats.
-5. Read the Research page when the result depends on rejected methodology or a boundary.
-
-Do not treat the compact index as exhaustive; the full atlas wins if they differ.
+1. Read `/worldbox-modding-docs/data/wbml/manifest.json`.
+2. Use `quick-capabilities.json` only for lightweight 0.2–0.6 discovery.
+3. Retrieve the matching canonical raw atlas for exact behavior.
+4. Read Detailed Docs for interpretation and caveats.
+5. Read Research when rejected methodology or a boundary matters.
+6. Use `1000-practical-modding-baseline.json` for the freeze policy and current campaign state.
 
 ## Canonical raw exports
 
-| Suite | Canonical probe | Raw data |
+| Suite | Probe | Raw data |
 |---|---|---|
-| WBML-0200 | `0.2.0-fix3` | `/worldbox-modding-docs/data/wbml/0200-automatic-api-atlas.json` |
-| WBML-0300 | `0.3.0-fix1` | `/worldbox-modding-docs/data/wbml/0300-capability-verification-atlas.json` |
-| WBML-0400 | `0.4.0-fix2` | `/worldbox-modding-docs/data/wbml/0400-parameterized-query-atlas.json` |
-| WBML-0500 | `0.5.0` | `/worldbox-modding-docs/data/wbml/0500-safe-mutation-atlas.json` |
-| WBML-0600 | `0.6.0-fix5` | `/worldbox-modding-docs/data/wbml/0600-entity-lifecycle-atlas.json` |
+| WBML-0200 | `0.2.0-fix3` | `0200-automatic-api-atlas.json` |
+| WBML-0300 | `0.3.0-fix1` | `0300-capability-verification-atlas.json` |
+| WBML-0400 | `0.4.0-fix2` | `0400-parameterized-query-atlas.json` |
+| WBML-0500 | `0.5.0` | `0500-safe-mutation-atlas.json` |
+| WBML-0600 | `0.6.0-fix5` | `0600-entity-lifecycle-atlas.json` |
+| WBML-0700 | `0.7.0` | `0700-persistence-identity-atlas.json` |
+| WBML-0800 | `0.8.0-fix1` | `0800-world-game-integration-atlas.json` |
+| WBML-0900 | `0.9.0` | `0900-coverage-closure-atlas.json` |
 
-## Mandatory interpretation rules
+## New mandatory rules
 
-- `VERIFIED` means exact tested call/read success, not universal semantics.
-- Keep `visibility`/access. Reflection success does not convert an internal/private member into a stable public API.
-- Keep `owner_source` and, for parameterized queries, exact argument provenance.
-- If `argument_status` is unresolved, do not manufacture an argument.
-- `OBSERVED-THREW` describes one exported argument set and exception only.
-- `VERIFIED-REVERSIBLE` applies only to the exact 19 scalar transactions exported by 0.5.0.
-- `VERIFIED-NONTERMINAL-WINDOW` / `VERIFIED-EMPTY-REGISTERED-WINDOW` are bounded windows. Never turn them into “persists forever”.
-- `same_id_new_reference=0` is an observation inside the tested window, not proof that IDs are never reused.
-- Superseded fix runs listed in Research are negative methodology knowledge; they are intentionally absent from the canonical raw-data directory.
-- If a question is outside the exported evidence, answer `research-needed` and propose a focused WBML test rather than inventing an API.
+- Same logical ID after load does not guarantee the same CLR reference. Prefer re-resolution.
+- Harmony ordering/owner observations are version-bound.
+- A method-family census is not a safety classification.
+- `WBML 1.0 FROZEN` means systematic research is closed for the current stack, not that every method is verified.
+- Re-open broad research only on a game/NML change or a direct contradiction.
 
-## Human/machine synchronization rule
-
-A WBML batch is considered integrated only after canonical evidence → Detailed Docs → Quick Docs → machine/AI data. This release is the first full batch under that rule for 0.2–0.6.
-
-[Evidence model](../../api/evidence-model/) · [Research archive](../../research/) · [Quick Docs](../../quick/)
+[Evidence model](../../api/evidence-model/) · [Frozen baseline](../../research/wbml-1000-frozen-baseline/)

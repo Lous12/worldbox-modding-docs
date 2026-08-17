@@ -1,19 +1,16 @@
 ---
-title: UI — быстрый справочник
-description: Текущая граница UI evidence и что ещё требует отдельного исследования.
+title: UI / Input — Quick Docs
+description: Практический UI, input и Harmony integration guidance из WBML 0.8/0.9.
 ---
 
-**Статус:** Partial baseline; UI нельзя считать полностью картированным.
+**Статус:** VERIFIED для tested current runtime.
 
-Ранний WBML UI Infrastructure suite (`0.0.9-fix3`) дошёл до автоматических `126 PASS / 0 FAIL / 0 SKIP`, но **manual Escape behavior остаётся открытым gate** в сводном baseline. Atlases 0.2–0.6 не превращают это в универсальную UI/input гарантию.
+- Manual Escape keydown получен WBML input probe.
+- WBML-owned UI object создан, attached к active canvas и cleanly destroyed.
+- В 0.8 observed 20 active canvases / 1 EventSystem; после integrated reload 0.9 — 44 canvases / 1 EventSystem. Это observations, не constants.
+- Обнаружено 73 NML UI-related types.
+- Harmony test owners можно было установить, вызвать и снять, не удалив три observed foreign owners.
 
-Практическое правило:
+Discovery NML reload/listener type не доказывает, что безопасно mass-instantiate или force-reload live mods.
 
-- используй уже документированные UI recipes, где реально проверен конкретный path;
-- не предполагай одинаковый lifetime у каждого `Window`, input lock или клонированного объекта;
-- не называй Escape/input integration полностью Verified, пока manual gate открыт;
-- глубокий UI/input/game integration будет отдельным последующим WBML этапом.
-
-Для Fog of War Overhaul kingdom-view overlays, map modes, input override и camera integration пока **research-needed**, а не готовая подтверждённая архитектура.
-
-[Safe UI clone](../../recipes/safe-ui-clone/) · [Runtime tooling baseline](../../research/runtime-tooling-baseline/) · [Статусы evidence](../evidence-statuses/)
+[Полные integration details](../../api/runtime-game-integration/) · [WBML 0.8 evidence](../../research/wbml-0800-world-game-integration/)

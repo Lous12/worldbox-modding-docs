@@ -1,0 +1,17 @@
+WBML-0700 — Persistence & Identity Mega Atlas
+Canonical probe: 0.7.0
+Run: 26b9fe649e5c
+Environment: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NML 1.2.0.1
+Result: CLOSED PASS — 49 PASS / 0 FAIL / 0 SKIP — P/A/B/C/D/E/F PASS
+
+Key evidence:
+- 3 programmatic save/load cycles, 3/3 reload proofs.
+- Actor/City/Kingdom/Building identity classified across all cycles.
+- Actor reference was replaced with the same ID in cycles 1 and 3; Building reference was replaced with the same ID in all three cycles.
+- City and Kingdom references were reused in the tested cycles.
+- Pinned manager/owner collection provenance remained usable; owner relationships were preserved 9/9.
+- Actor/City/Kingdom `renown` unsaved markers rolled back; saved markers persisted exactly; final cleanup restored the original values.
+- Impossible-ID lookup missed 4/4; old-reference safe reads reported 0 failures.
+- Engine exceptions: 0. Game exceptions: 0.
+
+Boundary: exact identity reuse/replacement is version-bound. Same ID does not imply the same CLR object reference after reload.

@@ -3,7 +3,7 @@ title: Evidence model WBML
 description: Source-of-truth правила для signatures, provenance, runtime results, lifecycle windows и rejected methodology.
 ---
 
-Эта страница задаёт interpretation contract для новых reference-страниц WBML 0.2–0.6.
+Эта страница задаёт interpretation contract для новых reference-страниц WBML 0.2–0.9 + frozen 1.0 baseline.
 
 ## Порядок source of truth
 

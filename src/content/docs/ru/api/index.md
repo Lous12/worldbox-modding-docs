@@ -7,13 +7,16 @@ description: Source-of-truth runtime reference WorldBox, NeoModLoader и Politic
 
 Если нужен быстрый ответ — начни с [Quick Docs](../quick/). Если нужен сам эксперимент — открой [Research](../research/).
 
-## WorldBox runtime — canonical WBML 0.2–0.6
+## WorldBox runtime — canonical WBML 0.2–1.0
 
 - [WBML evidence model](./evidence-model/)
 - [Runtime capability atlases](./runtime-capability-atlas/)
 - [Parameterized Query Atlas](./runtime-parameterized-queries/)
 - [Safe Mutation Atlas](./runtime-safe-mutations/)
 - [Entity Lifecycle Atlas](./runtime-entity-lifecycle/)
+- [Persistence & Identity](./runtime-persistence-identity/)
+- [Game integration / Harmony / NML](./runtime-game-integration/)
+- [Frozen current-runtime baseline](./runtime-frozen-baseline/)
 - [Actor](./runtime-actor/)
 - [City](./runtime-city/)
 - [Kingdom](./runtime-kingdom/)

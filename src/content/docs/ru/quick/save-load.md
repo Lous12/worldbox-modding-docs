@@ -1,28 +1,21 @@
 ---
-title: Save / Load — быстрый справочник
-description: Version-bound правила SaveManager из сводного WBML baseline и текущего read atlas.
+title: Save / Load — Quick Docs
+description: Практические save/load identity и persistence rules из frozen WBML baseline.
 ---
 
-**Статус:** На baseline 0.51.2 есть протестированные save/reload paths, но 0.7.0 всё ещё должен глубже исследовать ID/reference/persistence integration.
+**Статус:** VERIFIED на WorldBox 0.51.2 build 719 / NML 1.2.0.1 в exact tested scopes.
 
-Сводный WBML 0.1 безопасно вызвал наблюдавшиеся no-arg signatures:
+Observed callable paths:
 
 ```text
 SaveManager.saveToCurrentPath()
 SaveManager.loadWorld()
 ```
 
-Это version-bound observations. Нельзя угадывать slot/path overloads или физические пути сохранений.
+Главный результат 0.7 — identity: после reload entity может сохранить logical ID, но получить новую CLR reference. Building сделал это во всех трёх tested cycles; Actor — в двух из трёх. City и Kingdom в этом run reuse references.
 
-WBML 0.3.0 также подтвердил read-only helpers:
+**Через load сохраняй IDs/durable data, затем заново resolve live objects. Не требуй object-reference equality.**
 
-```csharp
-int currentSlot = SaveManager.getCurrentSlot();
-bool loadingAnimation = SaveManager.isLoadingSaveAnimationActive();
-```
+Selected `renown` probes Actor/City/Kingdom показали exact saved persistence, unsaved rollback и cleanup restoration. Это не доказывает serialization каждого field/property.
 
-Для данных addon Political World используй документированные public storage APIs, а не реконструируй internal raw save keys.
-
-**research-needed:** stale/reused object identity `Actor`/`City`/`Kingdom` при non-empty save/reload registries остаётся известным gap и входит в направление 0.7.0.
-
-[Подробный SaveManager lifecycle](../../api/savemanager-lifecycle/) · [Save/reload baseline](../../research/save-reload-lifecycle-baseline/) · [Статусы evidence](../evidence-statuses/)
+[Полные persistence details](../../api/runtime-persistence-identity/) · [WBML 0.7 evidence](../../research/wbml-0700-persistence-identity/)

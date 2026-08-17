@@ -97,8 +97,8 @@ if (!fs.existsSync(manifestPath)) errors.push('missing public/data/wbml/manifest
 else {
   try {
     const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-    if (manifest.site_release !== '0.3.0') errors.push(`WBML manifest site_release=${manifest.site_release} expected 0.3.0`);
-    if (!Array.isArray(manifest.suites) || manifest.suites.length !== 5) errors.push('WBML manifest must contain five canonical suites (0200–0600)');
+    if (manifest.site_release !== '0.4.0') errors.push(`WBML manifest site_release=${manifest.site_release} expected 0.4.0`);
+    if (!Array.isArray(manifest.suites) || manifest.suites.length !== 8) errors.push('WBML manifest must contain eight canonical suites (0200–0900)');
     for (const suite of manifest.suites || []) {
       const dataPath = path.join(publicRoot, suite.machine_data || '');
       const evidencePath = path.join(publicRoot, suite.evidence || '');

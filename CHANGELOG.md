@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0 — WBML 1.0 Frozen Knowledge Baseline
+- Integrated canonical WBML 0.7.0 Persistence & Identity, WBML 0.8.0-fix1 World/Game/Integration, and WBML 0.9.0 Coverage Closure & Full Architecture Torture.
+- Froze systematic research for WorldBox 0.51.2 build 719 + NeoModLoader 1.2.0.1 until the game/loader changes or a direct contradiction to the baseline is found.
+- Added exact save/reload identity evidence for Actor, City, Kingdom and Building, including same-ID reference replacement and verified scalar persistence/rollback behavior.
+- Added UI/input, NML surface, Harmony ordering/ownership/cleanup and cross-mod coexistence evidence with Political World, Scenario Tools and Custom Worldsize.
+- Added the final closure census and integrated stress run: 15/15 core types, 18,625 methods, 19,200 stress reads with 0 failures, one rollback-only save/reload, preserved UI/mod/Harmony state and 0 WBML-captured runtime exceptions.
+- Published canonical 0.7–0.9 machine JSON, sanitized evidence, a `1000-practical-modding-baseline.json` consolidation record, and updated EN/RU Research, Detailed, Quick and AI layers.
+- WBML 1.0 is a publication/consolidation milestone, not a new runtime experiment.
+
+
 ## 0.3.0 — Evidence Architecture & WBML 0.2–0.6
 - Added the four-layer knowledge model: Quick Docs → Detailed Docs → WBML Research → Machine Data/AI.
 - Integrated canonical WBML 0.2.0-fix3, 0.3.0-fix1, 0.4.0-fix2, 0.5.0 and 0.6.0-fix5 evidence; superseded/faulty harness runs remain methodology history only.

@@ -40,3 +40,11 @@ This release turns WBML 0.2.0–0.6.0 into the agreed human + machine knowledge 
 ## Release rule
 
 Frontend bugs do not rewrite WBML conclusions. Ship a site hotfix if needed; keep canonical runtime evidence immutable unless a new research run supersedes it.
+
+
+## v0.4.0 / WBML 1.0 frozen baseline
+- [ ] Canonical 0700/0800/0900 JSON and sanitized evidence are present.
+- [ ] manifest.json passes LF-normalized integrity checks for eight canonical suites.
+- [ ] 1000-practical-modding-baseline.json is present and marked consolidation, not runtime suite.
+- [ ] EN/RU Research, Detailed, Quick and AI pages remain in parity.
+- [ ] `npm run audit` and `npm run build` pass before deployment.

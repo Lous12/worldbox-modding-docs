@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "name": "WorldBox Modding Docs — canonical WBML machine manifest",
-  "site_release": "0.3.0",
+  "site_release": "0.4.0",
   "baseline": {
     "worldbox": "0.51.2",
     "worldbox_build": 719,
@@ -15,8 +15,9 @@
     "quick_docs_must_not_widen_deep_docs": true,
     "rejected_methodology_is_not_public_capability_truth": true,
     "unknowns_must_remain_explicit": true,
-    "batch_cadence": "documentation may land in batches after 2–3 WBML research versions; this batch covers 0.2.0 through 0.6.0",
-    "integrity_normalization": "For text artifacts, manifest byte counts and SHA-256 values are computed after normalizing CRLF/CR line endings to LF. This keeps integrity checks stable across Git and Windows/Linux checkouts."
+    "batch_cadence": "final current-runtime publication batch integrates WBML 0.7.0 through 0.9.0 and freezes WBML 1.0 for WorldBox 0.51.2 / NML 1.2.0.1",
+    "integrity_normalization": "For text artifacts, manifest byte counts and SHA-256 values are computed after normalizing CRLF/CR line endings to LF. This keeps integrity checks stable across Git and Windows/Linux checkouts.",
+    "freeze_rule": "Re-open systematic WBML only after WorldBox/NML changes or a direct contradiction to the frozen baseline."
   },
   "suites": [
     {
@@ -187,6 +188,101 @@
       "machine_data_sha256": "adf3050b7fa304d4f428e438b528f18098b1ea607a400513504211854e1cc73e",
       "evidence_bytes": 1122,
       "evidence_sha256": "6d051ecfb405f062efa59ffbf708faaf5b476bfd48f557345afcb7c53c69700c"
+    },
+    {
+      "suite": "WBML-0700",
+      "research_version": "0.7.0",
+      "title": "Persistence & Identity Mega Atlas",
+      "canonical_probe": "0.7.0",
+      "run": "26b9fe649e5c",
+      "schema": 1,
+      "status": "CLOSED PASS",
+      "assertions": {
+        "pass": 49,
+        "fail": 0,
+        "skip": 0
+      },
+      "gates": [
+        "P",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "machine_data": "data/wbml/0700-persistence-identity-atlas.json",
+      "evidence": "evidence/wbml-0700-result.txt",
+      "research_route": "research/wbml-0700-persistence-identity/",
+      "noncanonical_runs": [],
+      "machine_data_bytes": 9035,
+      "machine_data_sha256": "725089340ce266165abf5ee5315a5a92867b950f7790e4cc5df477a6513ae4b3",
+      "evidence_bytes": 1066,
+      "evidence_sha256": "607155370fdc5f8177c86ea3e8d95a5c37e46cd2cd2e4492ba412daa9313009b"
+    },
+    {
+      "suite": "WBML-0800",
+      "research_version": "0.8.0",
+      "title": "World, Game & Integration Mega Atlas",
+      "canonical_probe": "0.8.0-fix1",
+      "run": "8ee7367799c0",
+      "schema": 1,
+      "status": "CLOSED PASS",
+      "assertions": {
+        "pass": 46,
+        "fail": 0,
+        "skip": 0
+      },
+      "gates": [
+        "P",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "machine_data": "data/wbml/0800-world-game-integration-atlas.json",
+      "evidence": "evidence/wbml-0800-result.txt",
+      "research_route": "research/wbml-0800-world-game-integration/",
+      "noncanonical_runs": [
+        "0.8.0"
+      ],
+      "machine_data_bytes": 9619,
+      "machine_data_sha256": "c6ecf0cbaff5c4672e3c27bb0117cd8b8d7009157a0b2328f71b1d097a5692c9",
+      "evidence_bytes": 1290,
+      "evidence_sha256": "31c7515f1c894be7a5d1345389b3438a8e3042c0124418c570576a4eab3869d5"
+    },
+    {
+      "suite": "WBML-0900",
+      "research_version": "0.9.0",
+      "title": "Coverage Closure & Full Architecture Torture",
+      "canonical_probe": "0.9.0",
+      "run": "dd7179d925a4",
+      "schema": 1,
+      "status": "CLOSED PASS",
+      "assertions": {
+        "pass": 40,
+        "fail": 0,
+        "skip": 0
+      },
+      "gates": [
+        "P",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "machine_data": "data/wbml/0900-coverage-closure-atlas.json",
+      "evidence": "evidence/wbml-0900-result.txt",
+      "research_route": "research/wbml-0900-coverage-closure/",
+      "noncanonical_runs": [],
+      "machine_data_bytes": 3051,
+      "machine_data_sha256": "b8cbc83b3c82e1eafd238a0eb6756557c13d4be706bdee78ae53cfa9398fefe4",
+      "evidence_bytes": 1314,
+      "evidence_sha256": "118110f4515a3df649bfac98d1a51b6840a98785e852fcf8b5a8b5b6d4f6f167"
     }
   ],
   "derived_files": [
@@ -207,16 +303,23 @@
     {
       "name": "llms_entry",
       "path": "llms.txt",
-      "bytes": 4001,
-      "sha256": "04e41e6d233016c235af2bdb2b347313a8c454b03fc9cf7d4bfd472622251ac7",
+      "bytes": 1223,
+      "sha256": "b7fde391efe932f868f78804c02180cc7e76e27102a0b13bcbf18b409560687e",
       "note": "Compact AI/RAG entry point."
     },
     {
       "name": "llms_full",
       "path": "llms-full.txt",
-      "bytes": 8443,
-      "sha256": "cef22b0db7fbdcc3484e016ecd159f5e92273a498339d3e0489a78ecdbc66421",
+      "bytes": 1906,
+      "sha256": "5f6f83c4f6c7fde84fe3426ec363ee31756bc383007dac0c4441eee82d44195b",
       "note": "Expanded AI/RAG evidence guide."
+    },
+    {
+      "name": "wbml_1000_frozen_baseline",
+      "path": "data/wbml/1000-practical-modding-baseline.json",
+      "bytes": 1939,
+      "sha256": "3b91fd14ebde2a7f32af54895c0f4116016b14ba4960c03f3aaf36e8b562e0dd",
+      "note": "Consolidation/freeze record. Not a runtime suite."
     }
   ]
 }

@@ -1,28 +1,21 @@
 ---
 title: Save / Load — Quick Docs
-description: Version-bound SaveManager guidance from the consolidated WBML baseline and current read atlas.
+description: Practical save/load identity and persistence rules from the frozen WBML baseline.
 ---
 
-**Status:** Tested save/reload paths exist on the 0.51.2 baseline, but 0.7.0 is still planned to deepen ID/reference/persistence integration.
+**Status:** VERIFIED on WorldBox 0.51.2 build 719 / NML 1.2.0.1 in the exact tested scopes.
 
-The consolidated WBML 0.1 baseline safely invoked the observed no-argument signatures:
+Observed callable paths include:
 
 ```text
 SaveManager.saveToCurrentPath()
 SaveManager.loadWorld()
 ```
 
-Treat those signatures as version-bound observations. Do not guess slot/path overloads or physical save paths.
+The important 0.7 result is identity: after reload, an entity may keep the same logical ID while its CLR reference is replaced. Building did this in all three tested cycles; Actor did it in two of three. City and Kingdom reused their references in that run.
 
-WBML 0.3.0 also verified read-only helpers:
+**Use IDs/durable data across load, then re-resolve live objects. Do not require object-reference equality across reload.**
 
-```csharp
-int currentSlot = SaveManager.getCurrentSlot();
-bool loadingAnimation = SaveManager.isLoadingSaveAnimationActive();
-```
+Selected `renown` probes on Actor/City/Kingdom showed exact saved persistence, unsaved rollback and cleanup restoration. That does not prove every field/property is serialized.
 
-For mod-owned Political World data, use the dedicated public storage APIs documented elsewhere rather than reconstructing raw save keys.
-
-**research-needed:** stale/reused `Actor`/`City`/`Kingdom` object identities across non-empty save/reload registries remain a named gap and are part of the deeper 0.7.0 direction.
-
-[Detailed SaveManager lifecycle](../../api/savemanager-lifecycle/) · [Save/reload baseline](../../research/save-reload-lifecycle-baseline/) · [Evidence statuses](../evidence-statuses/)
+[Full persistence details](../../api/runtime-persistence-identity/) · [WBML 0.7 evidence](../../research/wbml-0700-persistence-identity/)

@@ -1,45 +1,32 @@
 ---
 title: Research
-description: Runtime probes, hypotheses, rejected harness assumptions and canonical WBML evidence with explicit version boundaries.
+description: Runtime probes, rejected harness assumptions and the frozen canonical WBML evidence set.
 ---
 
 Research is the audit trail behind the practical docs.
 
 ```text
-question → controlled probe → raw observation → reject harness mistakes → canonical final matrix → detailed docs → quick docs → machine data
+question → controlled probe → raw observation → reject harness mistakes → canonical matrix → docs → machine data
 ```
 
-## Canonical post-baseline atlases
+## Frozen current-runtime campaign
 
-- [WBML 0.2.0 — Automatic API Atlas](./wbml-0200-automatic-api-atlas/) — canonical `0.2.0-fix3`
-- [WBML 0.3.0 — Capability Verification Atlas](./wbml-0300-capability-verification-atlas/) — canonical `0.3.0-fix1`
-- [WBML 0.4.0 — Parameterized Query Atlas](./wbml-0400-parameterized-query-atlas/) — canonical `0.4.0-fix2`
-- [WBML 0.5.0 — Safe Mutation Atlas](./wbml-0500-safe-mutation-atlas/) — canonical `0.5.0`
-- [WBML 0.6.0 — Entity Lifecycle Atlas](./wbml-0600-entity-lifecycle-atlas/) — canonical `0.6.0-fix5`
+- [WBML 0.2.0 — Automatic API Atlas](./wbml-0200-automatic-api-atlas/) — `0.2.0-fix3`
+- [WBML 0.3.0 — Capability Verification Atlas](./wbml-0300-capability-verification-atlas/) — `0.3.0-fix1`
+- [WBML 0.4.0 — Parameterized Query Atlas](./wbml-0400-parameterized-query-atlas/) — `0.4.0-fix2`
+- [WBML 0.5.0 — Safe Mutation Atlas](./wbml-0500-safe-mutation-atlas/)
+- [WBML 0.6.0 — Entity Lifecycle Atlas](./wbml-0600-entity-lifecycle-atlas/) — `0.6.0-fix5`
+- [WBML 0.7.0 — Persistence & Identity Mega Atlas](./wbml-0700-persistence-identity/)
+- [WBML 0.8.0-fix1 — World, Game & Integration Mega Atlas](./wbml-0800-world-game-integration/)
+- [WBML 0.9.0 — Coverage Closure & Full Architecture Torture](./wbml-0900-coverage-closure/)
+- [WBML 1.0 — Frozen WorldBox Modding Knowledge Baseline](./wbml-1000-frozen-baseline/)
 
-Canonical machine exports: `/worldbox-modding-docs/data/wbml/manifest.json`.
+Canonical machine manifest: `/worldbox-modding-docs/data/wbml/manifest.json`.
 
-- [WBML roadmap after 0.6.0](./wbml-roadmap/)
+[Freeze / future-update roadmap](./wbml-roadmap/)
 
-## First consolidated baseline
+## Earlier baseline
 
-- [WBML 0.1.0 — First Research Baseline](./wbml-0100-first-research-baseline/)
-- [Runtime tooling — 0.0.6–0.0.15](./runtime-tooling-baseline/)
-- [Live entities — 0.0.16–0.0.20](./live-entities-baseline/)
-- [World map — 0.0.21–0.0.23](./world-map-baseline/)
-- [Worldgen lifecycle — 0.0.24–0.0.25](./worldgen-lifecycle-baseline/)
-- [Performance & mass stress — 0.0.26–0.0.27](./performance-stress-baseline/)
-- [Cross-mod coexistence — 0.0.28](./cross-mod-coexistence-baseline/)
-- [Save/reload lifecycle — 0.0.29](./save-reload-lifecycle-baseline/)
-- [WBML-0030 — Full Integration Torture](./full-integration-torture/)
-- [Research Engine v2.1.1](./research-engine-status/)
+The 0.1 consolidated baseline and 0.0.x specialist suites remain part of the evidence archive. They are not repeated merely to refresh timestamps.
 
-## Early PoliticalWorldAPI research
-
-- [WBML-0001 — Addon Data Save/Load Probe](./addon-data-save-load-probe/)
-- [WBML-0002 — World Isolation Probe](./world-isolation-probe/)
-- [WBML-0003 — Persistence & Party Lifecycle Suite](./persistence-lifecycle-suite/)
-- [WBML-0004 — Event Bus Runtime Suite](./event-bus-runtime-suite/)
-- [WBML-0005 — Actions / Conditions / Effects Suite](./actions-conditions-effects-suite/)
-
-A failed/superseded harness can remain documented as negative knowledge. Only the named canonical run feeds the current machine atlas and public capability truth.
+A failed/superseded harness stays useful as negative methodology knowledge, but only the named canonical run feeds current public capability truth.

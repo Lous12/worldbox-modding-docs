@@ -1,47 +1,38 @@
 ---
 title: Machine data WBML
-description: Canonical WBML 0.2–0.6 JSON resources, retrieval order и правила интерпретации для ИИ.
+description: Canonical WBML 0.2–0.9 JSON resources и frozen 1.0 consolidation record.
 ---
 
-В release v0.3.0 те же canonical WBML results публикуются отдельным machine-facing слоем, чтобы assistant не реконструировал факты из случайных кусков prose.
+Machine layer зеркалит frozen current-runtime evidence и не заставляет assistant восстанавливать факты по prose.
 
 ## Retrieval order
 
-Для вопроса по WorldBox internals:
-
-1. Прочитать `/worldbox-modding-docs/data/wbml/manifest.json` — canonical run и exact tested stack.
-2. Для лёгкого discovery использовать `/worldbox-modding-docs/data/wbml/quick-capabilities.json`.
-3. Для конкретного method/result открыть полный canonical atlas.
-4. Прочитать Detailed Docs для caveats/interpretation.
-5. Если важна rejected methodology или boundary — открыть Research page.
-
-Compact index не exhaustive; при расхождении полный atlas главнее.
+1. Читать `/worldbox-modding-docs/data/wbml/manifest.json`.
+2. `quick-capabilities.json` использовать только для lightweight discovery 0.2–0.6.
+3. Для exact behavior брать matching canonical raw atlas.
+4. Для interpretation/caveats читать Detailed Docs.
+5. Для rejected methodology/boundary — Research.
+6. Для freeze policy/current campaign state — `1000-practical-modding-baseline.json`.
 
 ## Canonical raw exports
 
-| Suite | Canonical probe | Raw data |
+| Suite | Probe | Raw data |
 |---|---|---|
-| WBML-0200 | `0.2.0-fix3` | `/worldbox-modding-docs/data/wbml/0200-automatic-api-atlas.json` |
-| WBML-0300 | `0.3.0-fix1` | `/worldbox-modding-docs/data/wbml/0300-capability-verification-atlas.json` |
-| WBML-0400 | `0.4.0-fix2` | `/worldbox-modding-docs/data/wbml/0400-parameterized-query-atlas.json` |
-| WBML-0500 | `0.5.0` | `/worldbox-modding-docs/data/wbml/0500-safe-mutation-atlas.json` |
-| WBML-0600 | `0.6.0-fix5` | `/worldbox-modding-docs/data/wbml/0600-entity-lifecycle-atlas.json` |
+| WBML-0200 | `0.2.0-fix3` | `0200-automatic-api-atlas.json` |
+| WBML-0300 | `0.3.0-fix1` | `0300-capability-verification-atlas.json` |
+| WBML-0400 | `0.4.0-fix2` | `0400-parameterized-query-atlas.json` |
+| WBML-0500 | `0.5.0` | `0500-safe-mutation-atlas.json` |
+| WBML-0600 | `0.6.0-fix5` | `0600-entity-lifecycle-atlas.json` |
+| WBML-0700 | `0.7.0` | `0700-persistence-identity-atlas.json` |
+| WBML-0800 | `0.8.0-fix1` | `0800-world-game-integration-atlas.json` |
+| WBML-0900 | `0.9.0` | `0900-coverage-closure-atlas.json` |
 
-## Mandatory rules
+## Новые mandatory rules
 
-- `VERIFIED` = exact tested success, не universal semantics.
-- Сохранять `visibility`/access. Reflection success не делает internal/private member stable public API.
-- Сохранять `owner_source` и exact argument provenance.
-- Если argument unresolved — не изобретать значение.
-- `OBSERVED-THREW` описывает один exported argument set и exception.
-- `VERIFIED-REVERSIBLE` только для exact 19 transactions 0.5.
-- `VERIFIED-NONTERMINAL-WINDOW` / `VERIFIED-EMPTY-REGISTERED-WINDOW` — bounded windows, не permanent persistence.
-- `same_id_new_reference=0` — observation window, не proof «IDs никогда не reuse».
-- Superseded fixes в Research — negative methodology; они намеренно не лежат в canonical raw data.
-- Если evidence нет — `research-needed` + focused WBML probe, а не выдуманный API.
+- Same logical ID после load не гарантирует same CLR reference. Нужен re-resolve.
+- Harmony ordering/owner observations version-bound.
+- Method-family census не является safety classification.
+- `WBML 1.0 FROZEN` = systematic research закрыт для current stack, а не «каждый метод verified».
+- Broad research открывается снова только после game/NML change или direct contradiction.
 
-## Human/machine sync
-
-WBML batch интегрирован только после canonical evidence → Detailed Docs → Quick Docs → machine/AI data. Release 0.3.0 впервые полностью применяет это правило к 0.2–0.6.
-
-[Evidence model](../../api/evidence-model/) · [Research archive](../../research/) · [Quick Docs](../../quick/)
+[Evidence model](../../api/evidence-model/) · [Frozen baseline](../../research/wbml-1000-frozen-baseline/)

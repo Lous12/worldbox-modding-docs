@@ -1,30 +1,23 @@
 ---
 title: Матрица совместимости
-description: Текущая подтверждённая runtime-база WorldBox Modding Lab и PoliticalWorldAPI.
+description: Frozen runtime baseline WorldBox Modding Lab и PoliticalWorldAPI.
 ---
 
 # Матрица совместимости
 
-<div class="compat-hero"><strong>Текущая runtime-база</strong><span>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0 где применимо</span></div>
+<div class="compat-hero"><strong>Frozen runtime baseline</strong><span>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0 где применимо</span></div>
 
-| Область | Статус | Evidence |
+| Area | Status | Evidence |
 |---|---|---|
-| Kingdom typed addon data | ✅ Verified | WBML-0001 / 0002 / 0003 |
-| Cross-world isolation A → B → A → B в одном процессе | ✅ Verified | WBML-0002 |
-| Party typed data после restart | ✅ Verified | WBML-0003 |
-| Event Bus dispatch / isolation / recursion guard | ✅ Verified | WBML-0004 |
-| Actions / Conditions / Effects, executed branches | ✅ Verified | WBML-0005 |
-| Managed type/member/runtime relationship atlas | ✅ Closed Pass | WBML 0.2.0-fix3 |
-| Zero-arg read-query verification | ✅ Closed Pass | WBML 0.3.0-fix1 — 1,462 Verified |
-| Parameterized read-query verification | ✅ Closed Pass | WBML 0.4.0-fix2 — 315 Verified, 11 exact Observed-Threw |
-| Selected reversible scalar mutations | ✅ Closed Pass | WBML 0.5.0 — 19/19 Verified-Reversible |
-| Actor natural death lifecycle | ✅ Verified-Lifecycle | WBML 0.6.0-fix5 |
-| City natural destroy lifecycle | ✅ Verified-Lifecycle | WBML 0.6.0-fix5 |
-| Building после `kill()` | 🪟 Verified bounded window | registered 30 frames; не permanent claim |
-| Zero-city Kingdom после уничтожения всех cities | 🪟 Verified bounded window | registered 120 frames; не permanent claim |
-| Exact party-support mutation при 2+ active parties | 🧪 Не проверено | в ранней среде не было safe target |
-| Deep save/load ID/reference integration | 🧪 research-needed | направление WBML 0.7 |
-| Fog/visibility/camera/input integration | 🧪 research-needed | последующие dedicated WBML phases |
-| Будущие WorldBox / NML / PW API versions | 🧪 Не проверено | нужен baseline diff/re-test |
+| Managed type/member/runtime atlas | ✅ Closed Pass | WBML 0.2.0-fix3 |
+| Zero-argument queries | ✅ Closed Pass | WBML 0.3.0-fix1 |
+| Parameterized queries | ✅ Closed Pass | WBML 0.4.0-fix2 |
+| Selected reversible scalar mutations | ✅ Closed Pass | WBML 0.5.0 |
+| Actor/City lifecycle + bounded Building/Kingdom windows | ✅ / 🪟 | WBML 0.6.0-fix5 |
+| Save/load IDs, references, owner relations, scalar persistence | ✅ Closed Pass | WBML 0.7.0 |
+| UI/Input/NML/Harmony/cross-mod integration | ✅ Closed Pass | WBML 0.8.0-fix1 |
+| Current-stack closure + live stress + integrated rollback reload | ✅ Closed Pass | WBML 0.9.0 |
+| Systematic current-runtime research | 🔒 Frozen | WBML 1.0 baseline |
+| Future WorldBox/NML versions | 🧪 Нужен re-test | baseline diff после update |
 
-Зелёная строка означает **ровно tested scope**, а не «работает всегда». Bounded lifecycle windows намеренно не превращаются в permanent persistence.
+Green cell = **exact tested scope**. Frozen baseline не обещает безопасность каждого метода и идентичность будущих версий.

@@ -1,19 +1,16 @@
 ---
-title: UI — Quick Docs
-description: Current UI evidence boundary and where deeper WorldBox UI research is still needed.
+title: UI / Input — Quick Docs
+description: Practical UI, input and Harmony integration guidance from WBML 0.8/0.9.
 ---
 
-**Status:** Partial baseline; do not treat UI as fully mapped.
+**Status:** VERIFIED for the tested current runtime.
 
-The earlier WBML UI Infrastructure suite (`0.0.9-fix3`) reached an automated `126 PASS / 0 FAIL / 0 SKIP`, but its **manual Escape behavior remains an open gate** in the consolidated baseline. Later 0.2–0.6 atlases did not turn that into a universal UI/input guarantee.
+- Manual Escape keydown was received by the WBML input probe.
+- A WBML-owned UI object was created, attached to an active canvas and destroyed cleanly.
+- The 0.8 run saw 20 active canvases / 1 EventSystem; after the integrated 0.9 reload the run saw 44 canvases / 1 EventSystem. These are observations, not fixed constants.
+- 73 NML UI-related types were discovered.
+- Harmony test owners could be installed, invoked and removed without removing the three observed foreign owners.
 
-Practical rule:
+Do not treat discovery of an NML reload/listener type as proof that it is safe to mass-instantiate or force-reload live mods.
 
-- prefer already documented UI recipes where a concrete path was tested;
-- do not infer that every `Window`, input lock or cloned object has the same lifetime;
-- do not claim Escape/input integration is fully verified while the manual gate remains open;
-- deeper UI/input/game integration is planned for a later dedicated WBML phase.
-
-For Fog of War Overhaul, kingdom-view overlays, map modes, input override and camera integration are therefore **research-needed**, not pre-approved architecture.
-
-[Safe UI clone recipe](../../recipes/safe-ui-clone/) · [Runtime tooling baseline](../../research/runtime-tooling-baseline/) · [Evidence statuses](../evidence-statuses/)
+[Full integration details](../../api/runtime-game-integration/) · [WBML 0.8 evidence](../../research/wbml-0800-world-game-integration/)

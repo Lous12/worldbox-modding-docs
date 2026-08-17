@@ -1,0 +1,30 @@
+﻿{
+  "schema": 1,
+  "atlas": "coverage-closure-architecture-torture",
+  "suite": "WBML-0900",
+  "probe_version": "0.9.0",
+  "run": "dd7179d925a4",
+  "environment": {"worldbox":"0.51.2","unity":"2022.3.60f1","game_assembly":"Assembly-CSharp"},
+  "summary": {"core_types_resolved":15,"core_types_required":15,"methods":18625,"public_methods":9434,"query_like":6722,"mutation_like":5151,"lifecycle_like":460,"persistence_like":869,"worldgen_like":279,"ui_input_like":3428,"event_hook_like":307,"political_world_loaded":true,"scenario_tools_loaded":true,"custom_worldsize_loaded":true,"foreign_harmony_owners_before":3,"foreign_harmony_owners_after":3,"stress_frames":656,"stress_passes":12,"stress_reads":19200,"stress_read_failures":0,"stress_elapsed_ms":12016,"managed_bytes_before":1025429504,"managed_bytes_after":1027817472,"managed_bytes_peak":1025851392,"post_reload_canvases":44,"post_reload_event_systems":1,"post_reload_mods_preserved":true,"post_reload_harmony_preserved":true,"engine_exceptions":0},
+  "atlas_summary": "types=2905 members=38553 specializedBases=376 runtimeConcreteTypes=781 runtimeSpecializedTypes=35 runtimeMappedTypes=756 safeReads=10087 readFailures=0 relations=19446 specializedRelations=934 queue=15079",
+  "integration_summary": "gameTypes=2905 managerTypes=50 runtimeManagers=38 worldgenMethods=410 mapBox=yes worldTile=yes reads=40/fail0 canvases=0 eventSystems=0 nmlUI=73 escape=no harmonyTarget=yes harmonyCallbacks=yes harmonyCleanup=yes foreignOwners=3 nmlListeners=13 nmlReload=10 gameExceptions=0 engineExceptions=0",
+  "persistence_summary": "domains=4 scalarProbes=3 pauseGuard=yes saves=1 loads=1 reloadProofs=1 identityClassified=4 ownersPreserved=3 rollbackClassified=3 rollbackCleared=3 commitClassified=0 persistedExact=0 notPersistedExact=0 cleanupVerified=0 missingIdMisses=0 oldRefReadFailures=0 engineExceptions=0 gameExceptions=0 aborted=no operationalFailure=no",
+  "foreign_harmony_before": "fluttershy.politicalworld.politics.v1392 | humanityevolved.custom_worldsize | wbom.nml",
+  "foreign_harmony_after": "fluttershy.politicalworld.politics.v1392 | humanityevolved.custom_worldsize | wbom.nml",
+  "historical_baseline": [
+    "WBML 0.1.0 First Research Baseline CLOSED PASS",
+    "WBML 0.2.0 Automatic API Atlas CLOSED PASS",
+    "WBML 0.3.0 Capability Verification Atlas CLOSED PASS",
+    "WBML 0.4.0 Parameterized Query Atlas CLOSED PASS",
+    "WBML 0.5.0 Safe Mutation Atlas CLOSED PASS",
+    "WBML 0.6.0 Entity Lifecycle Atlas CLOSED PASS",
+    "WBML 0.7.0 Persistence & Identity Mega Atlas CLOSED PASS",
+    "WBML 0.8.0-fix1 World, Game & Integration Mega Atlas CLOSED PASS"
+  ],
+  "closure_policy": {
+    "verified": "runtime behavior with direct evidence",
+    "observed": "surface/version-bound evidence without widened guarantees",
+    "unsafe": "known destructive or corrupting routes are excluded from recipes",
+    "unknown": "only environment/platform/future-version or intentionally unrecoverable states may remain; these do not block the frozen current-runtime baseline"
+  }
+}

@@ -1,0 +1,17 @@
+WBML-0800 — World, Game & Integration Mega Atlas
+Canonical probe: 0.8.0-fix1
+Run: 8ee7367799c0
+Environment: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NML 1.2.0.1
+Result: CLOSED PASS — 46 PASS / 0 FAIL / 0 SKIP — P/A/B/C/D/E/F PASS
+
+Key evidence:
+- Manual Escape keydown observed in the controlled input window.
+- 20 active canvases and 1 EventSystem in the tested UI state; 73 NML UI-related types discovered.
+- WBML-owned UI probe was created, attached to an active canvas and destroyed cleanly.
+- World/map surface: 50 manager types, 38 runtime manager samples, 410 worldgen-like methods, 40 primitive reads / 0 failures.
+- Harmony test used two WBML owners on a read-like Actor getter; callbacks were observed in HIGH-PRE → LOW-PRE → HIGH-POST → LOW-POST order for each invocation, then WBML owners were removed.
+- Existing Harmony owners from Political World, Custom Worldsize and NML were observed without being removed.
+- NML listener/event/reload/service surfaces were discovered; live mod reload was intentionally not force-invoked.
+- Game exceptions: 0. Engine exceptions: 0.
+
+Rejected run: initial 0.8.0 produced one false UI census FAIL because the assertion ran before the census. fix1 moved the census before the assertion; no unrelated behavior was widened.

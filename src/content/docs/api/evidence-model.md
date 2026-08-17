@@ -3,7 +3,7 @@ title: WBML evidence model
 description: Source-of-truth rules for signatures, provenance, runtime results, lifecycle windows and rejected methodology.
 ---
 
-This page is the interpretation contract for the new WBML 0.2–0.6 reference pages.
+This page is the interpretation contract for the new WBML 0.2–0.9 + frozen 1.0 baseline reference pages.
 
 ## Source-of-truth order
 

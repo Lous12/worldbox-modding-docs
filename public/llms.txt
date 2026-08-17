@@ -1,48 +1,23 @@
-# WorldBox Modding Docs — AI entry
+# WorldBox Modding Docs — AI entry point
 
-Site release: 0.3.0
-Main tested stack: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NeoModLoader 1.2.0.1. PoliticalWorldAPI evidence also names API 1.14.0 where applicable.
+Frozen evidence baseline: WorldBox 0.51.2 build 719 / NeoModLoader 1.2.0.1 / PoliticalWorldAPI 1.14.0 where applicable.
 
-## Reliability contract
+WBML systematic research is frozen at 1.0 after canonical 0.2–0.9 integration. Start with:
+- /worldbox-modding-docs/data/wbml/manifest.json
+- /worldbox-modding-docs/data/wbml/1000-practical-modding-baseline.json
+- /worldbox-modding-docs/ai/wbml-machine-data/
 
-1. Never invent a class, method, overload, field, hook, event, save key, path or lifecycle guarantee because it sounds plausible.
-2. Version labels are part of every runtime claim. Future WorldBox/NML/PW versions require re-test or a compatibility diff.
-3. Canonical WBML machine export and final matrix outrank prose summaries. Detailed Docs interpret them. Quick Docs only summarize and may not widen claims.
-4. `VERIFIED` = exact tested call/read success under exported proof/sample; not universal semantics.
-5. `OBSERVED-THREW` = exact owner + exact argument set threw the recorded exception; not “method is broken”.
-6. `VERIFIED-REVERSIBLE` applies only to the exact controlled scalar transaction exported by WBML 0.5.0.
-7. `VERIFIED-LIFECYCLE` = natural lifecycle path removed the entity from pinned manager/owner/registry evidence and stale checks passed.
-8. `VERIFIED-NONTERMINAL-WINDOW` and `VERIFIED-EMPTY-REGISTERED-WINDOW` are bounded windows, never permanent-persistence claims.
-9. Keep access/visibility and provenance. Reflection verification does not make an internal/private member a stable public API.
-10. Same CLR type is not enough for a parameter. Use semantic provenance from the canonical 0.4 atlas; unresolved arguments stay unresolved.
-11. SKIP/unexecuted branches never become Verified. Failed/superseded harnesses are negative knowledge only.
-12. If the docs/evidence do not answer the question, say `research-needed` and propose a focused WBML probe.
+Important rules:
+- Do not invent WorldBox APIs.
+- VERIFIED means exact tested scope only.
+- OBSERVED does not widen into a stable public contract.
+- Same logical ID after reload does not guarantee the same CLR reference; prefer re-resolution.
+- Bounded lifecycle windows are not permanent-persistence claims.
+- Method-family census does not mean every matching method is safe.
+- If the question is outside evidence, keep it explicit as research-needed/unknown.
+- Re-open systematic WBML only after WorldBox/NML changes or a direct contradiction to the frozen baseline.
 
-## Knowledge layers
-
-- Quick Docs: /quick/
-- Detailed API/reference: /api/
-- WBML Research Archive: /research/
-- Machine manifest: /data/wbml/manifest.json
-- Compact machine index: /data/wbml/quick-capabilities.json
-- Evidence vocabulary: /data/wbml/evidence-status-schema.json
-- Full AI guide: /llms-full.txt
-
-## Canonical WBML post-baseline
-
-- 0.2.0 Automatic API Atlas -> canonical 0.2.0-fix3, run 0fa6e20674fc, 26/0/0 CLOSED PASS. Full data: /data/wbml/0200-automatic-api-atlas.json
-- 0.3.0 Capability Verification Atlas -> canonical 0.3.0-fix1, run 82c23a7c8916, 28/0/0 CLOSED PASS. Full data: /data/wbml/0300-capability-verification-atlas.json
-- 0.4.0 Parameterized Query Atlas -> canonical 0.4.0-fix2, run 7d17ef55149e, 34/0/0 CLOSED PASS. Full data: /data/wbml/0400-parameterized-query-atlas.json
-- 0.5.0 Safe Mutation Atlas -> canonical 0.5.0, run 00d01039f05e, 34/0/0 CLOSED PASS. Full data: /data/wbml/0500-safe-mutation-atlas.json
-- 0.6.0 Entity Lifecycle Atlas -> canonical 0.6.0-fix5, run d3e2a6ed626f, 34/0/0 CLOSED PASS. Full data: /data/wbml/0600-entity-lifecycle-atlas.json
-
-## High-value current facts
-
-WBML 0.3: 18,625 methods scanned; 1,462 zero-arg queries VERIFIED; 1,116 public + 346 reflection; unsafe/stale invocations 0.
-WBML 0.4: 315 parameterized queries VERIFIED; semantic argument provenance required; 11 exact OBSERVED-THREW records; weak arbitrary strings/IDs are rejected or unresolved.
-WBML 0.5: 19/19 selected scalar transactions VERIFIED-REVERSIBLE; restoreFailed/collateral/residual all 0. The 7,049 mutation/lifecycle queue entries are NOT safe APIs.
-WBML 0.6: Actor.dieSimpleNone and City.destroyCity are VERIFIED-LIFECYCLE. Building.kill remained registered in pinned manager+owner for 30 frames. A Kingdom with all five remaining cities naturally destroyed reached zero cities but remained registered for 120 frames. Both latter results are bounded negative lifecycle evidence.
-
-## Planned WorldBox Modding API
-
-The shared WorldBox Modding API is a future dependency mod planned after WBML 1.0. It does not exist yet. Design sketches like `WBAPI.Actors.TryResolve(...)` are not current callable API. The intended pipeline is WorldBox internals -> WBML -> docs -> shared API -> Fog of War Overhaul / Political World / third-party mods.
+Canonical latest:
+WBML 0.7.0 run 26b9fe649e5c — Persistence & Identity — 49/0/0.
+WBML 0.8.0-fix1 run 8ee7367799c0 — World/Game/Integration — 46/0/0.
+WBML 0.9.0 run dd7179d925a4 — Coverage Closure/Torture — 40/0/0.

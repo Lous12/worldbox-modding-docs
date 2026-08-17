@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "kind": "wbml-frozen-baseline",
+  "baseline_version": "1.0.0",
+  "status": "FROZEN",
+  "name": "WorldBox Modding Knowledge Baseline",
+  "environment": {
+    "worldbox": "0.51.2",
+    "worldbox_build": 719,
+    "unity": "2022.3.60f1",
+    "neomodloader": "1.2.0.1",
+    "political_world": "1.7.0",
+    "politicalworldapi": "1.14.0"
+  },
+  "systematic_research": "CLOSED for current runtime",
+  "canonical_latest": {
+    "persistence_identity": "WBML-0700 / 0.7.0 / 26b9fe649e5c",
+    "world_game_integration": "WBML-0800 / 0.8.0-fix1 / 8ee7367799c0",
+    "coverage_closure": "WBML-0900 / 0.9.0 / dd7179d925a4"
+  },
+  "closure": {
+    "core_types": "15/15",
+    "methods": 18625,
+    "public_methods": 9434,
+    "safe_reads_closure": 10087,
+    "safe_read_failures": 0,
+    "relations": 19446,
+    "unresolved_relations": 0,
+    "stress_frames": 656,
+    "stress_reads": 19200,
+    "stress_read_failures": 0,
+    "post_reload_canvases": 44,
+    "post_reload_event_systems": 1,
+    "foreign_harmony_owners_before": 3,
+    "foreign_harmony_owners_after": 3,
+    "wbml_engine_exceptions": 0
+  },
+  "evidence_policy": {
+    "VERIFIED": "direct runtime evidence in exact tested scope",
+    "OBSERVED": "version-bound surface/behavior without widened guarantee",
+    "UNSAFE": "known destructive/corrupting route excluded from recipes",
+    "UNKNOWN": "environment/platform/future-version or intentionally unrecoverable boundary; does not keep current-runtime campaign open"
+  },
+  "freeze_rule": [
+    "WorldBox version/build changes",
+    "NeoModLoader version changes",
+    "direct contradiction to the frozen baseline"
+  ],
+  "not_claimed": [
+    "every method is safe",
+    "every method was invoked",
+    "future WorldBox/NML versions behave the same",
+    "bounded lifecycle observations are permanent"
+  ],
+  "next_mode": "Use the frozen baseline for real mod development. Re-open WBML only on a freeze-rule trigger."
+}
