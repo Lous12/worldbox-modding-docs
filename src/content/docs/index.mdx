@@ -27,6 +27,19 @@ You do not need to know WorldBox internals before you begin. Pick what you want 
   <span><b>RUN</b> Runtime-tested where possible</span><span><b>?</b> Unknowns stay marked</span><span><b>LOCAL</b> Browser tools do not need file upload</span><span><b>EN/RU</b> Two full language versions</span>
 </div>
 
+## One fact, four useful layers
+
+The WBML knowledge base is now published as one connected chain. Use only as much depth as you need:
+
+<div class="quick-link-row" aria-label="Knowledge layers">
+  <a href="./quick/"><span>QUICK</span>Fast entity/task answer</a>
+  <a href="./api/"><span>DEEP</span>Signature + provenance + caveat</a>
+  <a href="./research/"><span>WBML</span>Experiment + rejected assumptions</a>
+  <a href="./ai/wbml-machine-data/"><span>DATA</span>Canonical JSON for tools/AI</a>
+</div>
+
+Quick Docs may simplify the route, but they never override Detailed Docs or canonical machine evidence. The current integrated batch covers **WBML 0.2.0 through 0.6.0**.
+
 ## Where do you want to start?
 
 <div class="entry-grid illustrated-entry-grid">
@@ -55,17 +68,17 @@ You do not need to know WorldBox internals before you begin. Pick what you want 
   <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/political-world.png" /></span><div><strong>Build a Political World addon</strong><p>Use the API surface already tested by WorldBox Modding Lab instead of guessing from stale source.</p></div><span class="goal-arrow">→</span></a>
   <a class="goal-card" href="./recipes/safe-ui-clone/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/ui.png" /></span><div><strong>Work with UI</strong><p>Start from a real crash and the safer cloning order that actually worked.</p></div><span class="goal-arrow">→</span></a>
   <a class="goal-card" href="./recipes/worldtile-height/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/worldgen.png" /></span><div><strong>Work with the world</strong><p>Use verified terrain-height findings and follow world-generation research as it expands.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./recipes/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/recipes.png" /></span><div><strong>Find a practical recipe</strong><p>Search by what you want to achieve, not by a method name you do not know yet.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./quick/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/recipes.png" /></span><div><strong>Look up a WorldBox entity</strong><p>Start with Actor, City, Kingdom, Building or WorldTile Quick Docs, then drill into the evidence only if needed.</p></div><span class="goal-arrow">→</span></a>
 </div>
 
 <div class="quick-link-row" aria-label="Quick links">
-  <a href="./api/politicalworld-event-bus/"><span>EVENT</span>Political events</a>
+  <a href="./quick/actors/"><span>ACTOR</span>Runtime entity reference</a>
   <a href="./workbench/log-analyzer/"><span>LOG</span>Read Player.log</a>
   <a href="./workbench/api-explorer/"><span>API</span>Search API behavior</a>
   <a href="./workbench/compatibility/"><span>VER</span>Check compatibility</a>
 </div>
 
-<div class="not-sure-card illustrated-callout"><div><span class="callout-art"><HomeIllustration src="icons/home/recipes.png" /></span><strong>Know the result, but not the method name?</strong><p>Use Recipes. They are organized around tasks instead of API names.</p></div><a class="wb-button" href="./recipes/">Open Recipes →</a></div>
+<div class="not-sure-card illustrated-callout"><div><span class="callout-art"><HomeIllustration src="icons/home/recipes.png" /></span><strong>Know the result, but not the method name?</strong><p>Use Recipes or Quick Docs. Both are organized around tasks/entities instead of requiring exact API names first.</p></div><a class="wb-button" href="./quick/">Open Quick Docs →</a></div>
 
 ## Tools
 
@@ -74,7 +87,7 @@ You do not need to know WorldBox internals before you begin. Pick what you want 
 <div class="workbench-launch-grid compact text-tool-grid">
   <a class="launch-card" href="./workbench/log-analyzer/"><span class="tool-symbol">LOG</span><strong>Player.log Analyzer</strong><p>Extract versions, loaded mods and known error signatures locally in the browser.</p></a>
   <a class="launch-card" href="./workbench/mod-generator/"><span class="tool-symbol">MOD</span><strong>Mod Generator</strong><p>Generate a minimal NeoModLoader or Political World addon skeleton.</p></a>
-  <a class="launch-card" href="./workbench/api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Search verified behavior by task, keyword or subsystem.</p></a>
+  <a class="launch-card" href="./workbench/api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Search PoliticalWorldAPI plus selected canonical WorldBox/WBML behavior by task or subsystem.</p></a>
   <a class="launch-card" href="./workbench/compatibility/"><span class="tool-symbol">VER</span><strong>Compatibility</strong><p>See exactly which versions and branches the evidence covers.</p></a>
 </div>
 
@@ -92,12 +105,12 @@ You do not need to know WorldBox internals before you begin. Pick what you want 
 <div class="friendly-status-row">
   <span class="friendly-status verified"><b>VERIFIED</b><strong>Reproduced at runtime</strong></span>
   <span class="friendly-status observed"><b>OBSERVED</b><strong>Seen, not fully explained</strong></span>
-  <span class="friendly-status experimental"><b>TESTING</b><strong>Still being tested</strong></span>
+  <span class="friendly-status experimental"><b>TESTING</b><strong>Still being tested / research-needed</strong></span>
 </div>
 
-<p class="small-center">Current main research baseline: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</strong>. <a href="./workbench/compatibility/">See the compatibility matrix →</a></p>
+<p class="small-center">Current main research baseline: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0 where applicable</strong>. Canonical WorldBox atlases are integrated through <strong>WBML 0.6.0</strong>. <a href="./workbench/compatibility/">See the compatibility matrix →</a></p>
 
-<div class="research-door"><div><span class="research-code">WBML</span><div><strong>Need proof, not just an example?</strong><p>Open the experiments, failed hypotheses, case studies and sanitized runtime evidence behind the beginner-facing conclusions.</p></div></div><a href="./research/">Open Research →</a></div>
+<div class="research-door"><div><span class="research-code">WBML</span><div><strong>Need proof, not just an example?</strong><p>Open final matrices, rejected harness assumptions, canonical machine data and the exact runtime evidence behind the quick answer.</p></div></div><a href="./research/">Open Research →</a></div>
 
 <div class="support-block support-late">
   <div>

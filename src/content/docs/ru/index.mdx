@@ -27,6 +27,19 @@ import HomeIllustration from '../../../components/HomeIllustration.astro';
   <span><b>RUN</b> Где можно — проверяем в runtime</span><span><b>?</b> Неизвестное остаётся отмеченным</span><span><b>LOCAL</b> Браузерные инструменты работают без загрузки файла</span><span><b>RU/EN</b> Две полноценные версии</span>
 </div>
 
+## Один факт — четыре полезных слоя
+
+Теперь WBML knowledge base публикуется одной связанной цепочкой. Открывай ровно столько глубины, сколько нужно:
+
+<div class="quick-link-row" aria-label="Слои знаний">
+  <a href="./quick/"><span>QUICK</span>Короткий ответ по entity/task</a>
+  <a href="./api/"><span>DEEP</span>Signature + provenance + caveat</a>
+  <a href="./research/"><span>WBML</span>Эксперимент + rejected assumptions</a>
+  <a href="./ai/wbml-machine-data/"><span>DATA</span>Canonical JSON для tools/AI</a>
+</div>
+
+Quick Docs могут сокращать путь, но не имеют права спорить с Detailed Docs или canonical machine evidence. Текущий полностью интегрированный batch покрывает **WBML 0.2.0–0.6.0**.
+
 ## С чего ты хочешь начать?
 
 <div class="entry-grid illustrated-entry-grid">
@@ -55,17 +68,17 @@ import HomeIllustration from '../../../components/HomeIllustration.astro';
   <a class="goal-card" href="./guides/politicalworldapi-runtime-baseline/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/political-world.png" /></span><div><strong>Сделать addon для Political World</strong><p>Используй поверхность API, которую WorldBox Modding Lab уже проверил, а не старые догадки.</p></div><span class="goal-arrow">→</span></a>
   <a class="goal-card" href="./recipes/safe-ui-clone/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/ui.png" /></span><div><strong>Работать с UI</strong><p>Начни с реального падения TerraForge и более безопасного порядка клонирования.</p></div><span class="goal-arrow">→</span></a>
   <a class="goal-card" href="./recipes/worldtile-height/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/worldgen.png" /></span><div><strong>Работать с миром</strong><p>Используй проверенные данные о высоте terrain и следи за расширением исследований генерации.</p></div><span class="goal-arrow">→</span></a>
-  <a class="goal-card" href="./recipes/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/recipes.png" /></span><div><strong>Найти практический рецепт</strong><p>Ищи по тому, что хочешь получить, а не по названию метода, которого ещё не знаешь.</p></div><span class="goal-arrow">→</span></a>
+  <a class="goal-card" href="./quick/"><span class="goal-icon goal-art"><HomeIllustration src="icons/home/recipes.png" /></span><div><strong>Быстро найти WorldBox entity</strong><p>Начни с Actor, City, Kingdom, Building или WorldTile, а глубже уходи только если нужен evidence.</p></div><span class="goal-arrow">→</span></a>
 </div>
 
 <div class="quick-link-row" aria-label="Быстрые ссылки">
-  <a href="./api/politicalworld-event-bus/"><span>EVENT</span>Политические события</a>
+  <a href="./quick/actors/"><span>ACTOR</span>Runtime entity reference</a>
   <a href="./workbench/log-analyzer/"><span>LOG</span>Разобрать Player.log</a>
   <a href="./workbench/api-explorer/"><span>API</span>Найти поведение API</a>
   <a href="./workbench/compatibility/"><span>VER</span>Проверить совместимость</a>
 </div>
 
-<div class="not-sure-card illustrated-callout"><div><span class="callout-art"><HomeIllustration src="icons/home/recipes.png" /></span><strong>Знаешь результат, но не название метода?</strong><p>Открой Рецепты. Они построены вокруг задач, а не названий API.</p></div><a class="wb-button" href="./recipes/">Открыть рецепты →</a></div>
+<div class="not-sure-card illustrated-callout"><div><span class="callout-art"><HomeIllustration src="icons/home/recipes.png" /></span><strong>Знаешь результат, но не название метода?</strong><p>Открой Рецепты или Quick Docs: они построены вокруг задач/entities, а не требования сначала знать exact API name.</p></div><a class="wb-button" href="./quick/">Открыть Quick Docs →</a></div>
 
 ## Инструменты
 
@@ -74,7 +87,7 @@ import HomeIllustration from '../../../components/HomeIllustration.astro';
 <div class="workbench-launch-grid compact text-tool-grid">
   <a class="launch-card" href="./workbench/log-analyzer/"><span class="tool-symbol">LOG</span><strong>Анализатор Player.log</strong><p>Версии, загруженные моды и известные сигнатуры ошибок — локально в браузере.</p></a>
   <a class="launch-card" href="./workbench/mod-generator/"><span class="tool-symbol">MOD</span><strong>Генератор мода</strong><p>Минимальный каркас NeoModLoader или addon для Political World.</p></a>
-  <a class="launch-card" href="./workbench/api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Ищи проверенное поведение по задаче, слову или подсистеме.</p></a>
+  <a class="launch-card" href="./workbench/api-explorer/"><span class="tool-symbol">API</span><strong>API Explorer</strong><p>Ищи PoliticalWorldAPI и selected canonical WorldBox/WBML behavior по задаче.</p></a>
   <a class="launch-card" href="./workbench/compatibility/"><span class="tool-symbol">VER</span><strong>Совместимость</strong><p>Посмотри, какие версии и ветки реально покрыты доказательствами.</p></a>
 </div>
 
@@ -92,12 +105,12 @@ import HomeIllustration from '../../../components/HomeIllustration.astro';
 <div class="friendly-status-row">
   <span class="friendly-status verified"><b>VERIFIED</b><strong>Воспроизведено в runtime</strong></span>
   <span class="friendly-status observed"><b>OBSERVED</b><strong>Увидели, но ещё не всё объяснили</strong></span>
-  <span class="friendly-status experimental"><b>TESTING</b><strong>Ещё тестируем</strong></span>
+  <span class="friendly-status experimental"><b>TESTING</b><strong>Ещё тестируем / research-needed</strong></span>
 </div>
 
-<p class="small-center">Текущий основной исследовательский стек: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</strong>. <a href="./workbench/compatibility/">Открыть матрицу совместимости →</a></p>
+<p class="small-center">Текущий основной research stack: <strong>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0 где применимо</strong>. Canonical WorldBox atlases интегрированы до <strong>WBML 0.6.0</strong>. <a href="./workbench/compatibility/">Открыть матрицу совместимости →</a></p>
 
-<div class="research-door"><div><span class="research-code">WBML</span><div><strong>Нужны доказательства, а не только пример?</strong><p>Открой эксперименты, неудачные гипотезы, case studies и санитизированный runtime evidence, на котором стоят выводы для новичков.</p></div></div><a href="./research/">Открыть исследования →</a></div>
+<div class="research-door"><div><span class="research-code">WBML</span><div><strong>Нужны доказательства, а не только пример?</strong><p>Открой final matrices, rejected harness assumptions, canonical machine data и exact runtime evidence за быстрым ответом.</p></div></div><a href="./research/">Открыть исследования →</a></div>
 
 <div class="support-block support-late">
   <div>

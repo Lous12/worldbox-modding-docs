@@ -1,0 +1,24 @@
+WorldBox Modding Lab — WBML-0600 Entity Lifecycle Atlas
+Canonical probe: 0.6.0-fix5
+Run: d3e2a6ed626f
+Environment: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NML 1.2.0.1
+
+FINAL MATRIX
+ASSERTIONS PASS=34 FAIL=0 SKIP=0
+P=PASS A=PASS B=PASS C=PASS D=PASS E=PASS F=PASS
+SUITE RESULT: PASS
+
+Canonical summary
+domainsReady=4 attempted=4 classified=4 removedVerified=2 nonTerminalWindow=2
+destroyInvoked=4 managerRemoved=2 ownerRemoved=2 stillRegistered=2
+reintroduced=0 sameIdNewReference=0 staleReadFailures=0 controlFailures=0 cleanupFailures=0
+engineExceptions=0 gameExceptions=0 aborted=no
+
+Outcomes
+Building.kill() -> VERIFIED-NONTERMINAL-WINDOW (registered for 30 frames)
+Actor.dieSimpleNone() -> VERIFIED-LIFECYCLE (50/50 stale reads)
+City.destroyCity() -> VERIFIED-LIFECYCLE (50/50 stale reads)
+all remaining victim cities destroyed -> Kingdom VERIFIED-EMPTY-REGISTERED-WINDOW (0 cities, still registered for 120 frames)
+
+Pinned provenance
+ActorManager=F:units_only_alive; CityManager=F:dict; KingdomManager=F:dict; BuildingManager=F:dict; Kingdom.cities=F:cities; City.units=P:units; City.buildings=F:buildings.

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import crypto from 'node:crypto';
 
 const cwd = process.cwd();
 const docsRoot = path.join(cwd, 'src', 'content', 'docs');
@@ -10,6 +11,7 @@ const errors = [];
 const notes = [];
 
 function walk(dir) {
+  if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const full = path.join(dir, entry.name);
     return entry.isDirectory() ? walk(full) : [full];
@@ -68,18 +70,67 @@ const ru = new Set(docs.map((f) => rel(f, path.join(docsRoot, 'ru'))).filter((r)
 for (const item of [...en].sort()) if (!ru.has(item)) errors.push(`missing RU counterpart: ${item}`);
 for (const item of [...ru].sort()) if (!en.has(item)) errors.push(`missing EN counterpart: ${item}`);
 
-const evidenceDir = path.join(publicRoot, 'evidence');
-if (fs.existsSync(evidenceDir)) {
-  const privatePatterns = [
-    /[A-Za-z]:[\\/](?:Users|SteamLibrary)[\\/]/i,
-    /steamid\s*[:=]\s*\d{12,}/i,
-    /\b765611\d{11}\b/,
-  ];
-  for (const file of walk(evidenceDir)) {
+const privatePatterns = [
+  /[A-Za-z]:[\\/](?:Users|SteamLibrary)[\\/]/i,
+  /steamid\s*[:=]\s*\d{12,}/i,
+  /\b765611\d{11}\b/,
+  /(?:^|[\s"'])\/home\//i,
+  /(?:^|[\s"'])\/Users\//i,
+  /Keskil/i,
+];
+for (const relDir of ['evidence', 'data/wbml']) {
+  const dir = path.join(publicRoot, relDir);
+  for (const file of walk(dir)) {
+    if (fs.statSync(file).isDirectory()) continue;
     const text = fs.readFileSync(file, 'utf8');
     for (const re of privatePatterns) if (re.test(text)) errors.push(`privacy check failed: ${rel(file, cwd)} matches ${re}`);
   }
 }
+
+const manifestPath = path.join(publicRoot, 'data', 'wbml', 'manifest.json');
+if (!fs.existsSync(manifestPath)) errors.push('missing public/data/wbml/manifest.json');
+else {
+  try {
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    if (manifest.site_release !== '0.3.0') errors.push(`WBML manifest site_release=${manifest.site_release} expected 0.3.0`);
+    if (!Array.isArray(manifest.suites) || manifest.suites.length !== 5) errors.push('WBML manifest must contain five canonical suites (0200–0600)');
+    for (const suite of manifest.suites || []) {
+      const dataPath = path.join(publicRoot, suite.machine_data || '');
+      const evidencePath = path.join(publicRoot, suite.evidence || '');
+      if (!fs.existsSync(dataPath)) { errors.push(`missing canonical machine data: ${suite.machine_data}`); continue; }
+      if (!fs.existsSync(evidencePath)) errors.push(`missing canonical evidence: ${suite.evidence}`);
+      try {
+        const dataBytes = fs.readFileSync(dataPath);
+        const raw = JSON.parse(dataBytes.toString('utf8').replace(/^\uFEFF/, ''));
+        for (const [field, expected] of [['suite', suite.suite], ['probe_version', suite.canonical_probe], ['run', suite.run], ['schema', suite.schema]]) {
+          if (raw[field] !== expected) errors.push(`${suite.machine_data}: ${field}=${raw[field]} expected ${expected}`);
+        }
+        if (suite.machine_data_bytes !== dataBytes.length) errors.push(`${suite.machine_data}: byte size ${dataBytes.length} expected ${suite.machine_data_bytes}`);
+        const dataHash = crypto.createHash('sha256').update(dataBytes).digest('hex');
+        if (suite.machine_data_sha256 !== dataHash) errors.push(`${suite.machine_data}: SHA-256 ${dataHash} expected ${suite.machine_data_sha256}`);
+        if (fs.existsSync(evidencePath)) {
+          const evidenceBytes = fs.readFileSync(evidencePath);
+          if (suite.evidence_bytes !== evidenceBytes.length) errors.push(`${suite.evidence}: byte size ${evidenceBytes.length} expected ${suite.evidence_bytes}`);
+          const evidenceHash = crypto.createHash('sha256').update(evidenceBytes).digest('hex');
+          if (suite.evidence_sha256 !== evidenceHash) errors.push(`${suite.evidence}: SHA-256 ${evidenceHash} expected ${suite.evidence_sha256}`);
+        }
+      } catch (error) {
+        errors.push(`${suite.machine_data}: invalid JSON or integrity metadata (${error.message})`);
+      }
+    }
+    for (const derived of manifest.derived_files || []) {
+      const derivedPath = path.join(publicRoot, derived.path || '');
+      if (!fs.existsSync(derivedPath)) { errors.push(`missing derived machine/AI file: ${derived.path}`); continue; }
+      const derivedBytes = fs.readFileSync(derivedPath);
+      if (derived.bytes !== derivedBytes.length) errors.push(`${derived.path}: byte size ${derivedBytes.length} expected ${derived.bytes}`);
+      const derivedHash = crypto.createHash('sha256').update(derivedBytes).digest('hex');
+      if (derived.sha256 !== derivedHash) errors.push(`${derived.path}: SHA-256 ${derivedHash} expected ${derived.sha256}`);
+    }
+  } catch (error) {
+    errors.push(`invalid WBML manifest JSON: ${error.message}`);
+  }
+}
+for (const name of ['llms.txt', 'llms-full.txt']) if (!fs.existsSync(path.join(publicRoot, name))) errors.push(`missing public/${name}`);
 
 const pkg = JSON.parse(fs.readFileSync(path.join(cwd, 'package.json'), 'utf8'));
 const changelog = fs.readFileSync(path.join(cwd, 'CHANGELOG.md'), 'utf8');
@@ -89,6 +140,7 @@ if (firstVersion && firstVersion !== pkg.version) errors.push(`package version $
 notes.push(`${docs.length} documentation files`);
 notes.push(`${en.size} EN + ${ru.size} RU pages`);
 notes.push(`${routes.size} routes checked`);
+notes.push('canonical WBML manifest checked');
 
 if (errors.length) {
   console.error(`Docs audit FAILED with ${errors.length} issue(s):`);

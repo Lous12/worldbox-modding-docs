@@ -1,0 +1,20 @@
+WorldBox Modding Lab — WBML-0400 Parameterized Query Atlas
+Canonical probe: 0.4.0-fix2
+Run: 7d17ef55149e
+Environment: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NML 1.2.0.1
+
+FINAL MATRIX
+ASSERTIONS PASS=34 FAIL=0 SKIP=0
+P=PASS A=PASS B=PASS C=PASS D=PASS E=PASS F=PASS
+SUITE RESULT: PASS
+
+Canonical summary
+methods=18625 parameterizedNonVoid=4291 records=1803
+ilSafe=473 ilRejected=1330 ownerResolved=382 noOwner=91
+argumentSets=326 unresolved=56 observedArgs=284 syntheticArgs=187 weakObservedRejected=223
+collectionKeysObserved=1280 collectionElementsObserved=586
+invoked=326 verified=315 observedThrew=11
+publicVerified=245 reflectionVerified=70 unsafeInvoked=0 staleInvoked=0
+stabilitySame=308 stabilityChanged=7 stabilityFailed=0 engineExceptions=0
+
+Evidence rule: OBSERVED-THREW means the exact exported argument set threw; it is not a universal claim that the method is broken.

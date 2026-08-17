@@ -1,13 +1,25 @@
 ---
 title: Исследования
-description: Runtime-probe, гипотезы, эксперименты и evidence с явными version/reliability boundaries.
+description: Runtime probes, гипотезы, rejected harness assumptions и canonical WBML evidence с явными version boundaries.
 ---
 
-Здесь находятся эксперименты для фактов, которые нельзя безопасно вывести только из названий методов или структуры source.
+Research — audit trail за практической документацией.
 
 ```text
-вопрос → controlled probe → raw observation → отбраковка harness ошибок → final matrix → version-bound docs
+вопрос → controlled probe → raw observation → отбраковка harness ошибок → canonical final matrix → detailed docs → quick docs → machine data
 ```
+
+## Canonical post-baseline atlases
+
+- [WBML 0.2.0 — Automatic API Atlas](./wbml-0200-automatic-api-atlas/) — canonical `0.2.0-fix3`
+- [WBML 0.3.0 — Capability Verification Atlas](./wbml-0300-capability-verification-atlas/) — canonical `0.3.0-fix1`
+- [WBML 0.4.0 — Parameterized Query Atlas](./wbml-0400-parameterized-query-atlas/) — canonical `0.4.0-fix2`
+- [WBML 0.5.0 — Safe Mutation Atlas](./wbml-0500-safe-mutation-atlas/) — canonical `0.5.0`
+- [WBML 0.6.0 — Entity Lifecycle Atlas](./wbml-0600-entity-lifecycle-atlas/) — canonical `0.6.0-fix5`
+
+Canonical machine exports: `/worldbox-modding-docs/data/wbml/manifest.json`.
+
+- [Roadmap WBML после 0.6.0](./wbml-roadmap/)
 
 ## Первый сводный baseline
 
@@ -30,4 +42,4 @@ description: Runtime-probe, гипотезы, эксперименты и eviden
 - [WBML-0004 — Event Bus Runtime Suite](./event-bus-runtime-suite/)
 - [WBML-0005 — Actions / Conditions / Effects Suite](./actions-conditions-effects-suite/)
 
-`PARTIAL PASS` сохраняется, если все executed assertions прошли, а SKIP названы. SKIP не превращается в Verified. Failed harness runs сохраняются как negative knowledge.
+Failed/superseded harness может оставаться negative knowledge. Только named canonical run попадает в current machine atlas и public capability truth.

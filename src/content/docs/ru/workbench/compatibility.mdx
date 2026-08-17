@@ -1,21 +1,30 @@
 ---
 title: Матрица совместимости
-description: Текущая подтверждённая runtime-база WorldBox Modding Lab.
+description: Текущая подтверждённая runtime-база WorldBox Modding Lab и PoliticalWorldAPI.
 ---
 
 # Матрица совместимости
 
-<div class="compat-hero"><strong>Текущая runtime-база</strong><span>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0</span></div>
+<div class="compat-hero"><strong>Текущая runtime-база</strong><span>WorldBox 0.51.2 build 719 · NeoModLoader 1.2.0.1 · PoliticalWorldAPI 1.14.0 где применимо</span></div>
 
-| Область | Статус | Доказательство |
+| Область | Статус | Evidence |
 |---|---|---|
 | Kingdom typed addon data | ✅ Verified | WBML-0001 / 0002 / 0003 |
-| Cross-world isolation в A → B → A → B в одном процессе | ✅ Verified | WBML-0002 |
-| Party typed data после полного restart | ✅ Verified | WBML-0003 |
-| Party deactivate → чтение данных → reactivate | ✅ Verified | WBML-0003 |
+| Cross-world isolation A → B → A → B в одном процессе | ✅ Verified | WBML-0002 |
+| Party typed data после restart | ✅ Verified | WBML-0003 |
 | Event Bus dispatch / isolation / recursion guard | ✅ Verified | WBML-0004 |
-| Actions / Conditions / Effects, выполненные ветки | ✅ Verified | WBML-0005 |
-| Exact party-support mutation при 2+ активных партиях | 🧪 Не проверено | В тестовом мире не было безопасной цели |
-| Будущие версии WorldBox / NML / PW API | 🧪 Не проверено | Нужен повторный прогон |
+| Actions / Conditions / Effects, executed branches | ✅ Verified | WBML-0005 |
+| Managed type/member/runtime relationship atlas | ✅ Closed Pass | WBML 0.2.0-fix3 |
+| Zero-arg read-query verification | ✅ Closed Pass | WBML 0.3.0-fix1 — 1,462 Verified |
+| Parameterized read-query verification | ✅ Closed Pass | WBML 0.4.0-fix2 — 315 Verified, 11 exact Observed-Threw |
+| Selected reversible scalar mutations | ✅ Closed Pass | WBML 0.5.0 — 19/19 Verified-Reversible |
+| Actor natural death lifecycle | ✅ Verified-Lifecycle | WBML 0.6.0-fix5 |
+| City natural destroy lifecycle | ✅ Verified-Lifecycle | WBML 0.6.0-fix5 |
+| Building после `kill()` | 🪟 Verified bounded window | registered 30 frames; не permanent claim |
+| Zero-city Kingdom после уничтожения всех cities | 🪟 Verified bounded window | registered 120 frames; не permanent claim |
+| Exact party-support mutation при 2+ active parties | 🧪 Не проверено | в ранней среде не было safe target |
+| Deep save/load ID/reference integration | 🧪 research-needed | направление WBML 0.7 |
+| Fog/visibility/camera/input integration | 🧪 research-needed | последующие dedicated WBML phases |
+| Будущие WorldBox / NML / PW API versions | 🧪 Не проверено | нужен baseline diff/re-test |
 
-Зелёная строка означает **ровно проверенный scope**, а не «будет работать всегда на любой версии».
+Зелёная строка означает **ровно tested scope**, а не «работает всегда». Bounded lifecycle windows намеренно не превращаются в permanent persistence.

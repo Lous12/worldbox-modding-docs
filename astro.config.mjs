@@ -12,78 +12,30 @@ export default defineConfig({
       favicon: '/worldbox-modding-docs/favicon.svg',
       defaultLocale: 'root',
       locales: {
-        root: {
-          label: 'English',
-          lang: 'en',
-        },
-        ru: {
-          label: 'Русский',
-          lang: 'ru',
-        },
+        root: { label: 'English', lang: 'en' },
+        ru: { label: 'Русский', lang: 'ru' },
       },
       social: [
-        {
-          icon: 'github',
-          label: 'GitHub',
-          href: 'https://github.com/Lous12/worldbox-modding-docs',
-        },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/Lous12/worldbox-modding-docs' },
       ],
-      editLink: {
-        baseUrl: 'https://github.com/Lous12/worldbox-modding-docs/edit/main/',
-      },
-      customCss: ['./src/styles/custom.css'],
+      editLink: { baseUrl: 'https://github.com/Lous12/worldbox-modding-docs/edit/main/' },
+      customCss: ['./src/styles/custom.css', './src/styles/wbml-v030.css'],
       sidebar: [
+        { label: 'Start here', translations: { ru: 'Начать здесь' }, items: [{ slug: 'getting-started' }] },
+        { label: 'Recipes', translations: { ru: 'Рецепты' }, items: [{ slug: 'recipes' }] },
+        { label: 'Quick Docs', translations: { ru: 'Быстрый справочник' }, items: [{ autogenerate: { directory: 'quick' } }] },
+        { label: 'Guides', translations: { ru: 'Гайды' }, items: [{ autogenerate: { directory: 'guides' } }] },
+        { label: 'Tools', translations: { ru: 'Инструменты' }, items: [{ autogenerate: { directory: 'workbench' } }] },
+        { label: 'Fix a problem', translations: { ru: 'Починить проблему' }, items: [{ autogenerate: { directory: 'troubleshooting' } }] },
+        { label: 'Detailed API & reference', translations: { ru: 'Подробный API и справочник' }, items: [{ autogenerate: { directory: 'api' } }] },
         {
-          label: 'Start here',
-          translations: { ru: 'Начать здесь' },
-          items: [{ slug: 'getting-started' }],
+          label: 'Research', translations: { ru: 'Исследования' },
+          items: [{ autogenerate: { directory: 'research' } }, { autogenerate: { directory: 'case-studies' } }],
         },
+        { label: 'For AI', translations: { ru: 'Для ИИ' }, items: [{ autogenerate: { directory: 'ai' } }] },
         {
-          label: 'Recipes',
-          translations: { ru: 'Рецепты' },
-          items: [{ slug: 'recipes' }],
-        },
-        {
-          label: 'Guides',
-          translations: { ru: 'Гайды' },
-          items: [{ autogenerate: { directory: 'guides' } }],
-        },
-        {
-          label: 'Tools',
-          translations: { ru: 'Инструменты' },
-          items: [{ autogenerate: { directory: 'workbench' } }],
-        },
-        {
-          label: 'Fix a problem',
-          translations: { ru: 'Починить проблему' },
-          items: [{ autogenerate: { directory: 'troubleshooting' } }],
-        },
-        {
-          label: 'API & reference',
-          translations: { ru: 'API и справочник' },
-          items: [{ autogenerate: { directory: 'api' } }],
-        },
-        {
-          label: 'Research',
-          translations: { ru: 'Исследования' },
-          items: [
-            { autogenerate: { directory: 'research' } },
-            { autogenerate: { directory: 'case-studies' } },
-          ],
-        },
-        {
-          label: 'For AI',
-          translations: { ru: 'Для ИИ' },
-          items: [{ autogenerate: { directory: 'ai' } }],
-        },
-        {
-          label: 'More',
-          translations: { ru: 'Ещё' },
-          items: [
-            { autogenerate: { directory: 'faq' } },
-            { autogenerate: { directory: 'graveyard' } },
-            { slug: 'support' },
-          ],
+          label: 'More', translations: { ru: 'Ещё' },
+          items: [{ autogenerate: { directory: 'faq' } }, { autogenerate: { directory: 'graveyard' } }, { slug: 'support' }],
         },
       ],
     }),

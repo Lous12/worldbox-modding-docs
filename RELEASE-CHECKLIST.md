@@ -1,32 +1,42 @@
-# v0.2.0 release checklist
+# v0.3.0 release checklist
 
-This checklist is intentionally split between checks that can be proved from the source tree and checks that require the deployed GitHub Pages build.
+This release turns WBML 0.2.0–0.6.0 into the agreed human + machine knowledge architecture.
 
 ## Automated/source checks
 
-- [x] `package.json` version is `0.2.0`.
-- [x] Top changelog entry is `0.2.0`.
-- [x] `npm run audit` passes.
-- [x] EN/RU documentation parity passes.
-- [x] Internal documentation routes pass the audit.
-- [x] Required `title` / `description` frontmatter passes.
-- [x] Markdown code fences are balanced.
-- [x] Referenced homepage artwork exists.
-- [x] Public evidence passes the privacy-pattern scan.
-- [x] No new npm dependency was added for the final promotion.
-- [x] No runtime/WBML evidence boundary was widened for the website release.
+- [ ] `package.json` version is `0.3.0`.
+- [ ] Top changelog entry is `0.3.0`.
+- [ ] `npm run audit` passes in the full repository.
+- [ ] EN/RU documentation parity passes.
+- [ ] Internal documentation routes pass the audit.
+- [ ] Required `title` / `description` frontmatter passes.
+- [ ] Markdown code fences are balanced.
+- [ ] Public evidence and `public/data/wbml` pass privacy-pattern scanning.
+- [ ] `public/data/wbml/manifest.json` resolves all five canonical raw atlases.
+- [ ] Manifest suite/probe/run/schema values match each raw JSON export.
+- [ ] `public/llms.txt` and `public/llms-full.txt` exist and mark the 0.2–0.6 baseline/version boundaries.
+- [ ] Quick Docs never promote OBSERVED/SKIP/UNSAFE/UNKNOWN into a stronger status.
+- [ ] 0.6.0 fix1–fix4 are mentioned only as rejected/superseded methodology, not current lifecycle truth.
+- [ ] Planned WorldBox Modding API is explicitly marked **not released / design only**.
+
+## Manual knowledge checks
+
+- [ ] Open Quick Actor → Detailed Actor → WBML-0300/0400/0600 evidence links.
+- [ ] Open Quick Kingdom and confirm the zero-city result says “120-frame bounded window”, not “persists forever”.
+- [ ] Open Quick Building and confirm `Building.kill()` is not described as immediate manager removal.
+- [ ] Open parameterized-query docs and confirm OBSERVED-THREW wording refers to the exact argument set.
+- [ ] Open Safe Mutation docs and confirm only the 19 tested scalar transactions are promoted to Verified-Reversible.
+- [ ] API Explorer shows both PoliticalWorldAPI and WorldBox/WBML entries with item-specific scope.
 
 ## After pushing to `main`
 
-- [ ] GitHub Actions completes the Astro production build.
-- [ ] GitHub Pages deployment completes successfully.
-- [ ] Open the English home page and test Start / Recipes / Tools / Troubleshooting.
-- [ ] Open `/ru/` and test the same four routes.
-- [ ] Drop a real `Player.log` into the Analyzer and confirm local analysis still runs.
-- [ ] Open the Starter Mod Generator and confirm generation/copy actions still work.
-- [ ] Test at least one narrow/mobile viewport.
-- [ ] Confirm DonationAlerts and DALink buttons point to the intended destinations.
+- [ ] GitHub Actions completes the audit + Astro production build.
+- [ ] GitHub Pages deploys successfully.
+- [ ] Test English and `/ru/` Quick Docs / Detailed API / Research / AI routes.
+- [ ] Test API Explorer search and filters on desktop + one narrow/mobile viewport.
+- [ ] Confirm machine-data URLs under `/worldbox-modding-docs/data/wbml/` load.
+- [ ] Confirm DonationAlerts and DALink remain unchanged.
 
 ## Release rule
 
-If the deployed build exposes a regression, keep the `0.2.0` evidence claims unchanged and ship a website-only `0.2.0.x` hotfix. Do not rewrite runtime conclusions to compensate for a frontend bug.
+Frontend bugs do not rewrite WBML conclusions. Ship a site hotfix if needed; keep canonical runtime evidence immutable unless a new research run supersedes it.

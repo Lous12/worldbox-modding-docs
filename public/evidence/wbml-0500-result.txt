@@ -1,0 +1,19 @@
+WorldBox Modding Lab — WBML-0500 Safe Mutation Atlas
+Canonical probe: 0.5.0
+Run: 00d01039f05e
+Environment: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NML 1.2.0.1
+
+FINAL MATRIX
+ASSERTIONS PASS=34 FAIL=0 SKIP=0
+P=PASS A=PASS B=PASS C=PASS D=PASS E=PASS F=PASS
+SUITE RESULT: PASS
+
+Canonical summary
+mutationMethods=5943 destructiveMethods=729 lifecycleMethods=377 setters=299 queue=7049
+transactionsAttempted=19 verifiedReversible=19 observedThrew=0
+restoreFailed=0 unexpectedCollateral=0 residualMutation=0
+actorVerified=8 cityVerified=6 kingdomVerified=5
+unsafeAutoInvoked=0 staleOwnerSkipped=0 engineExceptions=0
+
+Transaction contract: snapshot -> one scalar mutation -> exact delta -> restore -> residualFields=0. Unknown mutation methods were catalogued, not mass-invoked.
+Timing note: machine JSON records export=0 because export self-timing is written before the write completes; Player.log measured 59 ms. This does not affect mutation evidence.

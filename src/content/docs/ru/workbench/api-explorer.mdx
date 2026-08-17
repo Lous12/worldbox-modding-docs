@@ -1,6 +1,6 @@
 ---
 title: API Explorer
-description: Поиск подтверждённого runtime API по обычной задаче.
+description: Поиск verified PoliticalWorldAPI и canonical WorldBox/WBML runtime evidence по обычной задаче.
 ---
 import ApiExplorer from '../../../../components/workbench/ApiExplorer.astro';
 
@@ -10,4 +10,4 @@ import ApiExplorer from '../../../../components/workbench/ApiExplorer.astro';
 
 <ApiExplorer lang="ru" />
 
-Сейчас Explorer содержит runtime-базу PoliticalWorldAPI, подтверждённую до **WBML-0005**. Новые категории будут появляться по мере исследования NeoModLoader и внутренностей WorldBox.
+Explorer теперь смешивает две **явно разделённые по scope** поверхности: ранний runtime-tested PoliticalWorldAPI до **WBML-0005** и selected canonical WorldBox internals из **WBML 0.3–0.6**. У каждой записи свой evidence scope; raw/internal WorldBox evidence не выдаётся за PoliticalWorldAPI.

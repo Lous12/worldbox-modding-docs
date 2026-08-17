@@ -1,26 +1,40 @@
 ---
-title: API Reference
-description: Version-aware WorldBox, NeoModLoader and Political World API reference with explicit evidence labels.
+title: Detailed API & reference
+description: Source-of-truth WorldBox, NeoModLoader and Political World runtime reference with explicit evidence scopes.
 ---
 
-Use this section when you already know **what subsystem you need** and want the public methods, runtime behavior, limits and examples.
+Use this section when you need **technical truth rather than the shortest answer**: signatures, runtime owner/provenance, access, sample result, stability, argument semantics, lifecycle caveats and evidence links.
 
-If you are completely new, start with [Getting Started](../getting-started/) and then read the [PoliticalWorldAPI runtime baseline](../guides/politicalworldapi-runtime-baseline/).
+If you only need a fast answer, start with [Quick Docs](../quick/). If you need the experiment behind a claim, open [Research](../research/).
+
+## WorldBox runtime — canonical WBML 0.2–0.6
+
+- [WBML evidence model](./evidence-model/)
+- [Runtime capability atlases](./runtime-capability-atlas/)
+- [Parameterized Query Atlas](./runtime-parameterized-queries/)
+- [Safe Mutation Atlas](./runtime-safe-mutations/)
+- [Entity Lifecycle Atlas](./runtime-entity-lifecycle/)
+- [Actor](./runtime-actor/)
+- [City](./runtime-city/)
+- [Kingdom](./runtime-kingdom/)
+- [Building](./runtime-building/)
+- [WorldTile](./runtime-worldtile/)
+
+Full canonical JSON is published under `/worldbox-modding-docs/data/wbml/` for exhaustive lookup.
 
 ## PoliticalWorldAPI
 
 - [Addon registration](./politicalworld-addon-registration/)
 - [Addon-private kingdom data](./politicalworld-addon-private-data/)
-- [Party-private addon data](./politicalworld-party-private-data/) — WBML-0003 runtime persistence/lifecycle evidence
-- [Event Bus](./politicalworld-event-bus/) — WBML-0004 runtime dispatch evidence
-- [Actions, Conditions and Effects](./politicalworld-actions-conditions-effects/) — WBML-0005 runtime creator-stack evidence
+- [Party-private addon data](./politicalworld-party-private-data/)
+- [Event Bus](./politicalworld-event-bus/)
+- [Actions, Conditions and Effects](./politicalworld-actions-conditions-effects/)
 
-## WorldBox
+## Existing WorldBox baseline pages
 
-- [WorldTile.Height](./worldtile-height/) — terrain-height storage verified by TerraForge probe
+- [SaveManager lifecycle](./savemanager-lifecycle/)
+- [MapBox / worldgen](./mapbox-worldgen/)
+- [WorldTile.Height](./worldtile-height/)
+- [WorldTile runtime](./worldtile-runtime/)
 
-## How to read an API page
-
-Look at the status badges first. A page may contain both source-backed structure and newer runtime evidence. Version labels are part of the claim, not decoration.
-
-When an exact branch has not been tested, the page should say so instead of guessing.
+Version labels are part of the claim. A reflection-verified internal member is evidence, not automatically a stable public SDK surface.

@@ -1,0 +1,20 @@
+WorldBox Modding Lab — WBML-0200 Automatic API Atlas
+Canonical probe: 0.2.0-fix3
+Run: 0fa6e20674fc
+Environment: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NML 1.2.0.1
+
+FINAL MATRIX
+ASSERTIONS PASS=26 FAIL=0 SKIP=0
+P=PASS A=PASS B=PASS C=PASS D=PASS E=PASS
+SUITE RESULT: PASS
+
+Canonical summary
+types=2905 members=38553 typeIdCollisions=0
+runtimeReadsOk=8488 runtimeReadsFailed=0
+relations=19150 unresolvedRelationEndpoints=0
+runtimeConcreteTypes=697 runtimeSpecializedTypes=29 runtimeUnmappedTypes=0
+queue=15079 redactedRuntimeStrings=1 unsafeRuntimeSnapshots=0
+stabilitySame=4988 stabilityChanged=12 stabilityFailed=0
+typeLoaderExceptions=0 staticScanExceptions=0
+
+Scope: read-only census/relationship atlas. Discovered methods/properties/constructors were not auto-invoked.

@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "name": "WorldBox Modding Docs — canonical WBML machine manifest",
+  "site_release": "0.3.0",
+  "baseline": {
+    "worldbox": "0.51.2",
+    "worldbox_build": 719,
+    "unity": "2022.3.60f1",
+    "neomodloader": "1.2.0.1",
+    "political_world": "1.7.0",
+    "politicalworldapi": "1.14.0"
+  },
+  "policy": {
+    "canonical_only": true,
+    "quick_docs_must_not_widen_deep_docs": true,
+    "rejected_methodology_is_not_public_capability_truth": true,
+    "unknowns_must_remain_explicit": true,
+    "batch_cadence": "documentation may land in batches after 2–3 WBML research versions; this batch covers 0.2.0 through 0.6.0"
+  },
+  "suites": [
+    {
+      "suite": "WBML-0200",
+      "research_version": "0.2.0",
+      "title": "Automatic API Atlas",
+      "canonical_probe": "0.2.0-fix3",
+      "run": "0fa6e20674fc",
+      "schema": 2,
+      "status": "CLOSED PASS",
+      "assertions": {
+        "pass": 26,
+        "fail": 0,
+        "skip": 0
+      },
+      "gates": [
+        "P",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "machine_data": "data/wbml/0200-automatic-api-atlas.json",
+      "evidence": "evidence/wbml-0200-result.txt",
+      "research_route": "research/wbml-0200-automatic-api-atlas/",
+      "noncanonical_runs": [
+        "0.2.0",
+        "0.2.0-fix1",
+        "0.2.0-fix2"
+      ],
+      "machine_data_bytes": 19650915,
+      "machine_data_sha256": "700fced2ea1e7de280e4b175430aae73d54d41f30b812db86810960a91aa0108",
+      "evidence_bytes": 783,
+      "evidence_sha256": "b09c4ac62f4b6b6602a96caa4de58250a4d7cd72bf6666336cf4c7b352a35444"
+    },
+    {
+      "suite": "WBML-0300",
+      "research_version": "0.3.0",
+      "title": "Capability Verification Atlas",
+      "canonical_probe": "0.3.0-fix1",
+      "run": "82c23a7c8916",
+      "schema": 2,
+      "status": "CLOSED PASS",
+      "assertions": {
+        "pass": 28,
+        "fail": 0,
+        "skip": 0
+      },
+      "gates": [
+        "P",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "machine_data": "data/wbml/0300-capability-verification-atlas.json",
+      "evidence": "evidence/wbml-0300-result.txt",
+      "research_route": "research/wbml-0300-capability-verification-atlas/",
+      "noncanonical_runs": [
+        "0.3.0"
+      ],
+      "machine_data_bytes": 4991406,
+      "machine_data_sha256": "55f7be19cbc93c7aac71c347cba0486a0d5a11529e27e6fc065fef48864fb099",
+      "evidence_bytes": 843,
+      "evidence_sha256": "ee812a236f3ae3ffcecd7da9c25c7a547ce4959e242926e2788c02af5eb661a0"
+    },
+    {
+      "suite": "WBML-0400",
+      "research_version": "0.4.0",
+      "title": "Parameterized Query Atlas",
+      "canonical_probe": "0.4.0-fix2",
+      "run": "7d17ef55149e",
+      "schema": 3,
+      "status": "CLOSED PASS",
+      "assertions": {
+        "pass": 34,
+        "fail": 0,
+        "skip": 0
+      },
+      "gates": [
+        "P",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "machine_data": "data/wbml/0400-parameterized-query-atlas.json",
+      "evidence": "evidence/wbml-0400-result.txt",
+      "research_route": "research/wbml-0400-parameterized-query-atlas/",
+      "noncanonical_runs": [
+        "0.4.0",
+        "0.4.0-fix1"
+      ],
+      "machine_data_bytes": 2082305,
+      "machine_data_sha256": "3ef265450cfec805c683997cda2ad7a52d7136610acc7da54cae21ce79d95bbb",
+      "evidence_bytes": 892,
+      "evidence_sha256": "2a4b86b6fcbfa5b6d79f2a3ee6b120418cb5d640c79fae40afb18c4dbb4cf7d2"
+    },
+    {
+      "suite": "WBML-0500",
+      "research_version": "0.5.0",
+      "title": "Safe Mutation Atlas",
+      "canonical_probe": "0.5.0",
+      "run": "00d01039f05e",
+      "schema": 1,
+      "status": "CLOSED PASS",
+      "assertions": {
+        "pass": 34,
+        "fail": 0,
+        "skip": 0
+      },
+      "gates": [
+        "P",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "machine_data": "data/wbml/0500-safe-mutation-atlas.json",
+      "evidence": "evidence/wbml-0500-result.txt",
+      "research_route": "research/wbml-0500-safe-mutation-atlas/",
+      "noncanonical_runs": [],
+      "machine_data_bytes": 1706415,
+      "machine_data_sha256": "49bbedfd31f01038f8d1c1e77fe7f187505e3d98e24cb4d2cee32b5387016b34",
+      "evidence_bytes": 958,
+      "evidence_sha256": "181650da7db88358a348fbeab27eab985f49befeea61fdb5be0cb0aba715f5b8"
+    },
+    {
+      "suite": "WBML-0600",
+      "research_version": "0.6.0",
+      "title": "Entity Lifecycle Atlas",
+      "canonical_probe": "0.6.0-fix5",
+      "run": "d3e2a6ed626f",
+      "schema": 4,
+      "status": "CLOSED PASS",
+      "assertions": {
+        "pass": 34,
+        "fail": 0,
+        "skip": 0
+      },
+      "gates": [
+        "P",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+      ],
+      "machine_data": "data/wbml/0600-entity-lifecycle-atlas.json",
+      "evidence": "evidence/wbml-0600-result.txt",
+      "research_route": "research/wbml-0600-entity-lifecycle-atlas/",
+      "noncanonical_runs": [
+        "0.6.0",
+        "0.6.0-fix1",
+        "0.6.0-fix2",
+        "0.6.0-fix3",
+        "0.6.0-fix4"
+      ],
+      "machine_data_bytes": 3896,
+      "machine_data_sha256": "adf3050b7fa304d4f428e438b528f18098b1ea607a400513504211854e1cc73e",
+      "evidence_bytes": 1122,
+      "evidence_sha256": "6d051ecfb405f062efa59ffbf708faaf5b476bfd48f557345afcb7c53c69700c"
+    }
+  ],
+  "derived_files": [
+    {
+      "name": "quick_capabilities",
+      "path": "data/wbml/quick-capabilities.json",
+      "bytes": 33237,
+      "sha256": "424825738198b5ee3afa6e285b8437abca25f73fa288ce3642eba59cd0807fba",
+      "note": "Derived practical index; never supersedes canonical raw atlas evidence."
+    },
+    {
+      "name": "evidence_status_schema",
+      "path": "data/wbml/evidence-status-schema.json",
+      "bytes": 1998,
+      "sha256": "8a1c40d076e5c855da5a8834f9116c1761671c1721b0f83918cc15537daea7cd",
+      "note": "Shared status vocabulary for human and machine layers."
+    },
+    {
+      "name": "llms_entry",
+      "path": "llms.txt",
+      "bytes": 4001,
+      "sha256": "04e41e6d233016c235af2bdb2b347313a8c454b03fc9cf7d4bfd472622251ac7",
+      "note": "Compact AI/RAG entry point."
+    },
+    {
+      "name": "llms_full",
+      "path": "llms-full.txt",
+      "bytes": 8443,
+      "sha256": "cef22b0db7fbdcc3484e016ecd159f5e92273a498339d3e0489a78ecdbc66421",
+      "note": "Expanded AI/RAG evidence guide."
+    }
+  ]
+}

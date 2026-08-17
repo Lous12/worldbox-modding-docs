@@ -1,0 +1,17 @@
+/* v0.3.0 WBML knowledge-layer additions */
+.api-status.window {
+  border-color: color-mix(in srgb, var(--wb-info, #5ea8e8) 70%, var(--docs-border));
+  background: color-mix(in srgb, var(--wb-info, #5ea8e8) 13%, var(--docs-panel));
+}
+
+.api-status.reversible {
+  border-color: color-mix(in srgb, var(--wb-purple, #a987ea) 70%, var(--docs-border));
+  background: color-mix(in srgb, var(--wb-purple, #a987ea) 13%, var(--docs-panel));
+}
+
+@media (max-width: 40rem) {
+  .quick-link-row[aria-label="Knowledge layers"],
+  .quick-link-row[aria-label="Слои знаний"] {
+    align-items: stretch;
+  }
+}

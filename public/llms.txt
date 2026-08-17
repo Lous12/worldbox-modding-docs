@@ -1,354 +1,48 @@
-# WorldBox Modding Docs
+# WorldBox Modding Docs — AI entry
 
-> Evidence-first WorldBox and NeoModLoader documentation built from real mods, source inspection, runtime probes, logs, reproducible failures and verified research.
+Site release: 0.3.0
+Main tested stack: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NeoModLoader 1.2.0.1. PoliticalWorldAPI evidence also names API 1.14.0 where applicable.
 
-## Site/workbench release
-- WorldBox Modding Docs Workbench: 0.2.0
-- Website release stability does not widen runtime evidence. Runtime/API claims remain bound to the evidence scopes below.
+## Reliability contract
 
-## Research baseline
-- WorldBox 0.51.2 build 719
-- NeoModLoader 1.2.0.1
+1. Never invent a class, method, overload, field, hook, event, save key, path or lifecycle guarantee because it sounds plausible.
+2. Version labels are part of every runtime claim. Future WorldBox/NML/PW versions require re-test or a compatibility diff.
+3. Canonical WBML machine export and final matrix outrank prose summaries. Detailed Docs interpret them. Quick Docs only summarize and may not widen claims.
+4. `VERIFIED` = exact tested call/read success under exported proof/sample; not universal semantics.
+5. `OBSERVED-THREW` = exact owner + exact argument set threw the recorded exception; not “method is broken”.
+6. `VERIFIED-REVERSIBLE` applies only to the exact controlled scalar transaction exported by WBML 0.5.0.
+7. `VERIFIED-LIFECYCLE` = natural lifecycle path removed the entity from pinned manager/owner/registry evidence and stale checks passed.
+8. `VERIFIED-NONTERMINAL-WINDOW` and `VERIFIED-EMPTY-REGISTERED-WINDOW` are bounded windows, never permanent-persistence claims.
+9. Keep access/visibility and provenance. Reflection verification does not make an internal/private member a stable public API.
+10. Same CLR type is not enough for a parameter. Use semantic provenance from the canonical 0.4 atlas; unresolved arguments stay unresolved.
+11. SKIP/unexecuted branches never become Verified. Failed/superseded harnesses are negative knowledge only.
+12. If the docs/evidence do not answer the question, say `research-needed` and propose a focused WBML probe.
 
-## Reliability labels
-- Verified: reproduced/confirmed in the stated evidence scope.
-- Observed: seen at runtime, not fully explained.
-- Experimental: works in current tests or is a defined experiment awaiting full verification.
-- Inferred: evidence-backed conclusion without direct verification.
-- Failed: tested approach known to be wrong or broken.
-- Outdated: previously verified but not re-tested for the current target.
+## Knowledge layers
 
-## Mandatory AI rules
-1. Do not invent undocumented WorldBox, NeoModLoader or addon-framework APIs.
-2. Distinguish vanilla WorldBox API, NeoModLoader API, Political World internals and PoliticalWorldAPI.
-3. Bind claims to source snapshot, installed package or runtime version.
-4. Never merge planned features, source state and runtime state into one guessed version.
-5. Prefer runtime logs for what actually loaded.
-6. Prefer source constants/package metadata for what exists in a source snapshot.
-7. Documentation files can drift; preserve conflicting evidence scopes.
-8. Third-party Political World addons use PoliticalWorldAPI, not Main/ScenarioBridge/reflection.
-9. Current API version is not automatically the minimum API an addon should require.
-10. Optional functionality should prefer verified capability checks.
-11. Never invent capability names.
-12. For persistence, use public storage APIs; do not reconstruct internal raw save keys.
-13. Do not claim persistence is runtime-verified until a save/restart/load probe has passed.
-14. Stable persistent IDs are data compatibility, not branding.
-15. Private addon state should use addon-private storage/tags by default.
-16. Shared tags are cross-mod protocol and require intentional documented meaning.
-17. Do not remove legacy migration reads merely because newer storage exists.
-18. Prefer copy-forward migration before destructive cleanup.
-19. Treat a Lab final verdict as valid only if every required step passed; do not infer whole-experiment success from the last step.
-20. Do not widen same-process world-isolation evidence into full-restart isolation or party-private isolation.
+- Quick Docs: /quick/
+- Detailed API/reference: /api/
+- WBML Research Archive: /research/
+- Machine manifest: /data/wbml/manifest.json
+- Compact machine index: /data/wbml/quick-capabilities.json
+- Evidence vocabulary: /data/wbml/evidence-status-schema.json
+- Full AI guide: /llms-full.txt
 
-## Political World inspected source snapshot
-GitHub tree:
-ce0c91754722dd1e88e8eaf116c4c667ae020204
+## Canonical WBML post-baseline
 
-Source/package facts:
-- Political World core package: 1.7.0
-- PoliticalWorldAPI.cs ApiVersion: 1.9.0
-- CoreModId: Lous12.PoliticalWorld
-- target WorldBox build: 719
+- 0.2.0 Automatic API Atlas -> canonical 0.2.0-fix3, run 0fa6e20674fc, 26/0/0 CLOSED PASS. Full data: /data/wbml/0200-automatic-api-atlas.json
+- 0.3.0 Capability Verification Atlas -> canonical 0.3.0-fix1, run 82c23a7c8916, 28/0/0 CLOSED PASS. Full data: /data/wbml/0300-capability-verification-atlas.json
+- 0.4.0 Parameterized Query Atlas -> canonical 0.4.0-fix2, run 7d17ef55149e, 34/0/0 CLOSED PASS. Full data: /data/wbml/0400-parameterized-query-atlas.json
+- 0.5.0 Safe Mutation Atlas -> canonical 0.5.0, run 00d01039f05e, 34/0/0 CLOSED PASS. Full data: /data/wbml/0500-safe-mutation-atlas.json
+- 0.6.0 Entity Lifecycle Atlas -> canonical 0.6.0-fix5, run d3e2a6ed626f, 34/0/0 CLOSED PASS. Full data: /data/wbml/0600-entity-lifecycle-atlas.json
 
-Separate newer local runtime evidence exists for API 1.14.0.
-Do not merge that runtime version into this source snapshot.
+## High-value current facts
 
-## Addon-private kingdom data
-Public typed APIs exist for:
-- int
-- string
-- bool
-- float
+WBML 0.3: 18,625 methods scanned; 1,462 zero-arg queries VERIFIED; 1,116 public + 346 reflection; unsafe/stale invocations 0.
+WBML 0.4: 315 parameterized queries VERIFIED; semantic argument provenance required; 11 exact OBSERVED-THREW records; weak arbitrary strings/IDs are rejected or unresolved.
+WBML 0.5: 19/19 selected scalar transactions VERIFIED-REVERSIBLE; restoreFailed/collateral/residual all 0. The 7,049 mutation/lifecycle queue entries are NOT safe APIs.
+WBML 0.6: Actor.dieSimpleNone and City.destroyCity are VERIFIED-LIFECYCLE. Building.kill remained registered in pinned manager+owner for 30 frames. A Kingdom with all five remaining cities naturally destroyed reached zero cities but remained registered for 120 frames. Both latter results are bounded negative lifecycle evidence.
 
-Source implementation facts:
-- int/string route through addon-private Kingdom.data-backed helpers.
-- bool uses integer representation: false=0, true=1.
-- float uses string storage with CultureInfo.InvariantCulture.
-- float write uses ToString("R", InvariantCulture).
-- public setters require registered addon identity.
-- private-tag public API requires a registered addon.
+## Planned WorldBox Modding API
 
-## Addon-data v2 namespace
-Internal source constants:
-- legacy prefix: ukiol_api_data_
-- v2 prefix: pw_api2_data_
-
-v2 key concept:
-pw_api2_data_ + HEX(UTF8(addonId)) + "_" + HEX(UTF8(localKey))
-
-Reason:
-preserve exact identifier distinctions such as punctuation differences rather than normalizing different IDs into the same token.
-
-Do not construct these internal keys in normal addon code.
-
-## Legacy migration behavior
-For addon-private int/string reads:
-1. read v2;
-2. if missing, calculate/read API 1.1 legacy key;
-3. if legacy exists, copy value to v2;
-4. return value;
-5. keep legacy key untouched.
-
-This is source-verified lazy copy-forward migration.
-
-## Tags
-Shared kingdom tags:
-- public Get/Has/Add/RemoveKingdomTag APIs;
-- intentionally global/shared;
-- legacy storage key ukiol_api_kingdom_tags retained for compatibility.
-
-Addon-private kingdom tags:
-- public Get/Has/Add/RemoveAddonKingdomTag APIs;
-- stored inside addon-private namespace;
-- current internal local key __private_tags;
-- current internal list serialization uses '|';
-- a local private tag containing '|' is rejected.
-
-Rule:
-if another mod does not need to understand a tag, use addon-private tags.
-
-## Party-private addon state
-API 1.9 exposes:
-- Get/SetPartyInt
-- Get/SetPartyString
-- Get/SetPartyBool
-- Get/SetPartyFloat
-
-Implementation composes party identity/local key and reuses addon-private kingdom data.
-Setters verify the party exists before writing.
-
-WBML-0003 runtime 1.14.0 evidence additionally verified int/string/bool/float party values after a full process restart, missing-party getter fallbacks/setter rejection, and data availability across the tested deactivate/reactivate lifecycle. Same-kingdom party-to-party isolation remained SKIP/unverified.
-
-## Persistence verification status — WBML-0001
-Runtime Verified for the exact environment:
-- WorldBox 0.51.2 build 719
-- NeoModLoader 1.2.0.1
-- PoliticalWorldAPI 1.14.0
-- WorldBox Modding Lab 0.0.1
-
-Verified after:
-write → save → fully close process → new process → load same save → read without rewriting
-
-PASS:
-- kingdom int
-- kingdom Unicode string
-- kingdom bool
-- kingdom float
-- addon-private kingdom tag
-- shared kingdom tag
-
-Not verified by WBML-0001 itself:
-- party-private data
-- cross-world isolation (tested separately by WBML-0002)
-- language-switch round trip
-- runtime legacy-v1 → v2 migration
-- other WorldBox/NML/API versions
-
-Evidence excerpt:
-public/evidence/wbml-0001-result.txt
-
-## Stable ID migration lesson
-Political World's public identity changed to:
-Lous12.PoliticalWorld
-
-Historical ukiol_* gameplay/save IDs were intentionally retained to protect existing saves.
-New addon IDs should use modern globally unique addon namespaces; legacy IDs should not be renamed merely for branding.
-
-## World isolation verification status — WBML-0002
-Runtime Verified for the exact environment:
-- WorldBox 0.51.2 build 719
-- NeoModLoader 1.2.0.1
-- PoliticalWorldAPI 1.14.0
-- WorldBox Modding Lab 0.0.2-fix1
-
-Sequence:
-World A → World B → World A → World B
-
-Verified in the same WorldBox process:
-- World B had no current-run World A signature before B write
-- World A had no current-run World B signature on return
-- World B had no current-run World A signature on return
-- each world's marker + kingdom int/string/bool/float + addon-private/shared kingdom tags returned
-- final gate required A=PASS B=PASS C=PASS D=PASS
-
-Evidence excerpt:
-public/evidence/wbml-0002-result.txt
-
-Scope limit:
-Do not convert this into a claim about party-private isolation, full-process-restart isolation, exact physical storage, or future versions.
-
-## WorldBox Modding Lab status
-WBML-0001 — Addon Data Save/Load Probe: VERIFIED for kingdom typed data + private/shared tags after full process restart.
-WBML-0002 — World Isolation Probe: VERIFIED for the tested kingdom state across two saves in an A → B → A → B same-process sequence.
-WBML-0003 — Persistence & Party Lifecycle Suite: executed branches VERIFIED; 119 PASS / 0 FAIL / 1 SKIP.
-WBML-0004 — Event Bus Suite: VERIFIED; 68 PASS / 0 FAIL / 0 SKIP.
-WBML-0005 — Actions / Conditions / Effects Suite: executed branches VERIFIED; 90 PASS / 0 FAIL / 3 SKIP.
-
-Still open/planned:
-- same-kingdom party-to-party isolation;
-- exact party support mutation/restoration with >=2 active parties;
-- language-switch float check;
-- controlled legacy-v1 → v2 migration fixture;
-- dedicated diagnostics bookkeeping probe for same-ID action replacement history.
-
-## Project
-Repository: https://github.com/Lous12/worldbox-modding-docs
-Site: https://lous12.github.io/worldbox-modding-docs/
-
-## WBML-0003 — party persistence and lifecycle
-Runtime evidence for exact stack:
-- WorldBox 0.51.2 build 719
-- NeoModLoader 1.2.0.1
-- PoliticalWorldAPI 1.14.0
-- WorldBox Modding Lab 0.0.3-fix1
-
-Final matrix:
-- PASS=119
-- FAIL=0
-- SKIP=1
-- A/B/C/D gates PASS
-- suite PARTIAL PASS
-
-Executed runtime-verified branches:
-- party int/string/bool/float returned after full WorldBox process restart;
-- missing-party getters returned supplied fallbacks;
-- missing-party setters returned false;
-- tested party data remained readable while the safe non-ruling party was inactive;
-- reactivation restored active state;
-- kingdom restart values/tags and cross-object marker uniqueness also passed.
-
-Unverified WBML-0003 branch:
-- same-kingdom party-to-party isolation was skipped because the required second party was unavailable.
-
-AI rule:
-PARTIAL PASS promotes executed PASS assertions only. Never promote a SKIP branch.
-
-## WBML-0004 — Event Bus runtime
-Exact tested runtime: PoliticalWorldAPI 1.14.0.
-
-Final matrix:
-- PASS=68
-- FAIL=0
-- SKIP=0
-- suite PASS
-
-Runtime facts:
-- GetEventIds returned 23 IDs;
-- returned event collection passed defensive-copy test;
-- unique custom/unknown event subscription used by WBML was accepted and removable;
-- null handler was rejected;
-- duplicate exact subscription was rejected/ignored;
-- exact and wildcard subscribers received the tested rename event;
-- tested party.renamed old/new names were carried by OldValue/NewValue, while OldName/NewName were empty;
-- mutation of one subscriber's payload object did not affect the next subscriber payload;
-- a throwing callback did not stop a healthy callback;
-- diagnostics CallbackErrors incremented for the intentional exception;
-- self-unsubscribe during dispatch worked;
-- UnsubscribeAll cleanup worked;
-- recursive test dispatch requested 64 and stopped at 16; tail subscriber also received 16;
-- 100 accepted test dispatches produced exactly 100 callbacks;
-- 33 ms timing is an observation, not a performance guarantee;
-- final subscriptions reached zero.
-
-Source/runtime drift rule:
-The inspected API 1.9 source snapshot is older. Do not force its unknown-event rejection assumption onto runtime 1.14.0.
-
-## WBML-0005 — Actions / Conditions / Effects runtime
-Exact tested runtime: PoliticalWorldAPI 1.14.0.
-
-Final matrix:
-- PASS=90
-- FAIL=0
-- SKIP=3
-- A/B/C/D gates PASS
-- suite PARTIAL PASS
-
-Runtime-verified executed behavior:
-- action ID ownership validation PW303;
-- missing handler validation PW304;
-- missing display text warning PW305 while otherwise valid;
-- same-ID RegisterAction was accepted and replaced the prior definition;
-- canonical definition could be re-registered after the replacement probe;
-- GetAction/GetActionsByAddon/GetActionsByCategory/addon summary integration passed;
-- ActionInfo.Enabled changed with condition state;
-- All/Any/Not combinators passed, including Any(empty)=true and Not(null)=true in the tested runtime;
-- government/ideology/current/system/stability condition helpers passed for current target state;
-- addon int/bool/private-tag conditions passed;
-- tested party conditions passed with live party re-query;
-- disabled ExecuteAction did not call the handler;
-- TryExecuteAction codes observed: action-condition-failed, ok, action-not-found, invalid-kingdom;
-- Effects.Sequence integration passed;
-- SetAddonInt, ChangeAddonInt, SetAddonBool, AddAddonTag, RemoveAddonTag passed;
-- temporary stability mutation/restoration passed;
-- temporary party radicalism mutation/restoration passed;
-- unregister paths passed and live GetActionsByAddon reached zero.
-
-Party support boundary:
-- exact support mutation/restoration was skipped in final fix4 because target had one active party;
-- earlier runtime observation on the single-active-party path normalized the lone party to 100 when a lower value was requested;
-- exact multi-party support mutation/restoration remains unverified.
-
-Diagnostics caveat:
-- after live GetActionsByAddon returned count=0, diagnostics reported Registered actions: 2 following repeated same-ID replacement history;
-- treat this as Observed bookkeeping mismatch, not proof of two live actions.
-
-## WBML methodology rules learned through 0005
-- A final verdict must depend on every required phase, not only the last step.
-- If a restart is part of the experiment, persist proof state/gates/counters needed after restart.
-- Source assumptions must become observations when newer runtime disagrees.
-- Raw payload logging should precede conclusions about an event contract.
-- Re-query live DTO/info state when the simulation may have changed it.
-- Setup and cleanup/finalizer code are part of the experiment and can invalidate evidence.
-- One causal harness mistake can create several downstream FAIL lines; fix the earliest causal error.
-- SKIP is an evidence boundary, never an implicit PASS.
-
-## WBML 0.1.0 — First Research Baseline (0.0.1 through 0.0.30)
-This is the newer consolidated baseline and supersedes the earlier `WorldBox Modding Lab status` summary for current open/closed classification. Historical WBML-0001–0005 sections remain valid only within their stated evidence scope.
-
-Canonical machine-readable catalog:
-public/data/wbml-0100-baseline.json
-
-Baseline runtime:
-- WorldBox 0.51.2 build 719
-- Unity 2022.3.60f1
-- NeoModLoader 1.2.0.1
-- ResearchEngine v2.1.1
-- Political World 1.7.0 / PoliticalWorldAPI 1.14.0
-
-Catalog counts:
-- VERIFIED: 31
-- OBSERVED: 10
-- FAILED ASSUMPTION: 6
-- UNSAFE: 4
-- UNKNOWN: 6
-
-Mandatory lifecycle rules learned after WBML-0005:
-21. Never require WorldTile or tile-array reference replacement to prove worldgen/reload completion.
-22. For generateNewMap on this baseline, finishMakingWorld + live collections + a short stability window is Verified; on_world_loaded is not a universal completion contract.
-23. Never run a rich full-map reflection scan in every wait-loop frame; chunk heavy scans and validate after completion.
-24. Lifecycle-critical coroutines must be hosted persistently when the world can be replaced.
-25. WorldTile.Height can normalize/recompute during load; exact Height equality is not a reload contract.
-26. Do not guess SaveManager paths, slots or arguments. The tested no-arg saveToCurrentPath/loadWorld signatures are version-bound observations.
-27. Unity fake-null and delayed destruction require Unity-aware liveness checks; a managed wrapper existing is not proof of current liveness.
-28. Raw AppDomain assembly-count growth is not by itself a mod conflict; inspect concrete assemblies, core type uniqueness and Harmony owners.
-29. Measured performance timings are hardware observations, not compatibility thresholds.
-30. Preserve the WBML 0.1.0 UNKNOWN list. Do not invent answers for unresolved tails.
-31. Closed suites should be baseline-diffed when WorldBox/NML changes, not silently widened to future versions.
-
-Major verified runtime facts:
-- MapBox.generateNewMap() works; finishMakingWorld completed repeated generation in the tested path.
-- Same-size worldgen and tested save/reload reused WorldTile/array/service/manager references; reuse is observed implementation behavior, not a future requirement.
-- Three sequential worldgens passed; a later combined torture passed save→reload→two worldgens.
-- WorldTile terrain/biome route: cur_tile_type → TileTypeBase.biome_asset → BiomeAsset.
-- Tested map services resolved TileZone, MapChunk and MapRegion.
-- 524,288 tile visits + 250,000 coordinate lookups + 100,000 neighbour traversals completed without detected corruption.
-- SaveManager.saveToCurrentPath() and SaveManager.loadWorld() were safely invoked on the baseline.
-- Political World + Custom Worldsize + Scenario Tools remained loaded through cross-mod and integration torture; PW startWar Harmony ownership remained intact.
-
-Open baseline tails:
-- WBML-0002 final return-to-World-B identity/signature tail (the consolidated 0.1.0 baseline keeps this UNKNOWN even though the older WBML-0002 page records a historical all-green run);
-- WBML-0003 optional unsafe branch;
-- WBML-0009 manual Escape gate;
-- Kingdom/City/Actor entity-object stale-vs-reuse across reload with non-empty registries;
-- other runtime versions until baseline diff;
-- non-default Custom Worldsize save/reload + repeated worldgen lifecycle.
+The shared WorldBox Modding API is a future dependency mod planned after WBML 1.0. It does not exist yet. Design sketches like `WBAPI.Actors.TryResolve(...)` are not current callable API. The intended pipeline is WorldBox internals -> WBML -> docs -> shared API -> Fog of War Overhaul / Political World / third-party mods.

@@ -2,57 +2,62 @@
 const { lang = 'en' } = Astro.props;
 const ru = lang === 'ru';
 const t = ru ? {
-  title: 'API Explorer', intro: 'Ищи не по названию метода, а по тому, что хочешь сделать.',
-  search: 'Например: сохранить число, событие, action, party…', all: 'Все', persistence: 'Данные', party: 'Партии', events: 'События', actions: 'Actions',
-  no: 'Ничего не найдено. Попробуй более простые слова.', verified: 'Verified', observed: 'Observed', scope: 'Проверено на', open: 'Открыть подробную страницу →',
+  title: 'API Explorer', intro: 'Ищи по задаче, а не только по exact method name.',
+  search: 'Например: возраст юнита, buildings, lifecycle, save, event…', all: 'Все', pw: 'Political World', entities: 'Сущности', world: 'Мир', lifecycle: 'Lifecycle',
+  no: 'Ничего не найдено. Попробуй более простые слова.', verified: 'Verified', observed: 'Observed', window: 'Verified window', reversible: 'Reversible', scope: 'Evidence', open: 'Открыть подробную страницу →',
   shown: 'Показано', of: 'из', clear: 'Сбросить', recipe: 'Практический рецепт →'
 } : {
-  title: 'API Explorer', intro: 'Search by what you want to do, not only by exact method names.',
-  search: 'Try: save number, event, action, party…', all: 'All', persistence: 'Data', party: 'Parties', events: 'Events', actions: 'Actions',
-  no: 'Nothing found. Try simpler words.', verified: 'Verified', observed: 'Observed', scope: 'Verified on', open: 'Open full reference →',
+  title: 'API Explorer', intro: 'Search by the job you want to do, not only by exact method names.',
+  search: 'Try: actor age, buildings, lifecycle, save, event…', all: 'All', pw: 'Political World', entities: 'Entities', world: 'World', lifecycle: 'Lifecycle',
+  no: 'Nothing found. Try simpler words.', verified: 'Verified', observed: 'Observed', window: 'Verified window', reversible: 'Reversible', scope: 'Evidence', open: 'Open full reference →',
   shown: 'Showing', of: 'of', clear: 'Reset', recipe: 'Practical recipe →'
 };
 
+const wb = 'WB 0.51.2 · NML 1.2.0.1';
+const pw = 'WB 0.51.2 · NML 1.2.0.1 · PW API 1.14.0';
 const items = [
-  {cat:'persistence', recipe:'../../recipes/save-kingdom-number/', name:'SetKingdomInt / GetKingdomInt', status:'verified', desc: ru?'Сохранить целое число за королевством. Пережило save/load и полный restart.':'Store an integer on a kingdom. Survived save/load and a full process restart.', terms:'save data integer number kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
-  {cat:'persistence', recipe:null, name:'SetKingdomString / GetKingdomString', status:'verified', desc: ru?'Строковые addon-данные королевства, включая Unicode.':'Kingdom addon string data, including Unicode.', terms:'save text string unicode kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
-  {cat:'persistence', recipe:null, name:'SetKingdomBool / GetKingdomBool', status:'verified', desc: ru?'Булевы addon-данные королевства.':'Boolean addon data on a kingdom.', terms:'save bool flag kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
-  {cat:'persistence', recipe:null, name:'SetKingdomFloat / GetKingdomFloat', status:'verified', desc: ru?'Float addon-данные королевства, подтверждённые после restart.':'Float addon data verified after restart.', terms:'save float decimal kingdom persistence', href:'../../api/politicalworld-addon-private-data/'},
-  {cat:'party', recipe:'../../recipes/store-party-data/', name:'SetPartyInt / GetPartyInt', status:'verified', desc: ru?'Хранить число за конкретной партией. Данные читались после restart и во время inactive.':'Store an integer for a party. Data was readable after restart and while inactive.', terms:'party save int data inactive restart', href:'../../api/politicalworld-party-private-data/'},
-  {cat:'party', recipe:null, name:'SetPartyString / GetPartyString', status:'verified', desc: ru?'Строковые данные партии. Missing-party getter возвращает fallback.':'Party string data. Missing-party getter returns the supplied fallback.', terms:'party save string fallback missing', href:'../../api/politicalworld-party-private-data/'},
-  {cat:'party', recipe:null, name:'SetPartyBool / GetPartyBool', status:'verified', desc: ru?'Булевы данные партии. Missing-party setter возвращает false.':'Party boolean data. Missing-party setter returns false.', terms:'party bool fallback missing', href:'../../api/politicalworld-party-private-data/'},
-  {cat:'party', recipe:null, name:'SetPartyFloat / GetPartyFloat', status:'verified', desc: ru?'Float-данные партии с проверкой restart/inactive lifecycle.':'Party float data verified across restart/inactive lifecycle.', terms:'party float restart inactive', href:'../../api/politicalworld-party-private-data/'},
-  {cat:'events', recipe:'../../recipes/subscribe-political-event/', name:'Subscribe / Unsubscribe', status:'verified', desc: ru?'Подписка на Political World Event Bus. Проверены exact/wildcard, cleanup и exception isolation.':'Political World Event Bus subscription. Exact/wildcard, cleanup and callback isolation were tested.', terms:'event subscribe callback unsubscribe wildcard', href:'../../api/politicalworld-event-bus/'},
-  {cat:'events', recipe:null, name:'GetEventIds', status:'verified', desc: ru?'Возвращает список event ID; runtime 1.14.0 показал 23 ID и defensive clone.':'Returns event IDs; runtime 1.14.0 exposed 23 IDs and a defensive clone.', terms:'events list ids discovery', href:'../../api/politicalworld-event-bus/'},
-  {cat:'events', recipe:null, name:'Custom / unknown event subscription', status:'observed', desc: ru?'Runtime 1.14.0 принял подписку на ID, отсутствующий в GetEventIds().':'Runtime 1.14.0 accepted a subscription to an ID absent from GetEventIds().', terms:'event unknown custom id subscribe', href:'../../api/politicalworld-event-bus/'},
-  {cat:'actions', recipe:'../../recipes/create-political-action/', name:'RegisterAction', status:'verified', desc: ru?'Регистрирует action. Same-ID на runtime 1.14.0 заменяет существующее определение.':'Registers an action. Same-ID registration replaces the existing definition on runtime 1.14.0.', terms:'action register duplicate same id replace upsert', href:'../../api/politicalworld-actions-conditions-effects/'},
-  {cat:'actions', recipe:'../../recipes/create-political-action/', name:'CanExecuteAction / ExecuteAction', status:'verified', desc: ru?'Проверка condition и выполнение handler для kingdom.':'Condition check and handler execution for a kingdom.', terms:'action execute condition handler can execute', href:'../../api/politicalworld-actions-conditions-effects/'},
-  {cat:'actions', recipe:'../../recipes/create-political-action/', name:'TryExecuteAction', status:'verified', desc: ru?'Выполнение с operation result/code вместо простого bool.':'Execution with an operation result/code rather than only a bool.', terms:'action execute result code try', href:'../../api/politicalworld-actions-conditions-effects/'},
-  {cat:'actions', recipe:null, name:'Conditions.All / Any / Not', status:'verified', desc: ru?'Комбинаторы условий, проверенные WBML-0005.':'Condition combinators verified by WBML-0005.', terms:'conditions all any not combinator', href:'../../api/politicalworld-actions-conditions-effects/'},
-  {cat:'actions', recipe:null, name:'Effects.Sequence', status:'verified', desc: ru?'Последовательность effects, проверенная как единый runtime-путь.':'A sequence of effects verified as one runtime path.', terms:'effects sequence action', href:'../../api/politicalworld-actions-conditions-effects/'},
-  {cat:'party', recipe:null, name:'PartySupportAtLeast', status:'verified', desc: ru?'Порог поддержки проверен на свежем live PartyInfo. Старый snapshot может устареть.':'Support threshold verified against freshly re-read PartyInfo. Old snapshots may become stale.', terms:'party support condition threshold snapshot', href:'../../api/politicalworld-actions-conditions-effects/'},
-  {cat:'party', recipe:null, name:'SetPartySupport', status:'observed', desc: ru?'Для единственной активной партии runtime нормализовал поддержку до 100. Multi-party exact mutation ещё не проверена.':'With one active party, runtime normalized support to 100. Exact multi-party mutation is still unverified.', terms:'party support setter single party 100 normalize', href:'../../api/politicalworld-actions-conditions-effects/'}
+  {cat:'pw', recipe:'../../recipes/save-kingdom-number/', name:'SetKingdomInt / GetKingdomInt', status:'verified', scope:`${pw} · WBML-0001/0003`, desc: ru?'Сохранить целое число за королевством; пережило save/load и restart в проверенном scope.':'Store an integer on a kingdom; survived save/load and restart in the tested scope.', terms:'save data integer kingdom persistence political world', href:'../../api/politicalworld-addon-private-data/'},
+  {cat:'pw', recipe:'../../recipes/store-party-data/', name:'SetPartyInt / GetPartyInt', status:'verified', scope:`${pw} · WBML-0003`, desc: ru?'Хранить число за партией; проверены restart и inactive lifecycle.':'Store an integer for a party; restart and inactive lifecycle were tested.', terms:'party save int data restart political world', href:'../../api/politicalworld-party-private-data/'},
+  {cat:'pw', recipe:'../../recipes/subscribe-political-event/', name:'Subscribe / Unsubscribe', status:'verified', scope:`${pw} · WBML-0004`, desc: ru?'Event Bus: exact/wildcard dispatch, cleanup и exception isolation.':'Event Bus exact/wildcard dispatch, cleanup and exception isolation.', terms:'event subscribe callback unsubscribe wildcard political world', href:'../../api/politicalworld-event-bus/'},
+  {cat:'pw', recipe:'../../recipes/create-political-action/', name:'RegisterAction / ExecuteAction', status:'verified', scope:`${pw} · WBML-0005`, desc: ru?'Регистрация и выполнение political actions/conditions/effects в tested branches.':'Registration and execution of political actions/conditions/effects in tested branches.', terms:'action conditions effects political world execute register', href:'../../api/politicalworld-actions-conditions-effects/'},
+
+  {cat:'entities', recipe:null, name:'Actor.getAge()', status:'verified', scope:`${wb} · WBML 0.3.0-fix1`, desc: ru?'Public zero-arg read; canonical live sample вернул 76, stability=same.':'Public zero-arg read; the canonical live sample returned 76, stability=same.', terms:'actor unit age years read', href:'../../api/runtime-actor/'},
+  {cat:'entities', recipe:null, name:'Actor.hasTrait(ActorTrait)', status:'verified', scope:`${wb} · WBML 0.4.0-fix2`, desc: ru?'Parameterized query с ActorTrait из runtime Actor.traits[].':'Parameterized query using an ActorTrait from runtime Actor.traits[].', terms:'actor trait has parameter query', href:'../../api/runtime-actor/'},
+  {cat:'entities', recipe:null, name:'City.countBuildings()', status:'verified', scope:`${wb} · WBML 0.3.0-fix1`, desc: ru?'Public City read; sample=100, owner=CityManager.dict.':'Public City read; sample=100, owner=CityManager.dict.', terms:'city buildings count read', href:'../../api/runtime-city/'},
+  {cat:'entities', recipe:null, name:'City.countBuildingsOfID("bonfire")', status:'verified', scope:`${wb} · WBML 0.4.0-fix2`, desc: ru?'ID взят из City.buildings_dict_id dictionary key; result=1.':'ID came from a City.buildings_dict_id dictionary key; result=1.', terms:'city building id bonfire count parameter', href:'../../api/runtime-city/'},
+  {cat:'entities', recipe:null, name:'Kingdom.getPopulationTotal()', status:'verified', scope:`${wb} · WBML 0.3.0-fix1`, desc: ru?'Public Kingdom read; sample=14468, stability=same.':'Public Kingdom read; sample=14468, stability=same.', terms:'kingdom population count units', href:'../../api/runtime-kingdom/'},
+  {cat:'entities', recipe:null, name:'Building.getCity()', status:'verified', scope:`${wb} · WBML 0.3.0-fix1`, desc: ru?'Public Building→City reference read.':'Public Building→City reference read.', terms:'building city owner get reference', href:'../../api/runtime-building/'},
+
+  {cat:'world', recipe:'../../recipes/worldtile-height/', name:'WorldTile.Height', status:'verified', scope:`${wb} · WBML 0.3.0-fix1`, desc: ru?'Public WorldTile height read; canonical sample=210.':'Public WorldTile height read; canonical sample=210.', terms:'world tile terrain height map', href:'../../api/runtime-worldtile/'},
+  {cat:'world', recipe:null, name:'WorldTile.hasCity() / hasBuilding()', status:'verified', scope:`${wb} · WBML 0.3.0-fix1`, desc: ru?'Read-only tile occupancy helpers; sample true/false.':'Read-only tile occupancy helpers; sample true/false.', terms:'worldtile city building occupancy map', href:'../../api/runtime-worldtile/'},
+  {cat:'world', recipe:null, name:'ZoneCalculator.getZoneByID(0)', status:'verified', scope:`${wb} · WBML 0.4.0-fix2`, desc: ru?'Zone ID 0 получен из реального _zones_dict_id dictionary key.':'Zone ID 0 came from a real _zones_dict_id dictionary key.', terms:'zone tile zone calculator id map', href:'../../api/runtime-parameterized-queries/'},
+
+  {cat:'lifecycle', recipe:null, name:'ActorData scalar transaction', status:'reversible', scope:`${wb} · WBML 0.5.0`, desc: ru?'8 selected ActorData fields дали exact delta и exact restore без residual/collateral.':'Eight selected ActorData fields produced exact delta + exact restore with no residual/collateral fields.', terms:'actor data money experience renown mutation restore reversible', href:'../../api/runtime-safe-mutations/'},
+  {cat:'lifecycle', recipe:null, name:'Actor.dieSimpleNone()', status:'verified', scope:`${wb} · WBML 0.6.0-fix5`, desc: ru?'Verified-Lifecycle: pinned manager/owner/registry cleanup + 50/50 stale reads.':'Verified-Lifecycle: pinned manager/owner/registry cleanup plus 50/50 stale reads.', terms:'actor die death lifecycle remove stale', href:'../../api/runtime-entity-lifecycle/'},
+  {cat:'lifecycle', recipe:null, name:'City.destroyCity()', status:'verified', scope:`${wb} · WBML 0.6.0-fix5`, desc: ru?'Verified-Lifecycle через CityManager F:dict и Kingdom F:cities.':'Verified-Lifecycle through CityManager F:dict and Kingdom F:cities.', terms:'city destroy lifecycle remove registry stale', href:'../../api/runtime-entity-lifecycle/'},
+  {cat:'lifecycle', recipe:null, name:'Building.kill()', status:'window', scope:`${wb} · WBML 0.6.0-fix5`, desc: ru?'Same Building оставался в pinned manager+owner 30 frames; permanent persistence не утверждается.':'The same Building remained in pinned manager+owner for 30 frames; no permanent-persistence claim.', terms:'building kill lifecycle registered window cleanup', href:'../../api/runtime-entity-lifecycle/'},
+  {cat:'lifecycle', recipe:null, name:'Zero-city Kingdom window', status:'window', scope:`${wb} · WBML 0.6.0-fix5`, desc: ru?'После удаления всех remaining cities Kingdom оставался registered с 0 cities 120 frames.':'After all remaining cities were destroyed, the Kingdom stayed registered with zero cities for 120 frames.', terms:'kingdom zero cities lifecycle registered window', href:'../../api/runtime-entity-lifecycle/'}
 ];
 ---
 
 <div class="workbench-tool api-explorer" data-api-explorer>
   <div class="tool-head tool-head-polished">
     <div class="tool-identity"><span class="tool-symbol tool-symbol-large">API</span><div><span class="tool-kicker">Workbench</span><h2>{t.title}</h2><p>{t.intro}</p></div></div>
-    <span class="verified-pill">WBML-0001 → 0005</span>
+    <span class="verified-pill">PW WBML-0001→0005 · WorldBox 0.3→0.6</span>
   </div>
   <div class="api-search-row finder-search-row"><input type="search" data-api-search placeholder={t.search} /><div class="filter-pills filter-pills-scroll" data-filters>
     <button type="button" class="filter-pill active" data-filter="all">{t.all}</button>
-    <button type="button" class="filter-pill" data-filter="persistence">{t.persistence}</button>
-    <button type="button" class="filter-pill" data-filter="party">{t.party}</button>
-    <button type="button" class="filter-pill" data-filter="events">{t.events}</button>
-    <button type="button" class="filter-pill" data-filter="actions">{t.actions}</button>
+    <button type="button" class="filter-pill" data-filter="pw">{t.pw}</button>
+    <button type="button" class="filter-pill" data-filter="entities">{t.entities}</button>
+    <button type="button" class="filter-pill" data-filter="world">{t.world}</button>
+    <button type="button" class="filter-pill" data-filter="lifecycle">{t.lifecycle}</button>
   </div></div>
   <div class="finder-summary"><span data-api-count>{t.shown} {items.length} {t.of} {items.length}</span><button type="button" class="mini-button" data-api-clear>{t.clear}</button></div>
   <div class="api-results" data-api-results>
     {items.map((item) => <article class="api-item" data-cat={item.cat} data-search={`${item.name} ${item.desc} ${item.terms}`.toLowerCase()}>
-      <div class="api-item-top"><strong>{item.name}</strong><span class={`api-status ${item.status}`}>{item.status === 'verified' ? t.verified : t.observed}</span></div>
+      <div class="api-item-top"><strong>{item.name}</strong><span class={`api-status ${item.status}`}>{item.status === 'verified' ? t.verified : item.status === 'window' ? t.window : item.status === 'reversible' ? t.reversible : t.observed}</span></div>
       <p>{item.desc}</p>
-      <div class="api-item-foot"><span>{t.scope}: WB 0.51.2 / NML 1.2.0.1 / PW API 1.14.0</span><div class="api-item-links">{item.recipe && <a class="api-recipe-link" href={item.recipe}>{t.recipe}</a>}<a href={item.href}>{t.open}</a></div></div>
+      <div class="api-item-foot"><span>{t.scope}: {item.scope}</span><div class="api-item-links">{item.recipe && <a class="api-recipe-link" href={item.recipe}>{t.recipe}</a>}<a href={item.href}>{t.open}</a></div></div>
     </article>)}
     <div class="empty-good" data-api-empty hidden>{t.no}</div>
   </div>

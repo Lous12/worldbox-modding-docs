@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "name": "WBML evidence status vocabulary",
+  "statuses": {
+    "VERIFIED": "A call/read completed successfully under the exact exported runtime sample and stated structural proof. Not a universal semantic guarantee.",
+    "OBSERVED": "Seen at runtime or in exported evidence, but not promoted to a stronger guarantee.",
+    "OBSERVED-THREW": "The exact exported invocation and argument set threw the recorded exception. It does not mean the method is universally broken.",
+    "VERIFIED-REVERSIBLE": "A controlled mutation produced the expected scalar delta and the exact original value was restored with zero residual/collateral fields in the tested transaction.",
+    "VERIFIED-LIFECYCLE": "The tested natural lifecycle path removed the entity from the pinned manager/owner/registry evidence sources and stale-reference checks passed.",
+    "VERIFIED-NONTERMINAL-WINDOW": "The lifecycle call returned, but the same entity remained registered for the bounded exported observation window without game exceptions. No permanent-persistence claim.",
+    "VERIFIED-EMPTY-REGISTERED-WINDOW": "All owned cities were removed, but the Kingdom stayed registered with zero cities for the bounded exported window without game exceptions. No permanent-persistence claim.",
+    "SKIP": "Required branch/precondition was not executed. Never promote it to Verified.",
+    "FAILED-ASSUMPTION": "A hypothesis/harness assumption was demonstrated to be wrong. Preserve as negative knowledge, not capability truth.",
+    "UNSAFE": "Known or intentionally classified as unsafe to auto-invoke in the tested research policy.",
+    "UNKNOWN": "The current baseline does not resolve the question.",
+    "research-needed": "Documentation routing label: no current canonical evidence supports a stronger claim; create a focused WBML probe instead of guessing."
+  },
+  "precedence_rule": "Detailed docs + canonical machine export are source of truth. Quick docs summarize them and must preserve caveats."
+}

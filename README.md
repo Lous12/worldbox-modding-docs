@@ -4,23 +4,44 @@ Community-driven documentation, research, examples, and troubleshooting for Worl
 
 The project is built with Astro + Starlight as a multilingual modding workbench: beginner routes, practical browser tools, searchable reference, troubleshooting, and evidence-backed research for humans and AI assistants.
 
-**Current public workbench release: v0.2.0.**
+**Current public workbench release: v0.3.0.**
+
+## Knowledge architecture
+
+The documentation now has four deliberately different layers:
+
+1. **Quick Docs** — short task/entity pages for modders who need an answer fast.
+2. **Detailed API & reference** — the source of truth for signatures, runtime owner/provenance, access, result kind/type, stability, preconditions and lifecycle caveats.
+3. **WBML Research Archive** — experiment design, rejected harness assumptions, final matrices and version-bound conclusions.
+4. **Machine Data** — canonical JSON atlases, a manifest, compact capability index, evidence vocabulary and AI-facing text resources.
+
+Rule: a Quick page may simplify navigation, but it must never erase a caveat from Detailed Docs or canonical WBML evidence.
 
 ## Current foundation
 
-- English root documentation
-- Russian localization
+- English root documentation and full Russian localization
 - Built-in full-text search
 - Practical Workbench: local Player.log Analyzer 2.0, Starter Mod Generator, API Explorer and Compatibility Matrix
-- Task-first Recipe Library with dedicated beginner-friendly step-by-step pages
-- Goal-oriented beginner home page and first-mod route
-- GitHub Pages deployment workflow
-- Dark/light theme support
-- GitHub edit links
-- Dedicated sections for research, troubleshooting, case studies, AI documentation, and failed approaches
-- Evidence-status system for verified, observed, experimental, inferred, failed, and outdated findings
-- Real research extracted from Political World and TerraForge
-- AI-facing `llms.txt`
+- Task-first Recipe Library with beginner-friendly step-by-step pages
+- Quick Docs for Actor, City, Kingdom, Building, world/tiles, save/load, UI, diplomacy and evidence status
+- Detailed WorldBox runtime reference backed by canonical WBML 0.2.0–0.6.0 results
+- WBML research archive with rejected methodology kept separate from public capability truth
+- Canonical machine-readable atlases under `public/data/wbml/`
+- AI-facing `llms.txt` and `llms-full.txt`
+- Evidence-status system for verified, observed, reversible mutation, lifecycle windows, failed assumptions, unsafe and unknown findings
+- A clearly marked **planned** WorldBox Modding API roadmap; the runtime API itself does not exist yet
+- GitHub Pages deployment workflow, dark/light theme, GitHub edit links and optional support links
+
+## Current tested research stack
+
+Main WBML 0.2.0–0.6.0 canonical evidence is bound to:
+
+- WorldBox 0.51.2 build 719
+- Unity 2022.3.60f1
+- NeoModLoader 1.2.0.1
+- Political World 1.7.0 / PoliticalWorldAPI 1.14.0 where those mods were present in the research environment
+
+A green result is not a promise for future WorldBox/NML versions. Baseline-diff or re-test when the stack changes.
 
 ## Local development
 
@@ -38,29 +59,38 @@ npm run build
 ## Repository structure
 
 ```text
-src/content/docs/       Documentation pages
-src/content/docs/ru/    Russian translations
-src/styles/             Site-specific styles
-public/                  Static files and AI-facing resources
-.github/workflows/       GitHub Pages deployment
+src/content/docs/quick/  Human quick-reference layer
+src/content/docs/api/    Detailed/source-of-truth reference
+src/content/docs/research/ WBML research archive
+src/content/docs/ai/     AI reliability and retrieval rules
+src/content/docs/ru/     Russian counterparts
+public/data/wbml/        Canonical machine-readable WBML data
+public/evidence/         Sanitized evidence excerpts
+public/llms*.txt         AI-facing entry resources
 ```
+
+## Documentation ingestion rule
+
+A WBML result is not considered fully entered into the knowledge base until:
+
+```text
+canonical evidence
+→ full result analysis
+→ Detailed Docs
+→ Quick Docs
+→ machine/AI layer
+```
+
+Documentation may be published in batches after several WBML research versions, but the human and machine layers for that batch should land together.
 
 ## Support
 
-WorldBox Modding Docs is free and open.
-
-If the documentation or research saves you time, optional support helps fund more experiments, compatibility checks and maintenance:
+WorldBox Modding Docs is free and open. Optional support can help fund more experiments, compatibility checks and maintenance:
 
 - DonationAlerts: https://www.donationalerts.com/r/lous12
 - DALink: https://dalink.to/lous12
 
 There is no paid documentation tier.
-
-## Project status
-
-v0.2.0 is the first stable Workbench baseline. The site itself is usable as a beginner/practical entry point, while the knowledge base remains an active research project expanded through source archaeology, reproducible failures, runtime probes, compatibility testing, and the WorldBox Modding Lab.
-
-A stable website release does **not** mean every WorldBox or NeoModLoader behavior is known. Unverified runtime behavior stays explicitly marked until a reproducible probe closes it.
 
 ## Documentation audit
 
@@ -70,4 +100,4 @@ Before pushing a documentation change, run:
 npm run audit
 ```
 
-The audit is dependency-free and checks EN/RU page parity, internal routes, required frontmatter, code fences, referenced homepage artwork, sanitized evidence, and version/changelog consistency. GitHub Pages runs the same audit before building the site.
+The audit checks EN/RU page parity, internal routes, required frontmatter, code fences, referenced artwork, sanitized public evidence/machine data, package/changelog version agreement and canonical WBML manifest consistency.

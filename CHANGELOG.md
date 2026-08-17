@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.0 — Evidence Architecture & WBML 0.2–0.6
+- Added the four-layer knowledge model: Quick Docs → Detailed Docs → WBML Research → Machine Data/AI.
+- Integrated canonical WBML 0.2.0-fix3, 0.3.0-fix1, 0.4.0-fix2, 0.5.0 and 0.6.0-fix5 evidence; superseded/faulty harness runs remain methodology history only.
+- Added practical Quick Docs for Actor, City, Kingdom, Building, world/tiles, save/load, UI, diplomacy and evidence statuses in EN/RU.
+- Added detailed runtime pages with exact signatures, runtime owner/provenance, access, samples, stability, parameter provenance, safe scalar mutations and entity lifecycle boundaries.
+- Published full canonical machine JSON atlases under `public/data/wbml/`, plus manifest, evidence-status schema and a compact capability index.
+- Added sanitized WBML-0200…0600 evidence excerpts and expanded AI resources with `llms-full.txt`.
+- Expanded API Explorer and compatibility docs from the old PW-only baseline to include verified WorldBox/WBML findings with item-specific version scope.
+- Added the planned WorldBox Modding API architecture as an explicitly unreleased dependency-mod roadmap: WorldBox internals → WBML → docs → shared API → Fog of War Overhaul / Political World / third-party mods.
+- Extended the release audit to validate canonical machine data and privacy in both evidence and WBML data.
+- Preserved the project epigraph `Какова цена свободы?`, EN/RU parity, local-first browser tools and optional DonationAlerts/DALink support.
+
 ## 0.2.0 — Workbench Release
 - Promoted the v0.2 Workbench redesign from release candidate to the first stable practical-site release.
 - Ships the task-first EN/RU home pages, beginner first-mod route, Recipe Library 2.0, Player.log Analyzer 2.0, Starter Mod Generator, API Explorer, Compatibility Matrix and symptom-first Troubleshooter as one coherent public baseline.

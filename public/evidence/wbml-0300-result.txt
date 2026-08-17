@@ -1,0 +1,19 @@
+WorldBox Modding Lab — WBML-0300 Capability Verification Atlas
+Canonical probe: 0.3.0-fix1
+Run: 82c23a7c8916
+Environment: WorldBox 0.51.2 build 719 / Unity 2022.3.60f1 / NML 1.2.0.1
+
+FINAL MATRIX
+ASSERTIONS PASS=28 FAIL=0 SKIP=0
+P=PASS A=PASS B=PASS C=PASS D=PASS E=PASS F=PASS
+SUITE RESULT: PASS
+
+Canonical summary
+methods=18625 zeroArgNonVoid=4411 records=3021
+ilSafe=1751 ilRejected=1270 ownerResolved=1505 noOwner=246
+invoked=1505 verified=1462 observedThrew=43
+publicVerified=1116 reflectionVerified=346 unsafeInvoked=0 staleInvoked=0
+stabilitySame=1429 stabilityChanged=33 stabilityFailed=0
+engineExceptions=0
+
+Methodology correction: the initial run sampled stale/dead runtime objects and over-classified read-like names containing “attack” as dangerous. fix1 pins better live samples and uses read intent before name heuristics.
